@@ -7,10 +7,31 @@
     "text": "About this site"
   },
   {
+    "objectID": "teaching.html",
+    "href": "teaching.html",
+    "title": "G0LFT",
+    "section": "",
+    "text": "This is my teaching page"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "G0LFT",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "This is the home page"
+  },
+  {
+    "objectID": "station.html",
+    "href": "station.html",
+    "title": "G0LFT",
+    "section": "",
+    "text": "This is my shack"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "G0LFT",
+    "section": "",
+    "text": "This is my blog page"
   }
 ]
