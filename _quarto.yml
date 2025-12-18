@@ -1,5 +1,6 @@
 project:
   type: website
+  output-dir: _site
   resources:
     - images
 website:
@@ -22,11 +23,14 @@ website:
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.css
-    toc: true
-
-
+    theme: cosmo
+    toc: false
+    sitemap: true
+    title-block-style: none
+    page-layout: full
+    css: 
+      - _theme/_base.css
+      - _theme/_colors.css
+    include-after-body:
+      - _includes/_navbar-logo.html
 
