@@ -31,10 +31,6 @@ format:
     css: 
       - _theme/_base.css
       - _theme/_colors.css
-    include-in-header: 
-      - _includes/_structured-data-main.html
     include-after-body: 
-      - _includes/_cookie-consent.html
-      - _includes/_footer.html
       - _includes/_navbar-logo.html
 
