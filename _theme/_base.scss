@@ -1,0 +1,254 @@
+@use "sass:color";
+@use "colors" as c;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora&family=Roboto+Mono&display=swap');
+
+$font-heading: 'Inter', sans-serif;
+$font-body: 'Lora', serif;
+$font-mono: 'Roboto Mono', monospace;
+
+// Global body
+body {
+  font-family: $font-body;
+  line-height: 1.6;
+  color: c.$text-color;
+  background-color: c.$bg-light;
+  margin: 0;
+  padding: 0;
+}
+
+// Headings
+h1, h2, h3, h4 {
+  font-family: $font-heading;
+  font-weight: 600;
+  color: c.$heading-color;
+}
+
+// Code blocks
+code, pre {
+  font-family: $font-mono;
+  background-color: color.scale(c.$bg-light, $lightness: -5%);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+// Links
+a {
+  color: c.$secondary;
+  text-decoration: none;
+  &:hover {
+    color: color.scale(c.$secondary, $lightness: -10%);
+    text-decoration: underline;
+  }
+}
+
+// Hero Parallax
+.parallax {
+  position: relative;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  color: black;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0, var(--overlay-opacity, 0.35));
+    z-index: 1;
+  }
+
+  .overlay {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    border-radius: 10px;
+  }
+
+  &.light-overlay::before {
+    background: rgba(255,255,255, var(--overlay-opacity, 0.4));
+  }
+
+  &.dark-overlay::before {
+    background: rgba(0,0,0, var(--overlay-opacity, 0.4));
+  }
+}
+
+/* Card */
+.card {
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: c.$bg-light; // Ensure cards keep their color
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 4000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Mobile fallback: single column */
+@media (max-width: 767px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Desktop: default 2-column layout */
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Odd last card full-width if total cards are odd */
+  .card-grid > :nth-child(2n+1):last-child {
+    grid-column: 1 / -1;
+  }
+
+  /* Ensure cards keep their background color */
+  .card-grid > .card {
+    background-color: c.$bg-light;
+  }
+
+  /* Special case: exactly 3 cards, wide screens → 3 columns */
+  @media (min-width: 1024px) {
+    .card-grid:has(> .card:nth-child(3):last-child) {
+      grid-template-columns: repeat(3, 1fr);
+
+      /* Undo the last-child full-width rule */
+      > :nth-child(2n+1):last-child {
+        grid-column: auto;
+      }
+    }
+  }
+
+  /* Special case: exactly 4 cards → 2x2 grid, no full-width cards */
+  .card-grid:has(> .card:nth-child(4):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+
+    /* Ensure no full-width last card */
+    > :nth-child(2n+1):last-child {
+      grid-column: auto;
+    }
+  }
+}
+
+
+
+// Footer
+.site-footer {
+  padding: 2rem 1rem;
+  background-color: c.$bg-light;
+  color: c.$text-color;
+  text-align: center;
+  font-size: 0.9rem;
+  border-top: 1px solid color.scale(c.$text-color, $lightness: 80%);
+
+  a {
+    color: c.$secondary;
+    &:hover {
+      color: color.scale(c.$secondary, $lightness: -10%);
+      text-decoration: underline;
+    }
+  }
+
+  .footer-content {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+// Make the main page container wider on desktop
+.container {
+  max-width: 100%; // or whatever width you want
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (max-width: 767px) {
+  .container {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+}
+
+/* Completely hide Quarto-generated author metadata across all templates */
+.quarto-title-block,
+.quarto-title-meta,
+.quarto-title-author,
+.quarto-title-affiliation,
+.quarto-title-author-name,
+.quarto-title-author-email,
+.quarto-title-author-orcid,
+.quarto-title-author-container {
+  display: none !important;
+}
+
+/* Defensive rule — hides any author block Quarto might render */
+.author,
+.author-block,
+p.author,
+div.author {
+  display: none !important;
+}
+
+/* Logo in desktop navbar only */
+.navbar-desktop-logo {
+  display: inline-block;
+  height: 40px;   // adjust height as needed
+  width: auto;
+  vertical-align: middle;
+  margin-right: 0rem;
+}
+
+/* Hide logo in mobile dropdown menu */
+@media (max-width: 1000px) {
+  .navbar-desktop-logo {
+    display: none !important;
+  }
+}
+
+
+.selected-publications {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.pub-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.pub-cover {
+  width: 120px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.pub-info {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
