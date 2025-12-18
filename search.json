@@ -14,6 +14,13 @@
     "text": "This is my teaching page"
   },
   {
+    "objectID": "station.html",
+    "href": "station.html",
+    "title": "G0LFT",
+    "section": "",
+    "text": "This is my shack"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "G0LFT",
@@ -21,11 +28,11 @@
     "text": "This is the home page"
   },
   {
-    "objectID": "station.html",
-    "href": "station.html",
+    "objectID": "contact.html",
+    "href": "contact.html",
     "title": "G0LFT",
     "section": "",
-    "text": "This is my shack"
+    "text": "This is my contact page"
   },
   {
     "objectID": "blog.html",
