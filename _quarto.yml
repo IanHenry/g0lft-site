@@ -1,13 +1,24 @@
 project:
   type: website
-
+  resources:
+    - images
 website:
-  title: "G0LFT"
+  title: ""
+  site-url: "https://g0lft.org"
+  favicon: images/favicon.ico
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: Home
+        href: index.qmd 
+      - text: Station
+        href: station.qmd
+      - text: Teaching
+        href: teaching.qmd
+      - text: Blog
+        href: blog.qmd
+    right:
+      - text: Contact
+        href: contact.qmd
 
 format:
   html:
