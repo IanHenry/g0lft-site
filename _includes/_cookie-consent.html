@@ -1,0 +1,48 @@
+<!-- Cookie / Privacy Banner -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; left:0; width:100%; background:#222; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; z-index:9999;">
+  <div style="flex:1; min-width:250px;">
+    We use Google Analytics to collect anonymous data on site usage. 
+    <a href="https://drianhenry.co.uk/privacy.html" style="color:#1ecbe1; text-decoration:underline;">Learn more</a>.
+  </div>
+  <button id="accept-cookies" style="background:#1ecbe1; color:#000; border:none; padding:0.5rem 1rem; cursor:pointer; margin-left:1rem;">Accept</button>
+</div>
+
+<script>
+(function() {
+  const GA_MEASUREMENT_ID = "G-280EVPL7ZC"; // Change per domain if needed
+
+  // Load GA4 *only* after consent
+  function loadGA() {
+    if (window.GA_LOADED) return;
+    window.GA_LOADED = true;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    s.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+    };
+    document.head.appendChild(s);
+  }
+
+  const banner = document.getElementById('cookie-banner');
+  const hasConsent = document.cookie.split('; ').find(row => row.startsWith('cookies_accepted='));
+
+  if (hasConsent && hasConsent.split('=')[1] === 'true') {
+    banner.style.display = 'none';
+    loadGA(); // already accepted previously
+  } else {
+    banner.style.display = 'flex';
+    document.getElementById('accept-cookies').addEventListener('click', () => {
+      document.cookie = "cookies_accepted=true; path=/; max-age=" + (60*60*24*365);
+      banner.style.display = 'none';
+      loadGA();
+    });
+  }
+})();
+</script>
+
