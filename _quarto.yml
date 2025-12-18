@@ -33,7 +33,6 @@ format:
       - _theme/_colors.css
     include-in-header: 
       - _includes/_structured-data-main.html
-      - _includes/_favicons.html
     include-after-body: 
       - _includes/_cookie-consent.html
       - _includes/_footer.html
