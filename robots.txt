@@ -1,1 +1,1 @@
-Sitemap: https://IanHenry.github.io/g0lft-site/sitemap.xml
+Sitemap: https://g0lft.org/sitemap.xml
