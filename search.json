@@ -1,44 +1,79 @@
 [
   {
+    "objectID": "blog/2025-12-19-first-blog-post.html",
+    "href": "blog/2025-12-19-first-blog-post.html",
+    "title": "Why SDRs Are Teaching Spaces",
+    "section": "",
+    "text": "2025-12-19"
+  },
+  {
+    "objectID": "blog/2025-12-19-first-blog-post.html#introduction",
+    "href": "blog/2025-12-19-first-blog-post.html#introduction",
+    "title": "Why SDRs Are Teaching Spaces",
+    "section": "Introduction",
+    "text": "Introduction\nSoftware-defined radios are often discussed as tools or architectures, but they can also be understood as teaching spaces…"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "I’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together: - reflective writing on amateur radio, teaching, and learning - theory-focused pieces on SDR and digital communication - practical guides for operators who want to understand why things work, not just how\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
   },
   {
-    "objectID": "teaching.html",
-    "href": "teaching.html",
-    "title": "G0LFT",
-    "section": "",
-    "text": "This is my teaching page"
+    "objectID": "credits.html#hero-images",
+    "href": "credits.html#hero-images",
+    "title": "Credits & Attributions",
+    "section": "Hero Images",
+    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
   },
   {
-    "objectID": "station.html",
-    "href": "station.html",
-    "title": "G0LFT",
-    "section": "",
-    "text": "This is my shack"
+    "objectID": "credits.html#other-images",
+    "href": "credits.html#other-images",
+    "title": "Credits & Attributions",
+    "section": "Other Images",
+    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "G0LFT",
     "section": "",
-    "text": "This is the home page"
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find: - blog posts exploring ideas and experiences - theory-focused writing on learning and SDR - practical guides for applying those ideas in practice"
+  },
+  {
+    "objectID": "station.html",
+    "href": "station.html",
+    "title": "My Station",
+    "section": "",
+    "text": "I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes: - HF base and portable operation (including POTA) - VHF/UHF FM and digital voice - Homebrew and commercial SDR receivers - Raspberry Pi–based digital voice infrastructure\nI periodically update this page as my setup evolves."
   },
   {
     "objectID": "contact.html",
     "href": "contact.html",
-    "title": "G0LFT",
+    "title": "Contact",
     "section": "",
-    "text": "This is my contact page"
+    "text": "Contact Me\nQRZ Page: G0LFT"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "G0LFT",
-    "section": "",
-    "text": "This is my blog page"
+    "objectID": "privacy.html#privacy-cookies",
+    "href": "privacy.html#privacy-cookies",
+    "title": "Privacy & Disclaimer",
+    "section": "Privacy & Cookies",
+    "text": "Privacy & Cookies\nWe use Google Analytics 4 (GA4) to collect anonymous site usage data.\nThis may involve cookies to track sessions, page views, and returning visitors.\n\nCookies used: _ga, _gid\nPurpose: Analyze site traffic and improve user experience\n\nIP anonymization: Enabled\n\nThird-party access: Data is processed by Google under their privacy policy: https://policies.google.com/privacy\n\nYou may withdraw consent at any time by clearing your cookies."
+  },
+  {
+    "objectID": "privacy.html#appointment-bookings-cal.com",
+    "href": "privacy.html#appointment-bookings-cal.com",
+    "title": "Privacy & Disclaimer",
+    "section": "Appointment Bookings (Cal.com)",
+    "text": "Appointment Bookings (Cal.com)\nThis site uses Cal.com to manage scheduling and appointment bookings.\nWhen you book a session, Cal.com collects and processes the personal information you provide (such as your name, email address, and chosen time slot) to schedule the appointment.\nDepending on your booking, Cal.com may also connect with calendar or video services (such as Google Calendar or Google Meet) to generate meeting invitations.\n\nService provider: Cal.com, Inc.\n\nData collected: Name, email, selected appointment time, and any optional message you provide\n\nPurpose: Scheduling and managing appointments\n\nLegal basis: Consent (by submitting the booking form)\n\nThird-party processing: Data is handled under Cal.com’s privacy policy: https://cal.com/privacy\n\nNo booking data is stored on this website’s servers. All information is processed directly by Cal.com."
+  },
+  {
+    "objectID": "privacy.html#disclaimer",
+    "href": "privacy.html#disclaimer",
+    "title": "Privacy & Disclaimer",
+    "section": "Disclaimer",
+    "text": "Disclaimer\n\nThe information provided here is for informational purposes only.\n\nWhile care is taken to ensure accuracy, no guarantees are made regarding completeness or suitability.\n\nAny external links do not imply endorsement of those sites.\n\nIf you have concerns regarding your privacy or site content, please contact me."
   }
 ]
