@@ -1,0 +1,14 @@
+---
+title: "Thinking"
+listing:
+  contents: thinking-posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+---
+
+# Thinking
+
+Here you will find material teaching theoretical concepts needed for amateur radio
+
