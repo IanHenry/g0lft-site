@@ -10,16 +10,13 @@ website:
   navbar:
     left:
       - text: Home
-        href: index.qmd 
-      - text: Station
-        href: station.qmd
-      - text: Teaching
-        href: teaching.qmd
+        href: index.qmd
       - text: Blog
-        href: blog.qmd
-    right:
-      - text: Contact
-        href: contact.qmd
+        href: blog/_index.qmd
+      - text: Thinking
+        href: thinking/_index.qmd
+      - text: Guides
+        href: guides/_index.qmd
 
 format:
   html:
