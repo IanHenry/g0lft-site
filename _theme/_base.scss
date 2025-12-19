@@ -4,13 +4,22 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora&family=Roboto+Mono&display=swap');
 
-$font-heading: 'Inter', sans-serif;
-$font-body: 'Lora', serif;
-$font-mono: 'Roboto Mono', monospace;
+$font-heading: 'Montserrat', sans-serif;
+$font-body: 'Inter', sans-serif;
+$font-mono: 'JetBrains Mono', monospace;
+
+.mono{
+	font-variant-numeric: slashed-zero;
+}
+
+.body{
+	font-variant-numeric: slashed-zero;
+}
 
 // Global body
 body {
   font-family: $font-body;
+  font-weight: 400;
   line-height: 1.6;
   color: c.$text-color;
   background-color: c.$bg-light;
@@ -28,6 +37,7 @@ h1, h2, h3, h4 {
 // Code blocks
 code, pre {
   font-family: $font-mono;
+  color: c.$text-color;
   background-color: color.scale(c.$bg-light, $lightness: -5%);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
