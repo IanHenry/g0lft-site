@@ -2,7 +2,7 @@
 title: My Station
 ---
 
-# Station
+## Station
 
 I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.
 

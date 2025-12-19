@@ -1,8 +1,11 @@
 ---
 title: "G0LFT"
 ---
+# G0LFT
 
-# Teaching, learning, and amateur radio
+<img src="/images/main_logo.png" alt="G0LFT" class="center">
+
+## Teaching, learning, and amateur radio
 
 This site brings together reflective writing, theory, and practical guides
 focused on teaching, SDR, and modern amateur radio practice.

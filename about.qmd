@@ -2,7 +2,7 @@
 title: About
 ---
 
-# About
+## About
 
 I’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.
 

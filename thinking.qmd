@@ -8,7 +8,7 @@ listing:
   fields: [image, date, title, description, reading-time, categories]
 ---
 
-# Thinking
+## Thinking
 
 Here you will find material teaching theoretical concepts needed for amateur radio
 
