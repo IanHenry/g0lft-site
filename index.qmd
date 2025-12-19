@@ -2,7 +2,7 @@
 title: "G0LFT"
 ---
 
-![](images/main_logo.png){width=300px .mx-auto}
+<img src="images/main_logo.png" class="centered-image">
 
 
 ## Teaching, learning, and amateur radio
