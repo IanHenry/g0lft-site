@@ -2,7 +2,7 @@
 title: "Why SDRs Are Great Teaching Tools"
 date: 2025-12-19
 categories: [SDR, Teaching]
-excerpt: "Exploring how software-defined radios help in learning radio theory."
+description: "Exploring how software-defined radios help in learning radio theory."
 ---
 
 ## Introduction
