@@ -8,7 +8,7 @@ listing:
   fields: [image, date, title, description, reading-time, categories]
 ---
 
-# Guides
+## Guides
 
 Here you will find practical guides to setup equipment and software for digital modes and packet radio etc...
 

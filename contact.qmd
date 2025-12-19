@@ -2,6 +2,12 @@
 title: Contact
 ---
 
-# Contact Me
+## Contact
+
+You can contact me by email:
+
+📧 [ian@g0lft.org](mailto:ian@g0lft.org)
+
+or
 
 **QRZ Page:** [G0LFT](https://www.qrz.com/db/G0LFT) 
