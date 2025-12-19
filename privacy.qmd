@@ -1,0 +1,41 @@
+---
+title: Privacy & Disclaimer
+---
+
+# Privacy & Disclaimer
+
+## Privacy & Cookies
+
+We use Google Analytics 4 (GA4) to collect anonymous site usage data.  
+This may involve cookies to track sessions, page views, and returning visitors.
+
+- **Cookies used:** `_ga`, `_gid`
+- **Purpose:** Analyze site traffic and improve user experience  
+- **IP anonymization:** Enabled  
+- **Third-party access:** Data is processed by Google under their privacy policy: [https://policies.google.com/privacy](https://policies.google.com/privacy)
+
+You may withdraw consent at any time by clearing your cookies.
+
+## Appointment Bookings (Cal.com)
+
+This site uses **Cal.com** to manage scheduling and appointment bookings.
+
+When you book a session, Cal.com collects and processes the personal information you provide (such as your **name**, **email address**, and **chosen time slot**) to schedule the appointment.  
+Depending on your booking, Cal.com may also connect with calendar or video services (such as **Google Calendar** or **Google Meet**) to generate meeting invitations.
+
+- **Service provider:** [Cal.com, Inc.](https://cal.com)  
+- **Data collected:** Name, email, selected appointment time, and any optional message you provide  
+- **Purpose:** Scheduling and managing appointments  
+- **Legal basis:** Consent (by submitting the booking form)  
+- **Third-party processing:** Data is handled under Cal.com’s privacy policy: [https://cal.com/privacy](https://cal.com/privacy)
+
+No booking data is stored on this website’s servers. All information is processed directly by Cal.com.
+
+## Disclaimer
+
+- The information provided here is for **informational purposes only**.  
+- While care is taken to ensure accuracy, **no guarantees are made** regarding completeness or suitability.  
+- Any external links do **not imply endorsement** of those sites.
+
+If you have concerns regarding your privacy or site content, please [contact me](contact.html).
+
