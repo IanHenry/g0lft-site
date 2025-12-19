@@ -1,9 +1,9 @@
 ---
 title: "G0LFT"
 ---
-# G0LFT
 
-<img src="/images/main_logo.png" alt="G0LFT" class="center">
+![](images/main_logo.png){width=300px .mx-auto}
+
 
 ## Teaching, learning, and amateur radio
 
