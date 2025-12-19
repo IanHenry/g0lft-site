@@ -10,10 +10,11 @@
 
 body {
   font-family: "Inter", sans-serif;
+  font-variant-numeric: slashed-zero;
   font-weight: 400;
   line-height: 1.6;
   color: #1a1a1a;
-  background-color: #f5f8fc;
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
 }
@@ -21,23 +22,24 @@ body {
 h1, h2, h3, h4 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
-  color: #002244;
+  color: #2B2F36;
 }
 
 code, pre {
   font-family: "JetBrains Mono", monospace;
+  font-variant-numeric: slashed-zero;
   color: #1a1a1a;
-  background-color: rgb(225.8846153846, 234.6192307692, 246.2653846154);
+  background-color: rgb(242.25, 242.25, 242.25);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
 }
 
 a {
-  color: #0066cc;
+  color: #E6e9ef;
   text-decoration: none;
 }
 a:hover {
-  color: rgb(0, 91.8, 183.6);
+  color: rgb(201.4024390244, 207.8341463415, 220.6975609756);
   text-decoration: underline;
 }
 
@@ -78,7 +80,7 @@ a:hover {
 .card {
   border-radius: 12px;
   padding: 1.5rem;
-  background-color: #f5f8fc;
+  background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -114,7 +116,7 @@ a:hover {
   }
   /* Ensure cards keep their background color */
   .card-grid > .card {
-    background-color: #f5f8fc;
+    background-color: #ffffff;
   }
   /* Special case: exactly 3 cards, wide screens → 3 columns */
 }
@@ -139,17 +141,17 @@ a:hover {
 }
 .site-footer {
   padding: 2rem 1rem;
-  background-color: #f5f8fc;
+  background-color: #ffffff;
   color: #1a1a1a;
   text-align: center;
   font-size: 0.9rem;
   border-top: 1px solid rgb(209.2, 209.2, 209.2);
 }
 .site-footer a {
-  color: #0066cc;
+  color: #E6e9ef;
 }
 .site-footer a:hover {
-  color: rgb(0, 91.8, 183.6);
+  color: rgb(201.4024390244, 207.8341463415, 220.6975609756);
   text-decoration: underline;
 }
 .site-footer .footer-content {
