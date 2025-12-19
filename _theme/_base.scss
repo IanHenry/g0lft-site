@@ -19,6 +19,7 @@ $font-mono: 'JetBrains Mono', monospace;
 // Global body
 body {
   font-family: $font-body;
+  font-variant-numeric: slashed-zero;
   font-weight: 400;
   line-height: 1.6;
   color: c.$text-color;
@@ -37,6 +38,7 @@ h1, h2, h3, h4 {
 // Code blocks
 code, pre {
   font-family: $font-mono;
+  font-variant-numeric: slashed-zero;
   color: c.$text-color;
   background-color: color.scale(c.$bg-light, $lightness: -5%);
   padding: 0.2rem 0.4rem;
