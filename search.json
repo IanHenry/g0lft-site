@@ -1,17 +1,38 @@
 [
   {
-    "objectID": "blog/2025-12-19-first-blog-post.html",
-    "href": "blog/2025-12-19-first-blog-post.html",
+    "objectID": "blog-posts/2025-12-19-first-blog-post.html",
+    "href": "blog-posts/2025-12-19-first-blog-post.html",
     "title": "Why SDRs Are Teaching Spaces",
     "section": "",
     "text": "2025-12-19"
   },
   {
-    "objectID": "blog/2025-12-19-first-blog-post.html#introduction",
-    "href": "blog/2025-12-19-first-blog-post.html#introduction",
+    "objectID": "blog-posts/2025-12-19-first-blog-post.html#introduction",
+    "href": "blog-posts/2025-12-19-first-blog-post.html#introduction",
     "title": "Why SDRs Are Teaching Spaces",
     "section": "Introduction",
     "text": "Introduction\nSoftware-defined radios are often discussed as tools or architectures, but they can also be understood as teaching spaces…"
+  },
+  {
+    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html",
+    "href": "guides-posts/2025-12-19-wsjtx-setup.html",
+    "title": "Setting Up WSJT-X for FT8",
+    "section": "",
+    "text": "2025-12-20"
+  },
+  {
+    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html#requirements",
+    "href": "guides-posts/2025-12-19-wsjtx-setup.html#requirements",
+    "title": "Setting Up WSJT-X for FT8",
+    "section": "Requirements",
+    "text": "Requirements\n\nWSJT-X installed on your computer\n\nTransceiver connected via soundcard or interface\n\nTime synchronization (NTP or GPS)"
+  },
+  {
+    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html#setup-steps",
+    "href": "guides-posts/2025-12-19-wsjtx-setup.html#setup-steps",
+    "title": "Setting Up WSJT-X for FT8",
+    "section": "Setup Steps",
+    "text": "Setup Steps\n\nOpen WSJT-X and go to Settings &gt; Radio.\n\nConfigure your transceiver type and CAT control settings.\n\nGo to Settings &gt; Audio and select your input/output devices.\n\nSet your location (Grid Square) in Settings &gt; General.\n\nTest reception with the Monitor button and verify signals.\n\n\nTips\n\nEnsure your computer clock is accurate within 1 second for FT8.\n\nAdjust transmit power carefully to avoid interference.\n\nKeep logs to track contacts efficiently."
   },
   {
     "objectID": "about.html",
@@ -19,6 +40,41 @@
     "title": "About",
     "section": "",
     "text": "I’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together: - reflective writing on amateur radio, teaching, and learning - theory-focused pieces on SDR and digital communication - practical guides for operators who want to understand why things work, not just how\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory.html",
+    "href": "thinking-posts/2025-12-19-sdr_theory.html",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "",
+    "text": "2025-12-19"
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory.html#introduction",
+    "href": "thinking-posts/2025-12-19-sdr_theory.html#introduction",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "Introduction",
+    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
+  },
+  {
+    "objectID": "thinking.html",
+    "href": "thinking.html",
+    "title": "Thinking",
+    "section": "",
+    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy SDRs Are Great Teaching Tools\n\n\n\nSDR\n\nTeaching\n\n\n\n\n\n\n\n\n\nDec 19, 2025\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "station.html",
+    "href": "station.html",
+    "title": "My Station",
+    "section": "",
+    "text": "I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes: - HF base and portable operation (including POTA) - VHF/UHF FM and digital voice - Homebrew and commercial SDR receivers - Raspberry Pi–based digital voice infrastructure\nI periodically update this page as my setup evolves."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "G0LFT",
+    "section": "",
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find: - blog posts exploring ideas and experiences - theory-focused writing on learning and SDR - practical guides for applying those ideas in practice"
   },
   {
     "objectID": "credits.html#hero-images",
@@ -35,25 +91,18 @@
     "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "G0LFT",
-    "section": "",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find: - blog posts exploring ideas and experiences - theory-focused writing on learning and SDR - practical guides for applying those ideas in practice"
-  },
-  {
-    "objectID": "station.html",
-    "href": "station.html",
-    "title": "My Station",
-    "section": "",
-    "text": "I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes: - HF base and portable operation (including POTA) - VHF/UHF FM and digital voice - Homebrew and commercial SDR receivers - Raspberry Pi–based digital voice infrastructure\nI periodically update this page as my setup evolves."
-  },
-  {
     "objectID": "contact.html",
     "href": "contact.html",
     "title": "Contact",
     "section": "",
     "text": "Contact Me\nQRZ Page: G0LFT"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Blog\nWelcome to my blog! Posts appear below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy SDRs Are Teaching Spaces\n\n\n\nSDR\n\nTeaching\n\n\n\n\n\n\n\n\n\nDec 19, 2025\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "privacy.html#privacy-cookies",
@@ -68,5 +117,12 @@
     "title": "Privacy & Disclaimer",
     "section": "Disclaimer",
     "text": "Disclaimer\n\nThe information provided here is for informational purposes only.\n\nWhile care is taken to ensure accuracy, no guarantees are made regarding completeness or suitability.\n\nAny external links do not imply endorsement of those sites.\n\nIf you have concerns regarding your privacy or site content, please contact me."
+  },
+  {
+    "objectID": "guides.html",
+    "href": "guides.html",
+    "title": "Guides",
+    "section": "",
+    "text": "Guides\nHere you will find practical guides to setup equipment and software for digital modes and packet radio etc…\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetting Up WSJT-X for FT8\n\n\n\nDigital Modes\n\nFT8\n\n\n\n\n\n\n\n\n\nDec 20, 2025\n\n\n\n\n\nNo matching items"
   }
 ]
