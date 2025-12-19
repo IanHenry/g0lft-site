@@ -1,9 +1,0 @@
----
-title: Blog
-type: listing
-sort-by: date
-order: desc
-categories: true
-excerpt: true
----
-
