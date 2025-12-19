@@ -2,7 +2,7 @@
 title: "Setting Up WSJT-X for FT8"
 date: 2025-12-20
 categories: [Digital Modes, FT8]
-excerpt: "Step-by-step guide to configure WSJT-X for FT8 operation."
+description: "Step-by-step guide to configure WSJT-X for FT8 operation."
 ---
 
 ## Requirements
