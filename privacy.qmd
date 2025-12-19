@@ -16,21 +16,6 @@ This may involve cookies to track sessions, page views, and returning visitors.
 
 You may withdraw consent at any time by clearing your cookies.
 
-## Appointment Bookings (Cal.com)
-
-This site uses **Cal.com** to manage scheduling and appointment bookings.
-
-When you book a session, Cal.com collects and processes the personal information you provide (such as your **name**, **email address**, and **chosen time slot**) to schedule the appointment.  
-Depending on your booking, Cal.com may also connect with calendar or video services (such as **Google Calendar** or **Google Meet**) to generate meeting invitations.
-
-- **Service provider:** [Cal.com, Inc.](https://cal.com)  
-- **Data collected:** Name, email, selected appointment time, and any optional message you provide  
-- **Purpose:** Scheduling and managing appointments  
-- **Legal basis:** Consent (by submitting the booking form)  
-- **Third-party processing:** Data is handled under Cal.com’s privacy policy: [https://cal.com/privacy](https://cal.com/privacy)
-
-No booking data is stored on this website’s servers. All information is processed directly by Cal.com.
-
 ## Disclaimer
 
 - The information provided here is for **informational purposes only**.  
