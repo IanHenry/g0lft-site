@@ -1,0 +1,9 @@
+---
+title: Guides
+---
+
+Step-by-step guides for applying teaching and SDR ideas in practice.
+
+- [Teaching guides](teaching/)
+- [SDR guides](sdr/)
+

@@ -1,0 +1,12 @@
+---
+title: "Why SDRs Are Teaching Spaces"
+date: 2025-12-19
+categories: [SDR, Teaching]
+excerpt: "SDRs work best when treated as structured learning conversations."
+---
+
+## Introduction
+
+Software-defined radios are often discussed as tools or architectures,
+but they can also be understood as teaching spaces…
+

@@ -1,5 +1,18 @@
 ---
-title: "About"
+title: About
 ---
 
-About this site
+I’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.
+
+I discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.
+
+My interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.
+
+Alongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.
+
+This site brings together:
+- reflective writing on amateur radio, teaching, and learning
+- theory-focused pieces on SDR and digital communication
+- practical guides for operators who want to understand *why* things work, not just *how*
+
+If you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer.

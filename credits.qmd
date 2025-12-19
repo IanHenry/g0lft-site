@@ -1,0 +1,27 @@
+---
+title: Credits & Attributions
+---
+
+# Image Credits & Attributions
+
+Some images on this site are sourced from **Creative Commons**, free stock image providers, or generated via AI tools. Transparency and proper attribution are provided where applicable.
+
+## Hero Images
+
+| Image | Source / Method | License / Notes |
+|-------|----------------|----------------|
+
+## Other Images
+
+- Any additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.  
+
+**License Notes:**
+
+- All CC0 / public domain images are free to use without attribution, but attribution is provided where possible.  
+- Other images are used with permission or created in-house.  
+- AI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.  
+
+---
+
+If you believe any content here infringes copyright, or you would like additional attribution, please [contact me](contact.qmd) and I will correct it immediately.
+
