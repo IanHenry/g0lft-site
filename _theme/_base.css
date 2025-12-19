@@ -1,5 +1,9 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora&family=Roboto+Mono&display=swap");
+.navbar {
+  background-color: #ffffff; /* pure white */
+}
+
 .mono {
   font-variant-numeric: slashed-zero;
 }
