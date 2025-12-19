@@ -2,8 +2,9 @@
 title: Blog
 type: listing
 sort-by: date
-order: desc
+sort-reverse: true
 categories: true
 excerpt: true
 ---
 
+Welcome to my blog. Posts appear below
