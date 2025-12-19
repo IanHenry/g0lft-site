@@ -8,6 +8,7 @@ This site brings together reflective writing, theory, and practical guides
 focused on teaching, SDR, and modern amateur radio practice.
 
 You’ll find:
+
 - blog posts exploring ideas and experiences
 - theory-focused writing on learning and SDR
 - practical guides for applying those ideas in practice

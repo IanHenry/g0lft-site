@@ -3,10 +3,11 @@ project:
   output-dir: _site
   resources:
     - images
+
 website:
   title: ""
   site-url: "https://g0lft.org"
-  favicon: images/favicon.ico
+  favicon: /images/favicon.ico
   navbar:
     left:
       - text: Home

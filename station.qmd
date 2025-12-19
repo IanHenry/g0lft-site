@@ -2,9 +2,12 @@
 title: My Station
 ---
 
+# Station
+
 I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.
 
 My current setup includes:
+
 - HF base and portable operation (including POTA)
 - VHF/UHF FM and digital voice
 - Homebrew and commercial SDR receivers
