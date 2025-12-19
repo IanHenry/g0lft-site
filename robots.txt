@@ -1,1 +1,4 @@
+User-agent: *
+Allow: /
 Sitemap: https://g0lft.org/sitemap.xml
+
