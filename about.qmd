@@ -13,6 +13,7 @@ My interests centre on digital modes, SDR, and the theory that sits behind moder
 Alongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.
 
 This site brings together:
+
 - reflective writing on amateur radio, teaching, and learning
 - theory-focused pieces on SDR and digital communication
 - practical guides for operators who want to understand *why* things work, not just *how*
