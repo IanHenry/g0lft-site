@@ -4,6 +4,10 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora&family=Roboto+Mono&display=swap');
 
+.navbar {
+  background-color: #ffffff; /* pure white */
+}
+
 $font-heading: 'Montserrat', sans-serif;
 $font-body: 'Inter', sans-serif;
 $font-mono: 'JetBrains Mono', monospace;
