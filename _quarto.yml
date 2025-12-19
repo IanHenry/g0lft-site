@@ -12,11 +12,11 @@ website:
       - text: Home
         href: index.qmd
       - text: Blog
-        href: blog/_index.qmd
+        href: blog/
       - text: Thinking
-        href: thinking/_index.qmd
+        href: thinking/
       - text: Guides
-        href: guides/_index.qmd
+        href: guides/
 
 format:
   html:

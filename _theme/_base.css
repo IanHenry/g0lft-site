@@ -39,11 +39,11 @@ code, pre {
 }
 
 a {
-  color: #E6e9ef;
+  color: #1F6AE1;
   text-decoration: none;
 }
 a:hover {
-  color: rgb(201.4024390244, 207.8341463415, 220.6975609756);
+  color: rgb(27.2125984252, 95.2440944882, 203.1874015748);
   text-decoration: underline;
 }
 
@@ -152,10 +152,10 @@ a:hover {
   border-top: 1px solid rgb(209.2, 209.2, 209.2);
 }
 .site-footer a {
-  color: #E6e9ef;
+  color: #1F6AE1;
 }
 .site-footer a:hover {
-  color: rgb(201.4024390244, 207.8341463415, 220.6975609756);
+  color: rgb(27.2125984252, 95.2440944882, 203.1874015748);
   text-decoration: underline;
 }
 .site-footer .footer-content {
