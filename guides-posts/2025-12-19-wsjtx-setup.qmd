@@ -1,0 +1,27 @@
+---
+title: "Setting Up WSJT-X for FT8"
+date: 2025-12-20
+categories: [Digital Modes, FT8]
+excerpt: "Step-by-step guide to configure WSJT-X for FT8 operation."
+---
+
+## Requirements
+
+- WSJT-X installed on your computer  
+- Transceiver connected via soundcard or interface  
+- Time synchronization (NTP or GPS)  
+
+## Setup Steps
+
+1. Open WSJT-X and go to **Settings > Radio**.  
+2. Configure your transceiver type and CAT control settings.  
+3. Go to **Settings > Audio** and select your input/output devices.  
+4. Set your location (Grid Square) in **Settings > General**.  
+5. Test reception with the **Monitor** button and verify signals.  
+
+### Tips
+
+- Ensure your computer clock is accurate within 1 second for FT8.  
+- Adjust transmit power carefully to avoid interference.  
+- Keep logs to track contacts efficiently.
+

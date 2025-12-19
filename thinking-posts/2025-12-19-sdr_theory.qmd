@@ -1,0 +1,21 @@
+---
+title: "Why SDRs Are Great Teaching Tools"
+date: 2025-12-19
+categories: [SDR, Teaching]
+excerpt: "Exploring how software-defined radios help in learning radio theory."
+---
+
+## Introduction
+
+Software-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.  
+
+### Benefits for Learning
+
+- Immediate feedback: you can see signals in real time.  
+- Experimentation: easily test modulation, filters, and antennas.  
+- Visualization: spectrum displays make abstract concepts tangible.  
+
+### Conclusion
+
+Treating SDRs as learning spaces allows students to connect theory to practice quickly and safely.
+
