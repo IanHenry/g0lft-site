@@ -39,7 +39,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together: - reflective writing on amateur radio, teaching, and learning - theory-focused pieces on SDR and digital communication - practical guides for operators who want to understand why things work, not just how\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
+    "text": "About\nI’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together: - reflective writing on amateur radio, teaching, and learning - theory-focused pieces on SDR and digital communication - practical guides for operators who want to understand why things work, not just how\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
   },
   {
     "objectID": "thinking-posts/2025-12-19-sdr_theory.html",
@@ -67,14 +67,14 @@
     "href": "station.html",
     "title": "My Station",
     "section": "",
-    "text": "I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes: - HF base and portable operation (including POTA) - VHF/UHF FM and digital voice - Homebrew and commercial SDR receivers - Raspberry Pi–based digital voice infrastructure\nI periodically update this page as my setup evolves."
+    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "G0LFT",
     "section": "",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find: - blog posts exploring ideas and experiences - theory-focused writing on learning and SDR - practical guides for applying those ideas in practice"
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice"
   },
   {
     "objectID": "credits.html#hero-images",
@@ -102,7 +102,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Blog\nWelcome to my blog! Posts appear below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy SDRs Are Teaching Spaces\n\n\n\nSDR\n\nTeaching\n\n\n\n\n\n\n\n\n\nDec 19, 2025\n\n\n\n\n\nNo matching items"
+    "text": "Blog\nWelcome to my blog! Posts appear below.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy SDRs Are Teaching Spaces\n\n\n\nSDR\n\nTeaching\n\n\n\nSDRs work best when treated as structured learning conversations.\n\n\n\n\n\nDec 19, 2025\n\n1 min\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "privacy.html#privacy-cookies",
