@@ -1,6 +1,7 @@
 ---
 title: Contact
 ---
+<img src="images/main_logo.png" class="centered-image">
 
 ## Contact
 
