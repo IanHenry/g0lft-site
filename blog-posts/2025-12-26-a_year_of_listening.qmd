@@ -1,0 +1,37 @@
+---
+title: "A Year of Listening"
+date: 2025-12-26
+categories: [Reflections]
+description: "Finding Structure, Curiosity and Understanding Through Amateur Radio"
+---
+
+## A Year of Listening:
+
+### Finding Structure, Curiosity and Understanding Through Amateur Radio
+
+At the beginning of this year, I was completely unaware of amateur radio.  I was recovering from illness and work was already proving difficult. I needed something mentally stimulating but not demanding, something absorbing, technical and quietly constructive.
+
+In April, I stumbled upon amateur radio almost by chance. Initially, it wasn’t about licences or operating privileges; it was simply fascinating. Signals emerged from noise, antennas behaved in unexpected ways and the concept of meaningful communication with minimal power captivated me.
+
+My curiosity quickly turned into momentum. I sat the Foundation exam in May and shortly afterwards the Intermediate.  Looking back, this pace reflects more on circumstance than ability. Radio provided a concrete focus during a time when many other aspects of my life felt fragmented.
+
+Work remained challenging throughout the year, but studying and operating became a consistent background activity. It kept me engaged, distracted in a positive way and fostered a renewed sense of learning.  I experimented extensively with various modes, bands and contact methods, not for the sake of achievements, but to understand how the hobby’s components fit together.
+
+Joining CDARC was another significant milestone.  Interacting with generous individuals who shared their time and experience reminded me that amateur radio is as much about people as it is about equipment or exams.  Observing diverse operating styles and problem-solving approaches was as enlightening as any reading I’ve done.
+
+Later in the year, I decided to work towards the Full licence. I mainly studied from the RSGB book, reading slowly and following ideas rather than memorising answers.  I was awarded a distinction, which I mention only because it led to a lasting realisation: the most challenging aspects of learning radio aren’t about formulas or regulations – they’re about visualising what’s actually happening.
+
+That’s where books fall short.
+
+Circuits, filters, impedance, noise and signal flow are inherently dynamic, constantly changing and interacting. Static diagrams and paragraphs can only take you so far before you need to observe behaviour, not just read about it.  A capacitor charging, a filter rejecting energy and a weak signal emerging from noise are processes, not pictures.
+
+As someone who works professionally with complex systems, I’ve become increasingly convinced that radio education would greatly benefit from improved visual and animated explanations.  This isn’t to replace books but to complement them – to transform abstract concepts into something you can watch evolve and intuitively understand.
+
+This idea is one of the reasons this blog exists.
+
+Next year, I want to spend less time acquiring equipment and more time understanding it. If this space becomes anything, I hope it becomes a place where difficult radio concepts are explained visually patiently and honestly – where behaviour is shown, not just described, and where understanding can grow over time.
+
+Amateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.
+
+If you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts.
+
