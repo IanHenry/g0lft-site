@@ -1,7 +1,7 @@
 ---
 title: "A Year of Listening"
 date: 2025-12-26
-categories: [Reflections]
+categories: [Reflections, Learning, Radio Education]
 description: "Finding Structure, Curiosity and Understanding Through Amateur Radio"
 ---
 
@@ -33,5 +33,4 @@ Next year, I want to spend less time acquiring equipment and more time understan
 
 Amateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.
 
-If you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts.
-
+*If you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts.*
