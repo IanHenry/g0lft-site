@@ -51,7 +51,7 @@ plt.title(f"Constellation @ {fc/1e6:.3f} MHz")
 plt.axis("equal")
 plt.grid(True)
 plt.show()
-
+```
 </details>
 
 {
@@ -198,8 +198,7 @@ As before, this is included only as a reference. Everything important about the 
 
 ## Audio-synchronised IQ animation (supplementary)
 
-::: 
-{#fig-video fig-cap="Animated IQ plot with audio overlay"}
+::: {#fig-video fig-cap="Animated IQ plot with audio overlay"}
 
 {{< video images/dynamic_iq_audio.mp4
 title="Animated IQ plot with audio overlay"
