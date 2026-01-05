@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-01-05">
-<meta name="description" content="Seeing Broadcast FM in IQ Space">
+<meta name="description" content="This post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM.">
 
 <title>Seeing Broadcast FM in IQ Space</title>
 <style>
@@ -175,18 +175,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#seeing-broadcast-fm-in-iq-space" id="toc-seeing-broadcast-fm-in-iq-space" class="nav-link active" data-scroll-target="#seeing-broadcast-fm-in-iq-space">Seeing Broadcast FM in IQ Space</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#broadcast-fm-in-iq-space" id="toc-broadcast-fm-in-iq-space" class="nav-link" data-scroll-target="#broadcast-fm-in-iq-space">Broadcast FM in IQ Space</a></li>
   <li><a href="#iq-constellation-the-rotating-carrier" id="toc-iq-constellation-the-rotating-carrier" class="nav-link" data-scroll-target="#iq-constellation-the-rotating-carrier">IQ constellation: the rotating carrier</a></li>
   <li><a href="#dynamic-iq-rotation-over-time" id="toc-dynamic-iq-rotation-over-time" class="nav-link" data-scroll-target="#dynamic-iq-rotation-over-time">Dynamic IQ: rotation over time</a></li>
   <li><a href="#magnitude-vs-time-what-fm-does-not-use" id="toc-magnitude-vs-time-what-fm-does-not-use" class="nav-link" data-scroll-target="#magnitude-vs-time-what-fm-does-not-use">Magnitude vs Time: what FM does not use</a></li>
-  <li><a href="#phase-and-instantaneous-frequency" id="toc-phase-and-instantaneous-frequency" class="nav-link" data-scroll-target="#phase-and-instantaneous-frequency">Phase and instantaneous frequency</a></li>
+  <li><a href="#phase-and-instantaneous-frequency" id="toc-phase-and-instantaneous-frequency" class="nav-link" data-scroll-target="#phase-and-instantaneous-frequency">Phase and instantaneous frequency</a>
+  <ul class="collapse">
   <li><a href="#instantaneous-frequency-audio-revealed" id="toc-instantaneous-frequency-audio-revealed" class="nav-link" data-scroll-target="#instantaneous-frequency-audio-revealed">Instantaneous frequency: audio revealed</a></li>
+  </ul></li>
   <li><a href="#demodulated-audio" id="toc-demodulated-audio" class="nav-link" data-scroll-target="#demodulated-audio">Demodulated audio</a></li>
   <li><a href="#audio-synchronised-animation" id="toc-audio-synchronised-animation" class="nav-link" data-scroll-target="#audio-synchronised-animation">Audio-synchronised animation</a></li>
   <li><a href="#what-broadcast-fm-teaches-us" id="toc-what-broadcast-fm-teaches-us" class="nav-link" data-scroll-target="#what-broadcast-fm-teaches-us">What broadcast FM teaches us</a></li>
   <li><a href="#github-link-to-code-used-to-create-these-plots" id="toc-github-link-to-code-used-to-create-these-plots" class="nav-link" data-scroll-target="#github-link-to-code-used-to-create-these-plots">GitHub Link to code used to create these plots</a></li>
   <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time…</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -200,6 +205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="seeing-broadcast-fm-in-iq-space" class="level1">
+<h1>Seeing Broadcast FM in IQ Space</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Modern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.</p>
@@ -213,16 +220,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="iq-constellation-the-rotating-carrier" class="level2">
 <h2 class="anchored" data-anchor-id="iq-constellation-the-rotating-carrier">IQ constellation: the rotating carrier</h2>
+<details>
+<summary>
+Load and plot raw IQ
+</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load saved IQ</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.load(<span class="st">"iq_capture.npz"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>iq <span class="op">=</span> data[<span class="st">'iq'</span>]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> data[<span class="st">'fs'</span>]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>fc <span class="op">=</span> data[<span class="st">'fc'</span>]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop initial transient samples</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>iq <span class="op">=</span> iq[<span class="dv">1000</span>:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> iq_io <span class="im">import</span> load_iq</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load IQ</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>iq, fs, fc <span class="op">=</span> load_iq(<span class="st">"iq_capture.npz"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>iq <span class="op">=</span> iq[<span class="dv">1000</span>:]  <span class="co"># drop initial transient</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">min</span>(<span class="bu">len</span>(iq), <span class="dv">200000</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>iq_seg <span class="op">=</span> iq[:N]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot constellation</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">6</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.scatter(iq_seg.real, iq_seg.imag, s<span class="op">=</span><span class="dv">2</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"I"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Q"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Constellation @ </span><span class="sc">{</span>fc<span class="op">/</span><span class="fl">1e6</span><span class="sc">:.3f}</span><span class="ss"> MHz"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"equal"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -251,6 +272,29 @@ Figure&nbsp;1: IQ constellation diagram showing raw iq from a short capture of B
 </section>
 <section id="dynamic-iq-rotation-over-time" class="level2">
 <h2 class="anchored" data-anchor-id="dynamic-iq-rotation-over-time">Dynamic IQ: rotation over time</h2>
+<details>
+<summary>
+Animate IQ (GIF)
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.animation <span class="im">import</span> FuncAnimation</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'I'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Q'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Dynamic IQ Plot (GIF)'</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.05</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.05</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> ax.scatter([], [])</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> update(frame):</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    scatter.set_offsets(np.column_stack((iq_seg.real[:frame], iq_seg.imag[:frame])))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scatter,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ani <span class="op">=</span> FuncAnimation(fig, update, frames<span class="op">=</span><span class="dv">500</span>, blit<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ani.save(<span class="st">"dynamic_iq.gif"</span>, dpi<span class="op">=</span><span class="dv">80</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div id="fig-anim" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-anim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -266,6 +310,23 @@ Figure&nbsp;2: Fading IQ points over the full capture
 </section>
 <section id="magnitude-vs-time-what-fm-does-not-use" class="level2">
 <h2 class="anchored" data-anchor-id="magnitude-vs-time-what-fm-does-not-use">Magnitude vs Time: what FM does not use</h2>
+<details>
+<summary>
+Plot magnitude vs time
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.arange(<span class="bu">len</span>(iq_seg)) <span class="op">/</span> fs</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.<span class="bu">abs</span>(iq_seg)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.plot(t, mag, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"|IQ|"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Magnitude vs Time"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div id="fig-mag" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -281,6 +342,26 @@ Figure&nbsp;3: Magnitude of IQ vs Time
 </section>
 <section id="phase-and-instantaneous-frequency" class="level2">
 <h2 class="anchored" data-anchor-id="phase-and-instantaneous-frequency">Phase and instantaneous frequency</h2>
+<details>
+<summary>
+Phase and instantaneous frequency
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unwrapping Phase</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phase <span class="op">=</span> np.angle(iq_seg)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>phase_unwrapped <span class="op">=</span> np.unwrap(phase)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Instantaneous frequency</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>inst_freq <span class="op">=</span> np.diff(phase_unwrapped) <span class="op">*</span> fs <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>t_freq <span class="op">=</span> t[<span class="dv">1</span>:]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.plot(t_freq, inst_freq)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Frequency (Hz)"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instantaneous Frequency vs Time"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div id="fig-phase" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -293,35 +374,48 @@ Figure&nbsp;4: Unwrapped phase vs Time
 </div>
 <p>If the phase of the IQ samples is unwrapped and plotted against time (<a href="#fig-phase" class="quarto-xref">Figure&nbsp;4</a>), it appears as a steadily increasing line. The slope of this line corresponds to frequency. When audio is present, the slope changes continuously, this is frequency modulation made visible.</p>
 <p>While this plot is mathematically important, it is not always easy to interpret visually. For that reason, it is often more intuitive to plot instantaneous frequency, derived from the difference between successive phase samples.</p>
-</section>
-<section id="instantaneous-frequency-audio-revealed" class="level2">
-<h2 class="anchored" data-anchor-id="instantaneous-frequency-audio-revealed">Instantaneous frequency: audio revealed</h2>
-<div id="fig-inst" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/inst_freq_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Instantaneous frequency
-</figcaption>
-</figure>
-</div>
-<p>When instantaneous frequency is plotted (<a href="#fig-inst" class="quarto-xref">Figure&nbsp;5</a>), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.</p>
+<section id="instantaneous-frequency-audio-revealed" class="level3">
+<h3 class="anchored" data-anchor-id="instantaneous-frequency-audio-revealed">Instantaneous frequency: audio revealed</h3>
+<p><img src="images/inst_freq_vs_time.png" class="img-fluid" alt="Instantaneous frequency">{ #fig-inst fig-align=“left” fig-cap = “Instantaneous frequency” width=100% }</p>
+<p>When instantaneous frequency is plotted (<strong>?@fig-inst</strong>), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.</p>
 <p>Although this step already involves a small amount of processing, it remains very close to the raw signal and provides a clear bridge between the abstract idea of phase and the familiar concept of audio.</p>
+</section>
 </section>
 <section id="demodulated-audio" class="level2">
 <h2 class="anchored" data-anchor-id="demodulated-audio">Demodulated audio</h2>
+<details>
+<summary>
+FM demodulated audio
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.signal <span class="im">import</span> butter, filtfilt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Low-pass filter for audio</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fs_audio_cut <span class="op">=</span> <span class="fl">15e3</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>b, a <span class="op">=</span> butter(<span class="dv">5</span>, <span class="fl">15e3</span><span class="op">/</span>(fs<span class="op">/</span><span class="dv">2</span>), btype<span class="op">=</span><span class="st">'low'</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>audio <span class="op">=</span> filtfilt(b, a, inst_freq)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalize and plot</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>audio <span class="op">/=</span> <span class="bu">max</span>(<span class="bu">abs</span>(audio))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.plot(t_freq, audio, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Normalized Audio"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Demodulated FM Audio Waveform"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div id="fig-demod" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/demod_fm_audio.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Demodulated audio waveform
+Figure&nbsp;5: Demodulated audio waveform
 </figcaption>
 </figure>
 </div>
-<p>For completeness, the FM signal can of course be demodulated into audio (<a href="#fig-demod" class="quarto-xref">Figure&nbsp;6</a>). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.</p>
+<p>For completeness, the FM signal can of course be demodulated into audio (<a href="#fig-demod" class="quarto-xref">Figure&nbsp;5</a>). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.</p>
 <p>In this series, demodulated audio is included only as a reference. The focus is on understanding the signal before demodulation, using the structure already present in the IQ data.</p>
 </section>
 <section id="audio-synchronised-animation" class="level2">
@@ -331,13 +425,13 @@ Figure&nbsp;6: Demodulated audio waveform
 <div aria-describedby="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" width="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="images/dynamic_iq_audio.mp4"></video></div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Animated IQ plot with audio overlay
 </figcaption>
 </figure>
 </div>
-<p>As a final illustration, the IQ animation can be synchronised with the recovered audio (<a href="#fig-video" class="quarto-xref">Figure&nbsp;7</a>). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.</p>
-<p>This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.</p>
+<p>As a final illustration, the IQ animation can be synchronised with the recovered audio (<a href="#fig-video" class="quarto-xref">Figure&nbsp;6</a>). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.</p>
+<p>This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own. For a full audio-synced MP4, see the <a href="https://github.com/IanHenry/fm-iq-visualisation">GitHub repository</a>.</p>
 </section>
 <section id="what-broadcast-fm-teaches-us" class="level2">
 <h2 class="anchored" data-anchor-id="what-broadcast-fm-teaches-us">What broadcast FM teaches us</h2>
@@ -357,6 +451,7 @@ Figure&nbsp;7
 <p>In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
