@@ -2,12 +2,14 @@
 title: "Seeing Broadcast FM in IQ Space"
 date: 2026-01-05
 categories: [SDR, Teaching]
-description: "Seeing Broadcast FM in IQ Space"
+description: "This post is the first in a short series  exploring what different radio signals look like in IQ space.  It begins with broadcast FM."
 format:
   html:
     toc: true
     code-fold: true
 ---
+
+# Seeing Broadcast FM in IQ Space
 
 ## Introduction
 
@@ -30,7 +32,7 @@ When viewed as IQ samples, this carrier appears as a rotating vector in the comp
 <details>
 <summary>Load and plot raw IQ</summary>
 
-```{python}
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 from iq_io import load_iq
@@ -78,7 +80,7 @@ In FM, information is carried in how fast the vector rotates, not how far it is 
 <details>
 <summary>Animate IQ (GIF)</summary>
 
-```{python}
+```python
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
@@ -117,7 +119,7 @@ This animation does more than any single static plot to build intuition for what
 <details>
 <summary>Plot magnitude vs time</summary>
 
-```{python}
+```python
 import matplotlib.pyplot as plt
 
 t = np.arange(len(iq_seg)) / fs
@@ -150,7 +152,7 @@ This plot is a useful contrast with AM, where the magnitude directly follows the
 <details>
 <summary>Phase and instantaneous frequency</summary>
 
-```{python}
+```python
 # Unwrapping Phase
 phase = np.angle(iq_seg)
 phase_unwrapped = np.unwrap(phase)
@@ -186,6 +188,7 @@ While this plot is mathematically important, it is not always easy to interpret 
 ![Instantaneous frequency](images/inst_freq_vs_time.png){
   #fig-inst
   fig-align="left"
+  fig-cap = "Instantaneous frequency"
   width=100%
 }
 
@@ -198,7 +201,7 @@ Although this step already involves a small amount of processing, it remains ver
 <details>
 <summary>FM demodulated audio</summary>
 
-```{python}
+```python
 from scipy.signal import butter, filtfilt
 
 # Low-pass filter for audio
@@ -232,7 +235,7 @@ In this series, demodulated audio is included only as a reference. The focus is 
 
 
 ## Audio-synchronised animation
-::: {#fig-video}
+::: {#fig-video fig-cap="Animated IQ plot with audio overlay"}
 
 {{< video images/dynamic_iq_audio.mp4
      title='Animated IQ plot with audio overlay'
