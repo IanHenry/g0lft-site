@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -150,6 +185,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#demodulated-audio" id="toc-demodulated-audio" class="nav-link" data-scroll-target="#demodulated-audio">Demodulated audio</a></li>
   <li><a href="#audio-synchronised-animation" id="toc-audio-synchronised-animation" class="nav-link" data-scroll-target="#audio-synchronised-animation">Audio-synchronised animation</a></li>
   <li><a href="#what-broadcast-fm-teaches-us" id="toc-what-broadcast-fm-teaches-us" class="nav-link" data-scroll-target="#what-broadcast-fm-teaches-us">What broadcast FM teaches us</a></li>
+  <li><a href="#github-link-to-code-used-to-create-these-plots" id="toc-github-link-to-code-used-to-create-these-plots" class="nav-link" data-scroll-target="#github-link-to-code-used-to-create-these-plots">GitHub Link to code used to create these plots</a></li>
   <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time…</a></li>
   </ul>
 </nav>
@@ -177,6 +213,18 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="iq-constellation-the-rotating-carrier" class="level2">
 <h2 class="anchored" data-anchor-id="iq-constellation-the-rotating-carrier">IQ constellation: the rotating carrier</h2>
+<p>::: details Load and prepare IQ samples</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load saved IQ</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.load(<span class="st">"iq_capture.npz"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>iq <span class="op">=</span> data[<span class="st">'iq'</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> data[<span class="st">'fs'</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>fc <span class="op">=</span> data[<span class="st">'fc'</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop initial transient samples</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>iq <span class="op">=</span> iq[<span class="dv">1000</span>:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>:::</p>
 <div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -208,7 +256,7 @@ Figure&nbsp;1: IQ constellation diagram showing raw iq from a short capture of B
 <div id="fig-anim" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-anim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/dynamic_iq.gif" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:55.0%">
+<img src="images/dynamic_iq.gif" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Fading IQ points over the full capture
@@ -223,7 +271,7 @@ Figure&nbsp;2: Fading IQ points over the full capture
 <div id="fig-mag" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/mag_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:80.0%">
+<img src="images/mag_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Magnitude of IQ vs Time
@@ -238,7 +286,7 @@ Figure&nbsp;3: Magnitude of IQ vs Time
 <div id="fig-phase" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/unwrapped_phase_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:80.0%">
+<img src="images/unwrapped_phase_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: Unwrapped phase vs Time
@@ -253,7 +301,7 @@ Figure&nbsp;4: Unwrapped phase vs Time
 <div id="fig-inst" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/inst_freq_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:80.0%">
+<img src="images/inst_freq_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: Instantaneous frequency
@@ -268,7 +316,7 @@ Figure&nbsp;5: Instantaneous frequency
 <div id="fig-demod" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/demod_fm_audio.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:80.0%">
+<img src="images/demod_fm_audio.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: Demodulated audio waveform
@@ -283,7 +331,7 @@ Figure&nbsp;6: Demodulated audio waveform
 <div id="fig-video" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="400" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="images/dynamic_iq.mp4"></video></div>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" width="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="images/dynamic_iq.mp4"></video></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;7
@@ -301,6 +349,10 @@ Figure&nbsp;7
 <li>A visible carrier produces rotation</li>
 <li>Different modulations encode information in different aspects of that rotation</li>
 </ul>
+</section>
+<section id="github-link-to-code-used-to-create-these-plots" class="level2">
+<h2 class="anchored" data-anchor-id="github-link-to-code-used-to-create-these-plots">GitHub Link to code used to create these plots</h2>
+<p>For complete reproducible scripts, including capture, plotting, and video generation, see the <a href="https://github.com/IanHenry/fm-iq-visualisation">GitHub repository</a>.</p>
 </section>
 <section id="next-time" class="level2">
 <h2 class="anchored" data-anchor-id="next-time">Next Time…</h2>
