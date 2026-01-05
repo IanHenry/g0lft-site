@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-12-19">
-<meta name="description" content="Exploring how software-defined radios help in learning radio theory.">
+<meta name="dcterms.date" content="2026-01-05">
+<meta name="description" content="Exploring how software-defined radios capture and represent FM signals">
 
-<title>Why SDRs Are Great Teaching Tools</title>
+<title>Exploring IQ Data - Broadcast FM</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,25 +25,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../images/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9dc0ea0bfd80716bcf5b9386a0e4308a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9dc0ea0bfd80716bcf5b9386a0e4308a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,16 +82,16 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- intentionally empty — GA is handled by _cookie_consent.html -->
 
-<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-<link rel="manifest" href="../images/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
 <meta name="theme-color" content="#1ecbe1">
 
 
 
-<link rel="stylesheet" href="../_theme/_base.css">
-<link rel="stylesheet" href="../_theme/_colors.css">
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -107,19 +107,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../thinking.html"> 
+    <a class="nav-link" href="../../thinking.html"> 
 <span class="menu-text">Thinking</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../guides.html"> 
+    <a class="nav-link" href="../../guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
 </ul>
@@ -135,33 +135,33 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Why SDRs Are Great Teaching Tools</h1></header>
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Exploring IQ Data - Broadcast FM</h1></header>
 
 <header id="title-block-header">
 
 
-<p class="date">2025-12-19</p>
+<p class="date">2026-01-05</p>
 </header>
 
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Software-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.</p>
-<section id="benefits-for-learning" class="level3">
-<h3 class="anchored" data-anchor-id="benefits-for-learning">Benefits for Learning</h3>
-<ul>
-<li>Immediate feedback: you can see signals in real time.<br>
-</li>
-<li>Experimentation: easily test modulation, filters, and antennas.<br>
-</li>
-<li>Visualization: spectrum displays make abstract concepts tangible.</li>
-</ul>
+<p>Modern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.</p>
+<p>Representing a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work — what changes, what stays the same, and where the information really lives.</p>
+<p>This post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM, moves to narrowband FM and then to airband FM. In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns</p>
+<section id="broadcast-fm-in-iq-space" class="level3">
+<h3 class="anchored" data-anchor-id="broadcast-fm-in-iq-space">Broadcast FM in IQ Space</h3>
+<section id="the-simplest-case-a-single-strong-carrier" class="level4">
+<h4 class="anchored" data-anchor-id="the-simplest-case-a-single-strong-carrier">The simplest case: a single strong carrier</h4>
+<p>Broadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.</p>
+<p>If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.</p>
+<p><img src="images/constellation.png" class="img-fluid"></p>
+<p>(Figure 1 : IQ scatter plot, short time window)</p>
+<p>In Figure 1 When plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.</p>
+<p>What does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating.</p>
+
+
 </section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>Treating SDRs as learning spaces allows students to connect theory to practice quickly and safely.</p>
-
-
 </section>
 </section>
 
@@ -217,18 +217,18 @@ ul.task-list li input[type="checkbox"] {
 <div class="site-footer">
  <div class="footer-content">
    © 2025 Dr Ian Henry, G0LFT. All rights reserved.<br>
-   <a href="../privacy.html">Privacy Policy</a> |
-   <a href="../credits.html">Image Credits</a> |
-   <a href="../about.html">About</a> |
-   <a href="../station.html">Station</a> |
-   <a href="../contact.html">Contact</a> |
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
    <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
    <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
   </div>
 </div>
 <!-- Desktop-only navbar logo -->
 <a href="https://g0lft.org" class="navbar-desktop-logo-link">
-  <img src="../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
 </a>
 
 <script>

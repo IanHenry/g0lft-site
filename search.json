@@ -42,39 +42,25 @@
     "text": "About\nI’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together:\n\nreflective writing on amateur radio, teaching, and learning\ntheory-focused pieces on SDR and digital communication\npractical guides for operators who want to understand why things work, not just how\n\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
   },
   {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory.html",
-    "href": "thinking-posts/2025-12-19-sdr_theory.html",
-    "title": "Why SDRs Are Great Teaching Tools",
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
+    "title": "Exploring IQ Data - Broadcast FM",
     "section": "",
-    "text": "2025-12-19"
+    "text": "2026-01-05"
   },
   {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory.html#introduction",
-    "href": "thinking-posts/2025-12-19-sdr_theory.html#introduction",
-    "title": "Why SDRs Are Great Teaching Tools",
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#introduction",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#introduction",
+    "title": "Exploring IQ Data - Broadcast FM",
     "section": "Introduction",
-    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
+    "text": "Introduction\nModern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.\nRepresenting a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work — what changes, what stays the same, and where the information really lives.\nThis post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM, moves to narrowband FM and then to airband FM. In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns\n\nBroadcast FM in IQ Space\n\nThe simplest case: a single strong carrier\nBroadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.\nIf the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.\n\n(Figure 1 : IQ scatter plot, short time window)\nIn Figure 1 When plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.\nWhat does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating."
   },
   {
-    "objectID": "thinking.html#thinking",
-    "href": "thinking.html#thinking",
-    "title": "Thinking",
-    "section": "Thinking",
-    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
-  },
-  {
-    "objectID": "station.html#station",
-    "href": "station.html#station",
-    "title": "My Station",
-    "section": "Station",
-    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
-  },
-  {
-    "objectID": "index.html#teaching-learning-and-amateur-radio",
-    "href": "index.html#teaching-learning-and-amateur-radio",
-    "title": "G0LFT",
-    "section": "Teaching, learning, and amateur radio",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice"
+    "objectID": "contact.html#contact",
+    "href": "contact.html#contact",
+    "title": "Contact",
+    "section": "Contact",
+    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
   },
   {
     "objectID": "credits.html#hero-images",
@@ -91,11 +77,39 @@
     "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
   },
   {
-    "objectID": "contact.html#contact",
-    "href": "contact.html#contact",
-    "title": "Contact",
-    "section": "Contact",
-    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
+    "objectID": "index.html#teaching-learning-and-amateur-radio",
+    "href": "index.html#teaching-learning-and-amateur-radio",
+    "title": "G0LFT",
+    "section": "Teaching, learning, and amateur radio",
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice"
+  },
+  {
+    "objectID": "station.html#station",
+    "href": "station.html#station",
+    "title": "My Station",
+    "section": "Station",
+    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
+  },
+  {
+    "objectID": "thinking.html#thinking",
+    "href": "thinking.html#thinking",
+    "title": "Thinking",
+    "section": "Thinking",
+    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "",
+    "text": "2025-12-19"
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "Introduction",
+    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
   },
   {
     "objectID": "blog.html#blog",
