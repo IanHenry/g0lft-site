@@ -1,0 +1,36 @@
+---
+title: "Exploring IQ Data - Broadcast FM"
+date: 2026-01-05
+categories: [SDR, Teaching]
+description: "Exploring how software-defined radios capture and represent FM signals"
+---
+
+## Introduction
+
+Modern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.
+
+Representing a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work — what changes, what stays the same, and where the information really lives.
+
+
+This post is the first in a short series  exploring what different radio signals look like in IQ space.  It begins with broadcast FM, moves to narrowband FM and then to airband FM.  In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns
+
+
+### Broadcast FM in IQ Space
+#### The simplest case: a single strong carrier
+Broadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.
+
+If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.
+
+
+![](images/constellation.png)
+
+(Figure 1 : IQ scatter plot, short time window)
+
+
+
+In Figure 1 When plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.
+
+
+
+What does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating.
+
