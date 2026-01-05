@@ -61,7 +61,7 @@ This animation does more than any single static plot to build intuition for what
 ![Magnitude of IQ vs Time](images/mag_vs_time.png){
   #fig-mag
   fig-align="left"
-  height=50%
+  height=20%
 }
 
 Plotting the magnitude of the IQ samples over time (@fig-mag) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.
@@ -73,7 +73,7 @@ This plot is a useful contrast with AM, where the magnitude directly follows the
 ![Unwrapped phase vs Time](images/unwrapped_phase_vs_time.png){
   #fig-phase
   fig-align="left"
-  height=50%
+  height=20%
 }
 
 If the phase of the IQ samples is unwrapped and plotted against time (@fig-phase), it appears as a steadily increasing line. The slope of this line corresponds to frequency. When audio is present, the slope changes continuously, this is frequency modulation made visible.
@@ -85,7 +85,7 @@ While this plot is mathematically important, it is not always easy to interpret 
 ![Instantaneous frequency](images/inst_freq_vs_time.png){
   #fig-inst
   fig-align="left"
-  height=50%
+  height=20%
 }
 
 When instantaneous frequency is plotted (@fig-inst), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.
@@ -97,7 +97,7 @@ Although this step already involves a small amount of processing, it remains ver
 ![Demodulated audio waveform](images/demod_fm_audio.png){
   #fig-demod
   fig-align="left"
-  height=50%
+  height=20%
 }
 
 For completeness, the FM signal can of course be demodulated into audio (@fig-demod). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.
@@ -108,7 +108,7 @@ In this series, demodulated audio is included only as a reference. The focus is 
 ## Audio-synchronised animation
 ::: {#fig-video}
 
-{{< video dynamic_iq.mp4
+{{< video images/dynamic_iq.mp4
     title='Animated IQ plot with audio overlay'
 >}}
 
