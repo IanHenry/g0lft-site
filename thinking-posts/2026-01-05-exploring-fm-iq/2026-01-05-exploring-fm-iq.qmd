@@ -245,7 +245,10 @@ In this series, demodulated audio is included only as a reference. The focus is 
 
 As a final illustration, the IQ animation can be synchronised with the recovered audio (@fig-video). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.
 
-This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.  For the script to create a fully audio-synced MP4, see the [GitHub repository](https://github.com/IanHenry/iq-visualisation/fm_broadcast).
+::: {.callout-important}
+## Educational note
+The audio-synchronised MP4 is included solely to illustrate how audio maps onto frequency deviation in broadcast FM. It uses a short off-air capture for technical demonstration, not for redistribution or listening.
+:::
 
 ## What broadcast FM teaches us
 
@@ -257,7 +260,7 @@ Broadcast FM establishes three ideas that will carry through the rest of this se
 
 ## GitHub Link to code used to create these plots
 
-For complete reproducible scripts, including capture, plotting, and video generation, see the [GitHub repository](https://github.com/IanHenry/iq-visualisation/fm_broadcast).
+For complete reproducible scripts, including capture, plotting, and video generation, see the [GitHub repository](https://github.com/IanHenry/iq-visualisation/).  *The link is currently here as a placeholder but code will be added shortly*
 
 ## Next Time...
 In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.
