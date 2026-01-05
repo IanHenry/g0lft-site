@@ -1,7 +1,7 @@
 ---
 title: "Seeing Broadcast FM in IQ Space"
 date: 2026-01-05
-categories: [SDR, Teaching]
+categories: [SDR, IQ, Frequency Modulation, Broadcast FM, Signal Processing, Visualisation, Constellation Diagram]
 description: "This post is the first in a short series  exploring what different radio signals look like in IQ space.  It begins with broadcast FM."
 format:
   html:
@@ -188,7 +188,6 @@ While this plot is mathematically important, it is not always easy to interpret 
 ![Instantaneous frequency](images/inst_freq_vs_time.png){
   #fig-inst
   fig-align="left"
-  fig-cap = "Instantaneous frequency"
   width=100%
 }
 
@@ -246,7 +245,7 @@ In this series, demodulated audio is included only as a reference. The focus is 
 
 As a final illustration, the IQ animation can be synchronised with the recovered audio (@fig-video). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.
 
-This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.  For a full audio-synced MP4, see the [GitHub repository](https://github.com/IanHenry/fm-iq-visualisation).
+This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.  For the script to create a fully audio-synced MP4, see the [GitHub repository](https://github.com/IanHenry/iq-visualisation/fm_broadcast).
 
 ## What broadcast FM teaches us
 
@@ -258,7 +257,7 @@ Broadcast FM establishes three ideas that will carry through the rest of this se
 
 ## GitHub Link to code used to create these plots
 
-For complete reproducible scripts, including capture, plotting, and video generation, see the [GitHub repository](https://github.com/IanHenry/fm-iq-visualisation).
+For complete reproducible scripts, including capture, plotting, and video generation, see the [GitHub repository](https://github.com/IanHenry/iq-visualisation/fm_broadcast).
 
 ## Next Time...
 In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.
