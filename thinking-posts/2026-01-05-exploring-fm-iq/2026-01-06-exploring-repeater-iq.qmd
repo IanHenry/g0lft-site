@@ -1,0 +1,231 @@
+---
+title: "Seeing an FM Repeater in IQ Space"
+date: 2026-01-06
+categories: [SDR, IQ, Frequency Modulation, Narrowband FM, Repeaters, Signal Processing, Visualisation]
+description: "Exploring narrowband FM repeater behaviour using IQ plots"
+format:
+  html:
+    toc: true
+    code-fold: true
+---
+
+# Seeing an FM Repeater in IQ Space
+
+In the previous post we looked at broadcast FM, where a strong, continuous carrier produces a clean and steady pattern in IQ space. In this post, we’ll look at a narrowband FM repeater signal and see how the same underlying geometry appears in a much more dynamic, real-world setting.
+
+The capture shown here is from the **GB3PI** repeater, and includes silence, background noise, the repeater keying up, a spoken time announcement, and the carrier dropping again. Nothing about the modulation itself has changed, but the behaviour in IQ space becomes far richer.
+
+## A reminder: FM geometry still applies
+
+Before looking at the plots, it’s worth restating the key point from the previous post:
+
+::: {.callout-tip}
+## Key point
+In FM, information is carried in frequency deviation, not amplitude.
+:::
+
+That remains true here. The differences we’ll see arise from:
+
+- The carrier turning on and off  
+- Periods of silence  
+- Noise being passed by the receiver  
+- Speech appearing intermittently  
+
+## IQ constellation over the full capture
+
+<details>
+<summary>Load IQ and plot full-segment constellation</summary>
+
+```python
+iq, fs, fc = load_iq("iq_capture.npz")
+
+iq = iq[1000:]  # drop initial transient
+N = min(len(iq), 80000000)
+iq_seg = iq[:N]
+
+plt.figure(figsize=(6,6))
+plt.scatter(iq_seg.real, iq_seg.imag, s=2, alpha=0.3)
+plt.xlabel("I")
+plt.ylabel("Q")
+plt.title(f"Constellation @ {fc/1e6:.3f} MHz")
+plt.axis("equal")
+plt.grid(True)
+plt.show()
+
+</details>
+
+{
+#fig-constellation
+fig-align="left"
+width=55%
+}
+
+When all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.
+
+This immediately tells us something important:
+
+The repeater is not transmitting continuously
+
+Large portions of the capture contain only noise
+
+The central cloud corresponds to periods when the repeater is idle. With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.
+
+The ring corresponds to periods when the repeater is active and transmitting FM.
+
+## Dynamic IQ: silence, key-up, speech
+
+<details> 
+<summary>Animated IQ (GIF, no audio)</summary>
+```python
+# GIF-only animation derived from full animation script
+ani.save("dynamic_iq.gif", dpi=80)
+```
+</details>
+
+{
+#fig-dynamic
+fig-align="left"
+width=60%
+}
+
+Animating the IQ samples reveals the structure much more clearly.
+
+The sequence is easy to follow:
+
+- Silence: a tight, noisy cloud near the origin
+- Key-up: a sudden appearance of a rotating ring
+- Speech: continuous rotation with changing speed
+- Carrier drop: collapse back into noise
+
+This animation reinforces an important idea:
+
+::: {.callout-tip}
+
+Observation
+
+The appearance or disappearance of a carrier is immediately visible in IQ space.
+:::
+
+No demodulation is required to see when the repeater is active.
+
+## Magnitude vs time: carrier presence
+<details> 
+<summary>Plot magnitude vs time</summary>
+```python
+mag = np.abs(iq_seg)
+plt.plot(t, mag)
+plt.xlabel("Time (s)")
+plt.ylabel("|IQ|")
+plt.show()
+```
+</details>
+
+{
+#fig-mag
+fig-align="left"
+width=100%
+}
+
+Plotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.
+
+As with broadcast FM, the magnitude does not follow the speech itself. This confirms that amplitude is not being used to carry information, even though amplitude changes are useful for detecting transmission boundaries.
+
+## Phase and instantaneous frequency
+<details> 
+<summary>Unwrapped phase and instantaneous frequency</summary>
+```python
+phase = np.angle(iq_seg)
+phase_unwrapped = np.unwrap(phase)
+
+inst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)
+```
+</details>
+
+{
+#fig-phase
+fig-align="left"
+width=100%
+}
+
+During periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.
+
+This makes phase plots particularly good at distinguishing:
+
+- Carrier present vs absent
+- Signal vs noise
+
+### Instantaneous frequency: speech appears
+
+{
+#fig-inst
+fig-align="left"
+width=100%
+}
+
+When instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.
+
+Compared to broadcast FM:
+- The deviation is narrower
+- The audio bandwidth is smaller
+- Transitions between silence and speech are more abrupt
+
+This reflects the operational nature of narrowband FM used on repeaters.
+
+### Demodulated audio
+<details> 
+<summary>FM demodulation using active IQ only</summary>
+```python
+active_mask = mag > squelch_thresh
+iq_active = iq_seg[active_mask]
+
+phase_active = np.unwrap(np.angle(iq_active))
+inst_freq_active = np.diff(phase_active) * fs / (2*np.pi)
+
+audio = filtfilt(b, a, inst_freq_active)
+audio /= np.max(np.abs(audio))
+```
+</details>
+
+{
+#fig-demod
+fig-align="left"
+width=100%
+}
+
+Demodulating the signal produces the expected result: silence, followed by the time announcement, followed by noise as the repeater drops.
+
+As before, this is included only as a reference. Everything important about the signal’s behaviour has already been visible in the IQ-derived plots.
+
+## Audio-synchronised IQ animation (supplementary)
+
+::: 
+{#fig-video fig-cap="Animated IQ plot with audio overlay"}
+
+{{< video images/dynamic_iq_audio.mp4
+title="Animated IQ plot with audio overlay"
+width=500
+
+}}
+
+:::
+
+Synchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely.
+
+
+## What the repeater example adds
+
+Compared to broadcast FM, the repeater example highlights three additional ideas:
+- Carriers can appear and disappear, and IQ shows this immediately
+- Noise collapses toward the origin in the absence of a signal
+- Real-world signals are intermittent, even when the modulation is unchanged
+
+The underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space.
+
+## GitHub link to code used to create these plots
+
+For complete reproducible scripts, including capture, plotting, and animation, see the
+GitHub repository.
+
+## Where next
+
+So far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space.
