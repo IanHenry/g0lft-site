@@ -27,7 +27,9 @@ When viewed as IQ samples, this carrier appears as a rotating vector in the comp
 
 ## IQ constellation: the rotating carrier
 
-```python
+```{python}
+#| code-fold: true
+#| code-summary: "Show the code"
 import numpy as np
 
 # Load saved IQ
