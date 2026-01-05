@@ -133,9 +133,22 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#broadcast-fm-in-iq-space" id="toc-broadcast-fm-in-iq-space" class="nav-link" data-scroll-target="#broadcast-fm-in-iq-space">Broadcast FM in IQ Space</a>
+  <ul class="collapse">
+  <li><a href="#the-simplest-case-a-single-strong-carrier" id="toc-the-simplest-case-a-single-strong-carrier" class="nav-link" data-scroll-target="#the-simplest-case-a-single-strong-carrier">The simplest case: a single strong carrier</a></li>
+  </ul></li>
+  <li><a href="#magnitude-vs-time" id="toc-magnitude-vs-time" class="nav-link" data-scroll-target="#magnitude-vs-time">Magnitude vs Time</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Exploring IQ Data - Broadcast FM</h1></header>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Exploring IQ Data - Broadcast FM</h1></header>
 
 <header id="title-block-header">
 
@@ -156,7 +169,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="the-simplest-case-a-single-strong-carrier">The simplest case: a single strong carrier</h3>
 <p>Broadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.</p>
 <p>If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.</p>
-<div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal" alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal" width="40%">
+<div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-center anchored" width="40%" data-fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal" alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/constellation.png" id="fig-constellation" class="img-fluid figure-img" style="width:40.0%" data-fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal" alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal">
@@ -173,7 +186,7 @@ Figure&nbsp;1
 </section>
 <section id="magnitude-vs-time" class="level2">
 <h2 class="anchored" data-anchor-id="magnitude-vs-time">Magnitude vs Time</h2>
-<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-cap="Magnitude of IQ vs Time" alt="Magnitude of IQ vs Time" width="40%">
+<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-center anchored" width="40%" data-fig-cap="Magnitude of IQ vs Time" alt="Magnitude of IQ vs Time">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mag_vs_time.png" id="fig-mag" class="img-fluid figure-img" style="width:40.0%" data-fig-cap="Magnitude of IQ vs Time" alt="Magnitude of IQ vs Time">
