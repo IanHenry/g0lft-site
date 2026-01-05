@@ -376,8 +376,17 @@ Figure&nbsp;4: Unwrapped phase vs Time
 <p>While this plot is mathematically important, it is not always easy to interpret visually. For that reason, it is often more intuitive to plot instantaneous frequency, derived from the difference between successive phase samples.</p>
 <section id="instantaneous-frequency-audio-revealed" class="level3">
 <h3 class="anchored" data-anchor-id="instantaneous-frequency-audio-revealed">Instantaneous frequency: audio revealed</h3>
-<p><img src="images/inst_freq_vs_time.png" class="img-fluid" alt="Instantaneous frequency">{ #fig-inst fig-align=“left” fig-cap = “Instantaneous frequency” width=100% }</p>
-<p>When instantaneous frequency is plotted (<strong>?@fig-inst</strong>), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.</p>
+<div id="fig-inst" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inst_freq_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Instantaneous frequency
+</figcaption>
+</figure>
+</div>
+<p>When instantaneous frequency is plotted (<a href="#fig-inst" class="quarto-xref">Figure&nbsp;5</a>), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.</p>
 <p>Although this step already involves a small amount of processing, it remains very close to the raw signal and provides a clear bridge between the abstract idea of phase and the familiar concept of audio.</p>
 </section>
 </section>
@@ -411,11 +420,11 @@ FM demodulated audio
 <img src="images/demod_fm_audio.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Demodulated audio waveform
+Figure&nbsp;6: Demodulated audio waveform
 </figcaption>
 </figure>
 </div>
-<p>For completeness, the FM signal can of course be demodulated into audio (<a href="#fig-demod" class="quarto-xref">Figure&nbsp;5</a>). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.</p>
+<p>For completeness, the FM signal can of course be demodulated into audio (<a href="#fig-demod" class="quarto-xref">Figure&nbsp;6</a>). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.</p>
 <p>In this series, demodulated audio is included only as a reference. The focus is on understanding the signal before demodulation, using the structure already present in the IQ data.</p>
 </section>
 <section id="audio-synchronised-animation" class="level2">
@@ -426,12 +435,12 @@ Figure&nbsp;5: Demodulated audio waveform
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" width="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="images/dynamic_iq_audio.mp4"></video></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Animated IQ plot with audio overlay
+Figure&nbsp;7: Animated IQ plot with audio overlay
 </figcaption>
 </figure>
 </div>
-<p>As a final illustration, the IQ animation can be synchronised with the recovered audio (<a href="#fig-video" class="quarto-xref">Figure&nbsp;6</a>). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.</p>
-<p>This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own. For a full audio-synced MP4, see the <a href="https://github.com/IanHenry/fm-iq-visualisation">GitHub repository</a>.</p>
+<p>As a final illustration, the IQ animation can be synchronised with the recovered audio (<a href="#fig-video" class="quarto-xref">Figure&nbsp;7</a>). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.</p>
+<p>This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own. For the script to create a fully audio-synced MP4, see the <a href="https://github.com/IanHenry/iq-visualisation/fm_broadcast">GitHub repository</a>.</p>
 </section>
 <section id="what-broadcast-fm-teaches-us" class="level2">
 <h2 class="anchored" data-anchor-id="what-broadcast-fm-teaches-us">What broadcast FM teaches us</h2>
@@ -444,7 +453,7 @@ Figure&nbsp;6: Animated IQ plot with audio overlay
 </section>
 <section id="github-link-to-code-used-to-create-these-plots" class="level2">
 <h2 class="anchored" data-anchor-id="github-link-to-code-used-to-create-these-plots">GitHub Link to code used to create these plots</h2>
-<p>For complete reproducible scripts, including capture, plotting, and video generation, see the <a href="https://github.com/IanHenry/fm-iq-visualisation">GitHub repository</a>.</p>
+<p>For complete reproducible scripts, including capture, plotting, and video generation, see the <a href="https://github.com/IanHenry/iq-visualisation/fm_broadcast">GitHub repository</a>.</p>
 </section>
 <section id="next-time" class="level2">
 <h2 class="anchored" data-anchor-id="next-time">Next Time…</h2>
