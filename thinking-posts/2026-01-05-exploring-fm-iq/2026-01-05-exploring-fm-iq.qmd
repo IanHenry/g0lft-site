@@ -21,11 +21,14 @@ Broadcast FM is a good place to start because it produces one of the cleanest an
 
 If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.
 
-![](images/constellation.png){width=30%}
+![](images/constellation.png){
+  #fig-constellation
+  fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal"
+  fig-alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal"
+  width=40%
+}
 
-(Figure 1 : IQ scatter plot, short capture of BBC Radio Cambridgshire broadcast)
-
-In Figure 1, when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.
+In @fig-constellation , when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.
 
 What does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating.
 
@@ -33,9 +36,13 @@ What does change is the angular velocity. As the transmitted audio modulates the
 
 ## Magnitude vs Time
 
-![](images/mag_vs_time.png){width=30%}
-(Figure 2 : magnitude of IQ vs time)
+![](images/mag_vs_time.png){
+  #fig-mag
+  fig-cap="Magnitude of IQ vs Time"
+  fig-alt="Magnitude of IQ vs Time"
+  width=40%
+}
 
-Plotting the magnitude of the IQ samples over time shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.
+Plotting the magnitude of the IQ samples over time (@fig-mag) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.
 
 This plot is a useful contrast with AM, where the magnitude directly follows the audio waveform.
