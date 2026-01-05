@@ -169,34 +169,25 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="the-simplest-case-a-single-strong-carrier">The simplest case: a single strong carrier</h3>
 <p>Broadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.</p>
 <p>If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.</p>
-<div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-center anchored" width="40%" data-fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal" alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/constellation.png" id="fig-constellation" class="img-fluid figure-img" style="width:40.0%" data-fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal" alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1
-</figcaption>
-</figure>
-</div>
-<p>In <a href="#fig-constellation" class="quarto-xref">Figure&nbsp;1</a> , when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.</p>
+<p><img src="images/constellation.png" class="img-fluid">{ #fig-constellation “IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal” fig-alt=“Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal” fig-align=“left” width=40% }</p>
+<p>In <strong>?@fig-constellation</strong> , when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.</p>
 <p>What does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating.</p>
 <p><strong>In FM, information is carried in how fast the vector rotates, not how far it is from the origin.</strong></p>
 </section>
 </section>
 <section id="magnitude-vs-time" class="level2">
 <h2 class="anchored" data-anchor-id="magnitude-vs-time">Magnitude vs Time</h2>
-<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-center anchored" width="40%" data-fig-cap="Magnitude of IQ vs Time" alt="Magnitude of IQ vs Time">
+<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Magnitude of IQ vs Time" data-fig-cap="Magnitude of IQ vs Time" width="40%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/mag_vs_time.png" id="fig-mag" class="img-fluid figure-img" style="width:40.0%" data-fig-cap="Magnitude of IQ vs Time" alt="Magnitude of IQ vs Time">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2
+Figure&nbsp;1
 </figcaption>
 </figure>
 </div>
-<p>Plotting the magnitude of the IQ samples over time (<a href="#fig-mag" class="quarto-xref">Figure&nbsp;2</a>) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.</p>
+<p>Plotting the magnitude of the IQ samples over time (<a href="#fig-mag" class="quarto-xref">Figure&nbsp;1</a>) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.</p>
 <p>This plot is a useful contrast with AM, where the magnitude directly follows the audio waveform.</p>
 
 
