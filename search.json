@@ -42,6 +42,132 @@
     "text": "About\nI’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together:\n\nreflective writing on amateur radio, teaching, and learning\ntheory-focused pieces on SDR and digital communication\npractical guides for operators who want to understand why things work, not just how\n\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
   },
   {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "",
+    "text": "2026-01-06"
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "A reminder: FM geometry still applies",
+    "text": "A reminder: FM geometry still applies\nBefore looking at the plots, it’s worth restating the key point from the previous post:\n\n\n\n\n\n\nTipKey point\n\n\n\nIn FM, information is carried in frequency deviation, not amplitude.\n\n\nThat remains true here. The differences we’ll see arise from:\n\nThe carrier turning on and off\n\nPeriods of silence\n\nNoise being passed by the receiver\n\nSpeech appearing intermittently"
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "IQ constellation over the full capture",
+    "text": "IQ constellation over the full capture\n\n\nLoad IQ and plot full-segment constellation\n\niq, fs, fc = load_iq(\"iq_capture.npz\")\n\niq = iq[1000:]  # drop initial transient\nN = min(len(iq), 80000000)\niq_seg = iq[:N]\n\nplt.figure(figsize=(6,6))\nplt.scatter(iq_seg.real, iq_seg.imag, s=2, alpha=0.3)\nplt.xlabel(\"I\")\nplt.ylabel(\"Q\")\nplt.title(f\"Constellation @ {fc/1e6:.3f} MHz\")\nplt.axis(\"equal\")\nplt.grid(True)\nplt.show()\n\n{ #fig-constellation fig-align=“left” width=55% }\nWhen all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.\nThis immediately tells us something important:\nThe repeater is not transmitting continuously\nLarge portions of the capture contain only noise\nThe central cloud corresponds to periods when the repeater is idle. With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.\nThe ring corresponds to periods when the repeater is active and transmitting FM."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Dynamic IQ: silence, key-up, speech",
+    "text": "Dynamic IQ: silence, key-up, speech\n\n\nAnimated IQ (GIF, no audio)\n\n# GIF-only animation derived from full animation script\nani.save(\"dynamic_iq.gif\", dpi=80)\n\n{ #fig-dynamic fig-align=“left” width=60% }\nAnimating the IQ samples reveals the structure much more clearly.\nThe sequence is easy to follow:\n\nSilence: a tight, noisy cloud near the origin\nKey-up: a sudden appearance of a rotating ring\nSpeech: continuous rotation with changing speed\nCarrier drop: collapse back into noise\n\nThis animation reinforces an important idea:\n\n\n\n\n\n\nTip\n\n\n\nObservation\nThe appearance or disappearance of a carrier is immediately visible in IQ space.\n\n\nNo demodulation is required to see when the repeater is active."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Magnitude vs time: carrier presence",
+    "text": "Magnitude vs time: carrier presence\n\n\nPlot magnitude vs time\n\nmag = np.abs(iq_seg)\nplt.plot(t, mag)\nplt.xlabel(\"Time (s)\")\nplt.ylabel(\"|IQ|\")\nplt.show()\n\n{ #fig-mag fig-align=“left” width=100% }\nPlotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.\nAs with broadcast FM, the magnitude does not follow the speech itself. This confirms that amplitude is not being used to carry information, even though amplitude changes are useful for detecting transmission boundaries."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Phase and instantaneous frequency",
+    "text": "Phase and instantaneous frequency\n\n\nUnwrapped phase and instantaneous frequency\n\nphase = np.angle(iq_seg)\nphase_unwrapped = np.unwrap(phase)\n\ninst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)\n\n{ #fig-phase fig-align=“left” width=100% }\nDuring periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.\nThis makes phase plots particularly good at distinguishing:\n\nCarrier present vs absent\nSignal vs noise\n\n\nInstantaneous frequency: speech appears\n{ #fig-inst fig-align=“left” width=100% }\nWhen instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.\nCompared to broadcast FM: - The deviation is narrower - The audio bandwidth is smaller - Transitions between silence and speech are more abrupt\nThis reflects the operational nature of narrowband FM used on repeaters.\n\n\nDemodulated audio\n\n\nFM demodulation using active IQ only\n\nactive_mask = mag &gt; squelch_thresh\niq_active = iq_seg[active_mask]\n\nphase_active = np.unwrap(np.angle(iq_active))\ninst_freq_active = np.diff(phase_active) * fs / (2*np.pi)\n\naudio = filtfilt(b, a, inst_freq_active)\naudio /= np.max(np.abs(audio))\n\n{ #fig-demod fig-align=“left” width=100% }\nDemodulating the signal produces the expected result: silence, followed by the time announcement, followed by noise as the repeater drops.\nAs before, this is included only as a reference. Everything important about the signal’s behaviour has already been visible in the IQ-derived plots."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Audio-synchronised IQ animation",
+    "text": "Audio-synchronised IQ animation\n\n\n\n\n\n\nFigure 1: Animated IQ plot with audio overlay\n\n\n\nSynchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "What the repeater example adds",
+    "text": "What the repeater example adds\nCompared to broadcast FM, the repeater example highlights three additional ideas: - Carriers can appear and disappear, and IQ shows this immediately - Noise collapses toward the origin in the absence of a signal - Real-world signals are intermittent, even when the modulation is unchanged\nThe underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "GitHub link to code used to create these plots",
+    "text": "GitHub link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and animation, see the GitHub repository."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Where next",
+    "text": "Where next\nSo far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space."
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "",
+    "text": "2025-12-19"
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "Introduction",
+    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
+  },
+  {
+    "objectID": "thinking.html#thinking",
+    "href": "thinking.html#thinking",
+    "title": "Thinking",
+    "section": "Thinking",
+    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
+  },
+  {
+    "objectID": "station.html#station",
+    "href": "station.html#station",
+    "title": "My Station",
+    "section": "Station",
+    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
+  },
+  {
+    "objectID": "index.html#teaching-learning-and-amateur-radio",
+    "href": "index.html#teaching-learning-and-amateur-radio",
+    "title": "G0LFT",
+    "section": "Teaching, learning, and amateur radio",
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice"
+  },
+  {
+    "objectID": "credits.html#hero-images",
+    "href": "credits.html#hero-images",
+    "title": "Credits & Attributions",
+    "section": "Hero Images",
+    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
+  },
+  {
+    "objectID": "credits.html#other-images",
+    "href": "credits.html#other-images",
+    "title": "Credits & Attributions",
+    "section": "Other Images",
+    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
+  },
+  {
+    "objectID": "contact.html#contact",
+    "href": "contact.html#contact",
+    "title": "Contact",
+    "section": "Contact",
+    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
+  },
+  {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
     "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
     "title": "Seeing Broadcast FM in IQ Space",
@@ -124,132 +250,6 @@
     "title": "Seeing Broadcast FM in IQ Space",
     "section": "Next Time…",
     "text": "Next Time…\nIn the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space."
-  },
-  {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
-    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
-    "title": "Why SDRs Are Great Teaching Tools",
-    "section": "",
-    "text": "2025-12-19"
-  },
-  {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
-    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
-    "title": "Why SDRs Are Great Teaching Tools",
-    "section": "Introduction",
-    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
-  },
-  {
-    "objectID": "thinking.html#thinking",
-    "href": "thinking.html#thinking",
-    "title": "Thinking",
-    "section": "Thinking",
-    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
-  },
-  {
-    "objectID": "station.html#station",
-    "href": "station.html#station",
-    "title": "My Station",
-    "section": "Station",
-    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
-  },
-  {
-    "objectID": "index.html#teaching-learning-and-amateur-radio",
-    "href": "index.html#teaching-learning-and-amateur-radio",
-    "title": "G0LFT",
-    "section": "Teaching, learning, and amateur radio",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice"
-  },
-  {
-    "objectID": "credits.html#hero-images",
-    "href": "credits.html#hero-images",
-    "title": "Credits & Attributions",
-    "section": "Hero Images",
-    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
-  },
-  {
-    "objectID": "credits.html#other-images",
-    "href": "credits.html#other-images",
-    "title": "Credits & Attributions",
-    "section": "Other Images",
-    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
-  },
-  {
-    "objectID": "contact.html#contact",
-    "href": "contact.html#contact",
-    "title": "Contact",
-    "section": "Contact",
-    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "",
-    "text": "2026-01-06"
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "A reminder: FM geometry still applies",
-    "text": "A reminder: FM geometry still applies\nBefore looking at the plots, it’s worth restating the key point from the previous post:\n\n\n\n\n\n\nTipKey point\n\n\n\nIn FM, information is carried in frequency deviation, not amplitude.\n\n\nThat remains true here. The differences we’ll see arise from:\n\nThe carrier turning on and off\n\nPeriods of silence\n\nNoise being passed by the receiver\n\nSpeech appearing intermittently"
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "IQ constellation over the full capture",
-    "text": "IQ constellation over the full capture\n\n\nLoad IQ and plot full-segment constellation\n\niq, fs, fc = load_iq(\"iq_capture.npz\")\n\niq = iq[1000:]  # drop initial transient\nN = min(len(iq), 80000000)\niq_seg = iq[:N]\n\nplt.figure(figsize=(6,6))\nplt.scatter(iq_seg.real, iq_seg.imag, s=2, alpha=0.3)\nplt.xlabel(\"I\")\nplt.ylabel(\"Q\")\nplt.title(f\"Constellation @ {fc/1e6:.3f} MHz\")\nplt.axis(\"equal\")\nplt.grid(True)\nplt.show()\n\n{ #fig-constellation fig-align=“left” width=55% }\nWhen all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.\nThis immediately tells us something important:\nThe repeater is not transmitting continuously\nLarge portions of the capture contain only noise\nThe central cloud corresponds to periods when the repeater is idle. With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.\nThe ring corresponds to periods when the repeater is active and transmitting FM."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Dynamic IQ: silence, key-up, speech",
-    "text": "Dynamic IQ: silence, key-up, speech\n\n\nAnimated IQ (GIF, no audio)\n\n# GIF-only animation derived from full animation script\nani.save(\"dynamic_iq.gif\", dpi=80)\n\n{ #fig-dynamic fig-align=“left” width=60% }\nAnimating the IQ samples reveals the structure much more clearly.\nThe sequence is easy to follow:\n\nSilence: a tight, noisy cloud near the origin\nKey-up: a sudden appearance of a rotating ring\nSpeech: continuous rotation with changing speed\nCarrier drop: collapse back into noise\n\nThis animation reinforces an important idea:\n\n\n\n\n\n\nTip\n\n\n\nObservation\nThe appearance or disappearance of a carrier is immediately visible in IQ space.\n\n\nNo demodulation is required to see when the repeater is active."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Magnitude vs time: carrier presence",
-    "text": "Magnitude vs time: carrier presence\n\n\nPlot magnitude vs time\n\nmag = np.abs(iq_seg)\nplt.plot(t, mag)\nplt.xlabel(\"Time (s)\")\nplt.ylabel(\"|IQ|\")\nplt.show()\n\n{ #fig-mag fig-align=“left” width=100% }\nPlotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.\nAs with broadcast FM, the magnitude does not follow the speech itself. This confirms that amplitude is not being used to carry information, even though amplitude changes are useful for detecting transmission boundaries."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Phase and instantaneous frequency",
-    "text": "Phase and instantaneous frequency\n\n\nUnwrapped phase and instantaneous frequency\n\nphase = np.angle(iq_seg)\nphase_unwrapped = np.unwrap(phase)\n\ninst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)\n\n{ #fig-phase fig-align=“left” width=100% }\nDuring periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.\nThis makes phase plots particularly good at distinguishing:\n\nCarrier present vs absent\nSignal vs noise\n\n\nInstantaneous frequency: speech appears\n{ #fig-inst fig-align=“left” width=100% }\nWhen instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.\nCompared to broadcast FM: - The deviation is narrower - The audio bandwidth is smaller - Transitions between silence and speech are more abrupt\nThis reflects the operational nature of narrowband FM used on repeaters.\n\n\nDemodulated audio\n\n\nFM demodulation using active IQ only\n\nactive_mask = mag &gt; squelch_thresh\niq_active = iq_seg[active_mask]\n\nphase_active = np.unwrap(np.angle(iq_active))\ninst_freq_active = np.diff(phase_active) * fs / (2*np.pi)\n\naudio = filtfilt(b, a, inst_freq_active)\naudio /= np.max(np.abs(audio))\n\n{ #fig-demod fig-align=“left” width=100% }\nDemodulating the signal produces the expected result: silence, followed by the time announcement, followed by noise as the repeater drops.\nAs before, this is included only as a reference. Everything important about the signal’s behaviour has already been visible in the IQ-derived plots."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Audio-synchronised IQ animation",
-    "text": "Audio-synchronised IQ animation\n\n\n\n\n\n\nFigure 1: Animated IQ plot with audio overlay\n\n\n\nSynchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "What the repeater example adds",
-    "text": "What the repeater example adds\nCompared to broadcast FM, the repeater example highlights three additional ideas: - Carriers can appear and disappear, and IQ shows this immediately - Noise collapses toward the origin in the absence of a signal - Real-world signals are intermittent, even when the modulation is unchanged\nThe underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "GitHub link to code used to create these plots",
-    "text": "GitHub link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and animation, see the GitHub repository."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#where-next",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#where-next",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Where next",
-    "text": "Where next\nSo far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space."
   },
   {
     "objectID": "blog.html#blog",
