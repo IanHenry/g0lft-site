@@ -196,20 +196,17 @@ Demodulating the signal produces the expected result: silence, followed by the t
 
 As before, this is included only as a reference. Everything important about the signal’s behaviour has already been visible in the IQ-derived plots.
 
-## Audio-synchronised IQ animation (supplementary)
-
+## Audio-synchronised IQ animation
 ::: {#fig-video fig-cap="Animated IQ plot with audio overlay"}
 
 {{< video images/dynamic_iq_audio.mp4
-title="Animated IQ plot with audio overlay"
-width=500
-
-}}
+     title='Animated IQ plot with audio overlay'
+     width=500
+>}}
 
 :::
 
 Synchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely.
-
 
 ## What the repeater example adds
 
