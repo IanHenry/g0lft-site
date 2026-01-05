@@ -27,8 +27,6 @@ When viewed as IQ samples, this carrier appears as a rotating vector in the comp
 
 ## IQ constellation: the rotating carrier
 
-::: details Load and prepare IQ samples
-
 ```python
 import numpy as np
 
@@ -41,8 +39,6 @@ fc = data['fc']
 # Drop initial transient samples
 iq = iq[1000:]
 ```
-
-:::
 
 ![IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal](images/constellation.png){
   #fig-constellation
@@ -126,7 +122,7 @@ In this series, demodulated audio is included only as a reference. The focus is 
 ## Audio-synchronised animation
 ::: {#fig-video}
 
-{{< video images/dynamic_iq.mp4
+{{< video images/dynamic_iq_audio.mp4
      title='Animated IQ plot with audio overlay'
      width=500
 >}}
