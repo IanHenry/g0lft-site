@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2026-01-05">
-<meta name="description" content="Exploring how software-defined radios capture and represent FM signals">
+<meta name="description" content="Seeing Broadcast FM in IQ Space">
 
-<title>Exploring IQ Data - Broadcast FM</title>
+<title>Seeing Broadcast FM in IQ Space</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -44,6 +44,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-9dc0ea0bfd80716bcf5b9386a0e4308a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -139,16 +141,21 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#broadcast-fm-in-iq-space" id="toc-broadcast-fm-in-iq-space" class="nav-link" data-scroll-target="#broadcast-fm-in-iq-space">Broadcast FM in IQ Space</a>
-  <ul class="collapse">
-  <li><a href="#the-simplest-case-a-single-strong-carrier" id="toc-the-simplest-case-a-single-strong-carrier" class="nav-link" data-scroll-target="#the-simplest-case-a-single-strong-carrier">The simplest case: a single strong carrier</a></li>
-  </ul></li>
-  <li><a href="#magnitude-vs-time" id="toc-magnitude-vs-time" class="nav-link" data-scroll-target="#magnitude-vs-time">Magnitude vs Time</a></li>
+  <li><a href="#broadcast-fm-in-iq-space" id="toc-broadcast-fm-in-iq-space" class="nav-link" data-scroll-target="#broadcast-fm-in-iq-space">Broadcast FM in IQ Space</a></li>
+  <li><a href="#iq-constellation-the-rotating-carrier" id="toc-iq-constellation-the-rotating-carrier" class="nav-link" data-scroll-target="#iq-constellation-the-rotating-carrier">IQ constellation: the rotating carrier</a></li>
+  <li><a href="#dynamic-iq-rotation-over-time" id="toc-dynamic-iq-rotation-over-time" class="nav-link" data-scroll-target="#dynamic-iq-rotation-over-time">Dynamic IQ: rotation over time</a></li>
+  <li><a href="#magnitude-vs-time-what-fm-does-not-use" id="toc-magnitude-vs-time-what-fm-does-not-use" class="nav-link" data-scroll-target="#magnitude-vs-time-what-fm-does-not-use">Magnitude vs Time: what FM does not use</a></li>
+  <li><a href="#phase-and-instantaneous-frequency" id="toc-phase-and-instantaneous-frequency" class="nav-link" data-scroll-target="#phase-and-instantaneous-frequency">Phase and instantaneous frequency</a></li>
+  <li><a href="#instantaneous-frequency-audio-revealed" id="toc-instantaneous-frequency-audio-revealed" class="nav-link" data-scroll-target="#instantaneous-frequency-audio-revealed">Instantaneous frequency: audio revealed</a></li>
+  <li><a href="#demodulated-audio" id="toc-demodulated-audio" class="nav-link" data-scroll-target="#demodulated-audio">Demodulated audio</a></li>
+  <li><a href="#audio-synchronised-animation" id="toc-audio-synchronised-animation" class="nav-link" data-scroll-target="#audio-synchronised-animation">Audio-synchronised animation</a></li>
+  <li><a href="#what-broadcast-fm-teaches-us" id="toc-what-broadcast-fm-teaches-us" class="nav-link" data-scroll-target="#what-broadcast-fm-teaches-us">What broadcast FM teaches us</a></li>
+  <li><a href="#next-time" id="toc-next-time" class="nav-link" data-scroll-target="#next-time">Next Time…</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Exploring IQ Data - Broadcast FM</h1></header>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Seeing Broadcast FM in IQ Space</h1></header>
 
 <header id="title-block-header">
 
@@ -160,44 +167,144 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Modern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.</p>
-<p>Representing a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work — what changes, what stays the same, and where the information really lives.</p>
-<p>This post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM, moves to narrowband FM and then to airband FM. In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns</p>
+<p>Representing a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work, what changes, what stays the same, and where the information really lives.</p>
+<p>This post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM, moves on to narrowband FM and airband AM, and finishes with DAB, where the limits of time-domain IQ visualisation become clear. In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns</p>
 </section>
 <section id="broadcast-fm-in-iq-space" class="level2">
 <h2 class="anchored" data-anchor-id="broadcast-fm-in-iq-space">Broadcast FM in IQ Space</h2>
-<section id="the-simplest-case-a-single-strong-carrier" class="level3">
-<h3 class="anchored" data-anchor-id="the-simplest-case-a-single-strong-carrier">The simplest case: a single strong carrier</h3>
-<p>Broadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.</p>
-<p>If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.</p>
+<p>Broadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant.</p>
+<p>When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane. If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.</p>
+</section>
+<section id="iq-constellation-the-rotating-carrier" class="level2">
+<h2 class="anchored" data-anchor-id="iq-constellation-the-rotating-carrier">IQ constellation: the rotating carrier</h2>
 <div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/constellation.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: “IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal”
+Figure&nbsp;1: IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal
 </figcaption>
 </figure>
 </div>
-<p>In <a href="#fig-constellation" class="quarto-xref">Figure&nbsp;1</a> , when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.</p>
-<p>What does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating.</p>
-<p><strong>In FM, information is carried in how fast the vector rotates, not how far it is from the origin.</strong></p>
+<p>Plotting a short segment of raw IQ samples (<a href="#fig-constellation" class="quarto-xref">Figure&nbsp;1</a>) produces a near-perfect circle. This circle is the carrier rotating in the complex plane. Unlike AM, the radius remains almost constant — the signal does not expand and contract with the audio.</p>
+<p>What does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but it becomes obvious when time ordering is preserved.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key point
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In FM, information is carried in how fast the vector rotates, not how far it is from the origin.</p>
+</div>
+</div>
 </section>
+<section id="dynamic-iq-rotation-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="dynamic-iq-rotation-over-time">Dynamic IQ: rotation over time</h2>
+<div id="fig-anim" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-anim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dynamic_iq.gif" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-anim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Fading IQ points over the full capture
+</figcaption>
+</figure>
+</div>
+<p>Animating the IQ samples (<a href="#fig-anim" class="quarto-xref">Figure&nbsp;2</a>) makes the underlying motion much clearer. The points trace out a rotating path, with the rotation rate continuously changing as the audio varies. Silence, speech, and music all appear as subtle changes in rotational behaviour rather than changes in size.</p>
+<p>This animation does more than any single static plot to build intuition for what FM “is doing”.</p>
 </section>
-<section id="magnitude-vs-time" class="level2">
-<h2 class="anchored" data-anchor-id="magnitude-vs-time">Magnitude vs Time</h2>
-<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Magnitude of IQ vs Time" data-fig-cap="Magnitude of IQ vs Time" width="40%">
+<section id="magnitude-vs-time-what-fm-does-not-use" class="level2">
+<h2 class="anchored" data-anchor-id="magnitude-vs-time-what-fm-does-not-use">Magnitude vs Time: what FM does not use</h2>
+<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/mag_vs_time.png" id="fig-mag" class="img-fluid figure-img" style="width:40.0%" data-fig-cap="Magnitude of IQ vs Time" alt="Magnitude of IQ vs Time">
+<img src="images/mag_vs_time.png" class="quarto-figure quarto-figure-left figure-img" style="height:50.0%">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Magnitude of IQ vs Time
 </figcaption>
 </figure>
 </div>
-<p>Plotting the magnitude of the IQ samples over time (<a href="#fig-mag" class="quarto-xref">Figure&nbsp;2</a>) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.</p>
+<p>Plotting the magnitude of the IQ samples over time (<a href="#fig-mag" class="quarto-xref">Figure&nbsp;3</a>) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.</p>
 <p>This plot is a useful contrast with AM, where the magnitude directly follows the audio waveform.</p>
+</section>
+<section id="phase-and-instantaneous-frequency" class="level2">
+<h2 class="anchored" data-anchor-id="phase-and-instantaneous-frequency">Phase and instantaneous frequency</h2>
+<div id="fig-phase" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/unwrapped_phase_vs_time.png" class="quarto-figure quarto-figure-left figure-img" style="height:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Unwrapped phase vs Time
+</figcaption>
+</figure>
+</div>
+<p>If the phase of the IQ samples is unwrapped and plotted against time (<a href="#fig-phase" class="quarto-xref">Figure&nbsp;4</a>), it appears as a steadily increasing line. The slope of this line corresponds to frequency. When audio is present, the slope changes continuously, this is frequency modulation made visible.</p>
+<p>While this plot is mathematically important, it is not always easy to interpret visually. For that reason, it is often more intuitive to plot instantaneous frequency, derived from the difference between successive phase samples.</p>
+</section>
+<section id="instantaneous-frequency-audio-revealed" class="level2">
+<h2 class="anchored" data-anchor-id="instantaneous-frequency-audio-revealed">Instantaneous frequency: audio revealed</h2>
+<div id="fig-inst" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inst_freq_vs_time.png" class="quarto-figure quarto-figure-left figure-img" style="height:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Instantaneous frequency
+</figcaption>
+</figure>
+</div>
+<p>When instantaneous frequency is plotted (<a href="#fig-inst" class="quarto-xref">Figure&nbsp;5</a>), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.</p>
+<p>Although this step already involves a small amount of processing, it remains very close to the raw signal and provides a clear bridge between the abstract idea of phase and the familiar concept of audio.</p>
+</section>
+<section id="demodulated-audio" class="level2">
+<h2 class="anchored" data-anchor-id="demodulated-audio">Demodulated audio</h2>
+<div id="fig-demod" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/demod_fm_audio.png" class="quarto-figure quarto-figure-left figure-img" style="height:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Demodulated audio waveform
+</figcaption>
+</figure>
+</div>
+<p>For completeness, the FM signal can of course be demodulated into audio (<a href="#fig-demod" class="quarto-xref">Figure&nbsp;6</a>). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.</p>
+<p>In this series, demodulated audio is included only as a reference. The focus is on understanding the signal before demodulation, using the structure already present in the IQ data.</p>
+</section>
+<section id="audio-synchronised-animation" class="level2">
+<h2 class="anchored" data-anchor-id="audio-synchronised-animation">Audio-synchronised animation</h2>
+<div id="fig-video" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="dynamic_iq.mp4"></video></div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7
+</figcaption>
+</figure>
+</div>
+<p>As a final illustration, the IQ animation can be synchronised with the recovered audio (<a href="#fig-video" class="quarto-xref">Figure&nbsp;7</a>). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.</p>
+<p>This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.</p>
+</section>
+<section id="what-broadcast-fm-teaches-us" class="level2">
+<h2 class="anchored" data-anchor-id="what-broadcast-fm-teaches-us">What broadcast FM teaches us</h2>
+<p>Broadcast FM establishes three ideas that will carry through the rest of this series:</p>
+<ul>
+<li>IQ represents a rotating vector, not a static point</li>
+<li>A visible carrier produces rotation</li>
+<li>Different modulations encode information in different aspects of that rotation</li>
+</ul>
+</section>
+<section id="next-time" class="level2">
+<h2 class="anchored" data-anchor-id="next-time">Next Time…</h2>
+<p>In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.</p>
 
 
 </section>
@@ -682,6 +789,7 @@ Figure&nbsp;2
   });
   </script>
 </div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 

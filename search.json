@@ -44,30 +44,86 @@
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
     "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
-    "title": "Exploring IQ Data - Broadcast FM",
+    "title": "Seeing Broadcast FM in IQ Space",
     "section": "",
     "text": "2026-01-05"
   },
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#introduction",
     "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#introduction",
-    "title": "Exploring IQ Data - Broadcast FM",
+    "title": "Seeing Broadcast FM in IQ Space",
     "section": "Introduction",
-    "text": "Introduction\nModern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.\nRepresenting a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work — what changes, what stays the same, and where the information really lives.\nThis post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM, moves to narrowband FM and then to airband FM. In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns"
+    "text": "Introduction\nModern software-defined radios (SDRs) do not deliver audio directly. Instead, they provide a stream of complex samples known as I and Q, which together describe the radio signal at baseband. This representation preserves both amplitude and phase, allowing software to examine, demodulate, or decode a wide range of signals long after they have been captured. In this series of posts, I’ll use raw IQ data to look at what familiar radio signals actually look like before demodulation.\nRepresenting a signal as IQ turns the radio waveform into a rotating vector in the complex plane. For signals with a carrier, this rotation is not an error but a fundamental part of the signal’s structure. By plotting these IQ samples directly, we can build visual intuition for how different modulations work, what changes, what stays the same, and where the information really lives.\nThis post is the first in a short series exploring what different radio signals look like in IQ space. It begins with broadcast FM, moves on to narrowband FM and airband AM, and finishes with DAB, where the limits of time-domain IQ visualisation become clear. In the future I may add posts around digital modes as IQ plots are especially good at investigating modulation patterns"
   },
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#broadcast-fm-in-iq-space",
     "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#broadcast-fm-in-iq-space",
-    "title": "Exploring IQ Data - Broadcast FM",
+    "title": "Seeing Broadcast FM in IQ Space",
     "section": "Broadcast FM in IQ Space",
-    "text": "Broadcast FM in IQ Space\n\nThe simplest case: a single strong carrier\nBroadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant. When viewed as IQ samples, this carrier appears as a rotating vector in the complex plane.\nIf the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.\n\n\n\n\n\n\nFigure 1: “IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal”\n\n\n\nIn Figure 1 , when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.\nWhat does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but in a time-ordered or fading plot it becomes clear that the signal is continuously rotating.\nIn FM, information is carried in how fast the vector rotates, not how far it is from the origin."
+    "text": "Broadcast FM in IQ Space\nBroadcast FM is a good place to start because it produces one of the cleanest and most recognisable patterns in IQ space. A broadcast FM signal consists of a strong carrier whose frequency is varied by the audio, while its amplitude remains largely constant.\nWhen viewed as IQ samples, this carrier appears as a rotating vector in the complex plane. If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears."
   },
   {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#magnitude-vs-time",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#magnitude-vs-time",
-    "title": "Exploring IQ Data - Broadcast FM",
-    "section": "Magnitude vs Time",
-    "text": "Magnitude vs Time\n\n\n\n\n\n\nFigure 2\n\n\n\nPlotting the magnitude of the IQ samples over time (Figure 2) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.\nThis plot is a useful contrast with AM, where the magnitude directly follows the audio waveform."
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#iq-constellation-the-rotating-carrier",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#iq-constellation-the-rotating-carrier",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "IQ constellation: the rotating carrier",
+    "text": "IQ constellation: the rotating carrier\n\n\n\n\n\n\nFigure 1: IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal\n\n\n\nPlotting a short segment of raw IQ samples (Figure 1) produces a near-perfect circle. This circle is the carrier rotating in the complex plane. Unlike AM, the radius remains almost constant — the signal does not expand and contract with the audio.\nWhat does change is the angular velocity. As the transmitted audio modulates the carrier frequency, the rotation speeds up and slows down. In a static scatter plot this motion is not visible, but it becomes obvious when time ordering is preserved.\n\n\n\n\n\n\nTipKey point\n\n\n\nIn FM, information is carried in how fast the vector rotates, not how far it is from the origin."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#dynamic-iq-rotation-over-time",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#dynamic-iq-rotation-over-time",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Dynamic IQ: rotation over time",
+    "text": "Dynamic IQ: rotation over time\n\n\n\n\n\n\nFigure 2: Fading IQ points over the full capture\n\n\n\nAnimating the IQ samples (Figure 2) makes the underlying motion much clearer. The points trace out a rotating path, with the rotation rate continuously changing as the audio varies. Silence, speech, and music all appear as subtle changes in rotational behaviour rather than changes in size.\nThis animation does more than any single static plot to build intuition for what FM “is doing”."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#magnitude-vs-time-what-fm-does-not-use",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#magnitude-vs-time-what-fm-does-not-use",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Magnitude vs Time: what FM does not use",
+    "text": "Magnitude vs Time: what FM does not use\n\n\n\n\n\n\nFigure 3: Magnitude of IQ vs Time\n\n\n\nPlotting the magnitude of the IQ samples over time (Figure 3) shows a nearly constant level. This confirms that the amplitude of the signal is not being used to carry information. Any small variations are due to noise, multipath, or receiver effects rather than the modulation itself.\nThis plot is a useful contrast with AM, where the magnitude directly follows the audio waveform."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#phase-and-instantaneous-frequency",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#phase-and-instantaneous-frequency",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Phase and instantaneous frequency",
+    "text": "Phase and instantaneous frequency\n\n\n\n\n\n\nFigure 4: Unwrapped phase vs Time\n\n\n\nIf the phase of the IQ samples is unwrapped and plotted against time (Figure 4), it appears as a steadily increasing line. The slope of this line corresponds to frequency. When audio is present, the slope changes continuously, this is frequency modulation made visible.\nWhile this plot is mathematically important, it is not always easy to interpret visually. For that reason, it is often more intuitive to plot instantaneous frequency, derived from the difference between successive phase samples."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#instantaneous-frequency-audio-revealed",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#instantaneous-frequency-audio-revealed",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Instantaneous frequency: audio revealed",
+    "text": "Instantaneous frequency: audio revealed\n\n\n\n\n\n\nFigure 5: Instantaneous frequency\n\n\n\nWhen instantaneous frequency is plotted (Figure 5), the audio content becomes immediately visible. Speech and music appear directly as deviations around the centre frequency. This plot makes explicit what FM is doing: audio is mapped onto frequency deviation.\nAlthough this step already involves a small amount of processing, it remains very close to the raw signal and provides a clear bridge between the abstract idea of phase and the familiar concept of audio."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#demodulated-audio",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#demodulated-audio",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Demodulated audio",
+    "text": "Demodulated audio\n\n\n\n\n\n\nFigure 6: Demodulated audio waveform\n\n\n\nFor completeness, the FM signal can of course be demodulated into audio (Figure 6). The resulting waveform confirms what we have already inferred from the instantaneous frequency plot.\nIn this series, demodulated audio is included only as a reference. The focus is on understanding the signal before demodulation, using the structure already present in the IQ data."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#audio-synchronised-animation",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#audio-synchronised-animation",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Audio-synchronised animation",
+    "text": "Audio-synchronised animation\n\n\n\n\n\n\nFigure 7\n\n\n\nAs a final illustration, the IQ animation can be synchronised with the recovered audio (Figure 7). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.\nThis animation is included as supplementary material; the visual intuition developed from the static plots stands on its own."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#what-broadcast-fm-teaches-us",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#what-broadcast-fm-teaches-us",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "What broadcast FM teaches us",
+    "text": "What broadcast FM teaches us\nBroadcast FM establishes three ideas that will carry through the rest of this series:\n\nIQ represents a rotating vector, not a static point\nA visible carrier produces rotation\nDifferent modulations encode information in different aspects of that rotation"
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#next-time",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#next-time",
+    "title": "Seeing Broadcast FM in IQ Space",
+    "section": "Next Time…",
+    "text": "Next Time…\nIn the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space."
   },
   {
     "objectID": "contact.html#contact",
