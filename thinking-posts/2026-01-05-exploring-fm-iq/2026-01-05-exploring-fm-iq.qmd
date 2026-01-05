@@ -24,10 +24,10 @@ Broadcast FM is a good place to start because it produces one of the cleanest an
 
 If the receiver is tuned exactly to the centre frequency, the carrier rotates at a steady rate. Any frequency offset between the transmitter and receiver simply changes how fast this rotation appears.
 
-![](images/constellation.png "IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal"){
+!["IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal"](images/constellation.png){
   #fig-constellation
   fig-align="left"
-  width=40%
+  width=50%
 }
 
 In @fig-constellation , when plotting the raw IQ samples of a broadcast FM signal, the result is a near-perfect circle. This is the rotating carrier. Unlike AM, the radius of the circle remains almost constant — the signal does not “breathe” in and out.
