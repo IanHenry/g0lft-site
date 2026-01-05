@@ -224,11 +224,32 @@
     "text": "Phase and instantaneous frequency\n\n\nUnwrapped phase and instantaneous frequency\n\nphase = np.angle(iq_seg)\nphase_unwrapped = np.unwrap(phase)\n\ninst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)\n\n{ #fig-phase fig-align=“left” width=100% }\nDuring periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.\nThis makes phase plots particularly good at distinguishing:\n\nCarrier present vs absent\nSignal vs noise\n\n\nInstantaneous frequency: speech appears\n{ #fig-inst fig-align=“left” width=100% }\nWhen instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.\nCompared to broadcast FM: - The deviation is narrower - The audio bandwidth is smaller - Transitions between silence and speech are more abrupt\nThis reflects the operational nature of narrowband FM used on repeaters.\n\n\nDemodulated audio\n\n\nFM demodulation using active IQ only\n\nactive_mask = mag &gt; squelch_thresh\niq_active = iq_seg[active_mask]\n\nphase_active = np.unwrap(np.angle(iq_active))\ninst_freq_active = np.diff(phase_active) * fs / (2*np.pi)\n\naudio = filtfilt(b, a, inst_freq_active)\naudio /= np.max(np.abs(audio))\n\n{ #fig-demod fig-align=“left” width=100% }\nDemodulating the signal produces the expected result: silence, followed by the time announcement, followed by noise as the repeater drops.\nAs before, this is included only as a reference. Everything important about the signal’s behaviour has already been visible in the IQ-derived plots."
   },
   {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation-supplementary",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation-supplementary",
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
     "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Audio-synchronised IQ animation (supplementary)",
-    "text": "Audio-synchronised IQ animation (supplementary)\n\n\n\n\n\n\n\n\nFigure 1: Animated IQ plot with audio overlay"
+    "section": "Audio-synchronised IQ animation",
+    "text": "Audio-synchronised IQ animation\n\n\n\n\n\n\nFigure 1: Animated IQ plot with audio overlay\n\n\n\nSynchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "What the repeater example adds",
+    "text": "What the repeater example adds\nCompared to broadcast FM, the repeater example highlights three additional ideas: - Carriers can appear and disappear, and IQ shows this immediately - Noise collapses toward the origin in the absence of a signal - Real-world signals are intermittent, even when the modulation is unchanged\nThe underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "GitHub link to code used to create these plots",
+    "text": "GitHub link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and animation, see the GitHub repository."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#where-next",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-06-exploring-repeater-iq.html#where-next",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Where next",
+    "text": "Where next\nSo far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space."
   },
   {
     "objectID": "blog.html#blog",
