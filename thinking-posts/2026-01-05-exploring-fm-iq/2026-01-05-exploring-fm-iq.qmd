@@ -3,6 +3,9 @@ title: "Exploring IQ Data - Broadcast FM"
 date: 2026-01-05
 categories: [SDR, Teaching]
 description: "Exploring how software-defined radios capture and represent FM signals"
+format:
+  html:
+    toc: true
 ---
 
 ## Introduction
