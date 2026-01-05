@@ -177,6 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#a-reminder-fm-geometry-still-applies" id="toc-a-reminder-fm-geometry-still-applies" class="nav-link" data-scroll-target="#a-reminder-fm-geometry-still-applies">A reminder: FM geometry still applies</a></li>
   <li><a href="#iq-constellation-over-the-full-capture" id="toc-iq-constellation-over-the-full-capture" class="nav-link" data-scroll-target="#iq-constellation-over-the-full-capture">IQ constellation over the full capture</a></li>
+  <li><a href="#dynamic-iq-silence-key-up-speech" id="toc-dynamic-iq-silence-key-up-speech" class="nav-link" data-scroll-target="#dynamic-iq-silence-key-up-speech">Dynamic IQ: silence, key-up, speech</a></li>
   <li><a href="#magnitude-vs-time-carrier-presence" id="toc-magnitude-vs-time-carrier-presence" class="nav-link" data-scroll-target="#magnitude-vs-time-carrier-presence">Magnitude vs time: carrier presence</a></li>
   <li><a href="#phase-and-instantaneous-frequency" id="toc-phase-and-instantaneous-frequency" class="nav-link" data-scroll-target="#phase-and-instantaneous-frequency">Phase and instantaneous frequency</a>
   <ul class="collapse">
@@ -248,35 +249,24 @@ Load IQ and plot full-segment constellation
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Constellation @ </span><span class="sc">{</span>fc<span class="op">/</span><span class="fl">1e6</span><span class="sc">:.3f}</span><span class="ss"> MHz"</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">"equal"</span>)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>details<span class="op">&gt;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#fig-constellation</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>fig<span class="op">-</span>align<span class="op">=</span><span class="st">"left"</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>width<span class="op">=</span><span class="dv">55</span><span class="op">%</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>When <span class="bu">all</span> IQ samples <span class="im">from</span> the capture are plotted together, the result <span class="kw">is</span> less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster <span class="cf">with</span> a surrounding ring.</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>This immediately tells us something important:</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>The repeater <span class="kw">is</span> <span class="kw">not</span> transmitting continuously</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Large portions of the capture contain only noise</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>The central cloud corresponds to periods when the repeater <span class="kw">is</span> idle. With no strong carrier present, the IQ samples collapse toward the origin <span class="kw">and</span> form a roughly circular noise distribution.</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>The ring corresponds to periods when the repeater <span class="kw">is</span> active <span class="kw">and</span> transmitting FM.</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">## Dynamic IQ: silence, key-up, speech</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>details<span class="op">&gt;</span> </span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>summary<span class="op">&gt;</span>Animated IQ (GIF, no audio)<span class="op">&lt;/</span>summary<span class="op">&gt;</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>```python</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># GIF-only animation derived from full animation script</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>ani.save(<span class="st">"dynamic_iq.gif"</span>, dpi<span class="op">=</span><span class="dv">80</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<p>{ #fig-constellation fig-align=“left” width=55% }</p>
+<p>When all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.</p>
+<p>This immediately tells us something important:</p>
+<p>The repeater is not transmitting continuously</p>
+<p>Large portions of the capture contain only noise</p>
+<p>The central cloud corresponds to periods when the repeater is idle. With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.</p>
+<p>The ring corresponds to periods when the repeater is active and transmitting FM.</p>
+</section>
+<section id="dynamic-iq-silence-key-up-speech" class="level2">
+<h2 class="anchored" data-anchor-id="dynamic-iq-silence-key-up-speech">Dynamic IQ: silence, key-up, speech</h2>
+<details>
+<summary>
+Animated IQ (GIF, no audio)
+</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GIF-only animation derived from full animation script</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ani.save(<span class="st">"dynamic_iq.gif"</span>, dpi<span class="op">=</span><span class="dv">80</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <p>{ #fig-dynamic fig-align=“left” width=60% }</p>
 <p>Animating the IQ samples reveals the structure much more clearly.</p>
@@ -310,11 +300,11 @@ Tip
 <summary>
 Plot magnitude vs time
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.<span class="bu">abs</span>(iq_seg)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.plot(t, mag)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"|IQ|"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mag <span class="op">=</span> np.<span class="bu">abs</span>(iq_seg)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.plot(t, mag)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"|IQ|"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <p>{ #fig-mag fig-align=“left” width=100% }</p>
 <p>Plotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.</p>
@@ -326,10 +316,10 @@ Plot magnitude vs time
 <summary>
 Unwrapped phase and instantaneous frequency
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>phase <span class="op">=</span> np.angle(iq_seg)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>phase_unwrapped <span class="op">=</span> np.unwrap(phase)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>inst_freq <span class="op">=</span> np.diff(phase_unwrapped) <span class="op">*</span> fs <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>phase <span class="op">=</span> np.angle(iq_seg)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>phase_unwrapped <span class="op">=</span> np.unwrap(phase)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>inst_freq <span class="op">=</span> np.diff(phase_unwrapped) <span class="op">*</span> fs <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <p>{ #fig-phase fig-align=“left” width=100% }</p>
 <p>During periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.</p>
@@ -351,14 +341,14 @@ Unwrapped phase and instantaneous frequency
 <summary>
 FM demodulation using active IQ only
 </summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>active_mask <span class="op">=</span> mag <span class="op">&gt;</span> squelch_thresh</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>iq_active <span class="op">=</span> iq_seg[active_mask]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>phase_active <span class="op">=</span> np.unwrap(np.angle(iq_active))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>inst_freq_active <span class="op">=</span> np.diff(phase_active) <span class="op">*</span> fs <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>audio <span class="op">=</span> filtfilt(b, a, inst_freq_active)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>audio <span class="op">/=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(audio))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>active_mask <span class="op">=</span> mag <span class="op">&gt;</span> squelch_thresh</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>iq_active <span class="op">=</span> iq_seg[active_mask]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>phase_active <span class="op">=</span> np.unwrap(np.angle(iq_active))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>inst_freq_active <span class="op">=</span> np.diff(phase_active) <span class="op">*</span> fs <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>audio <span class="op">=</span> filtfilt(b, a, inst_freq_active)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>audio <span class="op">/=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(audio))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <p>{ #fig-demod fig-align=“left” width=100% }</p>
 <p>Demodulating the signal produces the expected result: silence, followed by the time announcement, followed by noise as the repeater drops.</p>
@@ -367,7 +357,18 @@ FM demodulation using active IQ only
 </section>
 <section id="audio-synchronised-iq-animation-supplementary" class="level2">
 <h2 class="anchored" data-anchor-id="audio-synchronised-iq-animation-supplementary">Audio-synchronised IQ animation (supplementary)</h2>
-<p>::: {#fig-video fig-cap=“Animated IQ plot with audio overlay”}</p>
+<div id="fig-video" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Animated IQ plot with audio overlay
+</figcaption>
+</figure>
+</div>
 </section>
 </section>
 
