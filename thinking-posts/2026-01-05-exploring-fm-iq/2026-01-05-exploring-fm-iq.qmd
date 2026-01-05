@@ -26,8 +26,9 @@ If the receiver is tuned exactly to the centre frequency, the carrier rotates at
 
 ![](images/constellation.png){
   #fig-constellation
-  fig-cap="IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal"
+  "IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal"
   fig-alt="Constellation plot of IQ samples from a short capture of BBC Radio Cambridgshire broadcast signal"
+  fig-align="left"
   width=40%
 }
 
