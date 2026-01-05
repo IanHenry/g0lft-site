@@ -27,20 +27,33 @@ When viewed as IQ samples, this carrier appears as a rotating vector in the comp
 
 ## IQ constellation: the rotating carrier
 
+<details>
+<summary>Load and plot raw IQ</summary>
+
 ```{python}
-#| code-fold: true
-#| code-summary: "Show the code"
 import numpy as np
+import matplotlib.pyplot as plt
+from iq_io import load_iq
 
-# Load saved IQ
-data = np.load("iq_capture.npz")
-iq = data['iq']
-fs = data['fs']
-fc = data['fc']
+# Load IQ
+iq, fs, fc = load_iq("iq_capture.npz")
+iq = iq[1000:]  # drop initial transient
+N = min(len(iq), 200000)
+iq_seg = iq[:N]
 
-# Drop initial transient samples
-iq = iq[1000:]
+# Plot constellation
+plt.figure(figsize=(6,6))
+plt.scatter(iq_seg.real, iq_seg.imag, s=2, alpha=0.3)
+plt.xlabel("I")
+plt.ylabel("Q")
+plt.title(f"Constellation @ {fc/1e6:.3f} MHz")
+plt.axis("equal")
+plt.grid(True)
+plt.show()
 ```
+
+</details>
+
 
 ![IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal](images/constellation.png){
   #fig-constellation
@@ -62,6 +75,33 @@ In FM, information is carried in how fast the vector rotates, not how far it is 
 
 ## Dynamic IQ: rotation over time
 
+<details>
+<summary>Animate IQ (GIF)</summary>
+
+```{python}
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+fig, ax = plt.subplots(figsize=(5,5))
+ax.set_xlabel('I')
+ax.set_ylabel('Q')
+ax.set_title('Dynamic IQ Plot (GIF)')
+ax.set_xlim(-0.05, 0.05)
+ax.set_ylim(-0.05, 0.05)
+
+scatter = ax.scatter([], [])
+
+def update(frame):
+    scatter.set_offsets(np.column_stack((iq_seg.real[:frame], iq_seg.imag[:frame])))
+    return scatter,
+
+ani = FuncAnimation(fig, update, frames=500, blit=True)
+ani.save("dynamic_iq.gif", dpi=80)
+```
+
+</details>
+
+
 ![Fading IQ points over the full capture](images/dynamic_iq.gif){
   #fig-anim
   fig-align="left"
@@ -73,6 +113,27 @@ Animating the IQ samples (@fig-anim) makes the underlying motion much clearer. T
 This animation does more than any single static plot to build intuition for what FM “is doing”.
 
 ## Magnitude vs Time: what FM does not use
+
+<details>
+<summary>Plot magnitude vs time</summary>
+
+```{python}
+import matplotlib.pyplot as plt
+
+t = np.arange(len(iq_seg)) / fs
+mag = np.abs(iq_seg)
+
+plt.figure(figsize=(10,4))
+plt.plot(t, mag, linewidth=1)
+plt.xlabel("Time (s)")
+plt.ylabel("|IQ|")
+plt.title("Magnitude vs Time")
+plt.grid(True)
+plt.show()
+```
+
+</details>
+
 
 ![Magnitude of IQ vs Time](images/mag_vs_time.png){
   #fig-mag
@@ -86,6 +147,30 @@ This plot is a useful contrast with AM, where the magnitude directly follows the
 
 ## Phase and instantaneous frequency
 
+<details>
+<summary>Phase and instantaneous frequency</summary>
+
+```{python}
+# Unwrapping Phase
+phase = np.angle(iq_seg)
+phase_unwrapped = np.unwrap(phase)
+
+# Instantaneous frequency
+inst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)
+t_freq = t[1:]
+
+plt.figure(figsize=(10,4))
+plt.plot(t_freq, inst_freq)
+plt.xlabel("Time (s)")
+plt.ylabel("Frequency (Hz)")
+plt.title("Instantaneous Frequency vs Time")
+plt.grid(True)
+plt.show()
+```
+
+</details>
+
+
 ![Unwrapped phase vs Time](images/unwrapped_phase_vs_time.png){
   #fig-phase
   fig-align="left"
@@ -96,7 +181,7 @@ If the phase of the IQ samples is unwrapped and plotted against time (@fig-phase
 
 While this plot is mathematically important, it is not always easy to interpret visually. For that reason, it is often more intuitive to plot instantaneous frequency, derived from the difference between successive phase samples.
 
-## Instantaneous frequency: audio revealed
+### Instantaneous frequency: audio revealed
 
 ![Instantaneous frequency](images/inst_freq_vs_time.png){
   #fig-inst
@@ -109,6 +194,31 @@ When instantaneous frequency is plotted (@fig-inst), the audio content becomes i
 Although this step already involves a small amount of processing, it remains very close to the raw signal and provides a clear bridge between the abstract idea of phase and the familiar concept of audio.
 
 ## Demodulated audio
+
+<details>
+<summary>FM demodulated audio</summary>
+
+```{python}
+from scipy.signal import butter, filtfilt
+
+# Low-pass filter for audio
+fs_audio_cut = 15e3
+b, a = butter(5, 15e3/(fs/2), btype='low')
+audio = filtfilt(b, a, inst_freq)
+
+# Normalize and plot
+audio /= max(abs(audio))
+
+plt.figure(figsize=(10,4))
+plt.plot(t_freq, audio, linewidth=1)
+plt.xlabel("Time (s)")
+plt.ylabel("Normalized Audio")
+plt.title("Demodulated FM Audio Waveform")
+plt.grid(True)
+plt.show()
+```
+
+</details>
 
 ![Demodulated audio waveform](images/demod_fm_audio.png){
   #fig-demod
@@ -133,8 +243,7 @@ In this series, demodulated audio is included only as a reference. The focus is 
 
 As a final illustration, the IQ animation can be synchronised with the recovered audio (@fig-video). Hearing the audio while watching the rotation speed change reinforces the connection between sound and frequency deviation.
 
-This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.
-
+This animation is included as supplementary material; the visual intuition developed from the static plots stands on its own.  For a full audio-synced MP4, see the [GitHub repository](https://github.com/IanHenry/fm-iq-visualisation).
 
 ## What broadcast FM teaches us
 
