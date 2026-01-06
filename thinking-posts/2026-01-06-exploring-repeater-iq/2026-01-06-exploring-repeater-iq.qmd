@@ -54,7 +54,7 @@ plt.show()
 ```
 </details>
 
-{
+![IQ constellation diagram showing raw iq from the GB3PI repeater](images/constellation.png){
 #fig-constellation
 fig-align="left"
 width=55%
@@ -64,11 +64,11 @@ When all IQ samples from the capture are plotted together, the result is less ti
 
 This immediately tells us something important:
 
-The repeater is not transmitting continuously
+- The repeater is not transmitting continuously
+- Large portions of the capture contain only noise
+- The central cloud corresponds to periods when the repeater is idle. 
 
-Large portions of the capture contain only noise
-
-The central cloud corresponds to periods when the repeater is idle. With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.
+With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.
 
 The ring corresponds to periods when the repeater is active and transmitting FM.
 
@@ -82,7 +82,7 @@ ani.save("dynamic_iq.gif", dpi=80)
 ```
 </details>
 
-{
+![Fading IQ points over the full capture showing the true dynamic shifts before, during, and after tranmission of a short hourly timecode](images/dynamic_iq.gif){
 #fig-dynamic
 fig-align="left"
 width=60%
@@ -92,16 +92,15 @@ Animating the IQ samples reveals the structure much more clearly.
 
 The sequence is easy to follow:
 
-- Silence: a tight, noisy cloud near the origin
-- Key-up: a sudden appearance of a rotating ring
-- Speech: continuous rotation with changing speed
-- Carrier drop: collapse back into noise
+- **Silence**: a tight, noisy cloud near the origin
+- **Key-up**: a sudden appearance of a rotating ring
+- **Speech**: continuous rotation with changing speed
+- **Carrier drop**: collapse back into noise
 
 This animation reinforces an important idea:
 
 ::: {.callout-tip}
-
-Observation
+## Observation
 
 The appearance or disappearance of a carrier is immediately visible in IQ space.
 :::
@@ -120,7 +119,7 @@ plt.show()
 ```
 </details>
 
-{
+![Magnitude of IQ vs Time](images/mag_vs_time.png){
 #fig-mag
 fig-align="left"
 width=100%
@@ -141,7 +140,7 @@ inst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)
 ```
 </details>
 
-{
+![Unwrapped phase vs Time](images/unwrapped_phase_vs_time.png){
 #fig-phase
 fig-align="left"
 width=100%
@@ -156,7 +155,7 @@ This makes phase plots particularly good at distinguishing:
 
 ### Instantaneous frequency: speech appears
 
-{
+![Instantaneous frequency](images/inst_freq_vs_time.png){
 #fig-inst
 fig-align="left"
 width=100%
@@ -165,6 +164,7 @@ width=100%
 When instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.
 
 Compared to broadcast FM:
+
 - The deviation is narrower
 - The audio bandwidth is smaller
 - Transitions between silence and speech are more abrupt
@@ -211,6 +211,7 @@ Synchronising the IQ animation with the demodulated audio makes the relationship
 ## What the repeater example adds
 
 Compared to broadcast FM, the repeater example highlights three additional ideas:
+
 - Carriers can appear and disappear, and IQ shows this immediately
 - Noise collapses toward the origin in the absence of a signal
 - Real-world signals are intermittent, even when the modulation is unchanged
