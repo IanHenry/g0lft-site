@@ -178,6 +178,16 @@ Compared to broadcast FM:
 
 This reflects the operational nature of narrowband FM used on repeaters.
 
+::: {.callout-note}
+## Why receivers filter before FM demodulation
+
+The IQ capture shown here spans 500 kHz, integrating noise over a bandwidth far wider than the narrowband FM signal itself. When instantaneous frequency is computed directly on this wideband noise, large and meaningless frequency excursions result.
+
+Real FM receivers apply channel filtering, limiting, and often decimation before demodulation. These steps suppress out-of-band noise, stabilise the phase, and ensure that frequency deviation reflects only the transmitted audio. The unfiltered plots here are shown deliberately, to make the underlying behaviour visible.
+:::
+
+
+
 ### Demodulated audio
 <details> 
 <summary>FM demodulation using active IQ only</summary>
@@ -199,11 +209,11 @@ fig-align="left"
 width=100%
 }
 
-Demodulating the signal using only periods where the carrier is present produces the expected result: silence, followed by the spoken time announcement, and finally noise as the repeater drops.
+Demodulating the signal using only periods where the carrier is present improves the ability to recover the underlying audio. In practice, receivers interleave filtering and decimation in several stages, progressively reducing bandwidth and sample rate until the signal of interest is isolated and stable enough to demodulate.
 
-The recovered audio appears weaker than the wide excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.
+The recovered audio appears weaker than the large excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.
 
-As before, the demodulated audio is included only as a reference. All of the essential behaviour — carrier presence, silence, speech, and transitions — has already been visible in the IQ-derived plots.
+As before, the demodulated audio is included only as a reference. All of the essential behaviour—carrier presence, silence, speech, and transitions—has already been visible in the IQ-derived plots.
 
 ## Audio-synchronised IQ animation
 ::: {#fig-video fig-cap="Animated IQ plot with audio overlay"}
