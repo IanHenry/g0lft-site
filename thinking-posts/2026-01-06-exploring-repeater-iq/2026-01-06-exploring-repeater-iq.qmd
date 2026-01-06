@@ -210,7 +210,7 @@ Demodulating the signal using only periods where the carrier is present improves
 
 The recovered audio appears weaker than the large excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.
 
-As before, the demodulated audio is included only as a reference. All of the essential behaviour—carrier presence, silence, speech, and transitions—has already been visible in the IQ-derived plots.
+As before, the demodulated audio is included only as a reference. All of the essential behaviour; carrier presence, silence, speech and transitions; has already been visible in the IQ-derived plots.
 
 ## Audio-synchronised IQ animation
 ::: {#fig-video fig-cap="Animated IQ plot with audio overlay"}
