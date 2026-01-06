@@ -256,12 +256,24 @@ Load IQ and plot full-segment constellation
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>{ #fig-constellation fig-align=“left” width=55% }</p>
+<div id="fig-constellation" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/constellation.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-constellation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: IQ constellation diagram showing raw iq from the GB3PI repeater
+</figcaption>
+</figure>
+</div>
 <p>When all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.</p>
 <p>This immediately tells us something important:</p>
-<p>The repeater is not transmitting continuously</p>
-<p>Large portions of the capture contain only noise</p>
-<p>The central cloud corresponds to periods when the repeater is idle. With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.</p>
+<ul>
+<li>The repeater is not transmitting continuously</li>
+<li>Large portions of the capture contain only noise</li>
+<li>The central cloud corresponds to periods when the repeater is idle.</li>
+</ul>
+<p>With no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.</p>
 <p>The ring corresponds to periods when the repeater is active and transmitting FM.</p>
 </section>
 <section id="dynamic-iq-silence-key-up-speech" class="level2">
@@ -273,14 +285,23 @@ Animated IQ (GIF, no audio)
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GIF-only animation derived from full animation script</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ani.save(<span class="st">"dynamic_iq.gif"</span>, dpi<span class="op">=</span><span class="dv">80</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>{ #fig-dynamic fig-align=“left” width=60% }</p>
+<div id="fig-dynamic" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dynamic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/dynamic_iq.gif" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dynamic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Fading IQ points over the full capture showing the true dynamic shifts before, during, and after tranmission of a short hourly timecode
+</figcaption>
+</figure>
+</div>
 <p>Animating the IQ samples reveals the structure much more clearly.</p>
 <p>The sequence is easy to follow:</p>
 <ul>
-<li>Silence: a tight, noisy cloud near the origin</li>
-<li>Key-up: a sudden appearance of a rotating ring</li>
-<li>Speech: continuous rotation with changing speed</li>
-<li>Carrier drop: collapse back into noise</li>
+<li><strong>Silence</strong>: a tight, noisy cloud near the origin</li>
+<li><strong>Key-up</strong>: a sudden appearance of a rotating ring</li>
+<li><strong>Speech</strong>: continuous rotation with changing speed</li>
+<li><strong>Carrier drop</strong>: collapse back into noise</li>
 </ul>
 <p>This animation reinforces an important idea:</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -289,11 +310,10 @@ Animated IQ (GIF, no audio)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Tip</span>Observation
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Observation</p>
 <p>The appearance or disappearance of a carrier is immediately visible in IQ space.</p>
 </div>
 </div>
@@ -311,7 +331,16 @@ Plot magnitude vs time
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"|IQ|"</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>{ #fig-mag fig-align=“left” width=100% }</p>
+<div id="fig-mag" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/mag_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Magnitude of IQ vs Time
+</figcaption>
+</figure>
+</div>
 <p>Plotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.</p>
 <p>As with broadcast FM, the magnitude does not follow the speech itself. This confirms that amplitude is not being used to carry information, even though amplitude changes are useful for detecting transmission boundaries.</p>
 </section>
@@ -326,7 +355,16 @@ Unwrapped phase and instantaneous frequency
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>inst_freq <span class="op">=</span> np.diff(phase_unwrapped) <span class="op">*</span> fs <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>np.pi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>{ #fig-phase fig-align=“left” width=100% }</p>
+<div id="fig-phase" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/unwrapped_phase_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Unwrapped phase vs Time
+</figcaption>
+</figure>
+</div>
 <p>During periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.</p>
 <p>This makes phase plots particularly good at distinguishing:</p>
 <ul>
@@ -335,9 +373,23 @@ Unwrapped phase and instantaneous frequency
 </ul>
 <section id="instantaneous-frequency-speech-appears" class="level3">
 <h3 class="anchored" data-anchor-id="instantaneous-frequency-speech-appears">Instantaneous frequency: speech appears</h3>
-<p>{ #fig-inst fig-align=“left” width=100% }</p>
+<div id="fig-inst" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/inst_freq_vs_time.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inst-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Instantaneous frequency
+</figcaption>
+</figure>
+</div>
 <p>When instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.</p>
-<p>Compared to broadcast FM: - The deviation is narrower - The audio bandwidth is smaller - Transitions between silence and speech are more abrupt</p>
+<p>Compared to broadcast FM:</p>
+<ul>
+<li>The deviation is narrower</li>
+<li>The audio bandwidth is smaller</li>
+<li>Transitions between silence and speech are more abrupt</li>
+</ul>
 <p>This reflects the operational nature of narrowband FM used on repeaters.</p>
 </section>
 <section id="demodulated-audio" class="level3">
@@ -368,7 +420,7 @@ FM demodulation using active IQ only
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" width="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="images/dynamic_iq_audio.mp4"></video></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Animated IQ plot with audio overlay
+Figure&nbsp;6: Animated IQ plot with audio overlay
 </figcaption>
 </figure>
 </div>
@@ -376,7 +428,12 @@ Figure&nbsp;1: Animated IQ plot with audio overlay
 </section>
 <section id="what-the-repeater-example-adds" class="level2">
 <h2 class="anchored" data-anchor-id="what-the-repeater-example-adds">What the repeater example adds</h2>
-<p>Compared to broadcast FM, the repeater example highlights three additional ideas: - Carriers can appear and disappear, and IQ shows this immediately - Noise collapses toward the origin in the absence of a signal - Real-world signals are intermittent, even when the modulation is unchanged</p>
+<p>Compared to broadcast FM, the repeater example highlights three additional ideas:</p>
+<ul>
+<li>Carriers can appear and disappear, and IQ shows this immediately</li>
+<li>Noise collapses toward the origin in the absence of a signal</li>
+<li>Real-world signals are intermittent, even when the modulation is unchanged</li>
+</ul>
 <p>The underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space.</p>
 </section>
 <section id="github-link-to-code-used-to-create-these-plots" class="level2">
