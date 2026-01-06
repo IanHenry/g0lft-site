@@ -398,6 +398,20 @@ Figure&nbsp;5: Instantaneous frequency
 <li>Transitions between silence and speech are more abrupt</li>
 </ul>
 <p>This reflects the operational nature of narrowband FM used on repeaters.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why receivers filter before FM demodulation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The IQ capture shown here spans 500 kHz, integrating noise over a bandwidth far wider than the narrowband FM signal itself. When instantaneous frequency is computed directly on this wideband noise, large and meaningless frequency excursions result.</p>
+<p>Real FM receivers apply channel filtering, limiting, and often decimation before demodulation. These steps suppress out-of-band noise, stabilise the phase, and ensure that frequency deviation reflects only the transmitted audio. The unfiltered plots here are shown deliberately, to make the underlying behaviour visible.</p>
+</div>
+</div>
 </section>
 <section id="demodulated-audio" class="level3">
 <h3 class="anchored" data-anchor-id="demodulated-audio">Demodulated audio</h3>
@@ -424,9 +438,9 @@ Figure&nbsp;6: Demodulated audio waveform
 </figcaption>
 </figure>
 </div>
-<p>Demodulating the signal using only periods where the carrier is present produces the expected result: silence, followed by the spoken time announcement, and finally noise as the repeater drops.</p>
-<p>The recovered audio appears weaker than the wide excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.</p>
-<p>As before, the demodulated audio is included only as a reference. All of the essential behaviour — carrier presence, silence, speech, and transitions — has already been visible in the IQ-derived plots.</p>
+<p>Demodulating the signal using only periods where the carrier is present improves the ability to recover the underlying audio. In practice, receivers interleave filtering and decimation in several stages, progressively reducing bandwidth and sample rate until the signal of interest is isolated and stable enough to demodulate.</p>
+<p>The recovered audio appears weaker than the large excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.</p>
+<p>As before, the demodulated audio is included only as a reference. All of the essential behaviour—carrier presence, silence, speech, and transitions—has already been visible in the IQ-derived plots.</p>
 </section>
 </section>
 <section id="audio-synchronised-iq-animation" class="level2">
