@@ -183,6 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#magnitude-vs-time-carrier-presence" id="toc-magnitude-vs-time-carrier-presence" class="nav-link" data-scroll-target="#magnitude-vs-time-carrier-presence">Magnitude vs time: carrier presence</a></li>
   <li><a href="#phase-and-instantaneous-frequency" id="toc-phase-and-instantaneous-frequency" class="nav-link" data-scroll-target="#phase-and-instantaneous-frequency">Phase and instantaneous frequency</a>
   <ul class="collapse">
+  <li><a href="#unwrapped-phase" id="toc-unwrapped-phase" class="nav-link" data-scroll-target="#unwrapped-phase">Unwrapped Phase</a></li>
   <li><a href="#instantaneous-frequency-speech-appears" id="toc-instantaneous-frequency-speech-appears" class="nav-link" data-scroll-target="#instantaneous-frequency-speech-appears">Instantaneous frequency: speech appears</a></li>
   <li><a href="#demodulated-audio" id="toc-demodulated-audio" class="nav-link" data-scroll-target="#demodulated-audio">Demodulated audio</a></li>
   </ul></li>
@@ -291,7 +292,7 @@ Animated IQ (GIF, no audio)
 <img src="images/dynamic_iq.gif" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dynamic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Fading IQ points over the full capture showing the true dynamic shifts before, during, and after tranmission of a short hourly timecode
+Figure&nbsp;2: Fading IQ points over the full capture showing the true dynamic shifts before, during, and after transmission of a short hourly timecode
 </figcaption>
 </figure>
 </div>
@@ -346,6 +347,8 @@ Figure&nbsp;3: Magnitude of IQ vs Time
 </section>
 <section id="phase-and-instantaneous-frequency" class="level2">
 <h2 class="anchored" data-anchor-id="phase-and-instantaneous-frequency">Phase and instantaneous frequency</h2>
+<section id="unwrapped-phase" class="level3">
+<h3 class="anchored" data-anchor-id="unwrapped-phase">Unwrapped Phase</h3>
 <details>
 <summary>
 Unwrapped phase and instantaneous frequency
@@ -365,12 +368,15 @@ Figure&nbsp;4: Unwrapped phase vs Time
 </figcaption>
 </figure>
 </div>
-<p>During periods when the repeater is transmitting, the unwrapped phase increases steadily, just as in the broadcast FM case. During silence, the phase becomes essentially random, reflecting the absence of a coherent carrier.</p>
+<p>When the repeater is idle, the unwrapped phase shows a steady diagonal trend rather than a flat or stable line. This reflects the receiver’s residual frequency offset combined with noise, in the absence of a coherent carrier.</p>
+<p>When the repeater transmits, the phase behaviour changes abruptly. The presence of a strong carrier dominates the phase evolution, suppressing the noise-driven drift seen during silence and producing a far more coherent and structured trace.</p>
+<p>Rather than revealing modulation directly, the unwrapped phase plot is most useful here as a detector of signal presence. It clearly distinguishes between periods dominated by noise and periods dominated by a real carrier.</p>
 <p>This makes phase plots particularly good at distinguishing:</p>
 <ul>
 <li>Carrier present vs absent</li>
 <li>Signal vs noise</li>
 </ul>
+</section>
 <section id="instantaneous-frequency-speech-appears" class="level3">
 <h3 class="anchored" data-anchor-id="instantaneous-frequency-speech-appears">Instantaneous frequency: speech appears</h3>
 <div id="fig-inst" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
@@ -383,7 +389,8 @@ Figure&nbsp;5: Instantaneous frequency
 </figcaption>
 </figure>
 </div>
-<p>When instantaneous frequency is plotted, the spoken time announcement becomes clearly visible. Speech appears as deviations around the centre frequency, while silence corresponds to a flat or noisy trace.</p>
+<p>Plotting instantaneous frequency over the full capture reveals a striking contrast between silence and transmission. During periods with no carrier present, the frequency estimate spans a very wide range. These large excursions do not represent real frequency deviation, but arise from differentiating the phase of wideband noise, where instantaneous frequency is not well defined.</p>
+<p>When the repeater is transmitting, the instantaneous frequency collapses into a much narrower band. In this regime the phase evolves smoothly, and frequency deviation becomes meaningful. The spoken time announcement appears clearly as structured deviations around the centre frequency.</p>
 <p>Compared to broadcast FM:</p>
 <ul>
 <li>The deviation is narrower</li>
@@ -407,9 +414,19 @@ FM demodulation using active IQ only
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>audio <span class="op">=</span> filtfilt(b, a, inst_freq_active)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>audio <span class="op">/=</span> np.<span class="bu">max</span>(np.<span class="bu">abs</span>(audio))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<p>{ #fig-demod fig-align=“left” width=100% }</p>
-<p>Demodulating the signal produces the expected result: silence, followed by the time announcement, followed by noise as the repeater drops.</p>
-<p>As before, this is included only as a reference. Everything important about the signal’s behaviour has already been visible in the IQ-derived plots.</p>
+<div id="fig-demod" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/demod_fm_audio_active.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-demod-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Demodulated audio waveform
+</figcaption>
+</figure>
+</div>
+<p>Demodulating the signal using only periods where the carrier is present produces the expected result: silence, followed by the spoken time announcement, and finally noise as the repeater drops.</p>
+<p>The recovered audio appears weaker than the wide excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.</p>
+<p>As before, the demodulated audio is included only as a reference. All of the essential behaviour — carrier presence, silence, speech, and transitions — has already been visible in the IQ-derived plots.</p>
 </section>
 </section>
 <section id="audio-synchronised-iq-animation" class="level2">
@@ -420,7 +437,7 @@ FM demodulation using active IQ only
 <div class="quarto-video"><video id="video_shortcode_videojs_video1" width="500" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title="Animated IQ plot with audio overlay"><source src="images/dynamic_iq_audio.mp4"></video></div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-video-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Animated IQ plot with audio overlay
+Figure&nbsp;7: Animated IQ plot with audio overlay
 </figcaption>
 </figure>
 </div>
