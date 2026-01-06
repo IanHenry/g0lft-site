@@ -185,8 +185,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#unwrapped-phase" id="toc-unwrapped-phase" class="nav-link" data-scroll-target="#unwrapped-phase">Unwrapped Phase</a></li>
   <li><a href="#instantaneous-frequency-speech-appears" id="toc-instantaneous-frequency-speech-appears" class="nav-link" data-scroll-target="#instantaneous-frequency-speech-appears">Instantaneous frequency: speech appears</a></li>
-  <li><a href="#demodulated-audio" id="toc-demodulated-audio" class="nav-link" data-scroll-target="#demodulated-audio">Demodulated audio</a></li>
   </ul></li>
+  <li><a href="#demodulated-audio" id="toc-demodulated-audio" class="nav-link" data-scroll-target="#demodulated-audio">Demodulated audio</a></li>
   <li><a href="#audio-synchronised-iq-animation" id="toc-audio-synchronised-iq-animation" class="nav-link" data-scroll-target="#audio-synchronised-iq-animation">Audio-synchronised IQ animation</a></li>
   <li><a href="#what-the-repeater-example-adds" id="toc-what-the-repeater-example-adds" class="nav-link" data-scroll-target="#what-the-repeater-example-adds">What the repeater example adds</a></li>
   <li><a href="#github-link-to-code-used-to-create-these-plots" id="toc-github-link-to-code-used-to-create-these-plots" class="nav-link" data-scroll-target="#github-link-to-code-used-to-create-these-plots">GitHub link to code used to create these plots</a></li>
@@ -368,14 +368,9 @@ Figure&nbsp;4: Unwrapped phase vs Time
 </figcaption>
 </figure>
 </div>
-<p>When the repeater is idle, the unwrapped phase shows a steady diagonal trend rather than a flat or stable line. This reflects the receiver’s residual frequency offset combined with noise, in the absence of a coherent carrier.</p>
-<p>When the repeater transmits, the phase behaviour changes abruptly. The presence of a strong carrier dominates the phase evolution, suppressing the noise-driven drift seen during silence and producing a far more coherent and structured trace.</p>
-<p>Rather than revealing modulation directly, the unwrapped phase plot is most useful here as a detector of signal presence. It clearly distinguishes between periods dominated by noise and periods dominated by a real carrier.</p>
-<p>This makes phase plots particularly good at distinguishing:</p>
-<ul>
-<li>Carrier present vs absent</li>
-<li>Signal vs noise</li>
-</ul>
+<p>When the repeater is idle, the unwrapped phase shows a roughly diagonal trend rather than a flat line. This arises from the combination of the receiver’s residual frequency offset and the wideband noise present in the capture. In the absence of a coherent carrier, the phase drifts unpredictably and does not reflect any transmitted information.</p>
+<p>When the repeater transmits, the phase behaviour changes abruptly. The strong carrier dominates the phase evolution, suppressing the noise-driven drift and producing a more coherent, structured trace.</p>
+<p>Rather than revealing the audio modulation directly, the unwrapped phase plot is most useful as a detector of signal presence. It clearly distinguishes periods dominated by noise from periods dominated by a real carrier.</p>
 </section>
 <section id="instantaneous-frequency-speech-appears" class="level3">
 <h3 class="anchored" data-anchor-id="instantaneous-frequency-speech-appears">Instantaneous frequency: speech appears</h3>
@@ -389,15 +384,15 @@ Figure&nbsp;5: Instantaneous frequency
 </figcaption>
 </figure>
 </div>
-<p>Plotting instantaneous frequency over the full capture reveals a striking contrast between silence and transmission. During periods with no carrier present, the frequency estimate spans a very wide range. These large excursions do not represent real frequency deviation, but arise from differentiating the phase of wideband noise, where instantaneous frequency is not well defined.</p>
-<p>When the repeater is transmitting, the instantaneous frequency collapses into a much narrower band. In this regime the phase evolves smoothly, and frequency deviation becomes meaningful. The spoken time announcement appears clearly as structured deviations around the centre frequency.</p>
+<p>Plotting instantaneous frequency over the full capture highlights the contrast between silence and transmission. During idle periods, the instantaneous frequency spans a very wide range (e.g., ±250 kHz in your 500 kHz capture). These large excursions are not real frequency deviation but arise from differentiating the phase of wideband noise, where instantaneous frequency is essentially meaningless.</p>
+<p>When the repeater transmits, the instantaneous frequency collapses into a much narrower band. In this regime, the phase evolves smoothly, and frequency deviation becomes meaningful. The spoken time announcement is visible as structured deviations around the centre frequency, though in practice these deviations are small compared to the noise excursions in idle periods.</p>
 <p>Compared to broadcast FM:</p>
 <ul>
 <li>The deviation is narrower</li>
 <li>The audio bandwidth is smaller</li>
 <li>Transitions between silence and speech are more abrupt</li>
 </ul>
-<p>This reflects the operational nature of narrowband FM used on repeaters.</p>
+<p>This illustrates the operational nature of narrowband FM used on repeaters. In wideband captures, noise dominates the phase and instantaneous frequency outside active transmissions, making the true signal pattern barely readable without filtering or decimation.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -413,8 +408,9 @@ Figure&nbsp;5: Instantaneous frequency
 </div>
 </div>
 </section>
-<section id="demodulated-audio" class="level3">
-<h3 class="anchored" data-anchor-id="demodulated-audio">Demodulated audio</h3>
+</section>
+<section id="demodulated-audio" class="level2">
+<h2 class="anchored" data-anchor-id="demodulated-audio">Demodulated audio</h2>
 <details>
 <summary>
 FM demodulation using active IQ only
@@ -441,7 +437,6 @@ Figure&nbsp;6: Demodulated audio waveform
 <p>Demodulating the signal using only periods where the carrier is present improves the ability to recover the underlying audio. In practice, receivers interleave filtering and decimation in several stages, progressively reducing bandwidth and sample rate until the signal of interest is isolated and stable enough to demodulate.</p>
 <p>The recovered audio appears weaker than the large excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.</p>
 <p>As before, the demodulated audio is included only as a reference. All of the essential behaviour—carrier presence, silence, speech, and transitions—has already been visible in the IQ-derived plots.</p>
-</section>
 </section>
 <section id="audio-synchronised-iq-animation" class="level2">
 <h2 class="anchored" data-anchor-id="audio-synchronised-iq-animation">Audio-synchronised IQ animation</h2>
