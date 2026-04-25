@@ -1,292 +1,5 @@
 [
   {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "",
-    "text": "2026-04-25"
-  },
-  {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#from-oscillation-to-rotation",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#from-oscillation-to-rotation",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "From oscillation to rotation",
-    "text": "From oscillation to rotation\nPicture a simple arrow spinning in a circle, like a clock hand.\nAs it turns, imagine a light shining from one side, casting its shadow onto a flat surface. That shadow moves back and forth, tracing out the same sine wave shape we started with.\nWhat looks like an oscillation is really just a projection of circular motion.\n\n\n\n\n\n\nFigure 2: Rotating phasor illustration"
-  },
-  {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#the-phasor",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#the-phasor",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "The phasor",
-    "text": "The phasor\nThis rotating arrow has a name: a phasor. It’s a rotating vector that represents a signal.\nThe concept is simple but changes how you think about signals. Instead of tracking amplitude over time directly, you can think in terms of rotation: angle, speed, and phase."
-  },
-  {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#the-missing-information-problem",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#the-missing-information-problem",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "The missing information problem",
-    "text": "The missing information problem\nHere’s where it gets interesting. If you only see the shadow (the sine wave), you can’t tell which way the arrow is rotating.\nImagine two arrows spinning in opposite directions. Their shadows look identical. From just the wave, you’ve lost information about the direction of rotation.\n\n\n\n\n\n\nFigure 3: Two counter-rotating phasors\n\n\n\nThis matters because a real radio wave can be thought of as two phasors rotating in opposite directions. The wave itself is the sum of both rotations."
-  },
-  {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#adding-a-second-shadow",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#adding-a-second-shadow",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "Adding a second shadow",
-    "text": "Adding a second shadow\nWhat if we add another light source at 90 degrees to the first? Now we get two shadows: one horizontal, one vertical.\n\n\n\n\n\n\nFigure 4: Quadrature shadows\n\n\n\nWith both shadows, we can tell which way the arrow is rotating. The horizontal shadow is the cosine wave. The vertical shadow is the sine wave. Together, they define a single rotating phasor completely.\nThis is the foundation of I and Q."
-  },
-  {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#i-and-q",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#i-and-q",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "I and Q",
-    "text": "I and Q\nThe two shadows have names:\n\nI (In-phase): the cosine component\nQ (Quadrature): the sine component, 90 degrees shifted\n\nSine and cosine waves aren’t just related mathematical functions. They’re literally the horizontal and vertical projections of a single rotating phasor.\nWhen you have both I and Q, you have complete information about the signal: its amplitude, phase, and frequency."
-  },
-  {
-    "objectID": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#why-this-matters",
-    "href": "thinking-posts/2026-04-25-wave-vs-phasor/01-wave-vs-phasor.html#why-this-matters",
-    "title": "Wave vs Phasor: A Different Way to See Radio",
-    "section": "Why this matters",
-    "text": "Why this matters\nModern radios are increasingly software-defined radios (SDRs). They don’t work with the wave directly. They work with I and Q samples.\nUnderstanding phasors and why we need both I and Q is the key to understanding how modern radio actually works.\nIn the next post, we’ll look at why SDRs use I and Q, and how radios actually generate these signals.\n\nNext: Why Modern Radios Use I and Q"
-  },
-  {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
-    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
-    "title": "Why SDRs Are Great Teaching Tools",
-    "section": "",
-    "text": "2025-12-19"
-  },
-  {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
-    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
-    "title": "Why SDRs Are Great Teaching Tools",
-    "section": "Introduction",
-    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
-  },
-  {
-    "objectID": "privacy.html#privacy-cookies",
-    "href": "privacy.html#privacy-cookies",
-    "title": "Privacy & Disclaimer",
-    "section": "Privacy & Cookies",
-    "text": "Privacy & Cookies\nWe use Google Analytics 4 (GA4) to collect anonymous site usage data.\nThis may involve cookies to track sessions, page views, and returning visitors.\n\nCookies used: _ga, _gid\nPurpose: Analyze site traffic and improve user experience\n\nIP anonymization: Enabled\n\nThird-party access: Data is processed by Google under their privacy policy: https://policies.google.com/privacy\n\nYou may withdraw consent at any time by clearing your cookies."
-  },
-  {
-    "objectID": "privacy.html#disclaimer",
-    "href": "privacy.html#disclaimer",
-    "title": "Privacy & Disclaimer",
-    "section": "Disclaimer",
-    "text": "Disclaimer\n\nThe information provided here is for informational purposes only.\n\nWhile care is taken to ensure accuracy, no guarantees are made regarding completeness or suitability.\n\nAny external links do not imply endorsement of those sites.\n\nIf you have concerns regarding your privacy or site content, please contact me."
-  },
-  {
-    "objectID": "index.html#teaching-learning-and-amateur-radio",
-    "href": "index.html#teaching-learning-and-amateur-radio",
-    "title": "G0LFT",
-    "section": "Teaching, learning, and amateur radio",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice\n\nIf you have found your way here from my recent FT8 article in RadCom please check out my blog post on the subject."
-  },
-  {
-    "objectID": "station.html#station",
-    "href": "station.html#station",
-    "title": "My Station",
-    "section": "Station",
-    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
-  },
-  {
-    "objectID": "blog.html#blog",
-    "href": "blog.html#blog",
-    "title": "Blog",
-    "section": "Blog",
-    "text": "Blog\nWelcome to my blog! Posts appear below."
-  },
-  {
-    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html",
-    "href": "blog-posts/2025-12-26-a_year_of_listening.html",
-    "title": "A Year of Listening",
-    "section": "",
-    "text": "2025-12-26"
-  },
-  {
-    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
-    "href": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
-    "title": "A Year of Listening",
-    "section": "2025 - A Year of Listening:",
-    "text": "2025 - A Year of Listening:\n\nFinding Structure, Curiosity and Understanding Through Amateur Radio\nAt the beginning of this year, I was completely unaware of amateur radio. I was recovering from illness and work was already proving more challenging than usual. I needed something mentally stimulating but not demanding, something absorbing, technical and quietly constructive.\nIn April, I stumbled upon amateur radio almost by chance. Initially, it wasn’t about licences or operating privileges; it was simply fascinating. Signals emerged from noise, antennas behaved in unexpected ways and the concept of meaningful communication with minimal power captivated me.\nMy curiosity quickly turned into momentum. I sat the Foundation exam in May and shortly afterwards the Intermediate. Looking back, this pace reflects more on circumstance than ability. Radio provided a concrete focus during a time when many other aspects of my life felt fragmented.\nWork remained challenging throughout the year, but studying and operating became a consistent background activity. It kept me engaged, distracted in a positive way and fostered a renewed sense of learning. I experimented extensively with various modes, bands and contact methods, not for the sake of achievements, but to understand how the hobby’s components fit together.\nJoining Cambridge and District Amateur Radio Club (CDARC) was another significant milestone. Interacting with generous individuals who shared their time and experience reminded me that amateur radio is as much about people as it is about equipment or exams. Observing diverse operating styles and problem-solving approaches was as enlightening as any reading I’ve done.\nLater in the year, I decided to work towards the Full licence. I mainly studied from the RSGB book, reading slowly and following ideas rather than memorising answers. I was awarded a distinction, which I mention only because it led to a lasting realisation: the most challenging aspects of learning radio aren’t about formulas or regulations – they’re about visualising what’s actually happening.\nThat’s where books fall short.\nCircuits, filters, impedance, noise and signal flow are inherently dynamic, constantly changing and interacting. Static diagrams and paragraphs can only take you so far before you need to observe behaviour, not just read about it. A capacitor charging, a filter rejecting energy and a weak signal emerging from noise are processes, not pictures.\nAs someone who works professionally with complex systems, I’ve become increasingly convinced that radio education would greatly benefit from improved visual and animated explanations. This isn’t to replace books but to complement them – to transform abstract concepts into something you can watch evolve and intuitively understand.\nThis idea is one of the reasons this blog exists.\nNext year, I want to spend less time acquiring equipment and more time understanding it. If this space becomes anything, I hope it becomes a place where difficult radio concepts are explained visually patiently and honestly – where behaviour is shown, not just described, and where understanding can grow over time.\nAmateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.\nIf you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts."
-  },
-  {
-    "objectID": "credits.html#hero-images",
-    "href": "credits.html#hero-images",
-    "title": "Credits & Attributions",
-    "section": "Hero Images",
-    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
-  },
-  {
-    "objectID": "credits.html#other-images",
-    "href": "credits.html#other-images",
-    "title": "Credits & Attributions",
-    "section": "Other Images",
-    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
-  },
-  {
-    "objectID": "thinking.html#thinking",
-    "href": "thinking.html#thinking",
-    "title": "Thinking",
-    "section": "Thinking",
-    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "",
-    "text": "2026-04-25"
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "What surprised me most",
-    "text": "What surprised me most\nI thought I understood error correction because I work with it daily. But explaining why FT8 needs 50 Hz bandwidth made me think differently about why sequencing needs certain read lengths. Explaining why burst errors from fading are harder to correct than random errors clarified my understanding of coverage depth in genomics.\nThe parallel went both ways.\nI also underestimated how much I’d struggle with the timing synchronisation concept. In sequencing, cycle synchronisation is so fundamental I’d stopped questioning it. FT8 forced me to think about why time as an organising dimension matters, not just accept that it does."
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "What I want to know from you",
-    "text": "What I want to know from you\nIf you’ve read the article:\nWhat resonated? What didn’t make sense? Did the DNA sequencing parallel work for you, or was it too much detail for radio operators?\nFor everyone:\nHave you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere in topics such as antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?"
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "What’s coming next",
-    "text": "What’s coming next\nI’m working on an IQ visualisation series right now. It’s about understanding what SDRs actually see and how to interpret those waterfall displays and constellation diagrams we all stare at. The first post should be up soon.\nThe FT8 article and the IQ series connect more than I initially realised. Both are about making invisible signals visible. Both are about bridging theory and practice. Understanding IQ data helps you appreciate what FT8’s decoder is working with.\nI’m also presenting this material at the RSGB Convention in October. That’s both exciting and terrifying. Turning a written article into a 45-minute talk is a different challenge. If you’re planning to attend, I’d love to meet you."
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "The longer reflection I want to write",
-    "text": "The longer reflection I want to write\nOnce I finish the IQ series, I want to write a proper reflection on the research process. The mistakes I made. The rabbit holes I went down (why 8-FSK specifically? what’s the history of error correction codes?). The questions I’m still pondering.\nBut I don’t want to rush it. I’d rather write it when I have the mental space to do it properly and the energy to engage with the conversations it might start.\nFor now, I’m curious what you think. Leave a comment, send me an email (ian@g0lft.org), or catch me on 20m FT8 most evenings.\nWhat questions should I be asking?"
-  },
-  {
-    "objectID": "guides.html#guides",
-    "href": "guides.html#guides",
-    "title": "Guides",
-    "section": "Guides",
-    "text": "Guides\nHere you will find practical guides to setup equipment and software for digital modes and packet radio etc…"
-  },
-  {
-    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html",
-    "href": "guides-posts/2025-12-19-wsjtx-setup.html",
-    "title": "Setting Up WSJT-X for FT8",
-    "section": "",
-    "text": "2025-12-20"
-  },
-  {
-    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html#requirements",
-    "href": "guides-posts/2025-12-19-wsjtx-setup.html#requirements",
-    "title": "Setting Up WSJT-X for FT8",
-    "section": "Requirements",
-    "text": "Requirements\n\nWSJT-X installed on your computer\n\nTransceiver connected via soundcard or interface\n\nTime synchronization (NTP or GPS)"
-  },
-  {
-    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html#setup-steps",
-    "href": "guides-posts/2025-12-19-wsjtx-setup.html#setup-steps",
-    "title": "Setting Up WSJT-X for FT8",
-    "section": "Setup Steps",
-    "text": "Setup Steps\n\nOpen WSJT-X and go to Settings &gt; Radio.\n\nConfigure your transceiver type and CAT control settings.\n\nGo to Settings &gt; Audio and select your input/output devices.\n\nSet your location (Grid Square) in Settings &gt; General.\n\nTest reception with the Monitor button and verify signals.\n\n\nTips\n\nEnsure your computer clock is accurate within 1 second for FT8.\n\nAdjust transmit power carefully to avoid interference.\n\nKeep logs to track contacts efficiently."
-  },
-  {
-    "objectID": "about.html#about",
-    "href": "about.html#about",
-    "title": "About",
-    "section": "About",
-    "text": "About\nI’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together:\n\nreflective writing on amateur radio, teaching, and learning\ntheory-focused pieces on SDR and digital communication\npractical guides for operators who want to understand why things work, not just how\n\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
-  },
-  {
-    "objectID": "contact.html#contact",
-    "href": "contact.html#contact",
-    "title": "Contact",
-    "section": "Contact",
-    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "",
-    "text": "2026-01-06"
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "A reminder: FM geometry still applies",
-    "text": "A reminder: FM geometry still applies\nBefore looking at the plots, it’s worth restating the key point from the previous post:\n\n\n\n\n\n\nTipKey point\n\n\n\nIn FM, information is carried in frequency deviation, not amplitude.\n\n\nThat remains true here. The differences we’ll see arise from:\n\nThe carrier turning on and off\n\nPeriods of silence\n\nNoise being passed by the receiver\n\nSpeech appearing intermittently"
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "IQ constellation over the full capture",
-    "text": "IQ constellation over the full capture\n\n\nLoad IQ and plot full-segment constellation\n\niq, fs, fc = load_iq(\"iq_capture.npz\")\n\niq = iq[1000:]  # drop initial transient\nN = min(len(iq), 80000000)\niq_seg = iq[:N]\n\nplt.figure(figsize=(6,6))\nplt.scatter(iq_seg.real, iq_seg.imag, s=2, alpha=0.3)\nplt.xlabel(\"I\")\nplt.ylabel(\"Q\")\nplt.title(f\"Constellation @ {fc/1e6:.3f} MHz\")\nplt.axis(\"equal\")\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: IQ constellation diagram showing raw iq from the GB3PI repeater\n\n\n\nWhen all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.\nThis immediately tells us something important:\n\nThe repeater is not transmitting continuously\nLarge portions of the capture contain only noise\nThe central cloud corresponds to periods when the repeater is idle.\n\nWith no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.\nThe ring corresponds to periods when the repeater is active and transmitting FM."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Dynamic IQ: silence, key-up, speech",
-    "text": "Dynamic IQ: silence, key-up, speech\n\n\nAnimated IQ (GIF, no audio)\n\n# GIF-only animation derived from full animation script\nani.save(\"dynamic_iq.gif\", dpi=80)\n\n\n\n\n\n\n\nFigure 2: Fading IQ points over the full capture showing the true dynamic shifts before, during, and after transmission of a short hourly timecode\n\n\n\nAnimating the IQ samples reveals the structure much more clearly.\nThe sequence is easy to follow:\n\nSilence: a tight, noisy cloud near the origin\nKey-up: a sudden appearance of a rotating ring\nSpeech: continuous rotation with changing speed\nCarrier drop: collapse back into noise\n\nThis animation reinforces an important idea:\n\n\n\n\n\n\nTipObservation\n\n\n\nThe appearance or disappearance of a carrier is immediately visible in IQ space.\n\n\nNo demodulation is required to see when the repeater is active."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Magnitude vs time: carrier presence",
-    "text": "Magnitude vs time: carrier presence\n\n\nPlot magnitude vs time\n\nmag = np.abs(iq_seg)\nplt.plot(t, mag)\nplt.xlabel(\"Time (s)\")\nplt.ylabel(\"|IQ|\")\nplt.show()\n\n\n\n\n\n\n\nFigure 3: Magnitude of IQ vs Time\n\n\n\nPlotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.\nAs with broadcast FM, the magnitude does not follow the speech itself. This confirms that amplitude is not being used to carry information, even though amplitude changes are useful for detecting transmission boundaries."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Phase and instantaneous frequency",
-    "text": "Phase and instantaneous frequency\n\nUnwrapped Phase\n\n\nUnwrapped phase and instantaneous frequency\n\nphase = np.angle(iq_seg)\nphase_unwrapped = np.unwrap(phase)\n\ninst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)\n\n\n\n\n\n\n\nFigure 4: Unwrapped phase vs Time\n\n\n\nWhen the repeater is idle, the unwrapped phase shows a roughly diagonal trend rather than a flat line. This arises from the combination of the receiver’s residual frequency offset and the wideband noise present in the capture. In the absence of a coherent carrier, the phase drifts unpredictably and does not reflect any transmitted information.\nWhen the repeater transmits, the phase behaviour changes abruptly. The strong carrier dominates the phase evolution, suppressing the noise-driven drift and producing a more coherent, structured trace.\nRather than revealing the audio modulation directly, the unwrapped phase plot is most useful as a detector of signal presence. It clearly distinguishes periods dominated by noise from periods dominated by a real carrier.\n\n\nInstantaneous frequency: speech appears\n\n\n\n\n\n\nFigure 5: Instantaneous frequency\n\n\n\nPlotting instantaneous frequency over the full capture highlights the contrast between silence and transmission. During idle periods, the instantaneous frequency spans a very wide range (i.e. ±250 kHz in this 500 kHz capture). These large excursions are not real frequency deviation but arise from differentiating the phase of wideband noise, where instantaneous frequency is essentially meaningless.\nWhen the repeater transmits, the instantaneous frequency collapses into a much narrower band. In this regime, the phase evolves smoothly, and frequency deviation becomes meaningful. The spoken time announcement is visible as structured deviations around the centre frequency, though in practice these deviations are small compared to the noise excursions in idle periods.\nCompared to broadcast FM:\n\nThe deviation is narrower\nThe audio bandwidth is smaller\nTransitions between silence and speech are more abrupt\n\nThis illustrates the operational nature of narrowband FM used on repeaters. In wideband captures, noise dominates the phase and instantaneous frequency outside active transmissions, making the true signal pattern barely readable without filtering or decimation.\n\n\n\n\n\n\nNoteWhy receivers filter before FM demodulation\n\n\n\nThe IQ capture shown here spans 500 kHz, integrating noise over a bandwidth far wider than the narrowband FM signal itself. When instantaneous frequency is computed directly on this wideband noise, large and meaningless frequency excursions result.\nReal FM receivers apply channel filtering, limiting, and often decimation before demodulation. These steps suppress out-of-band noise, stabilise the phase, and ensure that frequency deviation reflects only the transmitted audio. The unfiltered plots here are shown deliberately, to make the underlying behaviour visible."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#demodulated-audio",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#demodulated-audio",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Demodulated audio",
-    "text": "Demodulated audio\n\n\nFM demodulation using active IQ only\n\nactive_mask = mag &gt; squelch_thresh\niq_active = iq_seg[active_mask]\n\nphase_active = np.unwrap(np.angle(iq_active))\ninst_freq_active = np.diff(phase_active) * fs / (2*np.pi)\n\naudio = filtfilt(b, a, inst_freq_active)\naudio /= np.max(np.abs(audio))\n\n\n\n\n\n\n\nFigure 6: Demodulated audio waveform\n\n\n\nDemodulating the signal using only periods where the carrier is present improves the ability to recover the underlying audio. In practice, receivers interleave filtering and decimation in several stages, progressively reducing bandwidth and sample rate until the signal of interest is isolated and stable enough to demodulate.\nThe recovered audio appears weaker than the large excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.\nAs before, the demodulated audio is included only as a reference. All of the essential behaviour; carrier presence, silence, speech and transitions; has already been visible in the IQ-derived plots."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Audio-synchronised IQ animation",
-    "text": "Audio-synchronised IQ animation\n\n\n\n\n\n\nFigure 7: Animated IQ plot with audio overlay\n\n\n\nSynchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "What the repeater example adds",
-    "text": "What the repeater example adds\nCompared to broadcast FM, the repeater example highlights three additional ideas:\n\nCarriers can appear and disappear, and IQ shows this immediately\nNoise collapses toward the origin in the absence of a signal\nReal-world signals are intermittent, even when the modulation is unchanged\n\nThe underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "GitHub link to code used to create these plots",
-    "text": "GitHub link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and animation, see the GitHub repository."
-  },
-  {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
-    "title": "Seeing an FM Repeater in IQ Space",
-    "section": "Where next",
-    "text": "Where next\nSo far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space."
-  },
-  {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
     "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
     "title": "Seeing Broadcast FM in IQ Space",
@@ -369,5 +82,243 @@
     "title": "Seeing Broadcast FM in IQ Space",
     "section": "Next Time…",
     "text": "Next Time…\nIn the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "",
+    "text": "2026-01-06"
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#a-reminder-fm-geometry-still-applies",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "A reminder: FM geometry still applies",
+    "text": "A reminder: FM geometry still applies\nBefore looking at the plots, it’s worth restating the key point from the previous post:\n\n\n\n\n\n\nTipKey point\n\n\n\nIn FM, information is carried in frequency deviation, not amplitude.\n\n\nThat remains true here. The differences we’ll see arise from:\n\nThe carrier turning on and off\n\nPeriods of silence\n\nNoise being passed by the receiver\n\nSpeech appearing intermittently"
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#iq-constellation-over-the-full-capture",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "IQ constellation over the full capture",
+    "text": "IQ constellation over the full capture\n\n\nLoad IQ and plot full-segment constellation\n\niq, fs, fc = load_iq(\"iq_capture.npz\")\n\niq = iq[1000:]  # drop initial transient\nN = min(len(iq), 80000000)\niq_seg = iq[:N]\n\nplt.figure(figsize=(6,6))\nplt.scatter(iq_seg.real, iq_seg.imag, s=2, alpha=0.3)\nplt.xlabel(\"I\")\nplt.ylabel(\"Q\")\nplt.title(f\"Constellation @ {fc/1e6:.3f} MHz\")\nplt.axis(\"equal\")\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\nFigure 1: IQ constellation diagram showing raw iq from the GB3PI repeater\n\n\n\nWhen all IQ samples from the capture are plotted together, the result is less tidy than the broadcast FM case. Instead of a single clean circle, we see a dense central cluster with a surrounding ring.\nThis immediately tells us something important:\n\nThe repeater is not transmitting continuously\nLarge portions of the capture contain only noise\nThe central cloud corresponds to periods when the repeater is idle.\n\nWith no strong carrier present, the IQ samples collapse toward the origin and form a roughly circular noise distribution.\nThe ring corresponds to periods when the repeater is active and transmitting FM."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#dynamic-iq-silence-key-up-speech",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Dynamic IQ: silence, key-up, speech",
+    "text": "Dynamic IQ: silence, key-up, speech\n\n\nAnimated IQ (GIF, no audio)\n\n# GIF-only animation derived from full animation script\nani.save(\"dynamic_iq.gif\", dpi=80)\n\n\n\n\n\n\n\nFigure 2: Fading IQ points over the full capture showing the true dynamic shifts before, during, and after transmission of a short hourly timecode\n\n\n\nAnimating the IQ samples reveals the structure much more clearly.\nThe sequence is easy to follow:\n\nSilence: a tight, noisy cloud near the origin\nKey-up: a sudden appearance of a rotating ring\nSpeech: continuous rotation with changing speed\nCarrier drop: collapse back into noise\n\nThis animation reinforces an important idea:\n\n\n\n\n\n\nTipObservation\n\n\n\nThe appearance or disappearance of a carrier is immediately visible in IQ space.\n\n\nNo demodulation is required to see when the repeater is active."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#magnitude-vs-time-carrier-presence",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Magnitude vs time: carrier presence",
+    "text": "Magnitude vs time: carrier presence\n\n\nPlot magnitude vs time\n\nmag = np.abs(iq_seg)\nplt.plot(t, mag)\nplt.xlabel(\"Time (s)\")\nplt.ylabel(\"|IQ|\")\nplt.show()\n\n\n\n\n\n\n\nFigure 3: Magnitude of IQ vs Time\n\n\n\nPlotting magnitude against time shows clear steps corresponding to the repeater turning on and off. When the carrier is present, the magnitude rises sharply and remains roughly constant. When the repeater is idle, the magnitude drops back to the noise floor.\nAs with broadcast FM, the magnitude does not follow the speech itself. This confirms that amplitude is not being used to carry information, even though amplitude changes are useful for detecting transmission boundaries."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#phase-and-instantaneous-frequency",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Phase and instantaneous frequency",
+    "text": "Phase and instantaneous frequency\n\nUnwrapped Phase\n\n\nUnwrapped phase and instantaneous frequency\n\nphase = np.angle(iq_seg)\nphase_unwrapped = np.unwrap(phase)\n\ninst_freq = np.diff(phase_unwrapped) * fs / (2*np.pi)\n\n\n\n\n\n\n\nFigure 4: Unwrapped phase vs Time\n\n\n\nWhen the repeater is idle, the unwrapped phase shows a roughly diagonal trend rather than a flat line. This arises from the combination of the receiver’s residual frequency offset and the wideband noise present in the capture. In the absence of a coherent carrier, the phase drifts unpredictably and does not reflect any transmitted information.\nWhen the repeater transmits, the phase behaviour changes abruptly. The strong carrier dominates the phase evolution, suppressing the noise-driven drift and producing a more coherent, structured trace.\nRather than revealing the audio modulation directly, the unwrapped phase plot is most useful as a detector of signal presence. It clearly distinguishes periods dominated by noise from periods dominated by a real carrier.\n\n\nInstantaneous frequency: speech appears\n\n\n\n\n\n\nFigure 5: Instantaneous frequency\n\n\n\nPlotting instantaneous frequency over the full capture highlights the contrast between silence and transmission. During idle periods, the instantaneous frequency spans a very wide range (i.e. ±250 kHz in this 500 kHz capture). These large excursions are not real frequency deviation but arise from differentiating the phase of wideband noise, where instantaneous frequency is essentially meaningless.\nWhen the repeater transmits, the instantaneous frequency collapses into a much narrower band. In this regime, the phase evolves smoothly, and frequency deviation becomes meaningful. The spoken time announcement is visible as structured deviations around the centre frequency, though in practice these deviations are small compared to the noise excursions in idle periods.\nCompared to broadcast FM:\n\nThe deviation is narrower\nThe audio bandwidth is smaller\nTransitions between silence and speech are more abrupt\n\nThis illustrates the operational nature of narrowband FM used on repeaters. In wideband captures, noise dominates the phase and instantaneous frequency outside active transmissions, making the true signal pattern barely readable without filtering or decimation.\n\n\n\n\n\n\nNoteWhy receivers filter before FM demodulation\n\n\n\nThe IQ capture shown here spans 500 kHz, integrating noise over a bandwidth far wider than the narrowband FM signal itself. When instantaneous frequency is computed directly on this wideband noise, large and meaningless frequency excursions result.\nReal FM receivers apply channel filtering, limiting, and often decimation before demodulation. These steps suppress out-of-band noise, stabilise the phase, and ensure that frequency deviation reflects only the transmitted audio. The unfiltered plots here are shown deliberately, to make the underlying behaviour visible."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#demodulated-audio",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#demodulated-audio",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Demodulated audio",
+    "text": "Demodulated audio\n\n\nFM demodulation using active IQ only\n\nactive_mask = mag &gt; squelch_thresh\niq_active = iq_seg[active_mask]\n\nphase_active = np.unwrap(np.angle(iq_active))\ninst_freq_active = np.diff(phase_active) * fs / (2*np.pi)\n\naudio = filtfilt(b, a, inst_freq_active)\naudio /= np.max(np.abs(audio))\n\n\n\n\n\n\n\nFigure 6: Demodulated audio waveform\n\n\n\nDemodulating the signal using only periods where the carrier is present improves the ability to recover the underlying audio. In practice, receivers interleave filtering and decimation in several stages, progressively reducing bandwidth and sample rate until the signal of interest is isolated and stable enough to demodulate.\nThe recovered audio appears weaker than the large excursions seen during noise-only periods. This is expected for narrowband FM captured over a wide bandwidth: noise produces large, unstructured phase changes, while speech introduces relatively small frequency deviations.\nAs before, the demodulated audio is included only as a reference. All of the essential behaviour; carrier presence, silence, speech and transitions; has already been visible in the IQ-derived plots."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#audio-synchronised-iq-animation",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Audio-synchronised IQ animation",
+    "text": "Audio-synchronised IQ animation\n\n\n\n\n\n\nFigure 7: Animated IQ plot with audio overlay\n\n\n\nSynchronising the IQ animation with the demodulated audio makes the relationship between speech and frequency deviation intuitive. As the announcement plays, the rotation rate varies in step with the spoken words; when the audio stops, the rotation vanishes entirely."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#what-the-repeater-example-adds",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "What the repeater example adds",
+    "text": "What the repeater example adds\nCompared to broadcast FM, the repeater example highlights three additional ideas:\n\nCarriers can appear and disappear, and IQ shows this immediately\nNoise collapses toward the origin in the absence of a signal\nReal-world signals are intermittent, even when the modulation is unchanged\n\nThe underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "GitHub link to code used to create these plots",
+    "text": "GitHub link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and animation, see the GitHub repository."
+  },
+  {
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
+    "title": "Seeing an FM Repeater in IQ Space",
+    "section": "Where next",
+    "text": "Where next\nSo far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space."
+  },
+  {
+    "objectID": "contact.html#contact",
+    "href": "contact.html#contact",
+    "title": "Contact",
+    "section": "Contact",
+    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
+  },
+  {
+    "objectID": "about.html#about",
+    "href": "about.html#about",
+    "title": "About",
+    "section": "About",
+    "text": "About\nI’m Dr Ian Henry. I live in a village just south of Cambridge and am a licensed UK radio amateur.\nI discovered amateur radio by chance in 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby — particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together:\n\nreflective writing on amateur radio, teaching, and learning\ntheory-focused pieces on SDR and digital communication\npractical guides for operators who want to understand why things work, not just how\n\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
+  },
+  {
+    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html",
+    "href": "guides-posts/2025-12-19-wsjtx-setup.html",
+    "title": "Setting Up WSJT-X for FT8",
+    "section": "",
+    "text": "2025-12-20"
+  },
+  {
+    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html#requirements",
+    "href": "guides-posts/2025-12-19-wsjtx-setup.html#requirements",
+    "title": "Setting Up WSJT-X for FT8",
+    "section": "Requirements",
+    "text": "Requirements\n\nWSJT-X installed on your computer\n\nTransceiver connected via soundcard or interface\n\nTime synchronization (NTP or GPS)"
+  },
+  {
+    "objectID": "guides-posts/2025-12-19-wsjtx-setup.html#setup-steps",
+    "href": "guides-posts/2025-12-19-wsjtx-setup.html#setup-steps",
+    "title": "Setting Up WSJT-X for FT8",
+    "section": "Setup Steps",
+    "text": "Setup Steps\n\nOpen WSJT-X and go to Settings &gt; Radio.\n\nConfigure your transceiver type and CAT control settings.\n\nGo to Settings &gt; Audio and select your input/output devices.\n\nSet your location (Grid Square) in Settings &gt; General.\n\nTest reception with the Monitor button and verify signals.\n\n\nTips\n\nEnsure your computer clock is accurate within 1 second for FT8.\n\nAdjust transmit power carefully to avoid interference.\n\nKeep logs to track contacts efficiently."
+  },
+  {
+    "objectID": "guides.html#guides",
+    "href": "guides.html#guides",
+    "title": "Guides",
+    "section": "Guides",
+    "text": "Guides\nHere you will find practical guides to setup equipment and software for digital modes and packet radio etc…"
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "",
+    "text": "2026-04-25"
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "What surprised me most",
+    "text": "What surprised me most\nI thought I understood error correction because I work with it daily. But explaining why FT8 needs 50 Hz bandwidth made me think differently about why sequencing needs certain read lengths. Explaining why burst errors from fading are harder to correct than random errors clarified my understanding of coverage depth in genomics.\nThe parallel went both ways.\nI also underestimated how much I’d struggle with the timing synchronisation concept. In sequencing, cycle synchronisation is so fundamental I’d stopped questioning it. FT8 forced me to think about why time as an organising dimension matters, not just accept that it does."
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "What I want to know from you",
+    "text": "What I want to know from you\nIf you’ve read the article:\nWhat resonated? What didn’t make sense? Did the DNA sequencing parallel work for you, or was it too much detail for radio operators?\nFor everyone:\nHave you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere in topics such as antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?"
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "What’s coming next",
+    "text": "What’s coming next\nI’m working on an IQ visualisation series right now. It’s about understanding what SDRs actually see and how to interpret those waterfall displays and constellation diagrams we all stare at. The first post should be up soon.\nThe FT8 article and the IQ series connect more than I initially realised. Both are about making invisible signals visible. Both are about bridging theory and practice. Understanding IQ data helps you appreciate what FT8’s decoder is working with.\nI’m also presenting this material at the RSGB Convention in October. That’s both exciting and terrifying. Turning a written article into a 45-minute talk is a different challenge. If you’re planning to attend, I’d love to meet you."
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "The longer reflection I want to write",
+    "text": "The longer reflection I want to write\nOnce I finish the IQ series, I want to write a proper reflection on the research process. The mistakes I made. The rabbit holes I went down (why 8-FSK specifically? what’s the history of error correction codes?). The questions I’m still pondering.\nBut I don’t want to rush it. I’d rather write it when I have the mental space to do it properly and the energy to engage with the conversations it might start.\nFor now, I’m curious what you think. Leave a comment, send me an email (ian@g0lft.org), or catch me on 20m FT8 most evenings.\nWhat questions should I be asking?"
+  },
+  {
+    "objectID": "thinking.html#thinking",
+    "href": "thinking.html#thinking",
+    "title": "Thinking",
+    "section": "Thinking",
+    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
+  },
+  {
+    "objectID": "credits.html#hero-images",
+    "href": "credits.html#hero-images",
+    "title": "Credits & Attributions",
+    "section": "Hero Images",
+    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
+  },
+  {
+    "objectID": "credits.html#other-images",
+    "href": "credits.html#other-images",
+    "title": "Credits & Attributions",
+    "section": "Other Images",
+    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
+  },
+  {
+    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html",
+    "href": "blog-posts/2025-12-26-a_year_of_listening.html",
+    "title": "A Year of Listening",
+    "section": "",
+    "text": "2025-12-26"
+  },
+  {
+    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
+    "href": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
+    "title": "A Year of Listening",
+    "section": "2025 - A Year of Listening:",
+    "text": "2025 - A Year of Listening:\n\nFinding Structure, Curiosity and Understanding Through Amateur Radio\nAt the beginning of this year, I was completely unaware of amateur radio. I was recovering from illness and work was already proving more challenging than usual. I needed something mentally stimulating but not demanding, something absorbing, technical and quietly constructive.\nIn April, I stumbled upon amateur radio almost by chance. Initially, it wasn’t about licences or operating privileges; it was simply fascinating. Signals emerged from noise, antennas behaved in unexpected ways and the concept of meaningful communication with minimal power captivated me.\nMy curiosity quickly turned into momentum. I sat the Foundation exam in May and shortly afterwards the Intermediate. Looking back, this pace reflects more on circumstance than ability. Radio provided a concrete focus during a time when many other aspects of my life felt fragmented.\nWork remained challenging throughout the year, but studying and operating became a consistent background activity. It kept me engaged, distracted in a positive way and fostered a renewed sense of learning. I experimented extensively with various modes, bands and contact methods, not for the sake of achievements, but to understand how the hobby’s components fit together.\nJoining Cambridge and District Amateur Radio Club (CDARC) was another significant milestone. Interacting with generous individuals who shared their time and experience reminded me that amateur radio is as much about people as it is about equipment or exams. Observing diverse operating styles and problem-solving approaches was as enlightening as any reading I’ve done.\nLater in the year, I decided to work towards the Full licence. I mainly studied from the RSGB book, reading slowly and following ideas rather than memorising answers. I was awarded a distinction, which I mention only because it led to a lasting realisation: the most challenging aspects of learning radio aren’t about formulas or regulations – they’re about visualising what’s actually happening.\nThat’s where books fall short.\nCircuits, filters, impedance, noise and signal flow are inherently dynamic, constantly changing and interacting. Static diagrams and paragraphs can only take you so far before you need to observe behaviour, not just read about it. A capacitor charging, a filter rejecting energy and a weak signal emerging from noise are processes, not pictures.\nAs someone who works professionally with complex systems, I’ve become increasingly convinced that radio education would greatly benefit from improved visual and animated explanations. This isn’t to replace books but to complement them – to transform abstract concepts into something you can watch evolve and intuitively understand.\nThis idea is one of the reasons this blog exists.\nNext year, I want to spend less time acquiring equipment and more time understanding it. If this space becomes anything, I hope it becomes a place where difficult radio concepts are explained visually patiently and honestly – where behaviour is shown, not just described, and where understanding can grow over time.\nAmateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.\nIf you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts."
+  },
+  {
+    "objectID": "blog.html#blog",
+    "href": "blog.html#blog",
+    "title": "Blog",
+    "section": "Blog",
+    "text": "Blog\nWelcome to my blog! Posts appear below."
+  },
+  {
+    "objectID": "station.html#station",
+    "href": "station.html#station",
+    "title": "My Station",
+    "section": "Station",
+    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
+  },
+  {
+    "objectID": "index.html#teaching-learning-and-amateur-radio",
+    "href": "index.html#teaching-learning-and-amateur-radio",
+    "title": "G0LFT",
+    "section": "Teaching, learning, and amateur radio",
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice\n\nIf you have found your way here from my recent FT8 article in RadCom please check out my blog post on the subject."
+  },
+  {
+    "objectID": "privacy.html#privacy-cookies",
+    "href": "privacy.html#privacy-cookies",
+    "title": "Privacy & Disclaimer",
+    "section": "Privacy & Cookies",
+    "text": "Privacy & Cookies\nWe use Google Analytics 4 (GA4) to collect anonymous site usage data.\nThis may involve cookies to track sessions, page views, and returning visitors.\n\nCookies used: _ga, _gid\nPurpose: Analyze site traffic and improve user experience\n\nIP anonymization: Enabled\n\nThird-party access: Data is processed by Google under their privacy policy: https://policies.google.com/privacy\n\nYou may withdraw consent at any time by clearing your cookies."
+  },
+  {
+    "objectID": "privacy.html#disclaimer",
+    "href": "privacy.html#disclaimer",
+    "title": "Privacy & Disclaimer",
+    "section": "Disclaimer",
+    "text": "Disclaimer\n\nThe information provided here is for informational purposes only.\n\nWhile care is taken to ensure accuracy, no guarantees are made regarding completeness or suitability.\n\nAny external links do not imply endorsement of those sites.\n\nIf you have concerns regarding your privacy or site content, please contact me."
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "",
+    "text": "2025-12-19"
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "Introduction",
+    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
   }
 ]
