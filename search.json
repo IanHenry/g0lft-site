@@ -287,11 +287,18 @@
     "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
   },
   {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "G0LFT",
+    "section": "Welcome",
+    "text": "Welcome\nI’m Dr Ian Henry a licensed UK radio amateur and a member of Cambridge and District Amateur Radio Club (CDARC), I’m also a member of the Radio Society of Great Britain (RSGB) and a published author in the RSGB magazine RadCom with an article titled “Understanding FT8 through DNA-sequencing parallels” (May 2026). If you have found your way here through reading this article, please check out my blog post on the subject."
+  },
+  {
     "objectID": "index.html#teaching-learning-and-amateur-radio",
     "href": "index.html#teaching-learning-and-amateur-radio",
     "title": "G0LFT",
     "section": "Teaching, learning, and amateur radio",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice\n\nIf you have found your way here from my recent FT8 article in RadCom please check out my blog post on the subject."
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice\n\nIf you have found your way here from my recent article in RadCom titled “Understanding FT8 through DNA-sequencing parllels” (May 2026) please check out my blog post on the subject."
   },
   {
     "objectID": "privacy.html#privacy-cookies",
