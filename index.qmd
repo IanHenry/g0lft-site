@@ -5,7 +5,7 @@ title: "G0LFT"
 
 ## Welcome
 
-I’m Dr Ian Henry a licensed UK radio amateur and a member of [Cambridge and District Amateur Radio Club (CDARC)](https://www.cdarc.org.uk/), I'm also a member of the [Radio Society of Great Britain (RSGB)](https://rsgb.org/) and a published author in the RSGB magazine [RadCom](https://rsgb.org/main/publications-archives/radcom/) with an article titled "Understanding FT8 through DNA-sequencing parallels" (May 2026).  If you have found your way here through reading this article, please check out my [blog post](/blog-posts/2026-04-25-ft8_dna_radcom.html) on the subject.
+I’m Dr Ian Henry a licensed UK radio amateur and member of [Cambridge and District Amateur Radio Club (CDARC)](https://www.cdarc.org.uk/), I'm also a member of the [Radio Society of Great Britain (RSGB)](https://rsgb.org/) and a published author in the RSGB magazine [RadCom](https://rsgb.org/main/publications-archives/radcom/) with an article titled "Understanding FT8 through DNA-sequencing parallels" (May 2026).  If you have found your way here through reading this article, please check out my [blog post](/blog-posts/2026-04-25-ft8_dna_radcom.html) on the subject.
 
 ## Teaching, learning, and amateur radio
 
@@ -18,4 +18,3 @@ You’ll find:
 - theory-focused writing on learning and SDR
 - practical guides for applying those ideas in practice
 
-If you have found your way here from my recent article in RadCom titled "Understanding FT8 through DNA-sequencing parllels" (May 2026) please check out my [blog post](/blog-posts/2026-04-25-ft8_dna_radcom.html) on the subject.
