@@ -13,21 +13,21 @@ format:
 
 When most people picture a radio wave, they imagine a familiar sine curve. Smooth, rhythmic, oscillating up and down.
 
-![Simple sine wave illustration](images/sinewave.gif){#fig-sine fig-align="left" width=80%}
-
 It's the classic visual taught in textbooks and classrooms. But there's another way to understand what's really going on.
 
 Instead of thinking of the wave as something moving up and down, imagine it as the shadow of something rotating.
+
+![Simple sine wave illustration](images/sinewave.gif){#fig-sine fig-align="left" width=80%}
 
 ## From oscillation to rotation
 
 Picture a simple arrow spinning in a circle, like a clock hand.
 
-![Rotating phasor illustration](images/phasor.png){#fig-phasor fig-align="left" width=55%}
-
 As it turns, imagine a light shining from one side, casting its shadow onto a flat surface. That shadow moves back and forth, tracing out the same sine wave shape we started with.
 
 What looks like an oscillation is really just a projection of circular motion.
+
+![Rotating phasor illustration](images/phasor.gif){#fig-phasor fig-align="left" width=80%}
 
 ## The phasor
 
@@ -41,7 +41,7 @@ Here's where it gets interesting. If you only see the shadow (the sine wave), yo
 
 Imagine two arrows spinning in opposite directions. Their shadows look identical. From just the wave, you've lost information about the direction of rotation.
 
-![Two counter-rotating phasors](images/counter_rotating.png){#fig-counter fig-align="left" width=55%}
+![Two counter-rotating phasors](images/counter_rotating.gif){#fig-counter fig-align="left" width=80%}
 
 This matters because a real radio wave can be thought of as two phasors rotating in opposite directions. The wave itself is the sum of both rotations.
 
@@ -49,7 +49,7 @@ This matters because a real radio wave can be thought of as two phasors rotating
 
 What if we add another light source at 90 degrees to the first? Now we get two shadows: one horizontal, one vertical.
 
-![Quadrature shadows](images/quadrature.png){#fig-quadrature fig-align="left" width=55%}
+![Quadrature shadows](images/quadrature.gif){#fig-quadrature fig-align="left" width=80%}
 
 With both shadows, we can tell which way the arrow is rotating. The horizontal shadow is the cosine wave. The vertical shadow is the sine wave. Together, they define a single rotating phasor completely.
 
