@@ -13,7 +13,7 @@ format:
 
 When most people picture a radio wave, they imagine a familiar sine curve. Smooth, rhythmic, oscillating up and down.
 
-![Simple sine wave illustration](images/sine_wave.gif){#fig-sine fig-align="left" width=55%}
+![Simple sine wave illustration](images/sinewave.gif){#fig-sine fig-align="left" width=55%}
 
 It's the classic visual taught in textbooks and classrooms. But there's another way to understand what's really going on.
 
