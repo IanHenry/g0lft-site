@@ -1,0 +1,53 @@
+---
+title: "My FT8 Article is Published and I Want to Hear From You"
+date: 2026-04-25
+categories: [FT8, Digital Modes, DNA Sequencing, Publications]
+description: "Reflections on writing about FT8 through the lens of computational biology, plus what's coming next"
+format:
+  html:
+    toc: true
+---
+
+# My FT8 Article is Published and I Want to Hear From You
+
+My article "Understanding FT8 Through DNA Sequencing Parallels" is now out in RadCom (May 2026). It explores something I noticed one Saturday morning while watching FT8 decode stations I couldn't hear: the engineering looked remarkably similar to what I work with every day in DNA sequencing.
+
+Both systems face the same challenge: extracting reliable information from incredibly weak signals surrounded by noise. Both use structured message formats, precise timing synchronisation, sophisticated error correction, and quality metrics. The solutions emerged completely independently, yet they're strikingly parallel.
+
+Writing it was fascinating. I learned as much about my own field as I did about FT8.
+
+## What surprised me most
+
+I thought I understood error correction because I work with it daily. But explaining why FT8 needs 50 Hz bandwidth made me think differently about why sequencing needs certain read lengths. Explaining why burst errors from fading are harder to correct than random errors clarified my understanding of coverage depth in genomics.
+
+The parallel went both ways.
+
+I also underestimated how much I'd struggle with the timing synchronisation concept. In sequencing, cycle synchronisation is so fundamental I'd stopped questioning it. FT8 forced me to think about why time as an organising dimension matters, not just accept that it does.
+
+## What I want to know from you
+
+**If you've read the article:**
+
+What resonated? What didn't make sense? Did the DNA sequencing parallel work for you, or was it too much detail for radio operators?
+
+**For everyone:**
+
+Have you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere—antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?
+
+## What's coming next
+
+I'm working on an **IQ visualisation series** right now. It's about understanding what SDRs actually see and how to interpret those waterfall displays and constellation diagrams we all stare at. The first post should be up soon.
+
+The FT8 article and the IQ series connect more than I initially realised. Both are about making invisible signals visible. Both are about bridging theory and practice. Understanding IQ data helps you appreciate what FT8's decoder is working with.
+
+I'm also presenting this material at the **RSGB Convention** in October. That's both exciting and terrifying. Turning a written article into a 45-minute talk is a different challenge. If you're planning to attend, I'd love to meet you.
+
+## The longer reflection I want to write
+
+Once I finish the IQ series, I want to write a proper reflection on the research process. The mistakes I made. The rabbit holes I went down (why 8-FSK specifically? what's the history of error correction codes?). The questions I'm still pondering.
+
+But I don't want to rush it. I'd rather write it when I have the mental space to do it properly and the energy to engage with the conversations it might start.
+
+For now, I'm curious what you think. Leave a comment, send me an email (ian@g0lft.org), or catch me on 20m FT8 most evenings.
+
+What questions should I be asking?
