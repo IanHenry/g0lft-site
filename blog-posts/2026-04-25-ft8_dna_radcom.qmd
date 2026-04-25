@@ -32,7 +32,7 @@ What resonated? What didn't make sense? Did the DNA sequencing parallel work for
 
 **For everyone:**
 
-Have you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere—antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?
+Have you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere in topics such as antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?
 
 ## What's coming next
 

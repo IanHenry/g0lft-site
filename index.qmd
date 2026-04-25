@@ -14,3 +14,4 @@ You’ll find:
 - theory-focused writing on learning and SDR
 - practical guides for applying those ideas in practice
 
+If you have found your way here from my recent FT8 article in RadCom please check out my [blog post](/blog-posts/2026-04-25-ft8_dna_radcom.html) on the subject.
