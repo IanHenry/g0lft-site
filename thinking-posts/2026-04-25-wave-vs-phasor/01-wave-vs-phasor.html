@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-04-25">
+<meta name="description" content="Reframing radio waves as rotating phasors instead of oscillating signals">
 
-<title>Guides</title>
+<title>Wave vs Phasor: A Different Way to See Radio</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,26 +28,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b87446ecb6c0226acb845f53c3b234a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b87446ecb6c0226acb845f53c3b234a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,35 +73,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-reading-time','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -113,45 +84,16 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- intentionally empty — GA is handled by _cookie_consent.html -->
 
-<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
-<link rel="manifest" href="./images/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
 <meta name="theme-color" content="#1ecbe1">
 
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="_theme/_base.css">
-<link rel="stylesheet" href="_theme/_colors.css">
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -167,19 +109,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./thinking.html"> 
+    <a class="nav-link" href="../../thinking.html"> 
 <span class="menu-text">Thinking</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./guides.html" aria-current="page"> 
+    <a class="nav-link" href="../../guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
 </ul>
@@ -194,60 +136,123 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGlnaXRhbCUyME1vZGVz">Digital Modes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RlQ4">FT8 <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#wave-vs-phasor-a-different-way-to-see-radio" id="toc-wave-vs-phasor-a-different-way-to-see-radio" class="nav-link active" data-scroll-target="#wave-vs-phasor-a-different-way-to-see-radio">Wave vs Phasor: A Different Way to See Radio</a>
+  <ul class="collapse">
+  <li><a href="#from-oscillation-to-rotation" id="toc-from-oscillation-to-rotation" class="nav-link" data-scroll-target="#from-oscillation-to-rotation">From oscillation to rotation</a></li>
+  <li><a href="#the-phasor" id="toc-the-phasor" class="nav-link" data-scroll-target="#the-phasor">The phasor</a></li>
+  <li><a href="#the-missing-information-problem" id="toc-the-missing-information-problem" class="nav-link" data-scroll-target="#the-missing-information-problem">The missing information problem</a></li>
+  <li><a href="#adding-a-second-shadow" id="toc-adding-a-second-shadow" class="nav-link" data-scroll-target="#adding-a-second-shadow">Adding a second shadow</a></li>
+  <li><a href="#i-and-q" id="toc-i-and-q" class="nav-link" data-scroll-target="#i-and-q">I and Q</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters">Why this matters</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Guides</h1></header>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Wave vs Phasor: A Different Way to See Radio</h1></header>
 
 <header id="title-block-header">
 
 
+<p class="date">2026-04-25</p>
 </header>
 
 
-<p><img src="images/main_logo.png" class="centered-image"></p>
-<section id="guides" class="level2">
-<h2 class="anchored" data-anchor-id="guides">Guides</h2>
-<p>Here you will find practical guides to setup equipment and software for digital modes and packet radio etc…</p>
-
+<section id="wave-vs-phasor-a-different-way-to-see-radio" class="level1">
+<h1>Wave vs Phasor: A Different Way to See Radio</h1>
+<p>When most people picture a radio wave, they imagine a familiar sine curve. Smooth, rhythmic, oscillating up and down.</p>
+<div id="fig-sine" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/sine_wave.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sine-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Simple sine wave illustration
+</figcaption>
+</figure>
+</div>
+<p>It’s the classic visual taught in textbooks and classrooms. But there’s another way to understand what’s really going on.</p>
+<p>Instead of thinking of the wave as something moving up and down, imagine it as the shadow of something rotating.</p>
+<section id="from-oscillation-to-rotation" class="level2">
+<h2 class="anchored" data-anchor-id="from-oscillation-to-rotation">From oscillation to rotation</h2>
+<p>Picture a simple arrow spinning in a circle, like a clock hand.</p>
+<div id="fig-phasor" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-phasor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/phasor.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-phasor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Rotating phasor illustration
+</figcaption>
+</figure>
+</div>
+<p>As it turns, imagine a light shining from one side, casting its shadow onto a flat surface. That shadow moves back and forth, tracing out the same sine wave shape we started with.</p>
+<p>What looks like an oscillation is really just a projection of circular motion.</p>
+</section>
+<section id="the-phasor" class="level2">
+<h2 class="anchored" data-anchor-id="the-phasor">The phasor</h2>
+<p>This rotating arrow has a name: a phasor. It’s a rotating vector that represents a signal.</p>
+<p>The concept is simple but changes how you think about signals. Instead of tracking amplitude over time directly, you can think in terms of rotation: angle, speed, and phase.</p>
+</section>
+<section id="the-missing-information-problem" class="level2">
+<h2 class="anchored" data-anchor-id="the-missing-information-problem">The missing information problem</h2>
+<p>Here’s where it gets interesting. If you only see the shadow (the sine wave), you can’t tell which way the arrow is rotating.</p>
+<p>Imagine two arrows spinning in opposite directions. Their shadows look identical. From just the wave, you’ve lost information about the direction of rotation.</p>
+<div id="fig-counter" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-counter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/counter_rotating.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-counter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Two counter-rotating phasors
+</figcaption>
+</figure>
+</div>
+<p>This matters because a real radio wave can be thought of as two phasors rotating in opposite directions. The wave itself is the sum of both rotations.</p>
+</section>
+<section id="adding-a-second-shadow" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-second-shadow">Adding a second shadow</h2>
+<p>What if we add another light source at 90 degrees to the first? Now we get two shadows: one horizontal, one vertical.</p>
+<div id="fig-quadrature" class="quarto-float quarto-figure quarto-figure-left anchored" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quadrature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/quadrature.png" class="img-fluid quarto-figure quarto-figure-left figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quadrature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Quadrature shadows
+</figcaption>
+</figure>
+</div>
+<p>With both shadows, we can tell which way the arrow is rotating. The horizontal shadow is the cosine wave. The vertical shadow is the sine wave. Together, they define a single rotating phasor completely.</p>
+<p>This is the foundation of I and Q.</p>
+</section>
+<section id="i-and-q" class="level2">
+<h2 class="anchored" data-anchor-id="i-and-q">I and Q</h2>
+<p>The two shadows have names:</p>
+<ul>
+<li>I (In-phase): the cosine component</li>
+<li>Q (Quadrature): the sine component, 90 degrees shifted</li>
+</ul>
+<p>Sine and cosine waves aren’t just related mathematical functions. They’re literally the horizontal and vertical projections of a single rotating phasor.</p>
+<p>When you have both I and Q, you have complete information about the signal: its amplitude, phase, and frequency.</p>
+</section>
+<section id="why-this-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters">Why this matters</h2>
+<p>Modern radios are increasingly software-defined radios (SDRs). They don’t work with the wave directly. They work with I and Q samples.</p>
+<p>Understanding phasors and why we need both I and Q is the key to understanding how modern radio actually works.</p>
+<p>In the next post, we’ll look at why SDRs use I and Q, and how radios actually generate these signals.</p>
+<hr>
+<p><strong>Next:</strong> <a href="02-why-iq-matters.qmd">Why Modern Radios Use I and Q</a></p>
 
 
 </section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="RGlnaXRhbCUyME1vZGVzJTJDRlQ4" data-listing-date-sort="1766188800000" data-listing-file-modified-sort="1777140368011" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="108">
-<div class="thumbnail"><a href="./guides-posts/2025-12-19-wsjtx-setup.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./guides-posts/2025-12-19-wsjtx-setup.html" class="no-external">Setting Up WSJT-X for FT8</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGlnaXRhbCUyME1vZGVz'); return false;">Digital Modes</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('RlQ4'); return false;">FT8</div>
-
-</div>
-<div class="delink listing-description"><a href="./guides-posts/2025-12-19-wsjtx-setup.html" class="no-external">
-<p>Step-by-step guide to configure WSJT-X for FT8 operation.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./guides-posts/2025-12-19-wsjtx-setup.html" class="no-external">
-<div class="listing-date">
-Dec 20, 2025
-</div>
-<div class="listing-reading-time">1 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <!-- Cookie / Privacy Banner -->
 <div id="cookie-banner" style="position: fixed; bottom: 0; left:0; width:100%; background:#222; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; z-index:9999;">
   <div style="flex:1; min-width:250px;">
@@ -299,18 +304,18 @@ Dec 20, 2025
 <div class="site-footer">
  <div class="footer-content">
    © 2025 Dr Ian Henry, G0LFT. All rights reserved.<br>
-   <a href="./privacy.html">Privacy Policy</a> |
-   <a href="./credits.html">Image Credits</a> |
-   <a href="./about.html">About</a> |
-   <a href="./station.html">Station</a> |
-   <a href="./contact.html">Contact</a> |
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
    <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
    <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
   </div>
 </div>
 <!-- Desktop-only navbar logo -->
 <a href="https://g0lft.org" class="navbar-desktop-logo-link">
-  <img src="./images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
 </a>
 
 <script>
