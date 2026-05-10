@@ -13,9 +13,9 @@ To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the 
 
 **Choose your path:**
 
--   **The Full Setup:** Follow the step-by-step guidelines below for GNU Radio.
+- **The Full Setup:** Follow the step-by-step guidelines below for GNU Radio.
 
--   **The Quick Start:** If you want a simpler way to view IQ constellation plots, skip straight to the [**Simple IQ Visualisation Plugin for SDRconnect**](#simple-iq-visualisation-plugin-for-sdrconnect) section.
+- **The Quick Start:** If you want a simpler way to view IQ constellation plots, skip straight to the [**Simple IQ Visualisation Plugin for SDRconnect**](#simple-iq-visualisation-plugin-for-sdrconnect) section.
 
 ## Step-by-Step Installation Guidelines
 
@@ -26,16 +26,16 @@ The easiest setup process involves installing the hardware driver first, followe
 Regardless of which software you use, you must install the official hardware driver first so your computer can recognise the device.
 
 - Go to the SDRplay Downloads page.
-- Download and [install the API for your platform](https://www.sdrplay.com/api/){:target="_blank"} (version 3.15 is current).
+- Download and [install the API for your platform](https://www.sdrplay.com/api/) (version 3.15 is current).
 - **Windows users:** Ensure the installer completes and, if prompted, restart your computer.
 
 ### 2. Install Radioconda
 
 Radioconda is a distribution that includes GNU Radio and almost all common SDR drivers pre-configured.
 
-- Download the latest installer from the [Radioconda GitHub](https://github.com){:target="_blank"}.
+- Download the latest installer from the [Radioconda GitHub](https://github.com).
 - Run the installer according to the ReadMe on the Radioconda GitHub page. This generally involves double-clicking the .exe (Windows) or running the bash shell script (Linux) to set up a complete GNU Radio environment without manual compilation.
-- If you are using hardware other than an SDRplay, refer to the [Radioconda ReadMe page](https://github.com#additional-installation-for-device-support){:target="_blank"} for further guidelines.
+- If you are using hardware other than an SDRplay, refer to the [Radioconda ReadMe page](https://github.com#additional-installation-for-device-support) for further guidelines.
 
 ### 3. Connect GNU Radio to your SDRplay
 
@@ -66,7 +66,7 @@ Found device 16
 
 ![image](./images/gnuradio.png)
 
-You are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the [GNU Radio wiki](https://gnuradio.org){:target="_blank"}. To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to [email me](mailto:YOUR_EMAIL_HERE).
+You are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the [GNU Radio wiki](https://gnuradio.org). To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to [email me](mailto:YOUR_EMAIL_HERE).
 
 ## Sample FlowGraphs
 
@@ -83,7 +83,7 @@ To solve this, I wrote a Python app that works with SDRconnect. It uses the WebS
 ### Installation instructions for SDRconnect and IQ module
 
 #### 1. Download SDRconnect
-- Download [SDRconnect](https://sdrplay.com){:target="_blank"} for Windows, MacOS, or Linux. Ensure you are using at least version 1.08.
+- Download [SDRconnect](https://sdrplay.com) for Windows, MacOS, or Linux. Ensure you are using at least version 1.08.
 - Once installed, enable the **WebSocket Server**: click the three dots (top right) -> Preferences -> Enable WebSocket Server.
 
 ![image](./images/load_prefs.png) ![image](./images/set_websocket.png)
@@ -99,7 +99,9 @@ This tool is designed for visualising strong signals like Broadcast FM/AM, Repea
 ![image](./images/plugin_working.png)
 
 The visualiser has two main controls:
+
 - **Gain Slider:** This rescales the IQ values on the plot (acting as a "zoom" for the constellation) without affecting the actual receiver gain.
+
 - **Preset Buttons:** Quickly set Mode, audio bandwidth, and sample rate for Broadcast FM, Narrowband FM, Broadcast AM, and Airband.
 
 You can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script "jumps" the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.
