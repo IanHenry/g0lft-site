@@ -24,7 +24,7 @@ The easiest setup process involves installing the hardware driver first, followe
 Regardless of which software you use, you must install the official hardware driver first so your computer can recognise the device.
 
 - Go to the SDRplay Downloads page.
-- Download and [install the API for your platform](https://sdrplay.com){:target="_blank"} (version 3.15 is current).
+- Download and [install the API for your platform](https://www.sdrplay.com/api/){:target="_blank"} (version 3.15 is current).
 - **Windows users:** Ensure the installer completes and, if prompted, restart your computer.
 
 ### 2. Install Radioconda
@@ -56,6 +56,8 @@ Found device 16
   label = SDRplay Dev0 UNKNOWN 24020E2670
   serial = 24020E2670
 ```
+
+> **Tip for Linux Users:** If the command above fails to find your device, use `lsusb` to verify that the OS sees the hardware. If it appears in `lsusb` but not in Soapy, you likely need to manually trigger the SDRplay `udev` rules or restart the API service with `sudo systemctl restart sdrplay`.
 
 - Launch GRC: type ```gnuradio-companion``` in the Radioconda shell to open the GUI.
 - Search for a **Soapy Source Block** in the block list on the right-hand side; it should be under `Core -> Soapy -> Source -> SoapySDRPlaySource`.
