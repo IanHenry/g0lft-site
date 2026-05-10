@@ -66,11 +66,25 @@ Found device 16
 
 ![image](./images/gnuradio.png)
 
-You are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the [GNU Radio wiki](https://wiki.gnuradio.org/). To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to [email me](mailto:YOUR_EMAIL_HERE).
+You are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the [GNU Radio wiki](https://wiki.gnuradio.org/). To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to [email me](mailto:ian@g0lft.org).
 
 ## Sample FlowGraphs
 
-These flowgraphs are provided "as-is" in the following Git repository: [**INSERT_FLOWGRAPH_REPO_URL_HERE**]. Many allow you to capture raw IQ to a file, which can then be processed with the included Python scripts to create high-quality density plots.
+These flowgraphs are provided "as-is" in the Git repository: [https://github.com/IanHenry/sdrplay-gnuradio-examples/](https://github.com/IanHenry/sdrplay-gnuradio-examples/).
+They allow you to capture raw IQ data from an SDR device and save it to a file. The captured data can then be processed with the included Python script to generate high-quality density plots. 
+
+Instructions for use are in the [README](https://github.com/IanHenry/sdrplay-gnuradio-examples/blob/main/README.md) of the GitHub repository but briefly:
+
+### Repository Structure
+- **/flowgraphs**: `.grc` files for capturing and visualising IQ data. 
+- **/analysis**: Python scripts for generating IQ density plots from recorded files.
+- **/data**: The intended directory for your `.iq` recordings.
+
+### Getting Started
+1. **Capture:** Open a flowgraph in GNU Radio Companion. Use the sliders to tune to a signal and record the output. 
+2. **Save:** Save your recording (e.g., `capture.iq`) into the **/data** folder.
+3. **Plot:** Open a terminal in the **/analysis** folder and run `python iq_density_plotter.py`. 
+4. **Customise:** You can edit the `USER SETTINGS` at the top of the script to change the filename or zoom in on specific modulations.
 
 ---
 
@@ -79,6 +93,8 @@ These flowgraphs are provided "as-is" in the following Git repository: [**INSERT
 If you prefer not to install the dependencies above and just want to view IQ plots using standard SDR software, options are limited. Most standard software does not include constellation plots by default.
 
 To solve this, I wrote a Python app that works with SDRconnect. It uses the WebSocket API (available in version 1.08+) to capture and plot IQ data in real-time.
+
+![image](./images/iq_vis.png)
 
 ### Installation instructions for SDRconnect and IQ module
 
@@ -90,11 +106,11 @@ To solve this, I wrote a Python app that works with SDRconnect. It uses the WebS
 
 #### 2. Install the Python IQ Module
 - Download my script from [https://github.com/IanHenry/sdrconnect-iq-visualiser] and run ```python sdrConnectIQvisualiser.py```. It does not need to be in the SDRconnect directory as it communicates via the network API.
-- **Windows users:** A pre-compiled .exe version is also available at [https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/] for a standalone launch.
+- **Windows users:** A pre-compiled .exe version is also available at [https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/](https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/) for a standalone launch.
 
 ### Using the Simple IQ Visualisation Plugin
 
-This tool is designed for visualising strong signals like Broadcast FM/AM, Repeaters, and Airband. It uses the sampled window centered on the waterfall. While audio filters are applied in SDRconnect, they do not affect this raw IQ stream. The script automatically periodically re-centers the VFO so the IQ you see matches your tuned frequency.
+This tool is designed for visualising strong signals like Broadcast FM/AM, Repeaters, and Airband. It uses an IQ sample window centered on the waterfall. While audio filters are applied in SDRconnect, they do not affect this raw IQ stream. The script automatically periodically re-centers the VFO so the IQ you see matches your tuned frequency.
 
 ![image](./images/plugin_working.png)
 
