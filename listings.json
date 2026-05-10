@@ -1,9 +1,8 @@
 [
   {
-    "listing": "/blog.html",
+    "listing": "/guides.html",
     "items": [
-      "/blog-posts/2026-04-25-ft8_dna_radcom.html",
-      "/blog-posts/2025-12-26-a_year_of_listening.html"
+      "/guides-posts/2026-10-05-visualising-iq-setup/2026-10-05-visualising-qi-setup.html"
     ]
   },
   {
@@ -15,10 +14,10 @@
     ]
   },
   {
-    "listing": "/guides.html",
+    "listing": "/blog.html",
     "items": [
-      "/guides-posts/2026-10-05-visualising-qi-setup.html",
-      "/guides-posts/2025-12-19-wsjtx-setup.html"
+      "/blog-posts/2026-04-25-ft8_dna_radcom.html",
+      "/blog-posts/2025-12-26-a_year_of_listening.html"
     ]
   }
 ]

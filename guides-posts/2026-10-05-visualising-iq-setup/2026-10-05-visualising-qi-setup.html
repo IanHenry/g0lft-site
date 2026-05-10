@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-12-20">
-<meta name="description" content="Step-by-step guide to configure WSJT-X for FT8 operation.">
+<meta name="dcterms.date" content="2026-10-05">
+<meta name="description" content="Step-by-step guide get you started using your SDRplay with GNURadio">
 
-<title>Setting Up WSJT-X for FT8</title>
+<title>Setup for IQ visualisation and digital signal processing</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,24 +28,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../images/favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b87446ecb6c0226acb845f53c3b234a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b87446ecb6c0226acb845f53c3b234a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -84,16 +84,16 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- intentionally empty — GA is handled by _cookie_consent.html -->
 
-<link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-<link rel="manifest" href="../images/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
 <meta name="theme-color" content="#1ecbe1">
 
 
 
-<link rel="stylesheet" href="../_theme/_base.css">
-<link rel="stylesheet" href="../_theme/_colors.css">
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -109,19 +109,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../thinking.html"> 
+    <a class="nav-link" href="../../thinking.html"> 
 <span class="menu-text">Thinking</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../guides.html"> 
+    <a class="nav-link" href="../../guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
 </ul>
@@ -137,47 +137,118 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Setting Up WSJT-X for FT8</h1></header>
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Setup for IQ visualisation and digital signal processing</h1></header>
 
 <header id="title-block-header">
 
 
-<p class="date">2025-12-20</p>
+<p class="date">2026-10-05</p>
 </header>
 
 
-<section id="requirements" class="level2">
-<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This guide explains how-to setup your computer to use an SDRplay device to visualise IQ. Ideally this requires software such as GNU Radio but I have also built a simple plugin for SDRconnect for people wanting to get a feel of what is possible.</p>
+<p>To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a way for GNU Radio to talk to it. Using Radioconda is the highly recommended “easy path” because it pre-packages GNU Radio with the necessary SoapySDR support.</p>
+<p>If you don’t want a simpler, but less versatile, way of viewing IQ constallation plots to just get the feel of things you can skip the sections below and go straight to the section titled <a href="https://g0lft.org/guides-posts/2026-10-05-visualising-qi-setup.html#simple-iq-visualisation-plugin-for-sdrconnect."><strong>Simple Plugin for SDRconnect</strong></a></p>
+</section>
+<section id="step-by-step-installation-guidelines" class="level2">
+<h2 class="anchored" data-anchor-id="step-by-step-installation-guidelines">Step-by Step Installation Guidelines</h2>
+<p>The easiest setup process involves installing the hardware driver first, followed by the software environment.</p>
+<section id="install-the-sdrplay-api" class="level3">
+<h3 class="anchored" data-anchor-id="install-the-sdrplay-api">1. Install the SDRplay API</h3>
+<p>Regardless of which software you use, you must install the official hardware driver first so your computer can recognize the device.</p>
 <ul>
-<li>WSJT-X installed on your computer<br>
-</li>
-<li>Transceiver connected via soundcard or interface<br>
-</li>
-<li>Time synchronization (NTP or GPS)</li>
+<li><p>Go to the SDRplay Downloads page.</p></li>
+<li><p>Download and <a href="https://www.sdrplay.com/api/">install the API for your platform</a>{:target=“_blank”} (version 3.15 is current).</p></li>
+<li><p><strong>Windows users:</strong> Ensure the installer completes and, if prompted, restart your computer</p></li>
 </ul>
 </section>
-<section id="setup-steps" class="level2">
-<h2 class="anchored" data-anchor-id="setup-steps">Setup Steps</h2>
-<ol type="1">
-<li>Open WSJT-X and go to <strong>Settings &gt; Radio</strong>.<br>
-</li>
-<li>Configure your transceiver type and CAT control settings.<br>
-</li>
-<li>Go to <strong>Settings &gt; Audio</strong> and select your input/output devices.<br>
-</li>
-<li>Set your location (Grid Square) in <strong>Settings &gt; General</strong>.<br>
-</li>
-<li>Test reception with the <strong>Monitor</strong> button and verify signals.</li>
-</ol>
-<section id="tips" class="level3">
-<h3 class="anchored" data-anchor-id="tips">Tips</h3>
+<section id="install-radioconda" class="level3">
+<h3 class="anchored" data-anchor-id="install-radioconda">2. Install Radioconda</h3>
+<p>Radioconda is a distribution that includes GNU Radio and almost all common SDR drivers pre-configured.</p>
 <ul>
-<li>Ensure your computer clock is accurate within 1 second for FT8.<br>
-</li>
-<li>Adjust transmit power carefully to avoid interference.<br>
-</li>
-<li>Keep logs to track contacts efficiently.</li>
+<li><p>Download the latest installer from the <a href="https://github.com/radioconda/radioconda-installer">Radioconda GitHub</a>{:target=“_blank”}.</p></li>
+<li><p>Run the installer according the ReadMe on the RadioConda github page. This generally involves either double clicking the install exe in windows, or running the bash shell script in linux, and will set up a complete GNU Radio environment without you needing to compile code manually.</p></li>
+<li><p>If you are SDR harware other than an SDRplay there are further guidelines on the <a href="https://github.com/radioconda/radioconda-installer#additional-installation-for-device-support">RadioConda ReadMe page</a>{:target=“_blank”}</p></li>
 </ul>
+</section>
+<section id="connect-gnu-radio-to-your-sdrplay" class="level3">
+<h3 class="anchored" data-anchor-id="connect-gnu-radio-to-your-sdrplay">3. Connect GNU Radio to your SDRplay</h3>
+<p>Once both are installed, you can use the device in GNU Radio Companion (GRC):</p>
+<ul>
+<li><p>Launch RadioConda, Windows users can do this by launching the RadioConda App from the Start Menu <img src="./images/radioconda_start.png" class="img-fluid" alt="image"></p></li>
+<li><p>Verify Connection using the <code>SoapySDRUtil --find</code> command. If eveything installed correcting and your SDRplay is connected via USB you should see your sdrplay among the devices identified</p></li>
+</ul>
+<pre><code>&gt; SoapySDRUtil --find
+
+######################################################
+##     Soapy SDR -- the SDR abstraction library     ##
+######################################################
+
+Found device 16
+  driver = sdrplay
+  label = SDRplay Dev0 UNKNOWN 24020E2670
+  serial = 24020E2670</code></pre>
+<ul>
+<li><p>Launch GRC: type <code>gnuradio-companion</code> in the RadioConda shell to launch gnuradio companion GUI</p></li>
+<li><p>Search for a Soapy Source Block in the list of blocks on th right-hand-side of the GNUradio-companion window it should be under Core-&gt;Soapy-&gt;Source-&gt;SoapySDRPlaySource</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/gnuradio.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<ul>
+<li>You should now be ready to use GNURadio to process the IQ output of your SDR receiver.</li>
+</ul>
+<p>The learning curve here can be steep even though <a href="https://wiki.gnuradio.org/index.php/Main_Page">GNUradio has a useful wiki</a>{:target=“_blank”} to explain how to get started. To get you started quickly I have included a few flowgraphs I’ve been using to make captures and visualise IQ for you to modify and play with for your needs. This is a good way to get started and if you have questions I’m happy to help, just drop me an email.</p>
+</section>
+</section>
+<section id="sample-flowgraphs" class="level2">
+<h2 class="anchored" data-anchor-id="sample-flowgraphs">Sample FlowGraphs</h2>
+<p>These flowgraphs are provided as is in the following Git repository. Many of them allow capture of raw IQ to a file that can be then used with Python visualisation scripts (also included in the repo) to create density plots of IQ captures.</p>
+</section>
+<section id="simple-iq-visualisation-plugin-for-sdrconnect." class="level2">
+<h2 class="anchored" data-anchor-id="simple-iq-visualisation-plugin-for-sdrconnect.">Simple IQ Visualisation Plugin for SDRconnect.</h2>
+<p>If you don’t want to install all the dependancies above and just want to view simple IQ plots using standard SDR software the the options are limited. I couldn’t find any software that included IQ constellation plots are standard.</p>
+<p>Therefore I wrote my own python app to work with the cross-platform SDRconnect program made by the SDRplay team themselves. This python program uses the WebSocket API available in the latest version (1.08 as of May 2026) to capture the IQ from your SDRplay and plot it.</p>
+</section>
+<section id="installation-instructions-for-sdrconnect-and-iq-module" class="level2">
+<h2 class="anchored" data-anchor-id="installation-instructions-for-sdrconnect-and-iq-module">Installation instructions for SDRconnect and IQ module</h2>
+<section id="download-sdrconnect-for-your-platform" class="level3">
+<h3 class="anchored" data-anchor-id="download-sdrconnect-for-your-platform">1. Download SDRconnect for your platform</h3>
+<ul>
+<li><p><a href="https://www.sdrplay.com/sdrconnect/">SDRconnext installers</a>{:target=“_blank”} for Windows, MacOS are available as well as Linux installation instructions. Please make sure you have at least version 1.08</p></li>
+<li><p>Once installed make sure you enable the Websocket Server by clicking on the three dots in the top right of the SDRconnect window and selecting Preferences, the enablling the WebSocket Server Option.</p></li>
+</ul>
+<p><img src="./images/load_prefs.png" class="img-fluid" alt="image"> <img src="./images/set_websocket.png" class="img-fluid" alt="image"></p>
+</section>
+<section id="install-my-python-iq-visualisation-module" class="level3">
+<h3 class="anchored" data-anchor-id="install-my-python-iq-visualisation-module">2. Install my Python IQ visualisation module</h3>
+<ul>
+<li><p>This can be done either by downloading my python script and running it with <code>python sdrConnectIQvisualiser.py</code> from the directory you placed this python script. It doesn’t need to be in the same directory as SDRconnect as it uses its websocket API to communicate.</p></li>
+<li><p>Windows users can also download an exe file from here which will launch the precompiled python program</p></li>
+</ul>
+</section>
+<section id="using-the-simple-iq-visualisation-plugin" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-simple-iq-visualisation-plugin">Using the Simple IQ Visualisation Plugin</h3>
+<p>This Python program does not do any complex processing or filtering and so is only really useful for strong signals such as Broadcast FM, Broadcast AM, FM Repeaters, and Airband AM. It uses the entire sampled window centered on the middle of the waterfall and while audio bandwidth filters are applied they do not affect the broader IQ stream. Most of the logic in the script is actually to centre the VFO periodically in the capture window so that the IQ you see is centred on the tuned position.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/plugin_working.png" class="img-fluid figure-img"></p>
+<figcaption>image</figcaption>
+</figure>
+</div>
+<p>The IQ analyser window only has two real widgets:</p>
+<ul>
+<li><p>At the bottom is the Gain slider which does not directly control the gain of the receiver but simple rescales the IQ values on the plot and so can be used for zooming in and out of the constellation.</p></li>
+<li><p>Additionally there are present buttons for Broadcast FM, Narrowband FM (for local FM repeaters), Broadcast AM, and Airband AM. These buttons automatically set the Mode, audio bandwidth (not IQ), and sample rate (effectively IQ bandwdith) to useful presets.</p></li>
+<li><p>Although the buttons set presets settings can still be altered in the SDRconnect window and will be reflected in the visualistion. You are encourage to pay around and tune to interesting signals.</p></li>
+<li><p>This tuning is done using the main SDRconnect app. However, as the IQ window plotted is based on the centre of the window not the red VFO line, the python script periodically shifts the center of the window to reflect the VFO position. This works pretty well but can be a bit buggy. Unfortunately centred tuning does not seem to be directly supported in SDRconnect yet but this is an OK workaround for now.</p></li>
+</ul>
+<p>I wrote this tool in one afternoon so it can be improved for sure but gives people who don’t want the learning curve of GNUradio an easy place to start.</p>
 
 
 </section>
@@ -235,18 +306,18 @@ ul.task-list li input[type="checkbox"] {
 <div class="site-footer">
  <div class="footer-content">
    © 2026 Dr Ian Henry, G0LFT. All rights reserved.<br>
-   <a href="../privacy.html">Privacy Policy</a> |
-   <a href="../credits.html">Image Credits</a> |
-   <a href="../about.html">About</a> |
-   <a href="../station.html">Station</a> |
-   <a href="../contact.html">Contact</a> |
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
    <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
    <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
   </div>
 </div>
 <!-- Desktop-only navbar logo -->
 <a href="https://g0lft.org" class="navbar-desktop-logo-link">
-  <img src="../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
 </a>
 
 <script>
