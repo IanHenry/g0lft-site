@@ -172,9 +172,9 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="install-radioconda">2. Install Radioconda</h3>
 <p>Radioconda is a distribution that includes GNU Radio and almost all common SDR drivers pre-configured.</p>
 <ul>
-<li>Download the latest installer from the <a href="https://github.com">Radioconda GitHub</a>.</li>
+<li>Download the latest installer from the <a href="https://github.com/radioconda/radioconda-installer">Radioconda GitHub</a>.</li>
 <li>Run the installer according to the ReadMe on the Radioconda GitHub page. This generally involves double-clicking the .exe (Windows) or running the bash shell script (Linux) to set up a complete GNU Radio environment without manual compilation.</li>
-<li>If you are using hardware other than an SDRplay, refer to the <a href="https://github.com#additional-installation-for-device-support">Radioconda ReadMe page</a> for further guidelines.</li>
+<li>If you are using hardware other than an SDRplay, refer to the <a href="https://github.com/radioconda/radioconda-installer#additional-installation-for-device-support">Radioconda ReadMe page</a> for further guidelines.</li>
 </ul>
 </section>
 <section id="connect-gnu-radio-to-your-sdrplay" class="level3">
@@ -207,7 +207,7 @@ Found device 16
 <figcaption>image</figcaption>
 </figure>
 </div>
-<p>You are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the <a href="https://gnuradio.org">GNU Radio wiki</a>. To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to <a href="mailto:YOUR_EMAIL_HERE">email me</a>.</p>
+<p>You are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the <a href="https://wiki.gnuradio.org/">GNU Radio wiki</a>. To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to <a href="mailto:YOUR_EMAIL_HERE">email me</a>.</p>
 </section>
 </section>
 <section id="sample-flowgraphs" class="level2">
@@ -224,7 +224,7 @@ Found device 16
 <section id="download-sdrconnect" class="level4">
 <h4 class="anchored" data-anchor-id="download-sdrconnect">1. Download SDRconnect</h4>
 <ul>
-<li>Download <a href="https://sdrplay.com">SDRconnect</a> for Windows, MacOS, or Linux. Ensure you are using at least version 1.08.</li>
+<li>Download <a href="https://www.sdrplay.com/sdrconnect/">SDRconnect</a> for Windows, MacOS, or Linux. Ensure you are using at least version 1.08.</li>
 <li>Once installed, enable the <strong>WebSocket Server</strong>: click the three dots (top right) -&gt; Preferences -&gt; Enable WebSocket Server.</li>
 </ul>
 <p><img src="./images/load_prefs.png" class="img-fluid" alt="image"> <img src="./images/set_websocket.png" class="img-fluid" alt="image"></p>
@@ -232,8 +232,8 @@ Found device 16
 <section id="install-the-python-iq-module" class="level4">
 <h4 class="anchored" data-anchor-id="install-the-python-iq-module">2. Install the Python IQ Module</h4>
 <ul>
-<li>Download my script from [<strong>INSERT_PLUGIN_REPO_URL_HERE</strong>] and run <code>python sdrConnectIQvisualiser.py</code>. It does not need to be in the SDRconnect directory as it communicates via the network API.</li>
-<li><strong>Windows users:</strong> A pre-compiled .exe version is also available at [<strong>INSERT_EXE_DOWNLOAD_URL_HERE</strong>] for a standalone launch.</li>
+<li>Download my script from [https://github.com/IanHenry/sdrconnect-iq-visualiser] and run <code>python sdrConnectIQvisualiser.py</code>. It does not need to be in the SDRconnect directory as it communicates via the network API.</li>
+<li><strong>Windows users:</strong> A pre-compiled .exe version is also available at [https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/] for a standalone launch.</li>
 </ul>
 </section>
 </section>
