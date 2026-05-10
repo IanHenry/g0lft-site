@@ -12,8 +12,10 @@ This guide explains how to set up your computer to use an SDRplay device to visu
 To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a bridge for GNU Radio to communicate with it. Using **Radioconda** is the highly recommended "easy path" because it pre-packages GNU Radio with the necessary SoapySDR support.
 
 **Choose your path:**
-*   **The Full Setup:** Follow the step-by-step guidelines below for GNU Radio.
-*   **The Quick Start:** If you want a simpler way to view IQ constellation plots, skip straight to the [**Simple IQ Visualisation Plugin for SDRconnect**](#simple-iq-visualisation-plugin-for-sdrconnect) section.
+
+-   **The Full Setup:** Follow the step-by-step guidelines below for GNU Radio.
+
+-   **The Quick Start:** If you want a simpler way to view IQ constellation plots, skip straight to the [**Simple IQ Visualisation Plugin for SDRconnect**](#simple-iq-visualisation-plugin-for-sdrconnect) section.
 
 ## Step-by-Step Installation Guidelines
 
