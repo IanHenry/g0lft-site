@@ -160,7 +160,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Regardless of which software you use, you must install the official hardware driver first so your computer can recognise the device.</p>
 <ul>
 <li>Go to the SDRplay Downloads page.</li>
-<li>Download and <a href="https://sdrplay.com">install the API for your platform</a>{:target=“_blank”} (version 3.15 is current).</li>
+<li>Download and <a href="https://www.sdrplay.com/api/">install the API for your platform</a>{:target=“_blank”} (version 3.15 is current).</li>
 <li><strong>Windows users:</strong> Ensure the installer completes and, if prompted, restart your computer.</li>
 </ul>
 </section>
@@ -190,6 +190,9 @@ Found device 16
   driver = sdrplay
   label = SDRplay Dev0 UNKNOWN 24020E2670
   serial = 24020E2670</code></pre>
+<blockquote class="blockquote">
+<p><strong>Tip for Linux Users:</strong> If the command above fails to find your device, use <code>lsusb</code> to verify that the OS sees the hardware. If it appears in <code>lsusb</code> but not in Soapy, you likely need to manually trigger the SDRplay <code>udev</code> rules or restart the API service with <code>sudo systemctl restart sdrplay</code>.</p>
+</blockquote>
 <ul>
 <li>Launch GRC: type <code>gnuradio-companion</code> in the Radioconda shell to open the GUI.</li>
 <li>Search for a <strong>Soapy Source Block</strong> in the block list on the right-hand side; it should be under <code>Core -&gt; Soapy -&gt; Source -&gt; SoapySDRPlaySource</code>.</li>
