@@ -105,7 +105,7 @@ To solve this, I wrote a Python app that works with SDRconnect. It uses the WebS
 ![image](./images/load_prefs.png) ![image](./images/set_websocket.png)
 
 #### 2. Install the Python IQ Module
-- Download my script from [https://github.com/IanHenry/sdrconnect-iq-visualiser] and run ```python sdrConnectIQvisualiser.py```. It does not need to be in the SDRconnect directory as it communicates via the network API.
+- Download my script from [https://github.com/IanHenry/sdrconnect-iq-visualiser](https://github.com/IanHenry/sdrconnect-iq-visualiser) and run ```python sdrConnectIQvisualiser.py```. It does not need to be in the SDRconnect directory as it communicates via the network API.
 - **Windows users:** A pre-compiled .exe version is also available at [https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/](https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/) for a standalone launch.
 
 ### Using the Simple IQ Visualisation Plugin
