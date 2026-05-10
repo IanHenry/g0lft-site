@@ -1,6 +1,6 @@
 ---
 title: "Setup for IQ visualisation and digital signal processing"
-date: 2026-12-20
+date: 2026-10-05
 categories: [IQ, DSP, Digital Signal Processing, SDRplay, SDR]
 description: "Step-by-step guide get you started using your SDRplay with GNURadio"
 ---
@@ -11,19 +11,19 @@ This guide explains how-to setup your computer to use an SDRplay device to visua
 
 To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a way for GNU Radio to talk to it. Using Radioconda is the highly recommended "easy path" because it pre-packages GNU Radio with the necessary SoapySDR support.
 
-If you don't want a simpler, but less versatile, way of viewing IQ constallation plots to just get the feel of things you can skip the sections below and go straight to the section titled **Simple Plugin for SDRconnect**
+If you don't want a simpler, but less versatile, way of viewing IQ constallation plots to just get the feel of things you can skip the sections below and go straight to the section titled [**Simple Plugin for SDRconnect**](https://g0lft.org/guides-posts/2026-10-05-visualising-qi-setup.html#simple-iq-visualisation-plugin-for-sdrconnect.)
 
 ## Step-by Step Installation Guidelines
 
 The easiest setup process involves installing the hardware driver first, followed by the software environment.
 
-### 1. Install the [SDRplay API](https://www.sdrplay.com/downloads/)
+### 1. Install the SDRplay API
 
 Regardless of which software you use, you must install the official hardware driver first so your computer can recognize the device.
 
 - Go to the SDRplay Downloads page.
 
-- Download and [install the API for your platform](https://www.sdrplay.com/api/) (version 3.15 is current).
+- Download and [install the API for your platform](https://www.sdrplay.com/api/){:target="_blank"} (version 3.15 is current).
 
 - **Windows users:** Ensure the installer completes and, if prompted, restart your computer
 
@@ -31,17 +31,18 @@ Regardless of which software you use, you must install the official hardware dri
 
 Radioconda is a distribution that includes GNU Radio and almost all common SDR drivers pre-configured.
 
-- Download the latest installer from the [Radioconda GitHub](https://github.com/radioconda/radioconda-installer).
+- Download the latest installer from the [Radioconda GitHub](https://github.com/radioconda/radioconda-installer){:target="_blank"}.
 
 - Run the installer according the ReadMe on the RadioConda github page. This generally involves either double clicking the install exe in windows, or running the bash shell script in linux, and will set up a complete GNU Radio environment without you needing to compile code manually.
 
-- If you are SDR harware other than an SDRplay there are further guidelines on the [RadioConda ReadMe page](https://github.com/radioconda/radioconda-installer#additional-installation-for-device-support)
+- If you are SDR harware other than an SDRplay there are further guidelines on the [RadioConda ReadMe page](https://github.com/radioconda/radioconda-installer#additional-installation-for-device-support){:target="_blank"}
 
 ### 3. Connect GNU Radio to your SDRplay
 
 Once both are installed, you can use the device in GNU Radio Companion (GRC):
 
 - Launch RadioConda, Windows users can do this by launching the RadioConda App from the Start Menu
+![image](./images/radioconda_start.png)
 
 - Verify Connection using the ```SoapySDRUtil --find``` command.  If eveything installed correcting and your SDRplay is connected via USB you should see your sdrplay among the devices identified
 
@@ -62,9 +63,11 @@ Found device 16
 
 - Search for a Soapy Source Block in the list of blocks on th right-hand-side of the GNUradio-companion window it should be under Core->Soapy->Source->SoapySDRPlaySource
 
+![image](./images/gnuradio.png)
+
 - You should now be ready to use GNURadio to process the IQ output of your SDR receiver.  
 
-The learning curve here can be steep even though [GNUradio has a useful wiki](https://wiki.gnuradio.org/index.php/Main_Page) to explain how to get started.  To get you started quickly I have included a few flowgraphs I've been using to make captures and visualise IQ for you to modify and play with for your needs.  This is a good way to get started and if you have questions I'm happy to help, just drop me an email.
+The learning curve here can be steep even though [GNUradio has a useful wiki](https://wiki.gnuradio.org/index.php/Main_Page){:target="_blank"} to explain how to get started.  To get you started quickly I have included a few flowgraphs I've been using to make captures and visualise IQ for you to modify and play with for your needs.  This is a good way to get started and if you have questions I'm happy to help, just drop me an email.
 
 ## Sample FlowGraphs
 
@@ -80,9 +83,11 @@ Therefore I wrote my own python app to work with the cross-platform SDRconnect p
 
 ### 1. Download SDRconnect for your platform
 
-- [SDRconnext installers](https://www.sdrplay.com/sdrconnect/) for Windows, MacOS are available as well as Linux installation instructions.  Please make sure you have at least version 1.08
+- [SDRconnext installers](https://www.sdrplay.com/sdrconnect/){:target="_blank"} for Windows, MacOS are available as well as Linux installation instructions.  Please make sure you have at least version 1.08
 
 - Once installed make sure you enable the Websocket Server by clicking on the three dots in the top right of the SDRconnect window and selecting Preferences, the enablling the WebSocket Server Option.
+
+![image](./images/load_prefs.png) ![image](./images/set_websocket.png)
 
 ### 2. Install my Python IQ visualisation module
 
@@ -93,6 +98,8 @@ Therefore I wrote my own python app to work with the cross-platform SDRconnect p
 ### Using the Simple IQ Visualisation Plugin
 
 This Python program does not do any complex processing or filtering and so is only really useful for strong signals such as Broadcast FM, Broadcast AM, FM Repeaters, and Airband AM.  It uses the entire sampled window centered on the middle of the waterfall and while audio bandwidth filters are applied they do not affect the broader IQ stream.  Most of the logic in the script is actually to centre the VFO periodically in the capture window so that the IQ you see is centred on the tuned position.
+
+![image](./images/plugin_working.png)
 
 The IQ analyser window only has two real widgets:  
 
