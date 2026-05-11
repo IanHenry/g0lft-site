@@ -124,4 +124,4 @@ The visualiser has two main controls:
 
 You can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script "jumps" the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.
 
-I built this tool in an afternoon to give newcomers an easy starting point—enjoy exploring the signals!
+I built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!
