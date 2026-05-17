@@ -1,6 +1,6 @@
 ---
 title: "Setup for IQ visualisation and digital signal processing"
-date: 2026-10-05
+date: 2026-05-10
 categories: [IQ, DSP, Digital Signal Processing, SDRplay, SDR]
 description: "Step-by-step guide to get you started using your SDRplay with GNU Radio or a simple custom plugin."
 aliases:
