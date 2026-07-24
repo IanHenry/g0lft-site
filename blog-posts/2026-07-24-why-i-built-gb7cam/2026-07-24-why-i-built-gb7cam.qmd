@@ -12,7 +12,7 @@ categories:
   - Reflections
 image: ./images/GB7CAM_square_cropped.png
 ---
-# My FT8 Article is Published and I Want to Hear From You
+# Why I Build GB7CAM - "How a £20 Raspberry Pi and a £10 handheld became a packet node, and what the Cambridge 'packet desert' taught me
 
 I never used a bulletin board system. I was the wrong age, or in the wrong house, or simply never had the phone line to spare. What I did have was magazines, and the occasional item on television, describing this world of dial-up systems where people left messages for one another on somebody's computer in somebody's spare room. It looked extraordinary. It also looked like something happening a long way from me, to other people.
 
