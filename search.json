@@ -1,52 +1,38 @@
 [
   {
-    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html",
-    "href": "blog-posts/2025-12-26-a_year_of_listening.html",
-    "title": "A Year of Listening",
+    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html",
+    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html",
+    "title": "Setup for IQ visualisation and digital signal processing",
     "section": "",
-    "text": "2025-12-26"
+    "text": "2026-05-10"
   },
   {
-    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
-    "href": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
-    "title": "A Year of Listening",
-    "section": "2025 - A Year of Listening:",
-    "text": "2025 - A Year of Listening:\n\nFinding Structure, Curiosity and Understanding Through Amateur Radio\nAt the beginning of this year, I was completely unaware of amateur radio. I was recovering from illness and work was already proving more challenging than usual. I needed something mentally stimulating but not demanding, something absorbing, technical and quietly constructive.\nIn April, I stumbled upon amateur radio almost by chance. Initially, it wasn’t about licences or operating privileges; it was simply fascinating. Signals emerged from noise, antennas behaved in unexpected ways and the concept of meaningful communication with minimal power captivated me.\nMy curiosity quickly turned into momentum. I sat the Foundation exam in May and shortly afterwards the Intermediate. Looking back, this pace reflects more on circumstance than ability. Radio provided a concrete focus during a time when many other aspects of my life felt fragmented.\nWork remained challenging throughout the year, but studying and operating became a consistent background activity. It kept me engaged, distracted in a positive way and fostered a renewed sense of learning. I experimented extensively with various modes, bands and contact methods, not for the sake of achievements, but to understand how the hobby’s components fit together.\nJoining Cambridge and District Amateur Radio Club (CDARC) was another significant milestone. Interacting with generous individuals who shared their time and experience reminded me that amateur radio is as much about people as it is about equipment or exams. Observing diverse operating styles and problem-solving approaches was as enlightening as any reading I’ve done.\nLater in the year, I decided to work towards the Full licence. I mainly studied from the RSGB book, reading slowly and following ideas rather than memorising answers. I was awarded a distinction, which I mention only because it led to a lasting realisation: the most challenging aspects of learning radio aren’t about formulas or regulations – they’re about visualising what’s actually happening.\nThat’s where books fall short.\nCircuits, filters, impedance, noise and signal flow are inherently dynamic, constantly changing and interacting. Static diagrams and paragraphs can only take you so far before you need to observe behaviour, not just read about it. A capacitor charging, a filter rejecting energy and a weak signal emerging from noise are processes, not pictures.\nAs someone who works professionally with complex systems, I’ve become increasingly convinced that radio education would greatly benefit from improved visual and animated explanations. This isn’t to replace books but to complement them – to transform abstract concepts into something you can watch evolve and intuitively understand.\nThis idea is one of the reasons this blog exists.\nNext year, I want to spend less time acquiring equipment and more time understanding it. If this space becomes anything, I hope it becomes a place where difficult radio concepts are explained visually patiently and honestly – where behaviour is shown, not just described, and where understanding can grow over time.\nAmateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.\nIf you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts."
+    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#introduction",
+    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#introduction",
+    "title": "Setup for IQ visualisation and digital signal processing",
+    "section": "Introduction",
+    "text": "Introduction\nThis guide explains how to set up your computer to use an SDRplay device to visualise IQ data. While this ideally requires advanced software like GNU Radio, I have also built a simple plugin for SDRconnect for those wanting a quick feel of what is possible without a steep learning curve.\nTo use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a bridge for GNU Radio to communicate with it. Using Radioconda is the highly recommended “easy path” because it pre-packages GNU Radio with the necessary SoapySDR support.\nChoose your path:\n\nThe Full Setup: Follow the step-by-step guidelines below for GNU Radio.\nThe Quick Start: If you want a simpler way to view IQ constellation plots, skip straight to the Simple IQ Visualisation Plugin for SDRconnect section."
   },
   {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "",
-    "text": "2026-04-25"
+    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#step-by-step-installation-guidelines",
+    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#step-by-step-installation-guidelines",
+    "title": "Setup for IQ visualisation and digital signal processing",
+    "section": "Step-by-Step Installation Guidelines",
+    "text": "Step-by-Step Installation Guidelines\nThe easiest setup process involves installing the hardware driver first, followed by the software environment.\n\n1. Install the SDRplay API\nRegardless of which software you use, you must install the official hardware driver first so your computer can recognise the device.\n\nGo to the SDRplay Downloads page.\nDownload and install the API for your platform (version 3.15 is current).\nWindows users: Ensure the installer completes and, if prompted, restart your computer.\n\n\n\n2. Install Radioconda\nRadioconda is a distribution that includes GNU Radio and almost all common SDR drivers pre-configured.\n\nDownload the latest installer from the Radioconda GitHub.\nRun the installer according to the ReadMe on the Radioconda GitHub page. This generally involves double-clicking the .exe (Windows) or running the bash shell script (Linux) to set up a complete GNU Radio environment without manual compilation.\nIf you are using hardware other than an SDRplay, refer to the Radioconda ReadMe page for further guidelines.\n\n\n\n3. Connect GNU Radio to your SDRplay\nOnce both are installed, you can use the device in GNU Radio Companion (GRC):\n\nLaunch Radioconda; Windows users can do this by launching the Radioconda App from the Start Menu. \nVerify the connection using the SoapySDRUtil --find command. If everything installed correctly and your SDRplay is connected via USB, you should see your device identified:\n\n&gt; SoapySDRUtil --find\n\n######################################################\n##     Soapy SDR -- the SDR abstraction library     ##\n######################################################\n\nFound device 16\n  driver = sdrplay\n  label = SDRplay Dev0 UNKNOWN 24020E2670\n  serial = 24020E2670\n\nTip for Linux Users: If the command above fails to find your device, use lsusb to verify that the OS sees the hardware. If it appears in lsusb but not in Soapy, you likely need to manually trigger the SDRplay udev rules or restart the API service with sudo systemctl restart sdrplay.\n\n\nLaunch GRC: type gnuradio-companion in the Radioconda shell to open the GUI.\nSearch for a Soapy Source Block in the block list on the right-hand side; it should be under Core -&gt; Soapy -&gt; Source -&gt; SoapySDRPlaySource.\n\n\n\n\nimage\n\n\nYou are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the GNU Radio wiki. To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to email me."
   },
   {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "What surprised me most",
-    "text": "What surprised me most\nI thought I understood error correction because I work with it daily. But explaining why FT8 needs 50 Hz bandwidth made me think differently about why sequencing needs certain read lengths. Explaining why burst errors from fading are harder to correct than random errors clarified my understanding of coverage depth in genomics.\nThe parallel went both ways.\nI also underestimated how much I’d struggle with the timing synchronisation concept. In sequencing, cycle synchronisation is so fundamental I’d stopped questioning it. FT8 forced me to think about why time as an organising dimension matters, not just accept that it does."
+    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#sample-flowgraphs",
+    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#sample-flowgraphs",
+    "title": "Setup for IQ visualisation and digital signal processing",
+    "section": "Sample FlowGraphs",
+    "text": "Sample FlowGraphs\nThese flowgraphs are provided “as-is” in the Git repository: https://github.com/IanHenry/sdrplay-gnuradio-examples/. They allow you to capture raw IQ data from an SDR device and save it to a file. The captured data can then be processed with the included Python script to generate high-quality density plots.\nInstructions for use are in the README of the GitHub repository but briefly:\n\nRepository Structure\n\n/flowgraphs: .grc files for capturing and visualising IQ data.\n/analysis: Python scripts for generating IQ density plots from recorded files.\n/data: The intended directory for your .iq recordings.\n\n\n\nGetting Started\n\nCapture: Open a flowgraph in GNU Radio Companion. Use the sliders to tune to a signal and record the output.\nSave: Save your recording (e.g., capture.iq) into the /data folder.\nPlot: Open a terminal in the /analysis folder and run python iq_density_plotter.py.\nCustomise: You can edit the USER SETTINGS at the top of the script to change the filename or zoom in on specific modulations."
   },
   {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "What I want to know from you",
-    "text": "What I want to know from you\nIf you’ve read the article:\nWhat resonated? What didn’t make sense? Did the DNA sequencing parallel work for you, or was it too much detail for radio operators?\nFor everyone:\nHave you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere in topics such as antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?"
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "What’s coming next",
-    "text": "What’s coming next\nI’m working on an IQ visualisation series right now. It’s about understanding what SDRs actually see and how to interpret those waterfall displays and constellation diagrams we all stare at. The first post should be up soon.\nThe FT8 article and the IQ series connect more than I initially realised. Both are about making invisible signals visible. Both are about bridging theory and practice. Understanding IQ data helps you appreciate what FT8’s decoder is working with.\nI’m also presenting this material at the RSGB Convention in October. That’s both exciting and terrifying. Turning a written article into a 45-minute talk is a different challenge. If you’re planning to attend, I’d love to meet you."
-  },
-  {
-    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
-    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
-    "title": "My FT8 Article is Published and I Want to Hear From You",
-    "section": "The longer reflection I want to write",
-    "text": "The longer reflection I want to write\nOnce I finish the IQ series, I want to write a proper reflection on the research process. The mistakes I made. The rabbit holes I went down (why 8-FSK specifically? what’s the history of error correction codes?). The questions I’m still pondering.\nBut I don’t want to rush it. I’d rather write it when I have the mental space to do it properly and the energy to engage with the conversations it might start.\nFor now, I’m curious what you think. Leave a comment, send me an email (ian@g0lft.org), or catch me on 20m FT8 most evenings.\nWhat questions should I be asking?"
+    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#simple-iq-visualisation-plugin-for-sdrconnect",
+    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#simple-iq-visualisation-plugin-for-sdrconnect",
+    "title": "Setup for IQ visualisation and digital signal processing",
+    "section": "Simple IQ Visualisation Plugin for SDRconnect",
+    "text": "Simple IQ Visualisation Plugin for SDRconnect\nIf you prefer not to install the dependencies above and just want to view IQ plots using standard SDR software, options are limited. Most standard software does not include constellation plots by default.\nTo solve this, I wrote a Python app that works with SDRconnect. It uses the WebSocket API (available in version 1.08+) to capture and plot IQ data in real-time.\n\n\n\nimage\n\n\n\nInstallation instructions for SDRconnect and IQ module\n\n1. Download SDRconnect\n\nDownload SDRconnect for Windows, MacOS, or Linux. Ensure you are using at least version 1.08.\nOnce installed, enable the WebSocket Server: click the three dots (top right) -&gt; Preferences -&gt; Enable WebSocket Server.\n\n \n\n\n2. Install the Python IQ Module\n\nDownload my script from https://github.com/IanHenry/sdrconnect-iq-visualiser and run python sdrConnectIQvisualiser.py. It does not need to be in the SDRconnect directory as it communicates via the network API.\nWindows users: A pre-compiled .exe version is also available at https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/ for a standalone launch.\n\n\n\n\nUsing the Simple IQ Visualisation Plugin\nThis tool is designed for visualising strong signals like Broadcast FM/AM, Repeaters, and Airband. It uses an IQ sample window centered on the waterfall. While audio filters are applied in SDRconnect, they do not affect this raw IQ stream. The script automatically periodically re-centers the VFO so the IQ you see matches your tuned frequency.\n\n\n\nimage\n\n\nThe visualiser has two main controls:\n\nGain Slider: This rescales the IQ values on the plot (acting as a “zoom” for the constellation) without affecting the actual receiver gain.\nPreset Buttons: Quickly set Mode, audio bandwidth, and sample rate for Broadcast FM, Narrowband FM, Broadcast AM, and Airband.\n\nYou can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script “jumps” the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.\nI built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!"
   },
   {
     "objectID": "station.html#station",
@@ -54,6 +40,76 @@
     "title": "My Station",
     "section": "Station",
     "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice\nHomebrew and commercial SDR receivers\nRaspberry Pi–based digital voice infrastructure\n\nI periodically update this page as my setup evolves."
+  },
+  {
+    "objectID": "guides.html#guides",
+    "href": "guides.html#guides",
+    "title": "Guides",
+    "section": "Guides",
+    "text": "Guides\nHere you will find practical guides to setup equipment and software for digital modes and packet radio etc…"
+  },
+  {
+    "objectID": "about.html#about",
+    "href": "about.html#about",
+    "title": "About",
+    "section": "About",
+    "text": "About\nI’m Dr Ian Henry and I live in a village just south of Cambridge. I am a licensed UK radio amateur and a member of Cambridge and District Amateur Radio Club (CDARC), a friendly club which has been serving the Cambridge area since 1919. I’m also a member of the Radio Society of Great Britain (RSGB) and a published author in the RSGB magazine RadCom with an article titled “Understanding FT8 through DNA-sequencing parallels” (May 2026).\nI discovered amateur radio by chance in April 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby, particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together:\n\nreflective writing on amateur radio, teaching, and learning\ntheory-focused pieces on SDR and digital communication\npractical guides for operators who want to understand why things work, not just how\n\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html",
+    "title": "Why I Built GB7CAM",
+    "section": "",
+    "text": "Ian Henry, G0LFT\n\n2026-07-24"
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#thirty-pounds-at-a-bring-and-buy",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#thirty-pounds-at-a-bring-and-buy",
+    "title": "Why I Built GB7CAM",
+    "section": "Thirty pounds at a bring and buy",
+    "text": "Thirty pounds at a bring and buy\nIt started at the CDARC bring and buy. I picked up a Raspberry Pi 400 for £20 and a Kenwood handheld for £10, with no clear plan beyond a vague sense that the two of them ought to be able to do something together. I had a week off work.\nOn the Saturday morning I applied for a Frequency Allocation Certificate for GB7CAM, the FAC, which does much the same job the old Notice of Variation used to. Five watts, 144.950 MHz. It was approved the same morning and I was quietly delighted to find such an obvious callsign still unclaimed. I want to underline that, because I had assumed it would be a months-long process involving forms and patience, and instead the answer came back before lunch. If that is the thing stopping you, it may not be the obstacle you think it is.\nUp to that point my only real experience of data over radio was APRS. I liked it. I like computer networking, and I like the idea of data riding on top of voice infrastructure. But APRS is fire and forget. You send a position, it goes somewhere, and that is the end of the transaction. I wanted something you could connect to. Something with a door on it. Just like in those 80s computer magazines!"
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#direwolf-then-hardware",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#direwolf-then-hardware",
+    "title": "Why I Built GB7CAM",
+    "section": "Direwolf, then hardware",
+    "text": "Direwolf, then hardware\nThe first version was entirely software: Direwolf acting as a TNC, driving the £10 Kenwood from the Pi. It worked, in the sense that packets went out and packets came back. It was also fiddly enough that I started looking at dedicated hardware fairly quickly.\nI bought a ready-built NinoTNC from Chris Smith, G1FEF, who sells them through hamserve.uk. It arrived with the chip loose in the packet rather than seated in its socket. Nothing was wrong with it, but it was not obvious to me which way round it went, or how much force was reasonable. Simon, G4WQG, sent me photographs of his own board so I could see exactly what it should look like. I clipped the chip in. It worked first time.\nThat is the first of several points in this story where the answer was a person rather than a document."
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#linbpq-and-the-configuration-file",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#linbpq-and-the-configuration-file",
+    "title": "Why I Built GB7CAM",
+    "section": "LinBPQ and the configuration file",
+    "text": "LinBPQ and the configuration file\nLinBPQ is the software that turns all of this into an actual node, handling routing, mailbox, chat and mail forwarding. It is also, on first contact, genuinely confusing. The configuration file is doing several jobs at once and assumes you already know the vocabulary. I got there in the end with the help of some good tutorials written by other operators, but I lost more than one evening to it.\nThe APRS line in particular took some getting right. Not the concept, just the syntax, which is unforgiving and not especially well documented. I eventually worked it out. Days later I was able to pass the same answer straight on to Gavin, M8VGU, when he hit exactly the same wall setting up his own node. It took him minutes rather than an evening, which is the whole point of writing any of this down. Here it is in case you are interested and the key point was the B (BBS Symbol on map) placed with no spaces between the coordinates ending in E and my callsign GB7CAM\nIDMSG:\n!5208.22N/00004.53EBGB7CAM LinBPQ Packet Mailbox (https://gb7cam.org.uk) AX.25 1200bd @ 144.950 MHz\n***"
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#getting-an-ip-address-then-realising-i-needed-more-than-that",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#getting-an-ip-address-then-realising-i-needed-more-than-that",
+    "title": "Why I Built GB7CAM",
+    "section": "Getting an IP address, then realising I needed more than that",
+    "text": "Getting an IP address, then realising I needed more than that\nI had heard about 44Net on the Ham Radio Workbench podcast. It is the block of IPv4 space set aside for amateur radio experimentation, and I knew that packet nodes could peer over IP as well as over RF, using AXUDP.\nApplying for an address was straightforward, and I had one within a few days. Then I discovered the part I had not thought about: an address on its own does you no good without a gateway to route it. That sent me to 44Net Connect, a WireGuard tunnel, and an evening rearranging my home network to accommodate a publicly routed subnet that had suddenly appeared in the middle of it.\nSomewhere in there I registered gb7cam.org.uk, and it all started to feel real. The site began as a few pages on GitHub Pages and has since grown an nginx reverse proxy, a subdomain for the node itself, and a FastAPI service that feeds the status page."
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#cambridge-is-a-packet-desert",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#cambridge-is-a-packet-desert",
+    "title": "Why I Built GB7CAM",
+    "section": "“Cambridge is a packet desert”",
+    "text": "“Cambridge is a packet desert”\nWhen I went to the OARC Discord asking for IP peers, the initial response was not encouraging. The gist was that Cambridge is a packet desert, that there was nobody local to work, and that what I really needed was a bigger antenna. Buy a yagi. Get it higher.\nI want to be fair about this, because it was not hostility. It was accurate local knowledge, delivered bluntly. But it did assume the problem was one of RF reach, and therefore that the solution was more RF.\nIt also was not the whole story. The same community that told me it would not work is the community that made it work. Simon was enormously helpful throughout, and ended up selling me a modified Tait 2000 Mk2 very cheaply. With a proper radio in place I applied to increase to 25W ERP, connected to my Diamond X50, and things improved considerably.\nMy first peer was GB7FCI. Others followed after I asked on the ukpacketradio list on groups.io, and GB7CAM now peers with a handful of nodes over AXUDP, a number that goes up and down as links come and go. The status page has the current picture, which is more reliable than anything I write here."
+  },
+  {
+    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#what-the-desert-actually-looks-like",
+    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#what-the-desert-actually-looks-like",
+    "title": "Why I Built GB7CAM",
+    "section": "What the desert actually looks like",
+    "text": "What the desert actually looks like\nOn RF, I hear Milton Keynes, around 50 km away, on and off. For 25W at 5 m above ground that is a better path than I expected, and it is intermittent enough to stay interesting. Most of the traffic through the node arrives over AXUDP rather than over the air, which is why the status page counts stations heard via RF and via AXIP separately. I was curious whether the desert was real, so I built something that would tell me. The same tooling draws a map of the nodes GB7CAM can reach, which has turned out to be more interesting than I expected, and which I will come back to another time.\nAnd then Gavin, M8VGU, 400 metres away, set up GB7NUL. He had wanted to do it for a while, and I think seeing GB7CAM working was the push. So the reliable RF link from here is not to a distant hilltop repeater site. It is to a friend at the other end of the village, with everything else coming and going as conditions allow.\nTwo packet nodes 400 metres apart is a slightly comic outcome when the county had none at all. But it is the part I keep coming back to. The desert was real, and it was also self-fulfilling: nobody built a node because there was nothing to connect to, and there was nothing to connect to because nobody built a node. Breaking that needed one person to go first, on £30 of second-hand equipment, during a week off work.\nThere is more to do. I want to take the node onto HF, going back to Direwolf as a software TNC, this time driving an FT-710 rather than a £10 handheld, which would give GB7CAM paths that do not depend on line of sight to Milton Keynes. And having spent those evenings on the LinBPQ configuration file myself, I am happy to share a cleaned-up version of mine, with the passwords and peer details stripped out, if it would save anybody else the same evenings. Just ask.\nI would like more peers, and I am not fussy about how. RF or AXUDP, near or far. If you run a node, my contact page has the details; send me your MAP line and I will get you added. And if you are sitting in your own local desert wondering whether it is worth the effort: the licence took a morning, the hardware cost less than a night out, and the people who told me it would not work here are the same people who helped me do it."
+  },
+  {
+    "objectID": "contact.html#contact",
+    "href": "contact.html#contact",
+    "title": "Contact",
+    "section": "Contact",
+    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
   },
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
@@ -140,62 +196,6 @@
     "text": "Next Time…\nIn the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space."
   },
   {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
-    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
-    "title": "Why SDRs Are Great Teaching Tools",
-    "section": "",
-    "text": "2025-12-19"
-  },
-  {
-    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
-    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
-    "title": "Why SDRs Are Great Teaching Tools",
-    "section": "Introduction",
-    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
-  },
-  {
-    "objectID": "thinking.html#thinking",
-    "href": "thinking.html#thinking",
-    "title": "Thinking",
-    "section": "Thinking",
-    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
-  },
-  {
-    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html",
-    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html",
-    "title": "Setup for IQ visualisation and digital signal processing",
-    "section": "",
-    "text": "2026-05-10"
-  },
-  {
-    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#introduction",
-    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#introduction",
-    "title": "Setup for IQ visualisation and digital signal processing",
-    "section": "Introduction",
-    "text": "Introduction\nThis guide explains how to set up your computer to use an SDRplay device to visualise IQ data. While this ideally requires advanced software like GNU Radio, I have also built a simple plugin for SDRconnect for those wanting a quick feel of what is possible without a steep learning curve.\nTo use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a bridge for GNU Radio to communicate with it. Using Radioconda is the highly recommended “easy path” because it pre-packages GNU Radio with the necessary SoapySDR support.\nChoose your path:\n\nThe Full Setup: Follow the step-by-step guidelines below for GNU Radio.\nThe Quick Start: If you want a simpler way to view IQ constellation plots, skip straight to the Simple IQ Visualisation Plugin for SDRconnect section."
-  },
-  {
-    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#step-by-step-installation-guidelines",
-    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#step-by-step-installation-guidelines",
-    "title": "Setup for IQ visualisation and digital signal processing",
-    "section": "Step-by-Step Installation Guidelines",
-    "text": "Step-by-Step Installation Guidelines\nThe easiest setup process involves installing the hardware driver first, followed by the software environment.\n\n1. Install the SDRplay API\nRegardless of which software you use, you must install the official hardware driver first so your computer can recognise the device.\n\nGo to the SDRplay Downloads page.\nDownload and install the API for your platform (version 3.15 is current).\nWindows users: Ensure the installer completes and, if prompted, restart your computer.\n\n\n\n2. Install Radioconda\nRadioconda is a distribution that includes GNU Radio and almost all common SDR drivers pre-configured.\n\nDownload the latest installer from the Radioconda GitHub.\nRun the installer according to the ReadMe on the Radioconda GitHub page. This generally involves double-clicking the .exe (Windows) or running the bash shell script (Linux) to set up a complete GNU Radio environment without manual compilation.\nIf you are using hardware other than an SDRplay, refer to the Radioconda ReadMe page for further guidelines.\n\n\n\n3. Connect GNU Radio to your SDRplay\nOnce both are installed, you can use the device in GNU Radio Companion (GRC):\n\nLaunch Radioconda; Windows users can do this by launching the Radioconda App from the Start Menu. \nVerify the connection using the SoapySDRUtil --find command. If everything installed correctly and your SDRplay is connected via USB, you should see your device identified:\n\n&gt; SoapySDRUtil --find\n\n######################################################\n##     Soapy SDR -- the SDR abstraction library     ##\n######################################################\n\nFound device 16\n  driver = sdrplay\n  label = SDRplay Dev0 UNKNOWN 24020E2670\n  serial = 24020E2670\n\nTip for Linux Users: If the command above fails to find your device, use lsusb to verify that the OS sees the hardware. If it appears in lsusb but not in Soapy, you likely need to manually trigger the SDRplay udev rules or restart the API service with sudo systemctl restart sdrplay.\n\n\nLaunch GRC: type gnuradio-companion in the Radioconda shell to open the GUI.\nSearch for a Soapy Source Block in the block list on the right-hand side; it should be under Core -&gt; Soapy -&gt; Source -&gt; SoapySDRPlaySource.\n\n\n\n\nimage\n\n\nYou are now ready to use GNU Radio to process the IQ output of your SDR receiver. The learning curve can be steep, so I recommend checking out the GNU Radio wiki. To get you started, I have included several sample flowgraphs in my repository for you to modify and explore. If you have questions, feel free to email me."
-  },
-  {
-    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#sample-flowgraphs",
-    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#sample-flowgraphs",
-    "title": "Setup for IQ visualisation and digital signal processing",
-    "section": "Sample FlowGraphs",
-    "text": "Sample FlowGraphs\nThese flowgraphs are provided “as-is” in the Git repository: https://github.com/IanHenry/sdrplay-gnuradio-examples/. They allow you to capture raw IQ data from an SDR device and save it to a file. The captured data can then be processed with the included Python script to generate high-quality density plots.\nInstructions for use are in the README of the GitHub repository but briefly:\n\nRepository Structure\n\n/flowgraphs: .grc files for capturing and visualising IQ data.\n/analysis: Python scripts for generating IQ density plots from recorded files.\n/data: The intended directory for your .iq recordings.\n\n\n\nGetting Started\n\nCapture: Open a flowgraph in GNU Radio Companion. Use the sliders to tune to a signal and record the output.\nSave: Save your recording (e.g., capture.iq) into the /data folder.\nPlot: Open a terminal in the /analysis folder and run python iq_density_plotter.py.\nCustomise: You can edit the USER SETTINGS at the top of the script to change the filename or zoom in on specific modulations."
-  },
-  {
-    "objectID": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#simple-iq-visualisation-plugin-for-sdrconnect",
-    "href": "guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html#simple-iq-visualisation-plugin-for-sdrconnect",
-    "title": "Setup for IQ visualisation and digital signal processing",
-    "section": "Simple IQ Visualisation Plugin for SDRconnect",
-    "text": "Simple IQ Visualisation Plugin for SDRconnect\nIf you prefer not to install the dependencies above and just want to view IQ plots using standard SDR software, options are limited. Most standard software does not include constellation plots by default.\nTo solve this, I wrote a Python app that works with SDRconnect. It uses the WebSocket API (available in version 1.08+) to capture and plot IQ data in real-time.\n\n\n\nimage\n\n\n\nInstallation instructions for SDRconnect and IQ module\n\n1. Download SDRconnect\n\nDownload SDRconnect for Windows, MacOS, or Linux. Ensure you are using at least version 1.08.\nOnce installed, enable the WebSocket Server: click the three dots (top right) -&gt; Preferences -&gt; Enable WebSocket Server.\n\n \n\n\n2. Install the Python IQ Module\n\nDownload my script from https://github.com/IanHenry/sdrconnect-iq-visualiser and run python sdrConnectIQvisualiser.py. It does not need to be in the SDRconnect directory as it communicates via the network API.\nWindows users: A pre-compiled .exe version is also available at https://github.com/IanHenry/sdrconnect-iq-visualiser/releases/ for a standalone launch.\n\n\n\n\nUsing the Simple IQ Visualisation Plugin\nThis tool is designed for visualising strong signals like Broadcast FM/AM, Repeaters, and Airband. It uses an IQ sample window centered on the waterfall. While audio filters are applied in SDRconnect, they do not affect this raw IQ stream. The script automatically periodically re-centers the VFO so the IQ you see matches your tuned frequency.\n\n\n\nimage\n\n\nThe visualiser has two main controls:\n\nGain Slider: This rescales the IQ values on the plot (acting as a “zoom” for the constellation) without affecting the actual receiver gain.\nPreset Buttons: Quickly set Mode, audio bandwidth, and sample rate for Broadcast FM, Narrowband FM, Broadcast AM, and Airband.\n\nYou can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script “jumps” the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.\nI built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!"
-  },
-  {
     "objectID": "blog.html#blog",
     "href": "blog.html#blog",
     "title": "Blog",
@@ -203,46 +203,11 @@
     "text": "Blog\nWelcome to my blog! Posts appear below."
   },
   {
-    "objectID": "about.html#about",
-    "href": "about.html#about",
-    "title": "About",
-    "section": "About",
-    "text": "About\nI’m Dr Ian Henry and I live in a village just south of Cambridge. I am a licensed UK radio amateur and a member of Cambridge and District Amateur Radio Club (CDARC), a friendly club which has been serving the Cambridge area since 1919. I’m also a member of the Radio Society of Great Britain (RSGB) and a published author in the RSGB magazine RadCom with an article titled “Understanding FT8 through DNA-sequencing parallels” (May 2026).\nI discovered amateur radio by chance in April 2025 and progressed through the Foundation, Intermediate, and Full licences within the same year, achieving my Full licence with distinction in December 2025. The pace of that journey reflects what I enjoy most about the hobby: learning, experimentation, and deepening understanding.\nMy interests centre on digital modes, SDR, and the theory that sits behind modern amateur radio practice. I spend a lot of time working with modes such as FT8 and JS8, experimenting with packet radio, and building or configuring SDR-based systems. I’m equally interested in how people learn these technologies and how we explain complex ideas clearly.\nAlongside operating, I’m passionate about teaching, training, and helping others enjoy the hobby, particularly by demystifying the underlying concepts rather than focusing only on procedures or equipment.\nThis site brings together:\n\nreflective writing on amateur radio, teaching, and learning\ntheory-focused pieces on SDR and digital communication\npractical guides for operators who want to understand why things work, not just how\n\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
-  },
-  {
-    "objectID": "privacy.html#privacy-cookies",
-    "href": "privacy.html#privacy-cookies",
-    "title": "Privacy & Disclaimer",
-    "section": "Privacy & Cookies",
-    "text": "Privacy & Cookies\nWe use Google Analytics 4 (GA4) to collect anonymous site usage data.\nThis may involve cookies to track sessions, page views, and returning visitors.\n\nCookies used: _ga, _gid\nPurpose: Analyze site traffic and improve user experience\n\nIP anonymization: Enabled\n\nThird-party access: Data is processed by Google under their privacy policy: https://policies.google.com/privacy\n\nYou may withdraw consent at any time by clearing your cookies."
-  },
-  {
-    "objectID": "privacy.html#disclaimer",
-    "href": "privacy.html#disclaimer",
-    "title": "Privacy & Disclaimer",
-    "section": "Disclaimer",
-    "text": "Disclaimer\n\nThe information provided here is for informational purposes only.\n\nWhile care is taken to ensure accuracy, no guarantees are made regarding completeness or suitability.\n\nAny external links do not imply endorsement of those sites.\n\nIf you have concerns regarding your privacy or site content, please contact me."
-  },
-  {
-    "objectID": "credits.html#hero-images",
-    "href": "credits.html#hero-images",
-    "title": "Credits & Attributions",
-    "section": "Hero Images",
-    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
-  },
-  {
-    "objectID": "credits.html#other-images",
-    "href": "credits.html#other-images",
-    "title": "Credits & Attributions",
-    "section": "Other Images",
-    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
-  },
-  {
-    "objectID": "guides.html#guides",
-    "href": "guides.html#guides",
-    "title": "Guides",
-    "section": "Guides",
-    "text": "Guides\nHere you will find practical guides to setup equipment and software for digital modes and packet radio etc…"
+    "objectID": "thinking.html#thinking",
+    "href": "thinking.html#thinking",
+    "title": "Thinking",
+    "section": "Thinking",
+    "text": "Thinking\nHere you will find material teaching theoretical concepts needed for amateur radio"
   },
   {
     "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
@@ -322,11 +287,95 @@
     "text": "Where next\nSo far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space."
   },
   {
-    "objectID": "contact.html#contact",
-    "href": "contact.html#contact",
-    "title": "Contact",
-    "section": "Contact",
-    "text": "Contact\nYou can contact me via:\n\nEmail: ian@g0lft.org\nQRZ Page: G0LFT"
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "",
+    "text": "2025-12-19"
+  },
+  {
+    "objectID": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "href": "thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html#introduction",
+    "title": "Why SDRs Are Great Teaching Tools",
+    "section": "Introduction",
+    "text": "Introduction\nSoftware-defined radios (SDRs) are not just tools for communication—they are powerful platforms for teaching the underlying theory of radio systems.\n\nBenefits for Learning\n\nImmediate feedback: you can see signals in real time.\n\nExperimentation: easily test modulation, filters, and antennas.\n\nVisualization: spectrum displays make abstract concepts tangible.\n\n\n\nConclusion\nTreating SDRs as learning spaces allows students to connect theory to practice quickly and safely."
+  },
+  {
+    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html",
+    "href": "blog-posts/2025-12-26-a_year_of_listening.html",
+    "title": "A Year of Listening",
+    "section": "",
+    "text": "2025-12-26"
+  },
+  {
+    "objectID": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
+    "href": "blog-posts/2025-12-26-a_year_of_listening.html#a-year-of-listening",
+    "title": "A Year of Listening",
+    "section": "2025 - A Year of Listening:",
+    "text": "2025 - A Year of Listening:\n\nFinding Structure, Curiosity and Understanding Through Amateur Radio\nAt the beginning of this year, I was completely unaware of amateur radio. I was recovering from illness and work was already proving more challenging than usual. I needed something mentally stimulating but not demanding, something absorbing, technical and quietly constructive.\nIn April, I stumbled upon amateur radio almost by chance. Initially, it wasn’t about licences or operating privileges; it was simply fascinating. Signals emerged from noise, antennas behaved in unexpected ways and the concept of meaningful communication with minimal power captivated me.\nMy curiosity quickly turned into momentum. I sat the Foundation exam in May and shortly afterwards the Intermediate. Looking back, this pace reflects more on circumstance than ability. Radio provided a concrete focus during a time when many other aspects of my life felt fragmented.\nWork remained challenging throughout the year, but studying and operating became a consistent background activity. It kept me engaged, distracted in a positive way and fostered a renewed sense of learning. I experimented extensively with various modes, bands and contact methods, not for the sake of achievements, but to understand how the hobby’s components fit together.\nJoining Cambridge and District Amateur Radio Club (CDARC) was another significant milestone. Interacting with generous individuals who shared their time and experience reminded me that amateur radio is as much about people as it is about equipment or exams. Observing diverse operating styles and problem-solving approaches was as enlightening as any reading I’ve done.\nLater in the year, I decided to work towards the Full licence. I mainly studied from the RSGB book, reading slowly and following ideas rather than memorising answers. I was awarded a distinction, which I mention only because it led to a lasting realisation: the most challenging aspects of learning radio aren’t about formulas or regulations – they’re about visualising what’s actually happening.\nThat’s where books fall short.\nCircuits, filters, impedance, noise and signal flow are inherently dynamic, constantly changing and interacting. Static diagrams and paragraphs can only take you so far before you need to observe behaviour, not just read about it. A capacitor charging, a filter rejecting energy and a weak signal emerging from noise are processes, not pictures.\nAs someone who works professionally with complex systems, I’ve become increasingly convinced that radio education would greatly benefit from improved visual and animated explanations. This isn’t to replace books but to complement them – to transform abstract concepts into something you can watch evolve and intuitively understand.\nThis idea is one of the reasons this blog exists.\nNext year, I want to spend less time acquiring equipment and more time understanding it. If this space becomes anything, I hope it becomes a place where difficult radio concepts are explained visually patiently and honestly – where behaviour is shown, not just described, and where understanding can grow over time.\nAmateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.\nIf you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts."
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "",
+    "text": "2026-04-25"
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-surprised-me-most",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "What surprised me most",
+    "text": "What surprised me most\nI thought I understood error correction because I work with it daily. But explaining why FT8 needs 50 Hz bandwidth made me think differently about why sequencing needs certain read lengths. Explaining why burst errors from fading are harder to correct than random errors clarified my understanding of coverage depth in genomics.\nThe parallel went both ways.\nI also underestimated how much I’d struggle with the timing synchronisation concept. In sequencing, cycle synchronisation is so fundamental I’d stopped questioning it. FT8 forced me to think about why time as an organising dimension matters, not just accept that it does."
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#what-i-want-to-know-from-you",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "What I want to know from you",
+    "text": "What I want to know from you\nIf you’ve read the article:\nWhat resonated? What didn’t make sense? Did the DNA sequencing parallel work for you, or was it too much detail for radio operators?\nFor everyone:\nHave you noticed parallels between amateur radio and your professional work? I suspect there are connections everywhere in topics such as antenna design and optimisation theory, propagation prediction and chaos modelling, contesting strategy and game theory. What have you seen?"
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#whats-coming-next",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "What’s coming next",
+    "text": "What’s coming next\nI’m working on an IQ visualisation series right now. It’s about understanding what SDRs actually see and how to interpret those waterfall displays and constellation diagrams we all stare at. The first post should be up soon.\nThe FT8 article and the IQ series connect more than I initially realised. Both are about making invisible signals visible. Both are about bridging theory and practice. Understanding IQ data helps you appreciate what FT8’s decoder is working with.\nI’m also presenting this material at the RSGB Convention in October. That’s both exciting and terrifying. Turning a written article into a 45-minute talk is a different challenge. If you’re planning to attend, I’d love to meet you."
+  },
+  {
+    "objectID": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
+    "href": "blog-posts/2026-04-25-ft8_dna_radcom.html#the-longer-reflection-i-want-to-write",
+    "title": "My FT8 Article is Published and I Want to Hear From You",
+    "section": "The longer reflection I want to write",
+    "text": "The longer reflection I want to write\nOnce I finish the IQ series, I want to write a proper reflection on the research process. The mistakes I made. The rabbit holes I went down (why 8-FSK specifically? what’s the history of error correction codes?). The questions I’m still pondering.\nBut I don’t want to rush it. I’d rather write it when I have the mental space to do it properly and the energy to engage with the conversations it might start.\nFor now, I’m curious what you think. Leave a comment, send me an email (ian@g0lft.org), or catch me on 20m FT8 most evenings.\nWhat questions should I be asking?"
+  },
+  {
+    "objectID": "privacy.html#privacy-cookies",
+    "href": "privacy.html#privacy-cookies",
+    "title": "Privacy & Disclaimer",
+    "section": "Privacy & Cookies",
+    "text": "Privacy & Cookies\nWe use Google Analytics 4 (GA4) to collect anonymous site usage data.\nThis may involve cookies to track sessions, page views, and returning visitors.\n\nCookies used: _ga, _gid\nPurpose: Analyze site traffic and improve user experience\n\nIP anonymization: Enabled\n\nThird-party access: Data is processed by Google under their privacy policy: https://policies.google.com/privacy\n\nYou may withdraw consent at any time by clearing your cookies."
+  },
+  {
+    "objectID": "privacy.html#disclaimer",
+    "href": "privacy.html#disclaimer",
+    "title": "Privacy & Disclaimer",
+    "section": "Disclaimer",
+    "text": "Disclaimer\n\nThe information provided here is for informational purposes only.\n\nWhile care is taken to ensure accuracy, no guarantees are made regarding completeness or suitability.\n\nAny external links do not imply endorsement of those sites.\n\nIf you have concerns regarding your privacy or site content, please contact me."
+  },
+  {
+    "objectID": "credits.html#hero-images",
+    "href": "credits.html#hero-images",
+    "title": "Credits & Attributions",
+    "section": "Hero Images",
+    "text": "Hero Images\n\n\n\nImage\nSource / Method\nLicense / Notes"
+  },
+  {
+    "objectID": "credits.html#other-images",
+    "href": "credits.html#other-images",
+    "title": "Credits & Attributions",
+    "section": "Other Images",
+    "text": "Other Images\n\nAny additional images are either created by Dr Ian Henry or sourced from free-to-use libraries.\n\nLicense Notes:\n\nAll CC0 / public domain images are free to use without attribution, but attribution is provided where possible.\n\nOther images are used with permission or created in-house.\n\nAI-generated images are used under the respective AI tool’s terms and are intended solely for illustrative purposes.\n\n\nIf you believe any content here infringes copyright, or you would like additional attribution, please contact me and I will correct it immediately."
   },
   {
     "objectID": "index.html#welcome",
@@ -341,54 +390,5 @@
     "title": "G0LFT",
     "section": "Teaching, learning, and amateur radio",
     "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, and practical guides focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nblog posts exploring ideas and experiences\ntheory-focused writing on learning and SDR\npractical guides for applying those ideas in practice"
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html",
-    "title": "Why I Built GB7CAM",
-    "section": "",
-    "text": "Ian Henry, G0LFT\n\n2026-07-24"
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#thirty-pounds-at-a-bring-and-buy",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#thirty-pounds-at-a-bring-and-buy",
-    "title": "Why I Built GB7CAM",
-    "section": "Thirty pounds at a bring and buy",
-    "text": "Thirty pounds at a bring and buy\nIt started at the CDARC bring and buy. I picked up a Raspberry Pi 400 for £20 and a Kenwood handheld for £10, with no clear plan beyond a vague sense that the two of them ought to be able to do something together. I had a week off work.\nOn the Saturday morning I applied for a Frequency Allocation Certificate for GB7CAM, the FAC, which does much the same job the old Notice of Variation used to. Five watts, 144.950 MHz. It was approved the same morning and I was quietly delighted to find such an obvious callsign still unclaimed. I want to underline that, because I had assumed it would be a months-long process involving forms and patience, and instead the answer came back before lunch. If that is the thing stopping you, it may not be the obstacle you think it is.\nUp to that point my only real experience of data over radio was APRS. I liked it. I like computer networking, and I like the idea of data riding on top of voice infrastructure. But APRS is fire and forget. You send a position, it goes somewhere, and that is the end of the transaction. I wanted something you could connect to. Something with a door on it. Just like in those 80s computer magazines!"
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#direwolf-then-hardware",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#direwolf-then-hardware",
-    "title": "Why I Built GB7CAM",
-    "section": "Direwolf, then hardware",
-    "text": "Direwolf, then hardware\nThe first version was entirely software: Direwolf acting as a TNC, driving the £10 Kenwood from the Pi. It worked, in the sense that packets went out and packets came back. It was also fiddly enough that I started looking at dedicated hardware fairly quickly.\nI bought a ready-built NinoTNC from Chris Smith, G1FEF, who sells them through hamserve.uk. It arrived with the chip loose in the packet rather than seated in its socket. Nothing was wrong with it, but it was not obvious to me which way round it went, or how much force was reasonable. Simon, G4WQG, sent me photographs of his own board so I could see exactly what it should look like. I clipped the chip in. It worked first time.\nThat is the first of several points in this story where the answer was a person rather than a document."
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#linbpq-and-the-configuration-file",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#linbpq-and-the-configuration-file",
-    "title": "Why I Built GB7CAM",
-    "section": "LinBPQ and the configuration file",
-    "text": "LinBPQ and the configuration file\nLinBPQ is the software that turns all of this into an actual node, handling routing, mailbox, chat and mail forwarding. It is also, on first contact, genuinely confusing. The configuration file is doing several jobs at once and assumes you already know the vocabulary. I got there in the end with the help of some good tutorials written by other operators, but I lost more than one evening to it.\nThe APRS line in particular took some getting right. Not the concept, just the syntax, which is unforgiving and not especially well documented. I eventually worked it out. Days later I was able to pass the same answer straight on to Gavin, M8VGU, when he hit exactly the same wall setting up his own node. It took him minutes rather than an evening, which is the whole point of writing any of this down. Here it is in case you are interested and the key point was the B (BBS Symbol on map) placed with no spaces between the coordinates ending in E and my callsign GB7CAM\nIDMSG:\n!5208.22N/00004.53EBGB7CAM LinBPQ Packet Mailbox (https://gb7cam.org.uk) AX.25 1200bd @ 144.950 MHz\n***"
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#getting-an-ip-address-then-realising-i-needed-more-than-that",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#getting-an-ip-address-then-realising-i-needed-more-than-that",
-    "title": "Why I Built GB7CAM",
-    "section": "Getting an IP address, then realising I needed more than that",
-    "text": "Getting an IP address, then realising I needed more than that\nI had heard about 44Net on the Ham Radio Workbench podcast. It is the block of IPv4 space set aside for amateur radio experimentation, and I knew that packet nodes could peer over IP as well as over RF, using AXUDP.\nApplying for an address was straightforward, and I had one within a few days. Then I discovered the part I had not thought about: an address on its own does you no good without a gateway to route it. That sent me to 44Net Connect, a WireGuard tunnel, and an evening rearranging my home network to accommodate a publicly routed subnet that had suddenly appeared in the middle of it.\nSomewhere in there I registered gb7cam.org.uk, and was quietly delighted to find such an obvious callsign still unclaimed. The site began as a few pages on GitHub Pages and has since grown an nginx reverse proxy, a subdomain for the node itself, and a FastAPI service that feeds the status page."
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#cambridge-is-a-packet-desert",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#cambridge-is-a-packet-desert",
-    "title": "Why I Built GB7CAM",
-    "section": "“Cambridge is a packet desert”",
-    "text": "“Cambridge is a packet desert”\nWhen I went to the OARC Discord asking for IP peers, the initial response was not encouraging. The gist was that Cambridge is a packet desert, that there was nobody local to work, and that what I really needed was a bigger antenna. Buy a yagi. Get it higher.\nI want to be fair about this, because it was not hostility. It was accurate local knowledge, delivered bluntly. But it did assume the problem was one of RF reach, and therefore that the solution was more RF.\nIt also was not the whole story. The same community that told me it would not work is the community that made it work. Simon was enormously helpful throughout, and ended up selling me a modified Tait 2000 Mk2 very cheaply. With a proper radio in place I applied to increase to 25W ERP, connected to my Diamond X50, and things improved considerably.\nMy first peer was GB7FCI. Others followed after I asked on the ukpacketradio list on groups.io, and GB7CAM now peers with a handful of nodes over AXUDP, a number that goes up and down as links come and go. The status page has the current picture, which is more reliable than anything I write here."
-  },
-  {
-    "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#what-the-desert-actually-looks-like",
-    "href": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html#what-the-desert-actually-looks-like",
-    "title": "Why I Built GB7CAM",
-    "section": "What the desert actually looks like",
-    "text": "What the desert actually looks like\nOn RF, I hear Milton Keynes, around 50 km away, on and off. For 25W at 5 m above ground that is a better path than I expected, and it is intermittent enough to stay interesting. Most of the traffic through the node arrives over AXUDP rather than over the air, which is why the status page counts stations heard via RF and via AXIP separately. I was curious whether the desert was real, so I built something that would tell me. The same tooling draws a map of the nodes GB7CAM can reach, which has turned out to be more interesting than I expected, and which I will come back to another time.\nAnd then Gavin, M8VGU, 400 metres away, set up GB7NUL. He had wanted to do it for a while, and I think seeing GB7CAM working was the push. So the reliable RF link from here is not to a distant hilltop repeater site. It is to a friend at the other end of the village, with everything else coming and going as conditions allow.\nTwo packet nodes 400 metres apart is a slightly comic outcome when the county had none at all. But it is the part I keep coming back to. The desert was real, and it was also self-fulfilling: nobody built a node because there was nothing to connect to, and there was nothing to connect to because nobody built a node. Breaking that needed one person to go first, on £30 of second-hand equipment, during a week off work.\nThere is more to do. I want to take the node onto HF, going back to Direwolf as a software TNC, this time driving an FT-710 rather than a £10 handheld, which would give GB7CAM paths that do not depend on line of sight to Milton Keynes. And having spent those evenings on the LinBPQ configuration file myself, I am happy to share a cleaned-up version of mine, with the passwords and peer details stripped out, if it would save anybody else the same evenings. Just ask.\nI would like more peers, and I am not fussy about how. RF or AXUDP, near or far. If you run a node, my contact page has the details; send me your MAP line and I will get you added. And if you are sitting in your own local desert wondering whether it is worth the effort: the licence took a morning, the hardware cost less than a night out, and the people who told me it would not work here are the same people who helped me do it."
   }
 ]
