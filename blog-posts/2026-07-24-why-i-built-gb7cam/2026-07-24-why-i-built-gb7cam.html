@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ian Henry, G0LFT">
+<meta name="dcterms.date" content="2026-07-24">
+<meta name="description" content="How a £20 Raspberry Pi and a £10 handheld became a packet node, and what the Cambridge ‘packet desert’ taught me">
 
-<title>My Station</title>
+<title>Why I Built GB7CAM</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,24 +29,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0194e7bc96e82ef052d4844f86e94602.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0194e7bc96e82ef052d4844f86e94602.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,16 +85,16 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- intentionally empty — GA is handled by _cookie_consent.html -->
 
-<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
-<link rel="manifest" href="./images/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
 <meta name="theme-color" content="#1ecbe1">
 
 
 
-<link rel="stylesheet" href="_theme/_base.css">
-<link rel="stylesheet" href="_theme/_colors.css">
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -107,19 +110,19 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./thinking.html"> 
+    <a class="nav-link" href="../../thinking.html"> 
 <span class="menu-text">Thinking</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guides.html"> 
+    <a class="nav-link" href="../../guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
 </ul>
@@ -135,26 +138,58 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">My Station</h1></header>
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Why I Built GB7CAM</h1></header>
 
 <header id="title-block-header">
 
+<p class="author">Ian Henry, G0LFT</p>
 
+<p class="date">2026-07-24</p>
 </header>
 
 
-<p><img src="images/main_logo.png" class="centered-image"></p>
-<section id="station" class="level2">
-<h2 class="anchored" data-anchor-id="station">Station</h2>
-<p>I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.</p>
-<p>My current setup includes:</p>
-<ul>
-<li>HF base and portable operation (including POTA)</li>
-<li>VHF/UHF FM and digital voice</li>
-<li>Homebrew and commercial SDR receivers</li>
-<li>Raspberry Pi–based digital voice infrastructure</li>
-</ul>
-<p>I periodically update this page as my setup evolves.</p>
+<p>I never used a bulletin board system. I was the wrong age, or in the wrong house, or simply never had the phone line to spare. What I did have was magazines, and the occasional item on television, describing this world of dial-up systems where people left messages for one another on somebody’s computer in somebody’s spare room. It looked extraordinary. It also looked like something happening a long way from me, to other people.</p>
+<p>Thirty years later I built one. It runs over radio instead of a phone line, and it lives in a village outside Cambridge.</p>
+<section id="thirty-pounds-at-a-bring-and-buy" class="level2">
+<h2 class="anchored" data-anchor-id="thirty-pounds-at-a-bring-and-buy">Thirty pounds at a bring and buy</h2>
+<p>It started at the <a href="https://www.cdarc.org.uk/">CDARC</a> bring and buy. I picked up a Raspberry Pi 400 for £20 and a Kenwood handheld for £10, with no clear plan beyond a vague sense that the two of them ought to be able to do something together. I had a week off work.</p>
+<p>On the Saturday morning I applied for a Frequency Allocation Certificate for <a href="https://gb7cam.org.uk">GB7CAM</a>, the FAC, which does much the same job the old Notice of Variation used to. Five watts, 144.950 MHz. It was approved the same morning and I was quietly delighted to find such an obvious callsign still unclaimed. I want to underline that, because I had assumed it would be a months-long process involving forms and patience, and instead the answer came back before lunch. If that is the thing stopping you, it may not be the obstacle you think it is.</p>
+<p>Up to that point my only real experience of data over radio was APRS. I liked it. I like computer networking, and I like the idea of data riding on top of voice infrastructure. But APRS is fire and forget. You send a position, it goes somewhere, and that is the end of the transaction. I wanted something you could <em>connect to</em>. Something with a door on it</p>
+</section>
+<section id="direwolf-then-hardware" class="level2">
+<h2 class="anchored" data-anchor-id="direwolf-then-hardware">Direwolf, then hardware</h2>
+<p>The first version was entirely software: Direwolf acting as a TNC, driving the £10 Kenwood from the Pi. It worked, in the sense that packets went out and packets came back. It was also fiddly enough that I started looking at dedicated hardware fairly quickly.</p>
+<p>I bought a ready-built <a href="https://wiki.oarc.uk/packet:ninotnc">NinoTNC</a> from Chris Smith, G1FEF, who sells them through <a href="https://hamserve.uk">hamserve.uk</a>. It arrived with the chip loose in the packet rather than seated in its socket. Nothing was wrong with it, but it was not obvious to me which way round it went, or how much force was reasonable. Simon, G4WQG, sent me photographs of his own board so I could see exactly what it should look like. I clipped the chip in. It worked first time.</p>
+<p>That is the first of several points in this story where the answer was a person rather than a document.</p>
+</section>
+<section id="linbpq-and-the-configuration-file" class="level2">
+<h2 class="anchored" data-anchor-id="linbpq-and-the-configuration-file">LinBPQ and the configuration file</h2>
+<p><a href="https://www.cantab.net/users/john.wiseman/Documents/">LinBPQ</a> is the software that turns all of this into an actual node, handling routing, mailbox, chat and mail forwarding. It is also, on first contact, genuinely confusing. The configuration file is doing several jobs at once and assumes you already know the vocabulary. I got there in the end with the help of some good tutorials written by other operators, but I lost more than one evening to it.</p>
+<p>The APRS line in particular took some getting right. Not the concept, just the syntax, which is unforgiving and not especially well documented. I eventually worked it out. Days later I was able to pass the same answer straight on to Gavin, M8VGU, when he hit exactly the same wall setting up his own node. It took him minutes rather than an evening, which is the whole point of writing any of this down. Here it is in case you are interested and the key point was the B (BBS Symbol on map) placed with no spaces between the coordinates ending in E and my callsign GB7CAM</p>
+<pre><code>IDMSG:
+!5208.22N/00004.53EBGB7CAM LinBPQ Packet Mailbox (https://gb7cam.org.uk) AX.25 1200bd @ 144.950 MHz
+***</code></pre>
+</section>
+<section id="getting-an-ip-address-then-realising-i-needed-more-than-that" class="level2">
+<h2 class="anchored" data-anchor-id="getting-an-ip-address-then-realising-i-needed-more-than-that">Getting an IP address, then realising I needed more than that</h2>
+<p>I had heard about <a href="https://wiki.ampr.org/wiki/Main_Page">44Net</a> on the Ham Radio Workbench podcast. It is the block of IPv4 space set aside for amateur radio experimentation, and I knew that packet nodes could peer over IP as well as over RF, using AXUDP.</p>
+<p>Applying for an address was straightforward, and I had one within a few days. Then I discovered the part I had not thought about: an address on its own does you no good without a gateway to route it. That sent me to <a href="https://connect.44net.cloud/">44Net Connect</a>, a WireGuard tunnel, and an evening rearranging my home network to accommodate a publicly routed subnet that had suddenly appeared in the middle of it.</p>
+<p>Somewhere in there I registered gb7cam.org.uk, and was quietly delighted to find such an obvious callsign still unclaimed. The site began as a few pages on GitHub Pages and has since grown an nginx reverse proxy, a subdomain for the node itself, and a FastAPI service that feeds the <a href="https://gb7cam.org.uk/status.html">status page</a>.</p>
+</section>
+<section id="cambridge-is-a-packet-desert" class="level2">
+<h2 class="anchored" data-anchor-id="cambridge-is-a-packet-desert">“Cambridge is a packet desert”</h2>
+<p>When I went to the OARC Discord asking for IP peers, the initial response was not encouraging. The gist was that Cambridge is a packet desert, that there was nobody local to work, and that what I really needed was a bigger antenna. Buy a yagi. Get it higher.</p>
+<p>I want to be fair about this, because it was not hostility. It was accurate local knowledge, delivered bluntly. But it did assume the problem was one of RF reach, and therefore that the solution was more RF.</p>
+<p>It also was not the whole story. The same community that told me it would not work is the community that made it work. Simon was enormously helpful throughout, and ended up selling me a modified <a href="https://wiki.oarc.uk/radios:tait2xxx">Tait 2000 Mk2</a> very cheaply. With a proper radio in place I applied to increase to 25W ERP, connected to my Diamond X50, and things improved considerably.</p>
+<p>My first peer was GB7FCI. Others followed after I asked on the <a href="https://groups.io/g/ukpacketradio">ukpacketradio</a> list on groups.io, and GB7CAM now peers with a handful of nodes over AXUDP, a number that goes up and down as links come and go. The <a href="https://gb7cam.org.uk/status.html">status page</a> has the current picture, which is more reliable than anything I write here.</p>
+</section>
+<section id="what-the-desert-actually-looks-like" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-desert-actually-looks-like">What the desert actually looks like</h2>
+<p>On RF, I hear Milton Keynes, around 50 km away, on and off. For 25W at 5 m above ground that is a better path than I expected, and it is intermittent enough to stay interesting. Most of the traffic through the node arrives over AXUDP rather than over the air, which is why the status page counts stations heard via RF and via AXIP separately. I was curious whether the desert was real, so I built something that would tell me. The same tooling draws a <a href="https://gb7cam.org.uk/graph.html">map of the nodes GB7CAM can reach</a>, which has turned out to be more interesting than I expected, and which I will come back to another time.</p>
+<p>And then Gavin, M8VGU, 400 metres away, set up GB7NUL. He had wanted to do it for a while, and I think seeing GB7CAM working was the push. So the reliable RF link from here is not to a distant hilltop repeater site. It is to a friend at the other end of the village, with everything else coming and going as conditions allow.</p>
+<p>Two packet nodes 400 metres apart is a slightly comic outcome when the county had none at all. But it is the part I keep coming back to. The desert was real, and it was also self-fulfilling: nobody built a node because there was nothing to connect to, and there was nothing to connect to because nobody built a node. Breaking that needed one person to go first, on £30 of second-hand equipment, during a week off work.</p>
+<p>There is more to do. I want to take the node onto HF, going back to Direwolf as a software TNC, this time driving an FT-710 rather than a £10 handheld, which would give GB7CAM paths that do not depend on line of sight to Milton Keynes. And having spent those evenings on the LinBPQ configuration file myself, I am happy to share a cleaned-up version of mine, with the passwords and peer details stripped out, if it would save anybody else the same evenings. Just ask.</p>
+<p>I would like more peers, and I am not fussy about how. RF or AXUDP, near or far. If you run a node, my <a href="https://gb7cam.org.uk/contact.html">contact page</a> has the details; send me your MAP line and I will get you added. And if you are sitting in your own local desert wondering whether it is worth the effort: the licence took a morning, the hardware cost less than a night out, and the people who told me it would not work here are the same people who helped me do it.</p>
 
 
 </section>
@@ -211,18 +246,18 @@ ul.task-list li input[type="checkbox"] {
 <div class="site-footer">
  <div class="footer-content">
    © 2026 Dr Ian Henry, G0LFT. All rights reserved.<br>
-   <a href="./privacy.html">Privacy Policy</a> |
-   <a href="./credits.html">Image Credits</a> |
-   <a href="./about.html">About</a> |
-   <a href="./station.html">Station</a> |
-   <a href="./contact.html">Contact</a> |
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
    <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
    <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
   </div>
 </div>
 <!-- Desktop-only navbar logo -->
 <a href="https://g0lft.org" class="navbar-desktop-logo-link">
-  <img src="./images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
 </a>
 
 <script>
