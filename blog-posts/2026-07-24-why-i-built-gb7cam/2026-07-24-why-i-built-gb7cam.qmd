@@ -1,0 +1,76 @@
+---
+title: "Why I Built GB7CAM"
+description: "How a £20 Raspberry Pi and a £10 handheld became a packet node, and what the Cambridge 'packet desert' taught me"
+author: "Ian Henry, G0LFT"
+date: "2026-07-24"
+categories:
+  - Packet Radio
+  - GB7CAM
+  - AX.25
+  - LinBPQ
+  - 44Net
+  - Reflections
+image: ./images/GB7CAM_square_cropped.png
+---
+
+I never used a bulletin board system. I was the wrong age, or in the wrong house, or simply never had the phone line to spare. What I did have was magazines, and the occasional item on television, describing this world of dial-up systems where people left messages for one another on somebody's computer in somebody's spare room. It looked extraordinary. It also looked like something happening a long way from me, to other people.
+
+Thirty years later I built one. It runs over radio instead of a phone line, and it lives in a village outside Cambridge.
+
+## Thirty pounds at a bring and buy
+
+It started at the [CDARC](https://www.cdarc.org.uk/) bring and buy. I picked up a Raspberry Pi 400 for £20 and a Kenwood handheld for £10, with no clear plan beyond a vague sense that the two of them ought to be able to do something together. I had a week off work.
+
+On the Saturday morning I applied for a Frequency Allocation Certificate for [GB7CAM](https://gb7cam.org.uk), the FAC, which does much the same job the old Notice of Variation used to. Five watts, 144.950 MHz. It was approved the same morning and I was quietly delighted to find such an obvious callsign still unclaimed. I want to underline that, because I had assumed it would be a months-long process involving forms and patience, and instead the answer came back before lunch. If that is the thing stopping you, it may not be the obstacle you think it is.
+
+Up to that point my only real experience of data over radio was APRS. I liked it. I like computer networking, and I like the idea of data riding on top of voice infrastructure. But APRS is fire and forget. You send a position, it goes somewhere, and that is the end of the transaction. I wanted something you could *connect to*. Something with a door on it
+
+## Direwolf, then hardware
+
+The first version was entirely software: Direwolf acting as a TNC, driving the £10 Kenwood from the Pi. It worked, in the sense that packets went out and packets came back. It was also fiddly enough that I started looking at dedicated hardware fairly quickly.
+
+I bought a ready-built [NinoTNC](https://wiki.oarc.uk/packet:ninotnc) from Chris Smith, G1FEF, who sells them through [hamserve.uk](https://hamserve.uk). It arrived with the chip loose in the packet rather than seated in its socket. Nothing was wrong with it, but it was not obvious to me which way round it went, or how much force was reasonable. Simon, G4WQG, sent me photographs of his own board so I could see exactly what it should look like. I clipped the chip in. It worked first time.
+
+That is the first of several points in this story where the answer was a person rather than a document.
+
+## LinBPQ and the configuration file
+
+[LinBPQ](https://www.cantab.net/users/john.wiseman/Documents/) is the software that turns all of this into an actual node, handling routing, mailbox, chat and mail forwarding. It is also, on first contact, genuinely confusing. The configuration file is doing several jobs at once and assumes you already know the vocabulary. I got there in the end with the help of some good tutorials written by other operators, but I lost more than one evening to it.
+
+The APRS line in particular took some getting right. Not the concept, just the syntax, which is unforgiving and not especially well documented. I eventually worked it out. Days later I was able to pass the same answer straight on to Gavin, M8VGU, when he hit exactly the same wall setting up his own node. It took him minutes rather than an evening, which is the whole point of writing any of this down.  Here it is in case you are interested and the key point was the B (BBS Symbol on map) placed with no spaces between the coordinates ending in E and my callsign GB7CAM
+
+```
+IDMSG:
+!5208.22N/00004.53EBGB7CAM LinBPQ Packet Mailbox (https://gb7cam.org.uk) AX.25 1200bd @ 144.950 MHz
+***
+```
+
+## Getting an IP address, then realising I needed more than that
+
+I had heard about [44Net](https://wiki.ampr.org/wiki/Main_Page) on the Ham Radio Workbench podcast. It is the block of IPv4 space set aside for amateur radio experimentation, and I knew that packet nodes could peer over IP as well as over RF, using AXUDP.
+
+Applying for an address was straightforward, and I had one within a few days. Then I discovered the part I had not thought about: an address on its own does you no good without a gateway to route it. That sent me to [44Net Connect](https://connect.44net.cloud/), a WireGuard tunnel, and an evening rearranging my home network to accommodate a publicly routed subnet that had suddenly appeared in the middle of it.
+
+Somewhere in there I registered gb7cam.org.uk, and was quietly delighted to find such an obvious callsign still unclaimed. The site began as a few pages on GitHub Pages and has since grown an nginx reverse proxy, a subdomain for the node itself, and a FastAPI service that feeds the [status page](https://gb7cam.org.uk/status.html).
+
+## "Cambridge is a packet desert"
+
+When I went to the OARC Discord asking for IP peers, the initial response was not encouraging. The gist was that Cambridge is a packet desert, that there was nobody local to work, and that what I really needed was a bigger antenna. Buy a yagi. Get it higher.
+
+I want to be fair about this, because it was not hostility. It was accurate local knowledge, delivered bluntly. But it did assume the problem was one of RF reach, and therefore that the solution was more RF.
+
+It also was not the whole story. The same community that told me it would not work is the community that made it work. Simon was enormously helpful throughout, and ended up selling me a modified [Tait 2000 Mk2](https://wiki.oarc.uk/radios:tait2xxx) very cheaply. With a proper radio in place I applied to increase to 25W ERP, connected to my Diamond X50, and things improved considerably.
+
+My first peer was GB7FCI. Others followed after I asked on the [ukpacketradio](https://groups.io/g/ukpacketradio) list on groups.io, and GB7CAM now peers with a handful of nodes over AXUDP, a number that goes up and down as links come and go. The [status page](https://gb7cam.org.uk/status.html) has the current picture, which is more reliable than anything I write here.
+
+## What the desert actually looks like
+
+On RF, I hear Milton Keynes, around 50 km away, on and off. For 25W at 5 m above ground that is a better path than I expected, and it is intermittent enough to stay interesting. Most of the traffic through the node arrives over AXUDP rather than over the air, which is why the status page counts stations heard via RF and via AXIP separately. I was curious whether the desert was real, so I built something that would tell me. The same tooling draws a [map of the nodes GB7CAM can reach](https://gb7cam.org.uk/graph.html), which has turned out to be more interesting than I expected, and which I will come back to another time.
+
+And then Gavin, M8VGU, 400 metres away, set up GB7NUL. He had wanted to do it for a while, and I think seeing GB7CAM working was the push. So the reliable RF link from here is not to a distant hilltop repeater site. It is to a friend at the other end of the village, with everything else coming and going as conditions allow.
+
+Two packet nodes 400 metres apart is a slightly comic outcome when the county had none at all. But it is the part I keep coming back to. The desert was real, and it was also self-fulfilling: nobody built a node because there was nothing to connect to, and there was nothing to connect to because nobody built a node. Breaking that needed one person to go first, on £30 of second-hand equipment, during a week off work.
+
+There is more to do. I want to take the node onto HF, going back to Direwolf as a software TNC, this time driving an FT-710 rather than a £10 handheld, which would give GB7CAM paths that do not depend on line of sight to Milton Keynes. And having spent those evenings on the LinBPQ configuration file myself, I am happy to share a cleaned-up version of mine, with the passwords and peer details stripped out, if it would save anybody else the same evenings. Just ask.
+
+I would like more peers, and I am not fussy about how. RF or AXUDP, near or far. If you run a node, my [contact page](https://gb7cam.org.uk/contact.html) has the details; send me your MAP line and I will get you added. And if you are sitting in your own local desert wondering whether it is worth the effort: the licence took a morning, the hardware cost less than a night out, and the people who told me it would not work here are the same people who helped me do it.
