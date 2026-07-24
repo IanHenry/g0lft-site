@@ -48,11 +48,11 @@ IDMSG:
 
 ## Getting an IP address, then realising I needed more than that
 
-I had heard about [44Net](https://wiki.ampr.org/wiki/Main_Page) on the Ham Radio Workbench podcast. It is the block of IPv4 space set aside for amateur radio experimentation, and I knew that packet nodes could peer over IP as well as over RF, using AXUDP.
+I had heard about [44Net](https://wiki.ampr.org/wiki/Main_Page) on the [Ham Radio Workbench podcast](https://www.hamradioworkbench.com/). It is the block of IPv4 space set aside for amateur radio experimentation, and I knew that packet nodes could peer over IP as well as over RF, using AXUDP.
 
 Applying for an address was straightforward, and I had one within a few days. Then I discovered the part I had not thought about: an address on its own does you no good without a gateway to route it. That sent me to [44Net Connect](https://connect.44net.cloud/), a WireGuard tunnel, and an evening rearranging my home network to accommodate a publicly routed subnet that had suddenly appeared in the middle of it.
 
-Somewhere in there I registered gb7cam.org.uk, and was quietly delighted to find such an obvious callsign still unclaimed. The site began as a few pages on GitHub Pages and has since grown an nginx reverse proxy, a subdomain for the node itself, and a FastAPI service that feeds the [status page](https://gb7cam.org.uk/status.html).
+Somewhere in there I registered gb7cam.org.uk, and it all started to feel real. The site began as a few pages on GitHub Pages and has since grown an nginx reverse proxy, a subdomain for the node itself, and a FastAPI service that feeds the [status page](https://gb7cam.org.uk/status.html).
 
 ## "Cambridge is a packet desert"
 
