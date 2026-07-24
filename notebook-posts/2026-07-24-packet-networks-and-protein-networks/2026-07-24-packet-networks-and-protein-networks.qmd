@@ -12,18 +12,14 @@ categories:
 image: ./images/gb7cam-graph-spoke-white.png
 ---
 
-::: {.callout-note appearance="simple"}
-**Epistemic status: notebook.** Half-formed and written as I went. Some of what
-I believed at the start turned out to be a moment rather than a fact, and I
-have kept the moments in, because watching them move is most of what I learned.
-Corrections welcome.
-:::
+# Packet Networks and Protein Networks
 
 ## What I wanted to see
 
-The node keeps a table of the other nodes it can reach. It is long, it changes
-without telling me, and reading it is like reading a train timetable for a
-network you cannot picture. I wanted to picture it.
+[GB7CAM](https://gb7cam.org.uk), my packet node, keeps a table of the other
+nodes it can reach. It is long, it changes without telling me, and reading it is
+like reading a train timetable for a network you cannot picture. I wanted to
+picture it.
 
 I had specific things I was hoping to see. How my peers connect to each other,
 rather than just to me. Which nodes are most distant, out at the faint edge of
@@ -83,6 +79,18 @@ that two of them are looking at the same backbone and one is looking somewhere
 else. If I wanted to know which peer was earning its place, the graph answered
 it: the one reaching the different part of the network, not the one with the
 biggest count.
+
+**The first thing on my list is the one the map would not answer: how my peers
+link to each other.** It shows me each node's route back to me, not my peers'
+routes amongst themselves. Now and then one peer does surface in another's
+table, GB7BED-5 in GB7NPR's as I write this, but the figure I get is a composite
+that could be a single direct hop or several composed together, and I cannot
+tell which without asking each peer for its own routing table. So whether
+GB7BDH, GB7BED-5 and GB7NPR are directly meshed or only meet somewhere out in
+the backbone, I do not yet know from here. My hunch is that with only three
+peers they largely are not, and that adding more would start to close the
+triangles, but that is a hunch, and a job for a later post once I can read their
+tables rather than only what they choose to advertise to me.
 
 **The backbone nodes I was looking for are there.** G8PZT shows up reachable
 through all three peers at once, which is exactly what a shared piece of

@@ -12,7 +12,7 @@ categories:
   - Reflections
 image: ./images/GB7CAM_square_cropped.png
 ---
-# Why I Build GB7CAM 
+# Why I Built GB7CAM
 
 I never used a bulletin board system. I was the wrong age, or in the wrong house, or simply never had the phone line to spare. What I did have was magazines, and the occasional item on television, describing this world of dial-up systems where people left messages for one another on somebody's computer in somebody's spare room. It looked extraordinary. It also looked like something happening a long way from me, to other people.
 

@@ -12,5 +12,4 @@ listing:
 ## Notebook
 
 Working notes rather than finished pieces. Speculative, half-formed, and often
-self-correcting. Everything here is flagged with an epistemic status, and
-corrections are welcome.
+self-correcting. Corrections are welcome.
