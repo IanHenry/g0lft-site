@@ -12,6 +12,7 @@ categories:
   - Reflections
 image: ./images/GB7CAM_square_cropped.png
 ---
+# My FT8 Article is Published and I Want to Hear From You
 
 I never used a bulletin board system. I was the wrong age, or in the wrong house, or simply never had the phone line to spare. What I did have was magazines, and the occasional item on television, describing this world of dial-up systems where people left messages for one another on somebody's computer in somebody's spare room. It looked extraordinary. It also looked like something happening a long way from me, to other people.
 
@@ -23,7 +24,7 @@ It started at the [CDARC](https://www.cdarc.org.uk/) bring and buy. I picked up 
 
 On the Saturday morning I applied for a Frequency Allocation Certificate for [GB7CAM](https://gb7cam.org.uk), the FAC, which does much the same job the old Notice of Variation used to. Five watts, 144.950 MHz. It was approved the same morning and I was quietly delighted to find such an obvious callsign still unclaimed. I want to underline that, because I had assumed it would be a months-long process involving forms and patience, and instead the answer came back before lunch. If that is the thing stopping you, it may not be the obstacle you think it is.
 
-Up to that point my only real experience of data over radio was APRS. I liked it. I like computer networking, and I like the idea of data riding on top of voice infrastructure. But APRS is fire and forget. You send a position, it goes somewhere, and that is the end of the transaction. I wanted something you could *connect to*. Something with a door on it
+Up to that point my only real experience of data over radio was APRS. I liked it. I like computer networking, and I like the idea of data riding on top of voice infrastructure. But APRS is fire and forget. You send a position, it goes somewhere, and that is the end of the transaction. I wanted something you could *connect to*. Something with a door on it.  Just like in those 80s computer magazines!
 
 ## Direwolf, then hardware
 
