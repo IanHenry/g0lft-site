@@ -1,10 +1,14 @@
 [
   {
-    "listing": "/thinking.html",
+    "listing": "/notebook.html",
     "items": [
-      "/thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
-      "/thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
-      "/thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html"
+      "/notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html"
+    ]
+  },
+  {
+    "listing": "/guides.html",
+    "items": [
+      "/guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html"
     ]
   },
   {
@@ -16,9 +20,11 @@
     ]
   },
   {
-    "listing": "/guides.html",
+    "listing": "/thinking.html",
     "items": [
-      "/guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html"
+      "/thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
+      "/thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
+      "/thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html"
     ]
   }
 ]
