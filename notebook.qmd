@@ -1,0 +1,16 @@
+---
+title: "Notebook"
+listing:
+  contents: notebook-posts
+  sort: "date desc"
+  type: default
+  categories: true
+  fields: [image, date, title, description, reading-time, categories]
+---
+<img src="images/main_logo.png" class="centered-image">
+
+## Notebook
+
+Working notes rather than finished pieces. Speculative, half-formed, and often
+self-correcting. Everything here is flagged with an epistemic status, and
+corrections are welcome.

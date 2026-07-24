@@ -1,0 +1,234 @@
+---
+title: "Packet Networks and Protein Networks"
+description: "I built a map of the nodes GB7CAM can reach because the table it came from was long and told me nothing. The map told me more, then it told me it would not hold still, and most of what moved turned out to be me"
+author: "Ian Henry, G0LFT"
+date: "2026-07-24"
+categories:
+  - Notebook
+  - Packet Radio
+  - Networks
+  - Computational Biology
+  - GB7CAM
+image: ./images/gb7cam-graph-spoke-white.png
+---
+
+::: {.callout-note appearance="simple"}
+**Epistemic status: notebook.** Half-formed and written as I went. Some of what
+I believed at the start turned out to be a moment rather than a fact, and I
+have kept the moments in, because watching them move is most of what I learned.
+Corrections welcome.
+:::
+
+## What I wanted to see
+
+The node keeps a table of the other nodes it can reach. It is long, it changes
+without telling me, and reading it is like reading a train timetable for a
+network you cannot picture. I wanted to picture it.
+
+I had specific things I was hoping to see. How my peers connect to each other,
+rather than just to me. Which nodes are most distant, out at the faint edge of
+what arrives. How much my links overlap, because I suspected they did. Whether
+the backbone nodes I keep hearing about, G8PZT at Kidderminster, GB7CIP at
+Caterham, actually show up in my own reachable set or whether they are just
+names other people mention. And, honestly, which of my peers sit closest
+together, because I like network graphs and wanted to look at one that was
+mine.
+
+Most packet maps online are geographic: nodes pinned to where they physically
+are, edges following the land. That is a reasonable thing to draw and it was
+not the thing I wanted. I spend my working life with a different kind of
+picture, where position carries no units and the shape is the point, and I
+wanted to see the packet network drawn that way instead.
+
+## What I built
+
+A FastAPI service parses LinBPQ's output, DuckDB stores it, and vis-network
+draws it in the browser. The result is a picture of the reachable network as
+seen from a village outside Cambridge, laid out by a force simulation rather
+than by geography. The [graph](https://gb7cam.org.uk/graph.html) is live.
+
+The first time I rendered it properly I stopped, because I had seen the shape
+before. Not in radio.
+
+A protein-protein interaction network is a graph where each node is a protein
+and each edge means two proteins have been observed to touch. They are a
+standard object where I work and you develop a feel for them: mostly sparse, a
+few heavily connected proteins, a long tail with one or two partners each,
+tight clusters where a group all interact because they form a complex. My
+packet map had that flavour. That resemblance is where the title comes from,
+and it is also the first thing that did not survive contact with the numbers,
+so hold it loosely.
+
+## What the map showed me
+
+Taking my list in order, because the map did answer most of it.
+
+**Six peers are configured. Three are up.** G0NMY-7 has been flapping on
+roughly a fifteen minute cycle, and GB7FCI-1 and GB7WOR-7 have not connected
+in over a week. So the first correction was to my own status page: six peers is
+a fact about my configuration file, not about the network. Through the three
+live links, as I write this, I can see about sixty-three distinct nodes.
+
+**The peers overlap heavily, which is what I suspected.** GB7BED-5 and GB7NPR
+show me almost the same set: their Jaccard overlap sits around 0.75, against
+roughly 0.1 for the other two pairings. GB7BDH is the odd one out. It shows me
+fewer nodes, but a much larger fraction of them are ones I cannot reach any
+other way. Better than half of what GB7BDH contributes is unique to it, against
+a small fraction for the other two. So the honest summary of my three links is
+that two of them are looking at the same backbone and one is looking somewhere
+else. If I wanted to know which peer was earning its place, the graph answered
+it: the one reaching the different part of the network, not the one with the
+biggest count.
+
+**The backbone nodes I was looking for are there.** G8PZT shows up reachable
+through all three peers at once, which is exactly what a shared piece of
+backbone should look like. GB7CIP shows up through two. Seeing G8PZT arrive by
+three independent paths was the single most satisfying thing in the picture,
+and it is also the redundancy point made concrete: a node everyone routes
+towards is a node you do not lose easily.
+
+**The distant edge is populated by the stations you would expect to be
+marginal.** Out at the faint end sit things like M1BFP over towards Calne,
+hanging on at a route quality of one, and a cluster around Swindon and Oxford a
+little further in. These are the routes a stricter node would drop first.
+
+So the map did its job. I got the shape, the overlap, the backbone, the far
+edge. If the post ended here it would be a happy little tour.
+
+## The map will not hold still
+
+I started storing a snapshot every fifteen minutes, mostly so I could do this
+sort of thing retrospectively later. Six hours in, the snapshots had already
+undermined the neatest sentence I had written.
+
+Earlier in the day I had measured GB7BED-5 and found it contributed zero unique
+nodes. Every node it showed me, GB7NPR also showed me. I liked that sentence. It
+settled the overlap question in one line. Over the six hours of snapshots, the
+number of nodes unique to GB7BED-5 read: zero, then six, then twenty-four, then
+twenty-eight, then zero again, then one. It was zero when I first looked and I
+had quietly promoted a snapshot to a law.
+
+The total count moved just as much. It sat in the seventies most of the
+afternoon, then at seventeen minutes past five it collapsed to fifteen, then
+climbed back to the low sixties. When I went to look at why, the cause was
+mundane: GB7BED-5 dropped its link at quarter past five, and because it fronts
+most of the backbone that GB7NPR also carries, losing it briefly took most of
+the map with it. Nothing in the actual network changed. One tunnel went down
+for a few minutes.
+
+That is the thing the six hours taught me that a single snapshot could not.
+The map is not a photograph of the network. It is a reading off an instrument,
+and the instrument drifts. Some of the drift is real churn out in the network.
+A lot of it is my three peers going up and down, and my own node going up and
+down, and quality thresholds set years ago by people I have never met.
+
+## The parts of the picture that are actually about me
+
+Once I stopped trusting the picture and started asking how it was made, most of
+its most striking features turned out to be properties of the instrument rather
+than the network. There are three things you can read off a network diagram,
+and mine misled me on all three.
+
+The **edges** form a star. Nodes attach to a hub and to almost nothing else,
+and dense local clustering, the very thing that makes a protein network look
+the way it does, is absent. That is not the network being sparse. It is my data
+being unable to express anything else. LinBPQ tells me that a node is reachable
+through a given peer. It does not tell me whether any two of those nodes are
+connected to each other. So my renderer draws one edge per table entry, from
+the node to the peer it came through, and a star is the only shape that rule
+can make. There is a name for this problem in interaction proteomics, where
+turning a pulldown into a list of interactions forces the same choice between a
+spoke model that collapses clustering and a matrix model that manufactures it. I
+had built a spoke model out of routing tables without knowing that was what I
+was doing.
+
+The **nodes** look sorted by callsign class, and I had a whole argument ready
+about why: GB7 stations are registered and documented, personal callsigns are
+not, so of course the legible ones dominate. Some days the numbers support a
+split and some days they do not, which is its own answer. But the precise
+question has a stable answer, and it is not the one my argument wanted. Ask how
+many nodes ever serve as somebody else's route, and it is three. GB7BDH,
+GB7BED-5, GB7NPR. Every other node in the graph, including the several dozen
+other GB7 stations, is a leaf. Hub status in my picture does not mean registered
+or important. It means one of my three peers. The most visually dominant feature
+of the whole map, the thing that made me think of protein networks in the first
+place, is a fact about where I happen to be standing.
+
+The **positions** are a physics simulation with a random seed. Nodes that share
+neighbours get pulled together, so distance in the picture carries a little
+meaning, but re-run the layout and things move. My own field has a famous
+version of this in the single-cell maps everyone reads too much into. As it
+happens the layout was telling the truth this time, GB7BED-5 and GB7NPR do land
+near each other and they do overlap, but I only know that because I computed it.
+Had it been coincidence the picture would have looked identical.
+
+## The threshold, and a null result worth keeping
+
+I had assumed the map faded out at some distance and that my generous settings
+were the reason I could see so far. NET/ROM gives every route a quality and it
+decays multiplicatively with each hop, so reachability attenuates whether or not
+the underlying links are healthy. Below a threshold called MINQUAL a node does
+not appear at all. Mine is set to one, and to zero on the internet-facing port.
+I am not merely permissive. I accept essentially everything that arrives, which
+is itself a deliberate choice: the default that ships with a simple
+configuration is one hundred and fifty, and I turned it right down.
+
+I expected that to be costing me, filling the table with junk. So I swept the
+threshold, and got a null result: raising it from one all the way to two hundred
+and ten removes only about a sixth of the nodes, with no cliff anywhere along
+the way. The routes I can see are overwhelmingly good ones. The generous setting
+is not propping up a picture full of phantoms. I am reporting this precisely
+because it is the sort of finding that quietly goes missing, the experiment that
+did not show the effect I went looking for.
+
+## A convention I nearly talked myself out of
+
+The advice everyone gives a new node operator is to peer with people near you.
+For a while my graph seemed to argue against it, since local peering is exactly
+what produces the overlapping, backbone-heavy picture I had been complaining
+about. I had it backwards.
+
+The convention is not about seeing more. It is about what the network can do
+when something breaks. Quality decays with distance, so short local paths stay
+strong, and a mesh of nearby nodes survives a backbone outage in a way a star
+hanging off one hub does not. What my numbers show is that I applied the right
+instinct on the wrong layer. An AXUDP link over the internet is not local in any
+meaningful sense. A tunnel to a node two hundred miles away costs exactly what a
+tunnel to Cambridge costs, and both of them land in the middle of the same
+backbone. Every IP peer I add is structurally a link to the centre. GB7BED-5
+contributing next to nothing on a good day is that fact stated numerically.
+
+The stations I cannot see are the ones that are genuinely local and genuinely on
+radio. Personal callsigns, no registry entry, no backbone peering, reachable
+only if somebody nearby is actually listening. Locality was always the right
+instinct. I had been chasing it over a transport where locality does not exist.
+
+## What I am building next
+
+- Keep the snapshots running. Six hours already changed my mind about one
+  sentence, so a few weeks should be worth having.
+- Get real edges. If I can ask each peer for its own routing table rather than
+  only the nodes it reaches, the spoke collapses into something nearer the
+  truth, and I find out whether the missing clustering is real.
+- Split RF from AXUDP and compare. I suspect they are two different networks
+  wearing the same name.
+- Sort out the flapping peer and the two silent ones, and see whether peering
+  into a genuinely different part of the network buys anything the current three
+  do not.
+- Draw the spoke and the matrix side by side. Neither is right, and showing how
+  far apart two defensible conventions land on identical data is probably the
+  most useful thing this whole exercise could produce.
+
+## Open question
+
+I set out thinking the packet network looked like a protein network. It does
+not, particularly. What the two turned out to share is the list of ways a
+picture of either one can quietly mislead you, which was not the post I sat down
+to write.
+
+The thing I still cannot answer is whether the stations I cannot see are a real
+population or a handful. If it is a handful, this is a good deal of theory about
+not very much. If you work on networks of any kind, biological, social or radio,
+I would like to hear where you think this breaks. And if you run a node,
+especially a quiet local one that nobody has peered with, I am now interested in
+you for reasons that are entirely self-serving.

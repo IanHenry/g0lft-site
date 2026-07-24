@@ -18,6 +18,8 @@ website:
         href: thinking.qmd
       - text: Guides
         href: guides.qmd
+      - text: Notebook
+        href: notebook.qmd
 
 format:
   html:
