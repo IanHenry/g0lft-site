@@ -45,7 +45,10 @@ wanted to see the packet network drawn that way instead.
 A FastAPI service parses LinBPQ's output, DuckDB stores it, and vis-network
 draws it in the browser. The result is a picture of the reachable network as
 seen from a village outside Cambridge, laid out by a force simulation rather
-than by geography. The [graph](https://gb7cam.org.uk/graph.html) is live.
+than by geography. The [graph](https://gb7cam.org.uk/graph.html) is live, and it
+sits alongside the [node's own site](https://gb7cam.org.uk). How the node itself
+came to exist, and the "packet desert" it sits in, I wrote about
+[separately](../../blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.qmd).
 
 The first time I rendered it properly I stopped, because I had seen the shape
 before. Not in radio.
@@ -65,8 +68,9 @@ Taking my list in order, because the map did answer most of it.
 
 **Six peers are configured. Three are up.** G0NMY-7 has been flapping on
 roughly a fifteen minute cycle, and GB7FCI-1 and GB7WOR-7 have not connected
-in over a week. So the first correction was to my own status page: six peers is
-a fact about my configuration file, not about the network. Through the three
+in over a week. So the first correction was to my own
+[status page](https://gb7cam.org.uk/status.html): six peers is a fact about my
+configuration file, not about the network. Through the three
 live links, as I write this, I can see about sixty-three distinct nodes.
 
 **The peers overlap heavily, which is what I suspected.** GB7BED-5 and GB7NPR
