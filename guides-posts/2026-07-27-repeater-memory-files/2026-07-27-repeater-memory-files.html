@@ -6,11 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ian Henry, G0LFT">
-<meta name="dcterms.date" content="2026-07-24">
-<meta name="description" content="I built a map of the nodes GB7CAM can reach because the table it came from was long and told me nothing. The map told me more, then it told me it would not hold still, and most of what moved turned out to be me">
+<meta name="dcterms.date" content="2026-07-27">
+<meta name="description" content="How to turn the RSGB repeater list into an organised, ready-to-import memory file — and the CSV traps that will bite you if you don’t.">
 
-<title>Packet Networks and Protein Networks</title>
+<title>Building a UK repeater memory file for your Yaesu</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -155,84 +154,291 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#why-bother" id="toc-why-bother" class="nav-link active" data-scroll-target="#why-bother">Why bother</a></li>
+  <li><a href="#the-input-the-rsgb-repeater-list" id="toc-the-input-the-rsgb-repeater-list" class="nav-link" data-scroll-target="#the-input-the-rsgb-repeater-list">The input: the RSGB repeater list</a></li>
+  <li><a href="#what-the-generator-does" id="toc-what-the-generator-does" class="nav-link" data-scroll-target="#what-the-generator-does">What the generator does</a>
+  <ul class="collapse">
+  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
+  <li><a href="#working-out-the-offset" id="toc-working-out-the-offset" class="nav-link" data-scroll-target="#working-out-the-offset">Working out the offset</a></li>
+  <li><a href="#choosing-the-mode" id="toc-choosing-the-mode" class="nav-link" data-scroll-target="#choosing-the-mode">Choosing the mode</a></li>
+  <li><a href="#bandwidth-the-one-that-surprised-me" id="toc-bandwidth-the-one-that-surprised-me" class="nav-link" data-scroll-target="#bandwidth-the-one-that-surprised-me">Bandwidth: the one that surprised me</a></li>
+  <li><a href="#ctcss" id="toc-ctcss" class="nav-link" data-scroll-target="#ctcss">CTCSS</a></li>
+  <li><a href="#organising-into-banks" id="toc-organising-into-banks" class="nav-link" data-scroll-target="#organising-into-banks">Organising into banks</a></li>
+  <li><a href="#airband" id="toc-airband" class="nav-link" data-scroll-target="#airband">Airband</a></li>
+  </ul></li>
+  <li><a href="#the-csv-traps" id="toc-the-csv-traps" class="nav-link" data-scroll-target="#the-csv-traps">The CSV traps</a>
+  <ul class="collapse">
+  <li><a href="#every-column-counts-including-the-ones-you-dont-use" id="toc-every-column-counts-including-the-ones-you-dont-use" class="nav-link" data-scroll-target="#every-column-counts-including-the-ones-you-dont-use">Every column counts, including the ones you don’t use</a></li>
+  <li><a href="#export-a-known-good-file-first" id="toc-export-a-known-good-file-first" class="nav-link" data-scroll-target="#export-a-known-good-file-first">Export a known-good file first</a></li>
+  <li><a href="#pad-the-unused-channels" id="toc-pad-the-unused-channels" class="nav-link" data-scroll-target="#pad-the-unused-channels">Pad the unused channels</a></li>
+  <li><a href="#name-length-and-character-set" id="toc-name-length-and-character-set" class="nav-link" data-scroll-target="#name-length-and-character-set">Name length and character set</a></li>
+  </ul></li>
+  <li><a href="#importing" id="toc-importing" class="nav-link" data-scroll-target="#importing">Importing</a></li>
+  <li><a href="#before-you-write-to-the-radio" id="toc-before-you-write-to-the-radio" class="nav-link" data-scroll-target="#before-you-write-to-the-radio">Before you write to the radio</a></li>
+  <li><a href="#doing-it-yourself" id="toc-doing-it-yourself" class="nav-link" data-scroll-target="#doing-it-yourself">Doing it yourself</a></li>
+  <li><a href="#related" id="toc-related" class="nav-link" data-scroll-target="#related">Related</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Packet Networks and Protein Networks</h1></header>
+<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Building a UK repeater memory file for your Yaesu</h1></header>
 
 <header id="title-block-header">
 
-<p class="author">Ian Henry, G0LFT</p>
 
-<p class="date">2026-07-24</p>
+<p class="date">2026-07-27</p>
 </header>
 
 
-<section id="packet-networks-and-protein-networks" class="level1">
-<h1>Packet Networks and Protein Networks</h1>
-<section id="what-i-wanted-to-see" class="level2">
-<h2 class="anchored" data-anchor-id="what-i-wanted-to-see">What I wanted to see</h2>
-<p><a href="https://gb7cam.org.uk">GB7CAM</a>, my packet node, keeps a table of the other nodes it can reach. It is long, it changes without telling me, and reading it is like reading a train timetable for a network you cannot picture. I wanted to picture it.</p>
-<p>I had specific things I was hoping to see. How my peers connect to each other, rather than just to me. Which nodes are most distant, out at the faint edge of what arrives. How much my links overlap, because I suspected they did. Whether the backbone nodes I keep hearing about, G8PZT at Kidderminster, GB7CIP at Caterham, actually show up in my own reachable set or whether they are just names other people mention. And, honestly, which of my peers sit closest together, because I like network graphs and wanted to look at one that was mine.</p>
-<p>Most packet maps online are geographic: nodes pinned to where they physically are, edges following the land. That is a reasonable thing to draw and it was not the thing I wanted. I spend my working life with a different kind of picture, where position carries no units and the shape is the point, and I wanted to see the packet network drawn that way instead.</p>
+<p><img src="../../images/memory-builder.png" class="img-fluid"></p>
+<section id="why-bother" class="level2">
+<h2 class="anchored" data-anchor-id="why-bother">Why bother</h2>
+<p>Typing several hundred repeaters into a handheld by hand is miserable, and you only have to do it again the next time the repeater list changes. Every modern Yaesu can import a CSV instead, which means the whole memory file can be <em>generated</em> — correctly, repeatably, and organised the way you actually operate.</p>
+<p>This guide describes the approach I use to build memory files for my FT5D and FTM-310 from the RSGB repeater list. It’s aimed at anyone comfortable running a small script, but the format notes are useful even if you plan to edit the CSV by hand — some of these traps cost me a lot of time.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>The programming software differs per radio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Each radio has its own Yaesu application, and each expects a <strong>different CSV layout</strong> — <strong>ADMS-14</strong> for the FT5D and <strong>ADMS-20</strong> for the FTM-310, for example. A file built for one will not import correctly into another.</p>
+</div>
+</div>
 </section>
-<section id="what-i-built" class="level2">
-<h2 class="anchored" data-anchor-id="what-i-built">What I built</h2>
-<p>A FastAPI service parses LinBPQ’s output, DuckDB stores it, and vis-network draws it in the browser. The result is a picture of the reachable network as seen from a village outside Cambridge, laid out by a force simulation rather than by geography. The <a href="https://gb7cam.org.uk/graph.html">graph</a> is live, and it sits alongside the <a href="https://gb7cam.org.uk">node’s own site</a>. How the node itself came to exist, and the “packet desert” it sits in, I wrote about <a href="../../blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html">separately</a>.</p>
-<p>The first time I rendered it properly I stopped, because I had seen the shape before. Not in radio.</p>
-<p>A protein-protein interaction network is a graph where each node is a protein and each edge means two proteins have been observed to touch. They are a standard object where I work and you develop a feel for them: mostly sparse, a few heavily connected proteins, a long tail with one or two partners each, tight clusters where a group all interact because they form a complex. My packet map had that flavour. That resemblance is where the title comes from, and it is also the first thing that did not survive contact with the numbers, so hold it loosely.</p>
+<section id="the-input-the-rsgb-repeater-list" class="level2">
+<h2 class="anchored" data-anchor-id="the-input-the-rsgb-repeater-list">The input: the RSGB repeater list</h2>
+<p>The source data is the RSGB repeater list, exported as CSV. The columns that matter are:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>callsign</code></td>
+<td>e.g.&nbsp;<code>GB3PI</code></td>
+</tr>
+<tr class="even">
+<td><code>band</code></td>
+<td><code>2M</code> or <code>70CM</code></td>
+</tr>
+<tr class="odd">
+<td><code>TX</code></td>
+<td>The <strong>repeater’s</strong> transmit frequency — this is <em>your</em> receive frequency</td>
+</tr>
+<tr class="even">
+<td><code>RX</code></td>
+<td>The <strong>repeater’s</strong> receive frequency — this is <em>your</em> transmit frequency</td>
+</tr>
+<tr class="odd">
+<td><code>modes</code></td>
+<td>Mode letters: <code>A</code> analogue FM, <code>F</code> Fusion/C4FM, <code>D</code> D-Star, <code>M</code> DMR</td>
+</tr>
+<tr class="even">
+<td><code>ctcss/cc</code></td>
+<td>Access tone, where one is required</td>
+</tr>
+<tr class="odd">
+<td><code>where</code></td>
+<td>Town or location, used for the channel name</td>
+</tr>
+<tr class="even">
+<td><code>lat</code>, <code>lon</code></td>
+<td>Used for distance and regional grouping</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>TX and RX are from the repeater’s point of view
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This catches everyone once. The list’s <code>TX</code> column is what you tune your receiver to, and <code>RX</code> is what your radio transmits on. Getting these the wrong way round produces a memory file that looks plausible and works for nothing.</p>
+</div>
+</div>
 </section>
-<section id="what-the-map-showed-me" class="level2">
-<h2 class="anchored" data-anchor-id="what-the-map-showed-me">What the map showed me</h2>
-<p>Taking my list in order, because the map did answer most of it.</p>
-<p><strong>Six peers are configured. Three are up.</strong> G0NMY-7 has been flapping on roughly a fifteen minute cycle, and GB7FCI-1 and GB7WOR-7 have not connected in over a week. So the first correction was to my own <a href="https://gb7cam.org.uk/status.html">status page</a>: six peers is a fact about my configuration file, not about the network. Through the three live links, as I write this, I can see about sixty-three distinct nodes.</p>
-<p><strong>The peers overlap heavily, which is what I suspected.</strong> GB7BED-5 and GB7NPR show me almost the same set: their Jaccard overlap sits around 0.75, against roughly 0.1 for the other two pairings. GB7BDH is the odd one out. It shows me fewer nodes, but a much larger fraction of them are ones I cannot reach any other way. Better than half of what GB7BDH contributes is unique to it, against a small fraction for the other two. So the honest summary of my three links is that two of them are looking at the same backbone and one is looking somewhere else. If I wanted to know which peer was earning its place, the graph answered it: the one reaching the different part of the network, not the one with the biggest count.</p>
-<p><strong>The first thing on my list is the one the map would not answer: how my peers link to each other.</strong> It shows me each node’s route back to me, not my peers’ routes amongst themselves. Now and then one peer does surface in another’s table, GB7BED-5 in GB7NPR’s as I write this, but the figure I get is a composite that could be a single direct hop or several composed together, and I cannot tell which without asking each peer for its own routing table. So whether GB7BDH, GB7BED-5 and GB7NPR are directly meshed or only meet somewhere out in the backbone, I do not yet know from here. My hunch is that with only three peers they largely are not, and that adding more would start to close the triangles, but that is a hunch, and a job for a later post once I can read their tables rather than only what they choose to advertise to me.</p>
-<p><strong>The backbone nodes I was looking for are there.</strong> G8PZT shows up reachable through all three peers at once, which is exactly what a shared piece of backbone should look like. GB7CIP shows up through two. Seeing G8PZT arrive by three independent paths was the single most satisfying thing in the picture, and it is also the redundancy point made concrete: a node everyone routes towards is a node you do not lose easily.</p>
-<p><strong>The distant edge is populated by the stations you would expect to be marginal.</strong> Out at the faint end sit things like M1BFP over towards Calne, hanging on at a route quality of one, and a cluster around Swindon and Oxford a little further in. These are the routes a stricter node would drop first.</p>
-<p>So the map did its job. I got the shape, the overlap, the backbone, the far edge. If the post ended here it would be a happy little tour.</p>
-</section>
-<section id="the-map-will-not-hold-still" class="level2">
-<h2 class="anchored" data-anchor-id="the-map-will-not-hold-still">The map will not hold still</h2>
-<p>I started storing a snapshot every fifteen minutes, mostly so I could do this sort of thing retrospectively later. Six hours in, the snapshots had already undermined the neatest sentence I had written.</p>
-<p>Earlier in the day I had measured GB7BED-5 and found it contributed zero unique nodes. Every node it showed me, GB7NPR also showed me. I liked that sentence. It settled the overlap question in one line. Over the six hours of snapshots, the number of nodes unique to GB7BED-5 read: zero, then six, then twenty-four, then twenty-eight, then zero again, then one. It was zero when I first looked and I had quietly promoted a snapshot to a law.</p>
-<p>The total count moved just as much. It sat in the seventies most of the afternoon, then at seventeen minutes past five it collapsed to fifteen, then climbed back to the low sixties. When I went to look at why, the cause was mundane: GB7BED-5 dropped its link at quarter past five, and because it fronts most of the backbone that GB7NPR also carries, losing it briefly took most of the map with it. Nothing in the actual network changed. One tunnel went down for a few minutes.</p>
-<p>That is the thing the six hours taught me that a single snapshot could not. The map is not a photograph of the network. It is a reading off an instrument, and the instrument drifts. Some of the drift is real churn out in the network. A lot of it is my three peers going up and down, and my own node going up and down, and quality thresholds set years ago by people I have never met.</p>
-</section>
-<section id="the-parts-of-the-picture-that-are-actually-about-me" class="level2">
-<h2 class="anchored" data-anchor-id="the-parts-of-the-picture-that-are-actually-about-me">The parts of the picture that are actually about me</h2>
-<p>Once I stopped trusting the picture and started asking how it was made, most of its most striking features turned out to be properties of the instrument rather than the network. There are three things you can read off a network diagram, and mine misled me on all three.</p>
-<p>The <strong>edges</strong> form a star. Nodes attach to a hub and to almost nothing else, and dense local clustering, the very thing that makes a protein network look the way it does, is absent. That is not the network being sparse. It is my data being unable to express anything else. LinBPQ tells me that a node is reachable through a given peer. It does not tell me whether any two of those nodes are connected to each other. So my renderer draws one edge per table entry, from the node to the peer it came through, and a star is the only shape that rule can make. There is a name for this problem in interaction proteomics, where turning a pulldown into a list of interactions forces the same choice between a spoke model that collapses clustering and a matrix model that manufactures it. I had built a spoke model out of routing tables without knowing that was what I was doing.</p>
-<p>The <strong>nodes</strong> look sorted by callsign class, and I had a whole argument ready about why: GB7 stations are registered and documented, personal callsigns are not, so of course the legible ones dominate. Some days the numbers support a split and some days they do not, which is its own answer. But the precise question has a stable answer, and it is not the one my argument wanted. Ask how many nodes ever serve as somebody else’s route, and it is three. GB7BDH, GB7BED-5, GB7NPR. Every other node in the graph, including the several dozen other GB7 stations, is a leaf. Hub status in my picture does not mean registered or important. It means one of my three peers. The most visually dominant feature of the whole map, the thing that made me think of protein networks in the first place, is a fact about where I happen to be standing.</p>
-<p>The <strong>positions</strong> are a physics simulation with a random seed. Nodes that share neighbours get pulled together, so distance in the picture carries a little meaning, but re-run the layout and things move. My own field has a famous version of this in the single-cell maps everyone reads too much into. As it happens the layout was telling the truth this time, GB7BED-5 and GB7NPR do land near each other and they do overlap, but I only know that because I computed it. Had it been coincidence the picture would have looked identical.</p>
-</section>
-<section id="the-threshold-and-a-null-result-worth-keeping" class="level2">
-<h2 class="anchored" data-anchor-id="the-threshold-and-a-null-result-worth-keeping">The threshold, and a null result worth keeping</h2>
-<p>I had assumed the map faded out at some distance and that my generous settings were the reason I could see so far. NET/ROM gives every route a quality and it decays multiplicatively with each hop, so reachability attenuates whether or not the underlying links are healthy. Below a threshold called MINQUAL a node does not appear at all. Mine is set to one, and to zero on the internet-facing port. I am not merely permissive. I accept essentially everything that arrives, which is itself a deliberate choice: the default that ships with a simple configuration is one hundred and fifty, and I turned it right down.</p>
-<p>I expected that to be costing me, filling the table with junk. So I swept the threshold, and got a null result: raising it from one all the way to two hundred and ten removes only about a sixth of the nodes, with no cliff anywhere along the way. The routes I can see are overwhelmingly good ones. The generous setting is not propping up a picture full of phantoms. I am reporting this precisely because it is the sort of finding that quietly goes missing, the experiment that did not show the effect I went looking for.</p>
-</section>
-<section id="a-convention-i-nearly-talked-myself-out-of" class="level2">
-<h2 class="anchored" data-anchor-id="a-convention-i-nearly-talked-myself-out-of">A convention I nearly talked myself out of</h2>
-<p>The advice everyone gives a new node operator is to peer with people near you. For a while my graph seemed to argue against it, since local peering is exactly what produces the overlapping, backbone-heavy picture I had been complaining about. I had it backwards.</p>
-<p>The convention is not about seeing more. It is about what the network can do when something breaks. Quality decays with distance, so short local paths stay strong, and a mesh of nearby nodes survives a backbone outage in a way a star hanging off one hub does not. What my numbers show is that I applied the right instinct on the wrong layer. An AXUDP link over the internet is not local in any meaningful sense. A tunnel to a node two hundred miles away costs exactly what a tunnel to Cambridge costs, and both of them land in the middle of the same backbone. Every IP peer I add is structurally a link to the centre. GB7BED-5 contributing next to nothing on a good day is that fact stated numerically.</p>
-<p>The stations I cannot see are the ones that are genuinely local and genuinely on radio. Personal callsigns, no registry entry, no backbone peering, reachable only if somebody nearby is actually listening. Locality was always the right instinct. I had been chasing it over a transport where locality does not exist.</p>
-</section>
-<section id="what-i-am-building-next" class="level2">
-<h2 class="anchored" data-anchor-id="what-i-am-building-next">What I am building next</h2>
+<section id="what-the-generator-does" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-generator-does">What the generator does</h2>
+<p>The script reads that CSV and writes a complete memory file. The useful work is in the decisions it makes along the way.</p>
+<section id="filtering" class="level3">
+<h3 class="anchored" data-anchor-id="filtering">Filtering</h3>
+<p>Only entries worth having end up in the file:</p>
 <ul>
-<li>Keep the snapshots running. Six hours already changed my mind about one sentence, so a few weeks should be worth having.</li>
-<li>Get real edges. If I can ask each peer for its own routing table rather than only the nodes it reaches, the spoke collapses into something nearer the truth, and I find out whether the missing clustering is real.</li>
-<li>Split RF from AXUDP and compare. I suspect they are two different networks wearing the same name.</li>
-<li>Sort out the flapping peer and the two silent ones, and see whether peering into a genuinely different part of the network buys anything the current three do not.</li>
-<li>Draw the spoke and the matrix side by side. Neither is right, and showing how far apart two defensible conventions land on identical data is probably the most useful thing this whole exercise could produce.</li>
+<li>Must be <strong>FM or Fusion</strong> (<code>A</code> or <code>F</code> in the modes column) — a D-Star-only or DMR-only repeater is no use to a Fusion radio.</li>
+<li>Must be <strong>2 m (144–148 MHz) or 70 cm (430–440 MHz)</strong>.</li>
+<li><strong>Cross-band repeaters are dropped</strong> — if the input is on 2 m the output must also be on 2 m, otherwise the offset logic is meaningless.</li>
 </ul>
 </section>
-<section id="open-question" class="level2">
-<h2 class="anchored" data-anchor-id="open-question">Open question</h2>
-<p>I set out thinking the packet network looked like a protein network. It does not, particularly. What the two turned out to share is the list of ways a picture of either one can quietly mislead you, which was not the post I sat down to write.</p>
-<p>The thing I still cannot answer is whether the stations I cannot see are a real population or a handful. If it is a handful, this is a good deal of theory about not very much. If you work on networks of any kind, biological, social or radio, I would like to hear where you think this breaks. And if you run a node, especially a quiet local one that nobody has peered with, I am now interested in you for reasons that are entirely self-serving.</p>
-
-
+<section id="working-out-the-offset" class="level3">
+<h3 class="anchored" data-anchor-id="working-out-the-offset">Working out the offset</h3>
+<p>The offset is derived rather than assumed, by subtracting your transmit frequency from your receive frequency:</p>
+<ul>
+<li>difference essentially zero → simplex, direction <code>OFF</code></li>
+<li>positive → <code>+RPT</code></li>
+<li>negative → <code>-RPT</code></li>
+</ul>
+<p>with the magnitude used as the offset value. This handles the non-standard splits correctly instead of hard-coding 600 kHz and 1.6 MHz everywhere.</p>
 </section>
+<section id="choosing-the-mode" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-the-mode">Choosing the mode</h3>
+<p>Straight from the mode letters:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>RSGB modes</th>
+<th>Radio setting</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Both <code>A</code> and <code>F</code></td>
+<td><code>AMS</code></td>
+<td>Automatic mode select — picks FM or C4FM per transmission</td>
+</tr>
+<tr class="even">
+<td><code>F</code> only</td>
+<td><code>DN</code></td>
+<td>Fusion digital narrow</td>
+</tr>
+<tr class="odd">
+<td>Neither</td>
+<td><code>FM</code></td>
+<td>Plain analogue FM</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bandwidth-the-one-that-surprised-me" class="level3">
+<h3 class="anchored" data-anchor-id="bandwidth-the-one-that-surprised-me">Bandwidth: the one that surprised me</h3>
+<p>UK FM channels are 12.5 kHz, so <strong>narrow</strong> is correct for analogue. But C4FM needs the <strong>wide</strong> IF filter — my hotspot won’t decode reliably otherwise. So <code>Narrow</code> is set <code>ON</code> for FM channels and <code>OFF</code> for anything <code>DN</code> or <code>AMS</code>.</p>
+</section>
+<section id="ctcss" class="level3">
+<h3 class="anchored" data-anchor-id="ctcss">CTCSS</h3>
+<p>Tones are only applied when the value is a <strong>real CTCSS tone</strong>. The list sometimes carries DMR colour codes in the same column, and a colour code of <code>7</code> is not a 7 Hz tone. Validating against the standard 50-tone table and ignoring anything below 60 Hz avoids writing nonsense into the file.</p>
+</section>
+<section id="organising-into-banks" class="level3">
+<h3 class="anchored" data-anchor-id="organising-into-banks">Organising into banks</h3>
+<p>This is what makes the file pleasant to use. Repeaters are grouped by distance from home using the haversine formula, then by region:</p>
+<ul>
+<li><strong>Super local</strong> (under 25 km) — the ones you actually use</li>
+<li><strong>Local</strong> (25–50 km)</li>
+<li><strong>Regional banks</strong> — East Anglia, Central, the South East split east/west, the South West, Wales, the North split three ways, Scotland split north and south, and Northern Ireland</li>
+</ul>
+<p>Within each bank, entries are sorted <code>GB</code> callsigns first, then <code>MB</code>, then everything else, each sorted by distance. If a bank overflows the radio’s channel limit, it’s the least useful entries that fall off the end rather than your local repeater.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Mind the per-bank limit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The FT5D allows <strong>100 channels per bank</strong>. Exceed it and ADMS rejects the import. This is why the regions are split geographically rather than lumped into “the North” — and why the FTM-310, which has no per-group limit but a 999-channel ceiling, uses a different layout.</p>
+</div>
+</div>
+</section>
+<section id="airband" class="level3">
+<h3 class="anchored" data-anchor-id="airband">Airband</h3>
+<p>I also include a block of receive-only airband channels — local fields, the London airports, VOLMET, and 121.5 — set to <strong>AM</strong>, simplex, with <strong>8.33 kHz</strong> steps. Worth having somewhere in the file even if you rarely use it.</p>
+</section>
+</section>
+<section id="the-csv-traps" class="level2">
+<h2 class="anchored" data-anchor-id="the-csv-traps">The CSV traps</h2>
+<p>These are the ones that cost me real time.</p>
+<section id="every-column-counts-including-the-ones-you-dont-use" class="level3">
+<h3 class="anchored" data-anchor-id="every-column-counts-including-the-ones-you-dont-use">Every column counts, including the ones you don’t use</h3>
+<p>The FT5D’s ADMS-14 format has <strong>54 fields</strong>. I originally worked from a column list that omitted <code>DCS Polarity</code>. That single missing field shifted everything after it one place to the left — which quietly moved the bank flags into the <code>Clock Shift</code> column and switched Clock Shift on for every channel. Nothing errored; the radio just behaved oddly.</p>
+<p><strong>If something is set that you never asked for, suspect a column offset</strong>, and count fields against a file exported from the software itself.</p>
+</section>
+<section id="export-a-known-good-file-first" class="level3">
+<h3 class="anchored" data-anchor-id="export-a-known-good-file-first">Export a known-good file first</h3>
+<p>The fastest way to learn the format is to programme two or three channels by hand in ADMS, export to CSV, and read it. That gives you the exact field count, the exact spelling of values like <code>High (5W)</code> or <code>RX Normal TX Normal</code>, and a reference to diff against.</p>
+</section>
+<section id="pad-the-unused-channels" class="level3">
+<h3 class="anchored" data-anchor-id="pad-the-unused-channels">Pad the unused channels</h3>
+<p>Write a row for <em>every</em> channel, not just the ones you use. Empty rows are the channel number followed by the right number of empty fields. A short file can import in unexpected ways.</p>
+</section>
+<section id="name-length-and-character-set" class="level3">
+<h3 class="anchored" data-anchor-id="name-length-and-character-set">Name length and character set</h3>
+<p>Names are capped (16 characters on these radios) and restricted to letters, numbers, spaces and dashes. Strip anything else before writing rather than letting the software silently mangle it.</p>
+</section>
+</section>
+<section id="importing" class="level2">
+<h2 class="anchored" data-anchor-id="importing">Importing</h2>
+<ol type="1">
+<li>Open the right application for your radio — ADMS-14, ADMS-20 and so on.</li>
+<li><strong>File → Import</strong> and select your CSV.</li>
+<li><strong>Set the bank names</strong> in the bank-names tab before doing anything else.</li>
+<li><strong>File → Save As</strong> to save the project file.</li>
+<li>Write to the radio.</li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Set bank names before saving
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If a bank has channels assigned but no name, ADMS-14 crashes on save with an index error rather than telling you what’s wrong. Name every bank you’ve used first.</p>
+</div>
+</div>
+<p>Bank names are limited to six characters, which is why mine read <code>SLOCAL</code>, <code>LOCAL</code>, <code>EANGLA</code>, <code>CENTR</code>, <code>NENGLS</code>, <code>SCOTS</code> and so on.</p>
+</section>
+<section id="before-you-write-to-the-radio" class="level2">
+<h2 class="anchored" data-anchor-id="before-you-write-to-the-radio">Before you write to the radio</h2>
+<ul>
+<li><strong>Back up what’s on the radio first.</strong> Read the current memory out and save it, so you can get back if the new file isn’t what you expected.</li>
+<li><strong>Check a handful of channels by hand</strong> against the repeater list — one simplex, one 2 m repeater, one 70 cm, one Fusion — before trusting the other
+<ol start="895" type="1">
+<li></li>
+</ol></li>
+<li><strong>Check the offsets</strong> on a couple of non-standard repeaters specifically.</li>
+</ul>
+</section>
+<section id="doing-it-yourself" class="level2">
+<h2 class="anchored" data-anchor-id="doing-it-yourself">Doing it yourself</h2>
+<p>The generator is a single Python script with no dependencies beyond the standard library — <code>csv</code>, <code>math</code> and <code>re</code>. If you want to adapt the approach, the parts you’d change are your home latitude and longitude, the bank boundaries, and the field layout for your particular radio.</p>
+<p>Mine are on GitHub as <a href="https://github.com/IanHenry/yaesu-memory-builder">yaesu-memory-builder</a>, MIT licensed — <code>--lat</code> and <code>--lon</code> set your own location, and your club net, hotspot and simplex channels go in a <code>special_channels.csv</code>.</p>
+</section>
+<section id="related" class="level2">
+<h2 class="anchored" data-anchor-id="related">Related</h2>
+<ul>
+<li><a href="../../projects/radio-memory-builder.html">Radio Memory Builder</a> — the project page</li>
+<li><a href="https://rsgb.org/main/operating/repeater-management/">RSGB repeater list</a></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
