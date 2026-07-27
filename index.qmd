@@ -5,18 +5,33 @@ title: "G0LFT"
 
 ## Welcome
 
-I’m Dr Ian Henry a licensed UK radio amateur and member of [Cambridge and District Amateur Radio Club (CDARC)](https://www.cdarc.org.uk/). I'm also a member of the [Radio Society of Great Britain (RSGB)](https://rsgb.org/) and a published author in the RSGB magazine [RadCom](https://rsgb.org/main/publications-archives/radcom/), with an article titled "Understanding FT8 through DNA-sequencing parallels" (May 2026).  If you have found your way here through reading this article, please check out my [blog post](/blog-posts/2026-04-25-ft8_dna_radcom.html) on the subject.
+I'm Dr Ian Henry, a licensed UK radio amateur living just south of Cambridge,
+and a member of [Cambridge and District Amateur Radio Club (CDARC)](https://www.cdarc.org.uk/)
+and the [Radio Society of Great Britain (RSGB)](https://rsgb.org/).
 
-If you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer.
+If you've found your way here from one of my
+[RadCom articles or talks](talks.qmd) — welcome. They're all listed on the
+[Talks & Publications](talks.qmd) page, including
+*Understanding FT8 through DNA-sequencing parallels* and the
+[blog post](blog-posts/2026-04-25-ft8_dna_radcom.qmd) that accompanies it.
+
+If you'd like to get in touch, collaborate, or talk radio, you can find contact
+details in the footer.
 
 ## Teaching, learning, and amateur radio
 
-This site brings together reflective writing, theory, and practical guides
-focused on teaching, SDR, and modern amateur radio practice.
+This site brings together reflective writing, theory, practical guides, and the
+things I'm building — all focused on teaching, SDR, and modern amateur radio
+practice.
 
-You’ll find:
+You'll find:
 
-- blog posts exploring ideas and experiences
-- theory-focused writing on learning and SDR
-- practical guides for applying those ideas in practice
+- [**Projects**](projects.qmd) — packet radio infrastructure, machine learning
+  for signal identification, and SDR builds
+- [**Blog**](blog.qmd) — posts exploring ideas and experiences
+- [**Thinking**](thinking.qmd) — theory-focused writing on learning and SDR
+- [**Guides**](guides.qmd) — practical guides for applying those ideas
+- [**Notebook**](notebook.qmd) — working notes: speculative and self-correcting
+- [**Talks & Publications**](talks.qmd) — articles and conference sessions
 
+There's more about me and how I got here on the [About](about.qmd) page.

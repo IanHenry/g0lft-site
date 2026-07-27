@@ -12,6 +12,8 @@ website:
     left:
       - text: Home
         href: index.qmd
+      - text: Projects
+        href: projects.qmd
       - text: Blog
         href: blog.qmd
       - text: Thinking
@@ -20,6 +22,10 @@ website:
         href: guides.qmd
       - text: Notebook
         href: notebook.qmd
+      - text: Talks & Publications
+        href: talks.qmd
+      - text: About
+        href: about.qmd
 
 format:
   html:

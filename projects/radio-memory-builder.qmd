@@ -1,0 +1,103 @@
+---
+title: "Radio Memory Builder"
+description: "Generating organised memory-channel files for Yaesu FT5D and FTM-310 radios from the RSGB repeater list."
+image: /images/memory-builder.png
+categories: [Yaesu, Repeaters, Automation, C4FM]
+---
+
+## What it is
+
+A tool that turns the RSGB UK repeater list into ready-to-import memory-channel
+files for my Yaesu radios — the **FT5D** handheld and the **FTM-310** in the
+car. Instead of typing hundreds of channels by hand, it generates the
+manufacturer's CSV format directly, with every channel correctly configured and
+sensibly organised.
+
+Alongside the UK repeater network, the files include a set of key **airband**
+frequencies for listening.
+
+The generator handles the details that make a memory file actually usable:
+
+- **Geographic banks** — repeaters grouped into regional banks (local, East
+  Anglia, Central, the North, Scotland, Northern Ireland and so on), sorted by
+  distance from home, so the right repeaters are a bank-select away when
+  travelling.
+- **Correct mode per repeater** — analogue FM, Fusion/C4FM, or automatic mode
+  select (AMS), derived from the RSGB mode codes.
+- **UK band-plan conventions** — 12.5 kHz steps, narrow FM, wide for C4FM,
+  CTCSS tones, and cross-band repeaters filtered out.
+- **Priority rules** — GB and MB callsigns first, so if a bank hits the radio's
+  channel limit it's the least useful entries that drop.
+
+## Why I built it
+
+Programming a modern handheld by hand is tedious and error-prone, and the
+manufacturer's CSV format is unforgiving — a single misplaced column silently
+shifts every setting after it. Each radio also has its own programming
+application — **ADMS-14** for the FT5D and **ADMS-20** for the FTM-310 — and each
+expects a different file layout.
+
+I wanted a repeatable way to rebuild the memory file whenever the repeater list
+changes, and the *same* organisation on both radios, so the bank I reach for in
+the car is the bank I reach for on the handheld.
+
+It also turned into a small exercise in reverse-engineering an undocumented
+file format, which was more interesting than it had any right to be.
+
+## Current status & goals
+
+- **FT5D (ADMS-14): working** — the full 54-field CSV, 900 channels across 16
+  geographic banks, imported and running on the radio.
+- **FTM-310 (ADMS-20): working** — a different 22-field layout, 999 channels, no
+  per-group limit, with the local channels flagged into the quick-access memory
+  group instead of banks.
+- **Coverage:** the full UK repeater network plus around 70 airband frequencies
+  for listening — local fields, the major airports, VOLMET and 121.5 — set to AM
+  with 8.33 kHz steps.
+- **Format bugs found and fixed** — most notably a missing DCS-polarity column
+  that shifted the whole flags block and switched Clock Shift on for every
+  channel, and an off-by-one in the bank-flag array that wrote into the comment
+  field.
+- **Published** as [yaesu-memory-builder](https://github.com/IanHenry/yaesu-memory-builder)
+  (MIT). Your own QTH and personal channels are parameters, so it builds for any
+  location rather than only mine.
+- **Goals:** factor the per-radio layouts into profiles rather than a script per
+  radio, and re-run automatically when the RSGB list is updated. A small **web tool** — upload the repeater list, pick your radio and
+  your location, download the CSV — is an appealing next step if it proves robust
+  enough.
+
+## How it works
+
+The input is the RSGB repeater list as CSV. The generator filters it to FM and
+Fusion repeaters on 2 m and 70 cm, discards cross-band entries, derives each
+offset by subtracting transmit from receive frequency, maps the RSGB mode letters
+onto FM/DN/AMS, and validates access tones against the real CTCSS table so that
+DMR colour codes in the same column don't become bogus tones. Repeaters are then
+grouped by distance from home and by region, sorted so GB and MB callsigns
+survive if a bank fills up, and written out in the exact field layout the
+radio's programming software expects.
+
+There's a full write-up of the method, and the CSV traps involved, in the guide
+below.
+
+## The mobile installation
+
+The FTM-310 is a recent addition to the car, a BMW F30. It runs from a boot-lip
+mount antenna and is powered directly from the vehicle battery in the boot,
+which keeps the supply clean and avoids loading the cabin circuits.
+
+## Key links
+
+- [RSGB repeater list](https://rsgb.org/main/operating/repeater-management/) —
+  the source data
+- [yaesu-memory-builder](https://github.com/IanHenry/yaesu-memory-builder) —
+  the code (MIT licensed)
+- [Yaesu ADMS programming software](https://www.yaesu.com/) — ADMS-14 (FT5D)
+  and ADMS-20 (FTM-310)
+
+## Related posts
+
+- [Building a UK repeater memory file for your Yaesu](../guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.qmd)
+  — the full method, and the CSV traps to avoid
+- [MMDVM Digital Voice Hotspot](mmdvm-hotspot.qmd) — the `G0LFT HOTSPOT` channel
+  in the memory file

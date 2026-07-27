@@ -1,0 +1,59 @@
+---
+title: "AI Signal Classifier"
+description: "A machine-learning system that identifies amateur-radio modes from RF, with the goal of automatic decoding."
+image: /images/constellation.png
+categories: [Machine Learning, SDR, Digital Modes, DSP]
+---
+
+## What it is
+
+A machine-learning system that classifies amateur-radio modes directly from RF
+(IQ) data, and — increasingly — decodes them. The aim is a pipeline that can
+look at a stretch of spectrum, find the signals in it, identify each mode, and
+extract the message: **capture → detect → extract → decode → annotate**.
+
+It combines two complementary views of a signal:
+
+- a **wideband spectrogram detector** that locates signals in time and
+  frequency across a span, and
+- a **narrowband IQ classifier** that identifies the exact mode of an
+  individual signal and validates it by decoding.
+
+## Why I built it
+
+It grew out of watching FT8 decode stations I couldn't even hear, and wondering
+how much of the "which mode is this?" work could be done automatically. The
+long-term goal is a live assistant that can scan a band, tell you what's on it,
+and decode what it finds — eventually as an overlay for an SDR such as a
+FlexRadio.
+
+## Current status & goals
+
+- **Validated mode generators** — accurate generators for the core keyed modes
+  (RTTY, PSK31/63, Navtex, Morse) that are decode-validated to zero character
+  error rate, so the training data is faithful rather than a generic
+  approximation.
+- **Narrowband classifier** — a length-agnostic CNN reaches ~99% on clean
+  1-second captures and confirmed a key hypothesis: distinguishing baud rates
+  (e.g. RTTY45 vs RTTY50) that shorter captures can't resolve.
+- **Wideband detector** — a spectrogram object-detector (YOLO) trained purely on
+  synthetic scenes *transfers to real off-air signals* and stays quiet on noise.
+- **Frequency-prior / band-plan layer** — narrow, frequency-defined modes like
+  FT8/FT4 are routed straight to a decoder from their known dial frequencies
+  rather than relying on the detector.
+- **Voice-to-text** — SSB/AM audio is demodulated and transcribed with Whisper,
+  a differentiator I haven't seen elsewhere.
+- **Goals:** add FT8/FT4 structural handling, harden real-world capture and
+  rejection of out-of-class signals, and close the loop into a live
+  identify-and-decode interface.
+
+## Key links
+
+- [fldigi](http://www.w1hkj.com/) — reference decoder used for validation
+- [WSJT-X](https://wsjt.sourceforge.io/wsjtx.html) — FT8/FT4 reference
+- [TorchSig](https://github.com/TorchDSP/torchsig) — synthetic RF dataset tooling
+
+## Related posts
+
+- [Understanding FT8 through DNA-sequencing parallels](../blog-posts/2026-04-25-ft8_dna_radcom.qmd)
+- [SDR theory](../thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.qmd)

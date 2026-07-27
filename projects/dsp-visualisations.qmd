@@ -1,0 +1,61 @@
+---
+title: "DSP Visualisations"
+description: "Tools and writing that make IQ data and digital signal processing visible and intuitive."
+image: /images/iq-analyser.png
+categories: [DSP, IQ, SDR, Teaching]
+---
+
+## What it is
+
+A running effort to make the digital signal processing behind SDR *visible* —
+IQ constellations, spectra, and the way real signals behave — through small
+tools and explanatory writing. It includes a simple IQ-visualisation plugin for
+SDRconnect for people who want a quick feel for IQ without the GNU Radio
+learning curve, alongside step-by-step setup notes.
+
+## Why I built it
+
+I care as much about *why* things work as *how*, and IQ/DSP concepts click far
+faster when you can see them move. These pieces are aimed at demystifying the
+theory rather than just listing procedures.
+
+## Current status & goals
+
+- Setup guide for IQ visualisation with an SDRplay (GNU Radio / Radioconda), plus
+  a lightweight SDRconnect plugin as a quick-start path.
+- Explorations of FM and repeater IQ.
+- The material became a full talk, *Making the invisible visible*, given to
+  CDARC in May 2026 and invited to the RSGB Convention in October 2026, and a
+  RadCom article, *Seeing signals: I and Q from first principles* (September
+  2026).
+- A [purpose-built Raspberry Pi device](../projects/raspberry-pi-sdr.qmd) plots
+  live IQ and demodulates the same signal to audio for demonstrations.
+
+## Key links
+
+**My code**
+
+- [sdrconnect-iq-visualiser](https://github.com/IanHenry/sdrconnect-iq-visualiser)
+  — the SDRconnect IQ visualisation plugin
+- [sdrplay-gnuradio-examples](https://github.com/IanHenry/sdrplay-gnuradio-examples)
+  — GNU Radio flow graphs for SDRplay devices
+
+**Elsewhere on this site**
+
+- [Setup for IQ visualisation and digital signal processing](../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd)
+- [Talks & Publications](../talks.qmd) — the IQ talk and article
+- [Raspberry Pi SDR](../projects/raspberry-pi-sdr.qmd) — the demonstration device
+
+**Tools used**
+
+- [SDRplay](https://www.sdrplay.com/) — the RSP receivers
+- [GNU Radio](https://www.gnuradio.org/about/) — the DSP environment
+- [Radioconda](https://github.com/radioconda/radioconda-installer) — the easy
+  path to a working GNU Radio install
+
+## Related posts
+
+- [Setup for IQ visualisation and digital signal processing](../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd)
+- [Exploring FM IQ](../thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.qmd)
+- [Exploring repeater IQ](../thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.qmd)
+- [SDR theory](../thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.qmd)

@@ -1,0 +1,21 @@
+---
+title: "Projects"
+listing:
+  contents: projects
+  sort: false
+  type: grid
+  grid-columns: 2
+  categories: true
+  fields: [image, title, description, categories]
+---
+<img src="images/main_logo.png" class="centered-image">
+
+## Projects
+
+A home for the things I'm building around amateur radio — packet
+infrastructure, machine learning for signal identification, SDR
+experiments, and tools that make the underlying DSP visible.
+
+Each project has its own page describing what it is, why I built it, where
+it's at now, and links to related writing. Some are live services, others
+are ongoing experiments and works in progress.

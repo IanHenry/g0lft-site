@@ -1,0 +1,97 @@
+---
+title: "Talks & Publications"
+---
+<img src="images/main_logo.png" class="centered-image">
+
+## Talks & Publications
+
+Writing and speaking on amateur radio, digital modes, and the theory behind
+them. I'm particularly interested in explaining *why* things work rather than
+only how — and in finding the parallels between radio and other technical
+fields.
+
+If you'd like me to speak to your club or group, contact details are in the
+footer.
+
+## Publications
+
+### Understanding FT8 through DNA-sequencing parallels
+
+**RadCom**, Radio Society of Great Britain — May 2026
+
+FT8 routinely decodes stations at signal-to-noise ratios as low as −24 dB, on
+bands that sound completely dead. My day job is with DNA sequencing systems,
+which face a strikingly similar problem: reading billions of individually
+minute, noise-swamped molecular signals at better than 99.9% accuracy. The two
+fields arrived independently at the same engineering answers — structured
+message formats, precise timing synchronisation, strong error correction, and
+quality metrics.
+
+The article uses those parallels to explain how FT8 achieves such extraordinary
+weak-signal performance. No molecular biology or advanced mathematics required
+— just the engineering trade-offs that make information transfer possible in
+high-noise environments.
+
+- [Blog post about the article](blog-posts/2026-04-25-ft8_dna_radcom.qmd)
+- [RadCom](https://rsgb.org/main/publications-archives/radcom/)
+
+### Seeing signals: I and Q from first principles
+
+**RadCom**, Radio Society of Great Britain — September 2026 *(scheduled)*
+
+IQ data sits at the heart of every modern software-defined radio, yet it's
+usually presented as an equation rather than something you can picture. This
+article builds I and Q up from first principles and with minimal mathematics:
+why a single measurement of a wave is ambiguous, how a pair of quadrature
+measurements resolves that ambiguity completely, and what the resulting IQ plot
+actually shows you for real signals — from a bare carrier and CW, through AM,
+FM and SSB, to the digital modes.
+
+Resources referenced in the article:
+
+- [Setup for IQ visualisation and digital signal processing](guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd)
+- [sdrconnect-iq-visualiser](https://github.com/IanHenry/sdrconnect-iq-visualiser)
+  — my SDRconnect IQ visualisation plugin
+- [sdrplay-gnuradio-examples](https://github.com/IanHenry/sdrplay-gnuradio-examples)
+  — my GNU Radio flow graphs for SDRplay devices
+- [SDRplay](https://www.sdrplay.com/) ·
+  [GNU Radio](https://www.gnuradio.org/about/) ·
+  [Radioconda](https://github.com/radioconda/radioconda-installer)
+
+## Invited talks
+
+### Understanding FT8 through DNA-sequencing parallels
+
+**RSGB Convention 2026** — Saturday 10 October 2026
+
+An invited convention session developing the themes of the May 2026 RadCom
+article: why FT8 and modern DNA sequencing solve the same weak-signal problem
+in the same ways, and what that tells us about digital mode design.
+
+- [RSGB Convention speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-speakers/)
+
+### Making the invisible visible: understanding your SDR through IQ visualisation
+
+**RSGB Convention 2026** — Saturday 10 October 2026
+
+An invited convention session introducing IQ visually and with minimal
+mathematics. It covers why IQ matters for modern radios, how to read an IQ
+plot, and what analogue voice (AM, FM, SSB) and the digital data modes (CW,
+RTTY, FT8, PSK, QAM) each look like in the IQ plane — finishing with a live
+demonstration using a purpose-built Raspberry Pi IQ visualiser.
+
+- [RSGB Convention speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-speakers/)
+- [Raspberry Pi SDR](projects/raspberry-pi-sdr.qmd) — the demonstration device
+
+### Making the invisible visible: understanding SDR through IQ visualisation
+
+[**Cambridge and District Amateur Radio Club (CDARC)**](https://www.cdarc.org.uk/)
+— 8 May 2026
+
+The first outing of the IQ talk, given to my home club. Starting from the idea
+that a wave is the shadow of something rotating, it builds up to I and Q, then
+works through what noise, carriers, CW, AM, FM, SSB and the digital modes each
+look like on an IQ plot — with a live Raspberry Pi and RTL-SDR showing real
+signals off air.
+
+- [Raspberry Pi SDR](projects/raspberry-pi-sdr.qmd) — the demonstration device

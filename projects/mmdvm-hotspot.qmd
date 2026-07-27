@@ -1,0 +1,54 @@
+---
+title: "MMDVM Digital Voice Hotspot"
+description: "A Raspberry Pi and MMDVM hat running WPSD, giving full-power-free access to the digital voice networks from home."
+categories: [Digital Voice, C4FM, MMDVM, Raspberry Pi, WPSD]
+---
+
+## What it is
+
+A personal digital voice hotspot: a **Raspberry Pi 5** with a **duplex MMDVM
+hat**, running [**WPSD**](https://w0chp.radio/wpsd/). It puts a low-power digital
+voice access point on my desk, so a handheld can reach the digital voice networks
+without needing to be in range of a repeater.
+
+Being duplex, it transmits and receives simultaneously on separate frequencies —
+so it behaves like a miniature repeater rather than requiring the turn-taking a
+simplex hotspot imposes. It gives me access to both **DMR** and **YSF**
+(System Fusion) networks, and works with the FT5D handheld and the FTM-200DE in
+the shack.
+
+It appears in my radios' memory files as the `G0LFT HOTSPOT` channel — 438.725
+MHz receive, 434.725 MHz transmit, in Fusion (`DN`) mode with the wide IF
+filter, which C4FM needs to decode reliably.
+
+## Why I built it
+
+Cambridge has repeater coverage, but a hotspot removes the dependency entirely:
+it works from indoors, at very low power, and lets me move between the digital
+voice networks without retuning anything. It's also the most convenient way to
+experiment with the digital modes — reflectors and talkgroups are a
+configuration change rather than a drive to somewhere with coverage.
+
+It's the piece of infrastructure that made the digital side of the hobby
+practical for me day to day, which is why the wide-IF discovery it prompted ended
+up baked into my [memory-channel builder](radio-memory-builder.qmd).
+
+## Current status & goals
+
+- **Built and in daily use**, running WPSD on a Pi 5 with a duplex MMDVM hat.
+- Gives access to the **DMR** and **YSF** networks.
+- Works with the FT5D handheld and the FTM-200DE via the same `G0LFT HOTSPOT`
+  memory channel.
+
+## Key links
+
+- [WPSD](https://w0chp.radio/wpsd/) — the hotspot software (a modern successor
+  to Pi-Star)
+- [MMDVM](https://github.com/g4klx/MMDVMHost) — the multi-mode digital voice
+  modem project
+
+## Related
+
+- [Radio Memory Builder](radio-memory-builder.qmd) — the hotspot's memory channel
+  and the wide/narrow bandwidth rule it taught me
+- [My Station](../station.qmd)

@@ -10,9 +10,16 @@ I operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipm
 My current setup includes:
 
 - HF base and portable operation (including POTA)
-- VHF/UHF FM and digital voice
+- VHF/UHF FM and digital voice, in the shack and mobile
 - Homebrew and commercial SDR receivers
-- Raspberry Pi–based digital voice infrastructure
+- Raspberry Pi–based packet and digital voice infrastructure
+
+Several of these have grown into projects in their own right — the
+[GB7CAM packet node](projects/gb7cam.qmd), my
+[MMDVM digital voice hotspot](projects/mmdvm-hotspot.qmd), a
+[Raspberry Pi IQ visualiser](projects/raspberry-pi-sdr.qmd), and the
+[memory-channel builder](projects/radio-memory-builder.qmd) that programmes my
+Yaesu radios.
 
 I periodically update this page as my setup evolves.
 
