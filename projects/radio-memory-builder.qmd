@@ -88,7 +88,7 @@ which keeps the supply clean and avoids loading the cabin circuits.
 
 ## Key links
 
-- [RSGB repeater list](https://rsgb.org/main/operating/repeater-management/) —
+- [UK repeater list (RSGB ETCC)](https://ukrepeater.net/repeaterlist.html) —
   the source data
 - [yaesu-memory-builder](https://github.com/IanHenry/yaesu-memory-builder) —
   the code (MIT licensed)
