@@ -228,7 +228,7 @@
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#related",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "Related",
-    "text": "Related\n\nRadio Memory Builder — the project page\nRSGB repeater list"
+    "text": "Related\n\nRadio Memory Builder — the project page\nUK repeater list (RSGB ETCC)"
   },
   {
     "objectID": "privacy.html#privacy-cookies",
@@ -340,7 +340,7 @@
     "href": "projects/radio-memory-builder.html#key-links",
     "title": "Radio Memory Builder",
     "section": "Key links",
-    "text": "Key links\n\nRSGB repeater list — the source data\nyaesu-memory-builder — the code (MIT licensed)\nYaesu ADMS programming software — ADMS-14 (FT5D) and ADMS-20 (FTM-310)"
+    "text": "Key links\n\nUK repeater list (RSGB ETCC) — the source data\nyaesu-memory-builder — the code (MIT licensed)\nYaesu ADMS programming software — ADMS-14 (FT5D) and ADMS-20 (FTM-310)"
   },
   {
     "objectID": "projects/radio-memory-builder.html#related-posts",
