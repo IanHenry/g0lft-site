@@ -133,11 +133,11 @@
     "text": "What broadcast FM teaches us\nBroadcast FM establishes three ideas that will carry through the rest of this series:\n\nIQ represents a rotating vector, not a static point\nA visible carrier produces rotation\nDifferent modulations encode information in different aspects of that rotation"
   },
   {
-    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#github-link-to-code-used-to-create-these-plots",
-    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#github-link-to-code-used-to-create-these-plots",
+    "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#code-and-tools",
+    "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#code-and-tools",
     "title": "Seeing Broadcast FM in IQ Space",
-    "section": "GitHub Link to code used to create these plots",
-    "text": "GitHub Link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and video generation, see the GitHub repository. The link is currently here as a placeholder but code will be added shortly"
+    "section": "Code and tools",
+    "text": "Code and tools\nThese plots come out of my wider DSP Visualisations work, which brings together the tooling for looking at IQ data like this:\n\nsdrplay-gnuradio-examples — GNU Radio flow graphs for capturing IQ from an SDRplay\nsdrconnect-iq-visualiser — a lightweight SDRconnect plugin, if you want IQ plots without the GNU Radio learning curve\nSetup for IQ visualisation and digital signal processing — how to get the whole toolchain running\n\nThe specific capture and video-generation scripts behind this post are still being tidied up for release."
   },
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#next-time",
@@ -693,11 +693,11 @@
     "text": "What the repeater example adds\nCompared to broadcast FM, the repeater example highlights three additional ideas:\n\nCarriers can appear and disappear, and IQ shows this immediately\nNoise collapses toward the origin in the absence of a signal\nReal-world signals are intermittent, even when the modulation is unchanged\n\nThe underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space."
   },
   {
-    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
-    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#github-link-to-code-used-to-create-these-plots",
+    "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#code-and-tools",
+    "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#code-and-tools",
     "title": "Seeing an FM Repeater in IQ Space",
-    "section": "GitHub link to code used to create these plots",
-    "text": "GitHub link to code used to create these plots\nFor complete reproducible scripts, including capture, plotting, and animation, see the GitHub repository."
+    "section": "Code and tools",
+    "text": "Code and tools\nThese plots come out of my wider DSP Visualisations work, which brings together the tooling for looking at IQ data like this:\n\nsdrplay-gnuradio-examples — GNU Radio flow graphs for capturing IQ from an SDRplay\nsdrconnect-iq-visualiser — a lightweight SDRconnect plugin, if you want IQ plots without the GNU Radio learning curve\nSetup for IQ visualisation and digital signal processing — how to get the whole toolchain running\n\nThe specific capture, plotting and animation scripts behind this post are still being tidied up for release."
   },
   {
     "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
