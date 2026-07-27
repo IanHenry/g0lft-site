@@ -258,9 +258,21 @@ Broadcast FM establishes three ideas that will carry through the rest of this se
 - A visible carrier produces rotation
 - Different modulations encode information in different aspects of that rotation
 
-## GitHub Link to code used to create these plots
+## Code and tools
 
-For complete reproducible scripts, including capture, plotting, and video generation, see the [GitHub repository](https://github.com/IanHenry/iq-visualisation/).  *The link is currently here as a placeholder but code will be added shortly*
+These plots come out of my wider [DSP Visualisations](../../projects/dsp-visualisations.qmd)
+work, which brings together the tooling for looking at IQ data like this:
+
+- [sdrplay-gnuradio-examples](https://github.com/IanHenry/sdrplay-gnuradio-examples)
+  — GNU Radio flow graphs for capturing IQ from an SDRplay
+- [sdrconnect-iq-visualiser](https://github.com/IanHenry/sdrconnect-iq-visualiser)
+  — a lightweight SDRconnect plugin, if you want IQ plots without the GNU Radio
+  learning curve
+- [Setup for IQ visualisation and digital signal processing](../../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd)
+  — how to get the whole toolchain running
+
+*The specific capture and video-generation scripts behind this post are still
+being tidied up for release.*
 
 ## Next Time...
 In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.

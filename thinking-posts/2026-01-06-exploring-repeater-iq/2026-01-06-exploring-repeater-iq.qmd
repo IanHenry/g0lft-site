@@ -234,10 +234,21 @@ Compared to broadcast FM, the repeater example highlights three additional ideas
 
 The underlying FM geometry is the same, but the operating context adds structure that is easy to see in IQ space.
 
-## GitHub link to code used to create these plots
+## Code and tools
 
-For complete reproducible scripts, including capture, plotting, and animation, see the
-GitHub repository.
+These plots come out of my wider [DSP Visualisations](../../projects/dsp-visualisations.qmd)
+work, which brings together the tooling for looking at IQ data like this:
+
+- [sdrplay-gnuradio-examples](https://github.com/IanHenry/sdrplay-gnuradio-examples)
+  — GNU Radio flow graphs for capturing IQ from an SDRplay
+- [sdrconnect-iq-visualiser](https://github.com/IanHenry/sdrconnect-iq-visualiser)
+  — a lightweight SDRconnect plugin, if you want IQ plots without the GNU Radio
+  learning curve
+- [Setup for IQ visualisation and digital signal processing](../../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd)
+  — how to get the whole toolchain running
+
+*The specific capture, plotting and animation scripts behind this post are still
+being tidied up for release.*
 
 ## Where next
 
