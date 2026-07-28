@@ -165,7 +165,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-it-is" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-is">What it is</h2>
-<p>A machine-learning system that classifies amateur-radio modes directly from RF (IQ) data, and — increasingly — decodes them. The aim is a pipeline that can look at a stretch of spectrum, find the signals in it, identify each mode, and extract the message: <strong>capture → detect → extract → decode → annotate</strong>.</p>
+<p>A machine-learning system that classifies amateur-radio modes directly from RF (IQ) data and, increasingly, decodes them. The aim is a pipeline that can look at a stretch of spectrum, find the signals in it, identify each mode, and extract the message: <strong>capture → detect → extract → decode → annotate</strong>.</p>
 <p>It combines two complementary views of a signal:</p>
 <ul>
 <li>a <strong>wideband spectrogram detector</strong> that locates signals in time and frequency across a span, and</li>
@@ -174,25 +174,25 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="why-i-built-it" class="level2">
 <h2 class="anchored" data-anchor-id="why-i-built-it">Why I built it</h2>
-<p>It grew out of watching FT8 decode stations I couldn’t even hear, and wondering how much of the “which mode is this?” work could be done automatically. The long-term goal is a live assistant that can scan a band, tell you what’s on it, and decode what it finds — eventually as an overlay for an SDR such as a FlexRadio.</p>
+<p>It grew out of watching FT8 decode stations I couldn’t even hear, and wondering how much of the “which mode is this?” work could be done automatically. The long-term goal is a live assistant that can scan a band, tell you what’s on it and decode what it finds, eventually as an overlay for an SDR such as a FlexRadio.</p>
 </section>
 <section id="current-status-goals" class="level2">
 <h2 class="anchored" data-anchor-id="current-status-goals">Current status &amp; goals</h2>
 <ul>
-<li><strong>Validated mode generators</strong> — accurate generators for the core keyed modes (RTTY, PSK31/63, Navtex, Morse) that are decode-validated to zero character error rate, so the training data is faithful rather than a generic approximation.</li>
-<li><strong>Narrowband classifier</strong> — a length-agnostic CNN reaches ~99% on clean 1-second captures and confirmed a key hypothesis: distinguishing baud rates (e.g.&nbsp;RTTY45 vs RTTY50) that shorter captures can’t resolve.</li>
-<li><strong>Wideband detector</strong> — a spectrogram object-detector (YOLO) trained purely on synthetic scenes <em>transfers to real off-air signals</em> and stays quiet on noise.</li>
-<li><strong>Frequency-prior / band-plan layer</strong> — narrow, frequency-defined modes like FT8/FT4 are routed straight to a decoder from their known dial frequencies rather than relying on the detector.</li>
-<li><strong>Voice-to-text</strong> — SSB/AM audio is demodulated and transcribed with Whisper, a differentiator I haven’t seen elsewhere.</li>
+<li><strong>Validated mode generators.</strong> Accurate generators for the core keyed modes (RTTY, PSK31/63, Navtex, Morse), decode-validated to zero character error rate, so the training data is faithful rather than a generic approximation.</li>
+<li><strong>Narrowband classifier.</strong> A length-agnostic CNN reaches about 99% on clean 1-second captures, and confirmed a key hypothesis: it distinguishes baud rates such as RTTY45 from RTTY50, which shorter captures can’t resolve.</li>
+<li><strong>Wideband detector.</strong> A spectrogram object-detector (YOLO) trained purely on synthetic scenes <em>transfers to real off-air signals</em> and stays quiet on noise.</li>
+<li><strong>Frequency-prior / band-plan layer.</strong> Narrow, frequency-defined modes like FT8 and FT4 are routed straight to a decoder from their known dial frequencies rather than relying on the detector.</li>
+<li><strong>Voice-to-text.</strong> SSB and AM audio is demodulated and transcribed with Whisper, which is a differentiator I haven’t seen elsewhere.</li>
 <li><strong>Goals:</strong> add FT8/FT4 structural handling, harden real-world capture and rejection of out-of-class signals, and close the loop into a live identify-and-decode interface.</li>
 </ul>
 </section>
 <section id="key-links" class="level2">
 <h2 class="anchored" data-anchor-id="key-links">Key links</h2>
 <ul>
-<li><a href="http://www.w1hkj.com/">fldigi</a> — reference decoder used for validation</li>
-<li><a href="https://wsjt.sourceforge.io/wsjtx.html">WSJT-X</a> — FT8/FT4 reference</li>
-<li><a href="https://github.com/TorchDSP/torchsig">TorchSig</a> — synthetic RF dataset tooling</li>
+<li><a href="https://sourceforge.net/projects/fldigi/">fldigi</a>, the reference decoder used for validation</li>
+<li><a href="https://wsjtx.github.io/wsjtx/index.html">WSJT-X</a>, the FT8 and FT4 reference</li>
+<li><a href="https://github.com/TorchDSP/torchsig">TorchSig</a>, synthetic RF dataset tooling</li>
 </ul>
 </section>
 <section id="related-posts" class="level2">

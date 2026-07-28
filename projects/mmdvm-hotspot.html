@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A Raspberry Pi and MMDVM hat running WPSD, giving full-power-free access to the digital voice networks from home.">
+<meta name="description" content="A Raspberry Pi and MMDVM hat running WPSD, giving low-power access to the digital voice networks from home.">
 
 <title>MMDVM Digital Voice Hotspot</title>
 <style>
@@ -166,12 +166,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-it-is" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-is">What it is</h2>
 <p>A personal digital voice hotspot: a <strong>Raspberry Pi 5</strong> with a <strong>duplex MMDVM hat</strong>, running <a href="https://w0chp.radio/wpsd/"><strong>WPSD</strong></a>. It puts a low-power digital voice access point on my desk, so a handheld can reach the digital voice networks without needing to be in range of a repeater.</p>
-<p>Being duplex, it transmits and receives simultaneously on separate frequencies — so it behaves like a miniature repeater rather than requiring the turn-taking a simplex hotspot imposes. It gives me access to both <strong>DMR</strong> and <strong>YSF</strong> (System Fusion) networks, and works with the FT5D handheld and the FTM-200DE in the shack.</p>
-<p>It appears in my radios’ memory files as the <code>G0LFT HOTSPOT</code> channel — 438.725 MHz receive, 434.725 MHz transmit, in Fusion (<code>DN</code>) mode with the wide IF filter, which C4FM needs to decode reliably.</p>
+<p>Being duplex, it transmits and receives simultaneously on separate frequencies, so it behaves like a miniature repeater rather than imposing the turn-taking a simplex hotspot requires. It gives me access to both the <strong>DMR</strong> and <strong>YSF</strong> (System Fusion) networks, and works with the FT5D handheld and the FTM-200DE in the shack.</p>
+<p>It appears in my radios’ memory files as the <code>G0LFT HOTSPOT</code> channel: 438.725 MHz receive, 434.725 MHz transmit, in Fusion (<code>DN</code>) mode with the wide IF filter, which C4FM needs to decode reliably.</p>
 </section>
 <section id="why-i-built-it" class="level2">
 <h2 class="anchored" data-anchor-id="why-i-built-it">Why I built it</h2>
-<p>Cambridge has repeater coverage, but a hotspot removes the dependency entirely: it works from indoors, at very low power, and lets me move between the digital voice networks without retuning anything. It’s also the most convenient way to experiment with the digital modes — reflectors and talkgroups are a configuration change rather than a drive to somewhere with coverage.</p>
+<p>Cambridge has repeater coverage, but a hotspot removes the dependency entirely. It works from indoors, at very low power, and lets me move between the digital voice networks without retuning anything. It’s also the most convenient way to experiment with the digital modes, since reflectors and talkgroups become a configuration change rather than a drive to somewhere with coverage.</p>
 <p>It’s the piece of infrastructure that made the digital side of the hobby practical for me day to day, which is why the wide-IF discovery it prompted ended up baked into my <a href="../projects/radio-memory-builder.html">memory-channel builder</a>.</p>
 </section>
 <section id="current-status-goals" class="level2">
@@ -185,14 +185,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="key-links" class="level2">
 <h2 class="anchored" data-anchor-id="key-links">Key links</h2>
 <ul>
-<li><a href="https://w0chp.radio/wpsd/">WPSD</a> — the hotspot software (a modern successor to Pi-Star)</li>
-<li><a href="https://github.com/g4klx/MMDVMHost">MMDVM</a> — the multi-mode digital voice modem project</li>
+<li><a href="https://w0chp.radio/wpsd/">WPSD</a>, the hotspot software and a modern successor to Pi-Star</li>
+<li><a href="https://github.com/g4klx/MMDVMHost">MMDVM</a>, the multi-mode digital voice modem project</li>
 </ul>
 </section>
 <section id="related" class="level2">
 <h2 class="anchored" data-anchor-id="related">Related</h2>
 <ul>
-<li><a href="../projects/radio-memory-builder.html">Radio Memory Builder</a> — the hotspot’s memory channel and the wide/narrow bandwidth rule it taught me</li>
+<li><a href="../projects/radio-memory-builder.html">Radio Memory Builder</a>, which carries the hotspot’s memory channel and the wide/narrow bandwidth rule it taught me</li>
 <li><a href="../station.html">My Station</a></li>
 </ul>
 

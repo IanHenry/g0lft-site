@@ -60,7 +60,7 @@
     "href": "station.html#station",
     "title": "My Station",
     "section": "Station",
-    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice, in the shack and mobile\nHomebrew and commercial SDR receivers\nRaspberry Pi–based packet and digital voice infrastructure\n\nSeveral of these have grown into projects in their own right — the GB7CAM packet node, my MMDVM digital voice hotspot, a Raspberry Pi IQ visualiser, and the memory-channel builder that programmes my Yaesu radios.\nI periodically update this page as my setup evolves."
+    "text": "Station\nI operate HF, VHF, and UHF using a mixture of fixed, mobile, and portable equipment, with a particular focus on digital modes and SDR-based systems.\nMy current setup includes:\n\nHF base and portable operation (including POTA)\nVHF/UHF FM and digital voice, in the shack and mobile\nHomebrew and commercial SDR receivers\nRaspberry Pi–based packet and digital voice infrastructure\n\nSeveral of these have grown into projects in their own right: the GB7CAM packet node, my MMDVM digital voice hotspot, a Raspberry Pi IQ visualiser, and the memory-channel builder that programmes my Yaesu radios.\nI periodically update this page as my setup evolves."
   },
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
@@ -137,7 +137,7 @@
     "href": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#code-and-tools",
     "title": "Seeing Broadcast FM in IQ Space",
     "section": "Code and tools",
-    "text": "Code and tools\nThese plots come out of my wider DSP Visualisations work, which brings together the tooling for looking at IQ data like this:\n\nsdrplay-gnuradio-examples — GNU Radio flow graphs for capturing IQ from an SDRplay\nsdrconnect-iq-visualiser — a lightweight SDRconnect plugin, if you want IQ plots without the GNU Radio learning curve\nSetup for IQ visualisation and digital signal processing — how to get the whole toolchain running\n\nThe specific capture and video-generation scripts behind this post are still being tidied up for release."
+    "text": "Code and tools\nThese plots come out of my wider DSP Visualisations work, which brings together the tooling for looking at IQ data like this:\n\nsdrplay-gnuradio-examples, GNU Radio flow graphs for capturing IQ from an SDRplay\nsdrconnect-iq-visualiser, a lightweight SDRconnect plugin if you want IQ plots without the GNU Radio learning curve\nSetup for IQ visualisation and digital signal processing, which covers getting the whole toolchain running\n\nThe specific capture and video-generation scripts behind this post are still being tidied up for release."
   },
   {
     "objectID": "thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html#next-time",
@@ -179,56 +179,56 @@
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#why-bother",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "Why bother",
-    "text": "Why bother\nTyping several hundred repeaters into a handheld by hand is miserable, and you only have to do it again the next time the repeater list changes. Every modern Yaesu can import a CSV instead, which means the whole memory file can be generated — correctly, repeatably, and organised the way you actually operate.\nThis guide describes the approach I use to build memory files for my FT5D and FTM-310 from the RSGB repeater list. It’s aimed at anyone comfortable running a small script, but the format notes are useful even if you plan to edit the CSV by hand — some of these traps cost me a lot of time.\n\n\n\n\n\n\nNoteThe programming software differs per radio\n\n\n\nEach radio has its own Yaesu application, and each expects a different CSV layout — ADMS-14 for the FT5D and ADMS-20 for the FTM-310, for example. A file built for one will not import correctly into another."
+    "text": "Why bother\nTyping several hundred repeaters into a handheld by hand is miserable, and you only have to do it again the next time the repeater list changes. Every modern Yaesu can import a CSV instead, which means the whole memory file can be generated: correctly, repeatably, and organised the way you actually operate.\nThis guide describes the approach I use to build memory files for my FT5D and FTM-310 from the RSGB repeater list. It’s aimed at anyone comfortable running a small script, but the format notes are useful even if you plan to edit the CSV by hand. Some of these traps cost me a lot of time.\n\n\n\n\n\n\nNoteThe programming software differs per radio\n\n\n\nEach radio has its own Yaesu application, and each expects a different CSV layout. It’s ADMS-14 for the FT5D and ADMS-20 for the FTM-310, for example. A file built for one will not import correctly into another."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#the-input-the-rsgb-repeater-list",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#the-input-the-rsgb-repeater-list",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "The input: the RSGB repeater list",
-    "text": "The input: the RSGB repeater list\nThe source data is the RSGB repeater list, exported as CSV. The columns that matter are:\n\n\n\n\n\n\n\nColumn\nWhat it is\n\n\n\n\ncallsign\ne.g. GB3PI\n\n\nband\n2M or 70CM\n\n\nTX\nThe repeater’s transmit frequency — this is your receive frequency\n\n\nRX\nThe repeater’s receive frequency — this is your transmit frequency\n\n\nmodes\nMode letters: A analogue FM, F Fusion/C4FM, D D-Star, M DMR\n\n\nctcss/cc\nAccess tone, where one is required\n\n\nwhere\nTown or location, used for the channel name\n\n\nlat, lon\nUsed for distance and regional grouping\n\n\n\n\n\n\n\n\n\nImportantTX and RX are from the repeater’s point of view\n\n\n\nThis catches everyone once. The list’s TX column is what you tune your receiver to, and RX is what your radio transmits on. Getting these the wrong way round produces a memory file that looks plausible and works for nothing."
+    "text": "The input: the RSGB repeater list\nThe source data is the RSGB repeater list, exported as CSV. The columns that matter are:\n\n\n\n\n\n\n\nColumn\nWhat it is\n\n\n\n\ncallsign\ne.g. GB3PI\n\n\nband\n2M or 70CM\n\n\nTX\nThe repeater’s transmit frequency, which is your receive frequency\n\n\nRX\nThe repeater’s receive frequency, which is your transmit frequency\n\n\nmodes\nMode letters: A analogue FM, F Fusion/C4FM, D D-Star, M DMR\n\n\nctcss/cc\nAccess tone, where one is required\n\n\nwhere\nTown or location, used for the channel name\n\n\nlat, lon\nUsed for distance and regional grouping\n\n\n\n\n\n\n\n\n\nImportantTX and RX are from the repeater’s point of view\n\n\n\nThis catches everyone once. The list’s TX column is what you tune your receiver to, and RX is what your radio transmits on. Getting these the wrong way round produces a memory file that looks plausible and works for nothing."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#what-the-generator-does",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#what-the-generator-does",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "What the generator does",
-    "text": "What the generator does\nThe script reads that CSV and writes a complete memory file. The useful work is in the decisions it makes along the way.\n\nFiltering\nOnly entries worth having end up in the file:\n\nMust be FM or Fusion (A or F in the modes column) — a D-Star-only or DMR-only repeater is no use to a Fusion radio.\nMust be 2 m (144–148 MHz) or 70 cm (430–440 MHz).\nCross-band repeaters are dropped — if the input is on 2 m the output must also be on 2 m, otherwise the offset logic is meaningless.\n\n\n\nWorking out the offset\nThe offset is derived rather than assumed, by subtracting your transmit frequency from your receive frequency:\n\ndifference essentially zero → simplex, direction OFF\npositive → +RPT\nnegative → -RPT\n\nwith the magnitude used as the offset value. This handles the non-standard splits correctly instead of hard-coding 600 kHz and 1.6 MHz everywhere.\n\n\nChoosing the mode\nStraight from the mode letters:\n\n\n\n\n\n\n\n\nRSGB modes\nRadio setting\nMeaning\n\n\n\n\nBoth A and F\nAMS\nAutomatic mode select — picks FM or C4FM per transmission\n\n\nF only\nDN\nFusion digital narrow\n\n\nNeither\nFM\nPlain analogue FM\n\n\n\n\n\nBandwidth: the one that surprised me\nUK FM channels are 12.5 kHz, so narrow is correct for analogue. But C4FM needs the wide IF filter — my hotspot won’t decode reliably otherwise. So Narrow is set ON for FM channels and OFF for anything DN or AMS.\n\n\nCTCSS\nTones are only applied when the value is a real CTCSS tone. The list sometimes carries DMR colour codes in the same column, and a colour code of 7 is not a 7 Hz tone. Validating against the standard 50-tone table and ignoring anything below 60 Hz avoids writing nonsense into the file.\n\n\nOrganising into banks\nThis is what makes the file pleasant to use. Repeaters are grouped by distance from home using the haversine formula, then by region:\n\nSuper local (under 25 km) — the ones you actually use\nLocal (25–50 km)\nRegional banks — East Anglia, Central, the South East split east/west, the South West, Wales, the North split three ways, Scotland split north and south, and Northern Ireland\n\nWithin each bank, entries are sorted GB callsigns first, then MB, then everything else, each sorted by distance. If a bank overflows the radio’s channel limit, it’s the least useful entries that fall off the end rather than your local repeater.\n\n\n\n\n\n\nWarningMind the per-bank limit\n\n\n\nThe FT5D allows 100 channels per bank. Exceed it and ADMS rejects the import. This is why the regions are split geographically rather than lumped into “the North” — and why the FTM-310, which has no per-group limit but a 999-channel ceiling, uses a different layout.\n\n\n\n\nAirband\nI also include a block of receive-only airband channels — local fields, the London airports, VOLMET, and 121.5 — set to AM, simplex, with 8.33 kHz steps. Worth having somewhere in the file even if you rarely use it."
+    "text": "What the generator does\nThe script reads that CSV and writes a complete memory file. The useful work is in the decisions it makes along the way.\n\nFiltering\nOnly entries worth having end up in the file:\n\nMust be FM or Fusion (A or F in the modes column), since a D-Star-only or DMR-only repeater is no use to a Fusion radio.\nMust be 2 m (144–148 MHz) or 70 cm (430–440 MHz).\nCross-band repeaters are dropped. If the input is on 2 m the output must also be on 2 m, otherwise the offset logic is meaningless.\n\n\n\nWorking out the offset\nThe offset is derived rather than assumed, by subtracting your transmit frequency from your receive frequency:\n\ndifference essentially zero → simplex, direction OFF\npositive → +RPT\nnegative → -RPT\n\nwith the magnitude used as the offset value. This handles the non-standard splits correctly instead of hard-coding 600 kHz and 1.6 MHz everywhere.\n\n\nChoosing the mode\nStraight from the mode letters:\n\n\n\n\n\n\n\n\nRSGB modes\nRadio setting\nMeaning\n\n\n\n\nBoth A and F\nAMS\nAutomatic mode select, picking FM or C4FM per transmission\n\n\nF only\nDN\nFusion digital narrow\n\n\nNeither\nFM\nPlain analogue FM\n\n\n\n\n\nBandwidth: the one that surprised me\nUK FM channels are 12.5 kHz, so narrow is correct for analogue. But C4FM needs the wide IF filter, or my hotspot won’t decode reliably. So Narrow is set ON for FM channels and OFF for anything DN or AMS.\n\n\nCTCSS\nTones are only applied when the value is a real CTCSS tone. The list sometimes carries DMR colour codes in the same column, and a colour code of 7 is not a 7 Hz tone. Validating against the standard 50-tone table and ignoring anything below 60 Hz avoids writing nonsense into the file.\n\n\nOrganising into banks\nThis is what makes the file pleasant to use. Repeaters are grouped by distance from home using the haversine formula, then by region:\n\nSuper local (under 25 km), the ones you actually use\nLocal (25–50 km)\nRegional banks covering East Anglia, Central, the South East split east/west, the South West, Wales, the North split three ways, Scotland split north and south, and Northern Ireland\n\nWithin each bank, entries are sorted GB callsigns first, then MB, then everything else, each sorted by distance. If a bank overflows the radio’s channel limit, it’s the least useful entries that fall off the end rather than your local repeater.\n\n\n\n\n\n\nWarningMind the per-bank limit\n\n\n\nThe FT5D allows 100 channels per bank. Exceed it and ADMS rejects the import. This is why the regions are split geographically rather than lumped into “the North”, and why the FTM-310, which has no per-group limit but a 999-channel ceiling, uses a different layout.\n\n\n\n\nAirband\nI also include a block of receive-only airband channels covering local fields, the London airports, VOLMET and 121.5, set to AM, simplex, with 8.33 kHz steps. Worth having somewhere in the file even if you rarely use it."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#the-csv-traps",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#the-csv-traps",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "The CSV traps",
-    "text": "The CSV traps\nThese are the ones that cost me real time.\n\nEvery column counts, including the ones you don’t use\nThe FT5D’s ADMS-14 format has 54 fields. I originally worked from a column list that omitted DCS Polarity. That single missing field shifted everything after it one place to the left — which quietly moved the bank flags into the Clock Shift column and switched Clock Shift on for every channel. Nothing errored; the radio just behaved oddly.\nIf something is set that you never asked for, suspect a column offset, and count fields against a file exported from the software itself.\n\n\nExport a known-good file first\nThe fastest way to learn the format is to programme two or three channels by hand in ADMS, export to CSV, and read it. That gives you the exact field count, the exact spelling of values like High (5W) or RX Normal TX Normal, and a reference to diff against.\n\n\nPad the unused channels\nWrite a row for every channel, not just the ones you use. Empty rows are the channel number followed by the right number of empty fields. A short file can import in unexpected ways.\n\n\nName length and character set\nNames are capped (16 characters on these radios) and restricted to letters, numbers, spaces and dashes. Strip anything else before writing rather than letting the software silently mangle it."
+    "text": "The CSV traps\nThese are the ones that cost me real time.\n\nEvery column counts, including the ones you don’t use\nThe FT5D’s ADMS-14 format has 54 fields. I originally worked from a column list that omitted DCS Polarity. That single missing field shifted everything after it one place to the left, which quietly moved the bank flags into the Clock Shift column and switched Clock Shift on for every channel. Nothing errored; the radio just behaved oddly.\nIf something is set that you never asked for, suspect a column offset, and count fields against a file exported from the software itself.\n\n\nExport a known-good file first\nThe fastest way to learn the format is to programme two or three channels by hand in ADMS, export to CSV, and read it. That gives you the exact field count, the exact spelling of values like High (5W) or RX Normal TX Normal, and a reference to diff against.\n\n\nPad the unused channels\nWrite a row for every channel, not just the ones you use. Empty rows are the channel number followed by the right number of empty fields. A short file can import in unexpected ways.\n\n\nName length and character set\nNames are capped (16 characters on these radios) and restricted to letters, numbers, spaces and dashes. Strip anything else before writing rather than letting the software silently mangle it."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#importing",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#importing",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "Importing",
-    "text": "Importing\n\nOpen the right application for your radio — ADMS-14, ADMS-20 and so on.\nFile → Import and select your CSV.\nSet the bank names in the bank-names tab before doing anything else.\nFile → Save As to save the project file.\nWrite to the radio.\n\n\n\n\n\n\n\nCautionSet bank names before saving\n\n\n\nIf a bank has channels assigned but no name, ADMS-14 crashes on save with an index error rather than telling you what’s wrong. Name every bank you’ve used first.\n\n\nBank names are limited to six characters, which is why mine read SLOCAL, LOCAL, EANGLA, CENTR, NENGLS, SCOTS and so on."
+    "text": "Importing\n\nOpen the right application for your radio, so ADMS-14, ADMS-20 and so on.\nFile → Import and select your CSV.\nSet the bank names in the bank-names tab before doing anything else.\nFile → Save As to save the project file.\nWrite to the radio.\n\n\n\n\n\n\n\nCautionSet bank names before saving\n\n\n\nIf a bank has channels assigned but no name, ADMS-14 crashes on save with an index error rather than telling you what’s wrong. Name every bank you’ve used first.\n\n\nBank names are limited to six characters, which is why mine read SLOCAL, LOCAL, EANGLA, CENTR, NENGLS, SCOTS and so on."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#before-you-write-to-the-radio",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#before-you-write-to-the-radio",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "Before you write to the radio",
-    "text": "Before you write to the radio\n\nBack up what’s on the radio first. Read the current memory out and save it, so you can get back if the new file isn’t what you expected.\nCheck a handful of channels by hand against the repeater list — one simplex, one 2 m repeater, one 70 cm, one Fusion — before trusting the other\n\n\n\nCheck the offsets on a couple of non-standard repeaters specifically."
+    "text": "Before you write to the radio\n\nBack up what’s on the radio first. Read the current memory out and save it, so you can get back if the new file isn’t what you expected.\nCheck a handful of channels by hand against the repeater list. One simplex, one 2 m repeater, one 70 cm and one Fusion, before trusting the other\n\n\n\nCheck the offsets on a couple of non-standard repeaters specifically."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#doing-it-yourself",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#doing-it-yourself",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "Doing it yourself",
-    "text": "Doing it yourself\nThe generator is a single Python script with no dependencies beyond the standard library — csv, math and re. If you want to adapt the approach, the parts you’d change are your home latitude and longitude, the bank boundaries, and the field layout for your particular radio.\nMine are on GitHub as yaesu-memory-builder, MIT licensed — --lat and --lon set your own location, and your club net, hotspot and simplex channels go in a special_channels.csv."
+    "text": "Doing it yourself\nThe generator is a single Python script with no dependencies beyond the standard library, just csv, math and re. If you want to adapt the approach, the parts you’d change are your home latitude and longitude, the bank boundaries, and the field layout for your particular radio.\nMine are on GitHub as yaesu-memory-builder, MIT licensed. --lat and --lon set your own location, and your club net, hotspot and simplex channels go in a special_channels.csv."
   },
   {
     "objectID": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#related",
     "href": "guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html#related",
     "title": "Building a UK repeater memory file for your Yaesu",
     "section": "Related",
-    "text": "Related\n\nRadio Memory Builder — the project page\nUK repeater list (RSGB ETCC)"
+    "text": "Related\n\nRadio Memory Builder, the project page\nUK repeater list (RSGB ETCC)"
   },
   {
     "objectID": "privacy.html#privacy-cookies",
@@ -249,49 +249,49 @@
     "href": "talks.html#talks-publications",
     "title": "Talks & Publications",
     "section": "Talks & Publications",
-    "text": "Talks & Publications\nWriting and speaking on amateur radio, digital modes, and the theory behind them. I’m particularly interested in explaining why things work rather than only how — and in finding the parallels between radio and other technical fields.\nIf you’d like me to speak to your club or group, contact details are in the footer."
+    "text": "Talks & Publications\nWriting and speaking on amateur radio, digital modes, and the theory behind them. I’m particularly interested in explaining why things work rather than only how, and in finding the parallels between radio and other technical fields.\nIf you’d like me to speak to your club or group, contact details are in the footer."
   },
   {
     "objectID": "talks.html#publications",
     "href": "talks.html#publications",
     "title": "Talks & Publications",
     "section": "Publications",
-    "text": "Publications\n\nUnderstanding FT8 through DNA-sequencing parallels\nRadCom, Radio Society of Great Britain — May 2026\nFT8 routinely decodes stations at signal-to-noise ratios as low as −24 dB, on bands that sound completely dead. My day job is with DNA sequencing systems, which face a strikingly similar problem: reading billions of individually minute, noise-swamped molecular signals at better than 99.9% accuracy. The two fields arrived independently at the same engineering answers — structured message formats, precise timing synchronisation, strong error correction, and quality metrics.\nThe article uses those parallels to explain how FT8 achieves such extraordinary weak-signal performance. No molecular biology or advanced mathematics required — just the engineering trade-offs that make information transfer possible in high-noise environments.\n\nBlog post about the article\nRadCom\n\n\n\nSeeing signals: I and Q from first principles\nRadCom, Radio Society of Great Britain — September 2026 (scheduled)\nIQ data sits at the heart of every modern software-defined radio, yet it’s usually presented as an equation rather than something you can picture. This article builds I and Q up from first principles and with minimal mathematics: why a single measurement of a wave is ambiguous, how a pair of quadrature measurements resolves that ambiguity completely, and what the resulting IQ plot actually shows you for real signals — from a bare carrier and CW, through AM, FM and SSB, to the digital modes.\nResources referenced in the article:\n\nSetup for IQ visualisation and digital signal processing\nsdrconnect-iq-visualiser — my SDRconnect IQ visualisation plugin\nsdrplay-gnuradio-examples — my GNU Radio flow graphs for SDRplay devices\nSDRplay · GNU Radio · Radioconda"
+    "text": "Publications\n\nUnderstanding FT8 through DNA-sequencing parallels\nRadCom, Radio Society of Great Britain, May 2026\nFT8 routinely decodes stations at signal-to-noise ratios as low as −24 dB, on bands that sound completely dead. My day job is with DNA sequencing systems, which face a strikingly similar problem: reading billions of individually minute, noise-swamped molecular signals at better than 99.9% accuracy. The two fields arrived independently at the same engineering answers, namely structured message formats, precise timing synchronisation, strong error correction, and quality metrics.\nThe article uses those parallels to explain how FT8 achieves such extraordinary weak-signal performance. No molecular biology or advanced mathematics required, just the engineering trade-offs that make information transfer possible in high-noise environments.\n\nBlog post about the article\nRadCom\n\n\n\nSeeing signals: I and Q from first principles\nRadCom, Radio Society of Great Britain, September 2026 (scheduled)\nIQ data sits at the heart of every modern software-defined radio, yet it’s usually presented as an equation rather than something you can picture. This article builds I and Q up from first principles and with minimal mathematics: why a single measurement of a wave is ambiguous, how a pair of quadrature measurements resolves that ambiguity completely, and what the resulting IQ plot actually shows you for real signals, from a bare carrier and CW, through AM, FM and SSB, to the digital modes.\nResources referenced in the article:\n\nSetup for IQ visualisation and digital signal processing\nsdrconnect-iq-visualiser, my SDRconnect IQ visualisation plugin\nsdrplay-gnuradio-examples, my GNU Radio flow graphs for SDRplay devices\nSDRplay · GNU Radio · Radioconda"
   },
   {
     "objectID": "talks.html#invited-talks",
     "href": "talks.html#invited-talks",
     "title": "Talks & Publications",
     "section": "Invited talks",
-    "text": "Invited talks\n\nUnderstanding FT8 through DNA-sequencing parallels\nRSGB Convention 2026 — Saturday 10 October 2026\nAn invited convention session developing the themes of the May 2026 RadCom article: why FT8 and modern DNA sequencing solve the same weak-signal problem in the same ways, and what that tells us about digital mode design.\n\nRSGB Convention speakers\n\n\n\nMaking the invisible visible: understanding your SDR through IQ visualisation\nRSGB Convention 2026 — Saturday 10 October 2026\nAn invited convention session introducing IQ visually and with minimal mathematics. It covers why IQ matters for modern radios, how to read an IQ plot, and what analogue voice (AM, FM, SSB) and the digital data modes (CW, RTTY, FT8, PSK, QAM) each look like in the IQ plane — finishing with a live demonstration using a purpose-built Raspberry Pi IQ visualiser.\n\nRSGB Convention speakers\nRaspberry Pi SDR — the demonstration device\n\n\n\nMaking the invisible visible: understanding SDR through IQ visualisation\nCambridge and District Amateur Radio Club (CDARC) — 8 May 2026\nThe first outing of the IQ talk, given to my home club. Starting from the idea that a wave is the shadow of something rotating, it builds up to I and Q, then works through what noise, carriers, CW, AM, FM, SSB and the digital modes each look like on an IQ plot — with a live Raspberry Pi and RTL-SDR showing real signals off air.\n\nRaspberry Pi SDR — the demonstration device"
+    "text": "Invited talks\n\nUnderstanding FT8 through DNA-sequencing parallels\nRSGB Convention 2026, Saturday 10 October 2026\nAn invited convention session developing the themes of the May 2026 RadCom article: why FT8 and modern DNA sequencing solve the same weak-signal problem in the same ways, and what that tells us about digital mode design.\n\nRSGB Convention speakers\n\n\n\nMaking the invisible visible: understanding your SDR through IQ visualisation\nRSGB Convention 2026, Saturday 10 October 2026\nAn invited convention session introducing IQ visually and with minimal mathematics. It covers why IQ matters for modern radios, how to read an IQ plot, and what analogue voice (AM, FM, SSB) and the digital data modes (CW, RTTY, FT8, PSK, QAM) each look like in the IQ plane. It finishes with a live demonstration using a purpose-built Raspberry Pi IQ visualiser.\n\nRSGB Convention speakers\nRaspberry Pi SDR, the demonstration device\n\n\n\nMaking the invisible visible: understanding SDR through IQ visualisation\nCambridge and District Amateur Radio Club (CDARC), 8 May 2026\nThe first outing of the IQ talk, given to my home club. Starting from the idea that a wave is the shadow of something rotating, it builds up to I and Q, then works through what noise, carriers, CW, AM, FM, SSB and the digital modes each look like on an IQ plot, with a live Raspberry Pi and RTL-SDR showing real signals off air.\n\nRaspberry Pi SDR, the demonstration device"
   },
   {
     "objectID": "projects/ai-signal-classifier.html#what-it-is",
     "href": "projects/ai-signal-classifier.html#what-it-is",
     "title": "AI Signal Classifier",
     "section": "What it is",
-    "text": "What it is\nA machine-learning system that classifies amateur-radio modes directly from RF (IQ) data, and — increasingly — decodes them. The aim is a pipeline that can look at a stretch of spectrum, find the signals in it, identify each mode, and extract the message: capture → detect → extract → decode → annotate.\nIt combines two complementary views of a signal:\n\na wideband spectrogram detector that locates signals in time and frequency across a span, and\na narrowband IQ classifier that identifies the exact mode of an individual signal and validates it by decoding."
+    "text": "What it is\nA machine-learning system that classifies amateur-radio modes directly from RF (IQ) data and, increasingly, decodes them. The aim is a pipeline that can look at a stretch of spectrum, find the signals in it, identify each mode, and extract the message: capture → detect → extract → decode → annotate.\nIt combines two complementary views of a signal:\n\na wideband spectrogram detector that locates signals in time and frequency across a span, and\na narrowband IQ classifier that identifies the exact mode of an individual signal and validates it by decoding."
   },
   {
     "objectID": "projects/ai-signal-classifier.html#why-i-built-it",
     "href": "projects/ai-signal-classifier.html#why-i-built-it",
     "title": "AI Signal Classifier",
     "section": "Why I built it",
-    "text": "Why I built it\nIt grew out of watching FT8 decode stations I couldn’t even hear, and wondering how much of the “which mode is this?” work could be done automatically. The long-term goal is a live assistant that can scan a band, tell you what’s on it, and decode what it finds — eventually as an overlay for an SDR such as a FlexRadio."
+    "text": "Why I built it\nIt grew out of watching FT8 decode stations I couldn’t even hear, and wondering how much of the “which mode is this?” work could be done automatically. The long-term goal is a live assistant that can scan a band, tell you what’s on it and decode what it finds, eventually as an overlay for an SDR such as a FlexRadio."
   },
   {
     "objectID": "projects/ai-signal-classifier.html#current-status-goals",
     "href": "projects/ai-signal-classifier.html#current-status-goals",
     "title": "AI Signal Classifier",
     "section": "Current status & goals",
-    "text": "Current status & goals\n\nValidated mode generators — accurate generators for the core keyed modes (RTTY, PSK31/63, Navtex, Morse) that are decode-validated to zero character error rate, so the training data is faithful rather than a generic approximation.\nNarrowband classifier — a length-agnostic CNN reaches ~99% on clean 1-second captures and confirmed a key hypothesis: distinguishing baud rates (e.g. RTTY45 vs RTTY50) that shorter captures can’t resolve.\nWideband detector — a spectrogram object-detector (YOLO) trained purely on synthetic scenes transfers to real off-air signals and stays quiet on noise.\nFrequency-prior / band-plan layer — narrow, frequency-defined modes like FT8/FT4 are routed straight to a decoder from their known dial frequencies rather than relying on the detector.\nVoice-to-text — SSB/AM audio is demodulated and transcribed with Whisper, a differentiator I haven’t seen elsewhere.\nGoals: add FT8/FT4 structural handling, harden real-world capture and rejection of out-of-class signals, and close the loop into a live identify-and-decode interface."
+    "text": "Current status & goals\n\nValidated mode generators. Accurate generators for the core keyed modes (RTTY, PSK31/63, Navtex, Morse), decode-validated to zero character error rate, so the training data is faithful rather than a generic approximation.\nNarrowband classifier. A length-agnostic CNN reaches about 99% on clean 1-second captures, and confirmed a key hypothesis: it distinguishes baud rates such as RTTY45 from RTTY50, which shorter captures can’t resolve.\nWideband detector. A spectrogram object-detector (YOLO) trained purely on synthetic scenes transfers to real off-air signals and stays quiet on noise.\nFrequency-prior / band-plan layer. Narrow, frequency-defined modes like FT8 and FT4 are routed straight to a decoder from their known dial frequencies rather than relying on the detector.\nVoice-to-text. SSB and AM audio is demodulated and transcribed with Whisper, which is a differentiator I haven’t seen elsewhere.\nGoals: add FT8/FT4 structural handling, harden real-world capture and rejection of out-of-class signals, and close the loop into a live identify-and-decode interface."
   },
   {
     "objectID": "projects/ai-signal-classifier.html#key-links",
     "href": "projects/ai-signal-classifier.html#key-links",
     "title": "AI Signal Classifier",
     "section": "Key links",
-    "text": "Key links\n\nfldigi — reference decoder used for validation\nWSJT-X — FT8/FT4 reference\nTorchSig — synthetic RF dataset tooling"
+    "text": "Key links\n\nfldigi, the reference decoder used for validation\nWSJT-X, the FT8 and FT4 reference\nTorchSig, synthetic RF dataset tooling"
   },
   {
     "objectID": "projects/ai-signal-classifier.html#related-posts",
@@ -305,28 +305,28 @@
     "href": "projects/radio-memory-builder.html#what-it-is",
     "title": "Radio Memory Builder",
     "section": "What it is",
-    "text": "What it is\nA tool that turns the RSGB UK repeater list into ready-to-import memory-channel files for my Yaesu radios — the FT5D handheld and the FTM-310 in the car. Instead of typing hundreds of channels by hand, it generates the manufacturer’s CSV format directly, with every channel correctly configured and sensibly organised.\nAlongside the UK repeater network, the files include a set of key airband frequencies for listening.\nThe generator handles the details that make a memory file actually usable:\n\nGeographic banks — repeaters grouped into regional banks (local, East Anglia, Central, the North, Scotland, Northern Ireland and so on), sorted by distance from home, so the right repeaters are a bank-select away when travelling.\nCorrect mode per repeater — analogue FM, Fusion/C4FM, or automatic mode select (AMS), derived from the RSGB mode codes.\nUK band-plan conventions — 12.5 kHz steps, narrow FM, wide for C4FM, CTCSS tones, and cross-band repeaters filtered out.\nPriority rules — GB and MB callsigns first, so if a bank hits the radio’s channel limit it’s the least useful entries that drop."
+    "text": "What it is\nA tool that turns the RSGB UK repeater list into ready-to-import memory-channel files for my Yaesu radios: the FT5D handheld and the FTM-310 in the car. Instead of typing hundreds of channels by hand, it generates the manufacturer’s CSV format directly, with every channel correctly configured and sensibly organised.\nAlongside the UK repeater network, the files include a set of key airband frequencies for listening.\nThe generator handles the details that make a memory file actually usable:\n\nGeographic banks. Repeaters grouped into regional banks (local, East Anglia, Central, the North, Scotland, Northern Ireland and so on), sorted by distance from home, so the right repeaters are a bank-select away when travelling.\nCorrect mode per repeater. Analogue FM, Fusion/C4FM, or automatic mode select (AMS), derived from the RSGB mode codes.\nUK band-plan conventions. 12.5 kHz steps, narrow FM, wide for C4FM, CTCSS tones, and cross-band repeaters filtered out.\nPriority rules. GB and MB callsigns first, so if a bank hits the radio’s channel limit it’s the least useful entries that drop."
   },
   {
     "objectID": "projects/radio-memory-builder.html#why-i-built-it",
     "href": "projects/radio-memory-builder.html#why-i-built-it",
     "title": "Radio Memory Builder",
     "section": "Why I built it",
-    "text": "Why I built it\nProgramming a modern handheld by hand is tedious and error-prone, and the manufacturer’s CSV format is unforgiving — a single misplaced column silently shifts every setting after it. Each radio also has its own programming application — ADMS-14 for the FT5D and ADMS-20 for the FTM-310 — and each expects a different file layout.\nI wanted a repeatable way to rebuild the memory file whenever the repeater list changes, and the same organisation on both radios, so the bank I reach for in the car is the bank I reach for on the handheld.\nIt also turned into a small exercise in reverse-engineering an undocumented file format, which was more interesting than it had any right to be."
+    "text": "Why I built it\nProgramming a modern handheld by hand is tedious and error-prone, and the manufacturer’s CSV format is unforgiving: a single misplaced column silently shifts every setting after it. Each radio also has its own programming application, ADMS-14 for the FT5D and ADMS-20 for the FTM-310, and each expects a different file layout.\nI wanted a repeatable way to rebuild the memory file whenever the repeater list changes, and the same organisation on both radios, so the bank I reach for in the car is the bank I reach for on the handheld.\nIt also turned into a small exercise in reverse-engineering an undocumented file format, which was more interesting than it had any right to be."
   },
   {
     "objectID": "projects/radio-memory-builder.html#current-status-goals",
     "href": "projects/radio-memory-builder.html#current-status-goals",
     "title": "Radio Memory Builder",
     "section": "Current status & goals",
-    "text": "Current status & goals\n\nFT5D (ADMS-14): working — the full 54-field CSV, 900 channels across 16 geographic banks, imported and running on the radio.\nFTM-310 (ADMS-20): working — a different 22-field layout, 999 channels, no per-group limit, with the local channels flagged into the quick-access memory group instead of banks.\nCoverage: the full UK repeater network plus around 70 airband frequencies for listening — local fields, the major airports, VOLMET and 121.5 — set to AM with 8.33 kHz steps.\nFormat bugs found and fixed — most notably a missing DCS-polarity column that shifted the whole flags block and switched Clock Shift on for every channel, and an off-by-one in the bank-flag array that wrote into the comment field.\nPublished as yaesu-memory-builder (MIT). Your own QTH and personal channels are parameters, so it builds for any location rather than only mine.\nGoals: factor the per-radio layouts into profiles rather than a script per radio, and re-run automatically when the RSGB list is updated. A small web tool — upload the repeater list, pick your radio and your location, download the CSV — is an appealing next step if it proves robust enough."
+    "text": "Current status & goals\n\nFT5D (ADMS-14): working. The full 54-field CSV, 900 channels across 16 geographic banks, imported and running on the radio.\nFTM-310 (ADMS-20): working. A different 22-field layout, 999 channels and no per-group limit, with the local channels flagged into the quick-access memory group instead of banks.\nCoverage: the full UK repeater network plus around 70 airband frequencies for listening, covering local fields, the major airports, VOLMET and 121.5, set to AM with 8.33 kHz steps.\nFormat bugs found and fixed. Most notably a missing DCS-polarity column that shifted the whole flags block and switched Clock Shift on for every channel, and an off-by-one in the bank-flag array that wrote into the comment field.\nPublished as yaesu-memory-builder under an MIT licence. Your own QTH and personal channels are parameters, so it builds for any location rather than only mine.\nGoals: factor the per-radio layouts into profiles rather than a script per radio, and re-run automatically when the RSGB list is updated. A small web tool, where you upload the repeater list, pick your radio and your location and download the CSV, is an appealing next step if it proves robust enough."
   },
   {
     "objectID": "projects/radio-memory-builder.html#how-it-works",
     "href": "projects/radio-memory-builder.html#how-it-works",
     "title": "Radio Memory Builder",
     "section": "How it works",
-    "text": "How it works\nThe input is the RSGB repeater list as CSV. The generator filters it to FM and Fusion repeaters on 2 m and 70 cm, discards cross-band entries, derives each offset by subtracting transmit from receive frequency, maps the RSGB mode letters onto FM/DN/AMS, and validates access tones against the real CTCSS table so that DMR colour codes in the same column don’t become bogus tones. Repeaters are then grouped by distance from home and by region, sorted so GB and MB callsigns survive if a bank fills up, and written out in the exact field layout the radio’s programming software expects.\nThere’s a full write-up of the method, and the CSV traps involved, in the guide below."
+    "text": "How it works\nThe input is the RSGB repeater list as CSV. The generator filters it to FM and Fusion repeaters on 2 m and 70 cm, discards cross-band entries, derives each offset by subtracting transmit from receive frequency, maps the RSGB mode letters onto FM, DN or AMS, and validates access tones against the real CTCSS table so that DMR colour codes in the same column don’t become bogus tones. Repeaters are then grouped by distance from home and by region, sorted so GB and MB callsigns survive if a bank fills up, and written out in the exact field layout the radio’s programming software expects.\nThere’s a full write-up of the method, and the CSV traps involved, in the guide below."
   },
   {
     "objectID": "projects/radio-memory-builder.html#the-mobile-installation",
@@ -340,28 +340,28 @@
     "href": "projects/radio-memory-builder.html#key-links",
     "title": "Radio Memory Builder",
     "section": "Key links",
-    "text": "Key links\n\nUK repeater list (RSGB ETCC) — the source data\nyaesu-memory-builder — the code (MIT licensed)\nYaesu ADMS programming software — ADMS-14 (FT5D) and ADMS-20 (FTM-310)"
+    "text": "Key links\n\nUK repeater list (RSGB ETCC), the source data\nyaesu-memory-builder, the code, MIT licensed\nYaesu ADMS programming software: ADMS-14 for the FT5D and ADMS-20 for the FTM-310"
   },
   {
     "objectID": "projects/radio-memory-builder.html#related-posts",
     "href": "projects/radio-memory-builder.html#related-posts",
     "title": "Radio Memory Builder",
     "section": "Related posts",
-    "text": "Related posts\n\nBuilding a UK repeater memory file for your Yaesu — the full method, and the CSV traps to avoid\nMMDVM Digital Voice Hotspot — the G0LFT HOTSPOT channel in the memory file"
+    "text": "Related posts\n\nBuilding a UK repeater memory file for your Yaesu, the full method and the CSV traps to avoid\nMMDVM Digital Voice Hotspot, which supplies the G0LFT HOTSPOT channel in the memory file"
   },
   {
     "objectID": "projects/raspberry-pi-sdr.html#what-it-is",
     "href": "projects/raspberry-pi-sdr.html#what-it-is",
     "title": "Raspberry Pi SDR",
     "section": "What it is",
-    "text": "What it is\nA small, self-contained device that receives radio signals and plots their IQ data live on a touchscreen — and demodulates the same signal to audio so you can hear what you’re looking at. It’s built entirely from off-the-shelf parts and open-source software:\n\nRaspberry Pi 5 mounted behind a touchscreen (on a touchscreen stand)\nRTL-SDR v5 USB dongle as the receiver\nUSB soundcard / speaker for the demodulated audio\n\nThe signal processing is a GNU Radio flow graph: it takes IQ samples from the USB dongle, selects the region of interest from the captured bandwidth, plots the IQ, demodulates to audio, and sends that audio to the speaker."
+    "text": "What it is\nA small, self-contained device that receives radio signals and plots their IQ data live on a touchscreen, then demodulates the same signal to audio so you can hear what you’re looking at. It’s built entirely from off-the-shelf parts and open-source software:\n\nRaspberry Pi 5 mounted behind a touchscreen (on a touchscreen stand)\nRTL-SDR v5 USB dongle as the receiver\nUSB soundcard and speaker for the demodulated audio\n\nThe signal processing is a GNU Radio flow graph. It takes IQ samples from the USB dongle, selects the region of interest from the captured bandwidth, plots the IQ, demodulates to audio, and sends that audio to the speaker."
   },
   {
     "objectID": "projects/raspberry-pi-sdr.html#why-i-built-it",
     "href": "projects/raspberry-pi-sdr.html#why-i-built-it",
     "title": "Raspberry Pi SDR",
     "section": "Why I built it",
-    "text": "Why I built it\nIQ is the foundation of every modern software-defined radio, but it’s usually buried inside the software and never seen. I wanted a physical object I could put on a table in front of people — tune it to a real signal and let them watch the constellation move while hearing the audio at the same time. Seeing an AM carrier trace a line, an FM signal ride a circle, and FT8 hop between eight tones does far more than a slide ever will.\nIt’s a demonstration tool for the IQ talk more than an instrument, which is why it’s deliberately built from cheap, easily-sourced components that anyone could copy."
+    "text": "Why I built it\nIQ is the foundation of every modern software-defined radio, but it’s usually buried inside the software and never seen. I wanted a physical object I could put on a table in front of people, tune to a real signal, and let them watch the constellation move while hearing the audio at the same time. Seeing an AM carrier trace a line, an FM signal ride a circle, and FT8 hop between eight tones does far more than a slide ever will.\nIt’s a demonstration tool for the IQ talk more than an instrument, which is why it’s deliberately built from cheap, easily sourced components that anyone could copy."
   },
   {
     "objectID": "projects/raspberry-pi-sdr.html#current-status-goals",
@@ -375,14 +375,14 @@
     "href": "projects/raspberry-pi-sdr.html#key-links",
     "title": "Raspberry Pi SDR",
     "section": "Key links",
-    "text": "Key links\n\nsdrplay-gnuradio-examples — my GNU Radio flow graphs\nSetup guide for IQ visualisation — how to get started with this yourself\nGNU Radio — the DSP environment\nRadioconda — pre-packaged GNU Radio with SDR driver support\nRTL-SDR — the receiver dongle\n\nThe flow graph for this specific device is still being tidied for release — in the meantime it’s available on request, get in touch."
+    "text": "Key links\n\nsdrplay-gnuradio-examples, my GNU Radio flow graphs\nSetup guide for IQ visualisation, which covers getting started with this yourself\nGNU Radio, the DSP environment\nRadioconda, pre-packaged GNU Radio with SDR driver support\nRTL-SDR, the receiver dongle\n\nThe flow graph for this specific device is still being tidied for release. In the meantime it’s available on request, so do get in touch."
   },
   {
     "objectID": "projects/raspberry-pi-sdr.html#related",
     "href": "projects/raspberry-pi-sdr.html#related",
     "title": "Raspberry Pi SDR",
     "section": "Related",
-    "text": "Related\n\nTalks & Publications — Making the invisible visible: understanding your SDR through IQ visualisation\nDSP Visualisations — the wider project this device belongs to"
+    "text": "Related\n\nTalks & Publications, covering Making the invisible visible: understanding your SDR through IQ visualisation\nDSP Visualisations, the wider project this device belongs to"
   },
   {
     "objectID": "about.html#about",
@@ -403,28 +403,28 @@
     "href": "projects/gb7cam.html#what-it-is",
     "title": "GB7CAM Packet Node",
     "section": "What it is",
-    "text": "What it is\nGB7CAM is my packet radio infrastructure project: a licensed LinBPQ node running on a Raspberry Pi, peering with other nodes across the UK packet network. Around the node I’ve built a set of web services — live status, a network topology graph, activity trends, and a searchable bulletin archive — plus a self-hosted WhatsPac chat gateway.\nIt runs as a production service that other operators connect to and peer with, so it’s treated accordingly: monitored, backed up, and hardened against the failure modes I’ve run into along the way.\n\nGB7CAM has its own dedicated site aimed at operators who want to use the node — connection details, frequencies, status, and documentation. This page is about the project and how it was built; it doesn’t duplicate that information."
+    "text": "What it is\nGB7CAM is my packet radio infrastructure project: a licensed LinBPQ node running on a Raspberry Pi, peering with other nodes across the UK packet network. Around the node I’ve built a set of web services covering live status, a network topology graph, activity trends and a searchable bulletin archive, plus a self-hosted WhatsPac chat gateway.\nIt runs as a production service that other operators connect to and peer with, so it’s treated accordingly: monitored, backed up, and hardened against the failure modes I’ve run into along the way.\n\nGB7CAM has its own dedicated site aimed at operators who want to use the node, with connection details, frequencies, status and documentation. This page is about the project and how it was built; it doesn’t duplicate that information."
   },
   {
     "objectID": "projects/gb7cam.html#why-i-built-it",
     "href": "projects/gb7cam.html#why-i-built-it",
     "title": "GB7CAM Packet Node",
     "section": "Why I built it",
-    "text": "Why I built it\nCambridge was a bit of a “packet desert” — plenty of history, not much live activity. I wanted to put a reliable, always-on node back on the air for the area, and to learn the AX.25 / NET/ROM stack properly by running a real service rather than reading about it. It started with a £20 Raspberry Pi and a £10 handheld, which turned out to be enough to get a node on the air."
+    "text": "Why I built it\nCambridge was a bit of a “packet desert”, with plenty of history but not much live activity. I wanted to put a reliable, always-on node back on the air for the area, and to learn the AX.25 and NET/ROM stack properly by running a real service rather than reading about it. It started with a £20 Raspberry Pi and a £10 handheld, which turned out to be enough to get a node on the air."
   },
   {
     "objectID": "projects/gb7cam.html#current-status-goals",
     "href": "projects/gb7cam.html#current-status-goals",
     "title": "GB7CAM Packet Node",
     "section": "Current status & goals",
-    "text": "Current status & goals\n\nLive and in production — the node, its API, and the direwolf/TNC stack all run as managed services that survive reboots and self-recover from crashes.\nSelf-healing bulletins — a recurring crash caused by malformed (bare-CR) bulletins relayed in from peers is now handled by an automatic mail sanitiser, so the node repairs itself instead of going down.\nNetwork analysis — logging routes and node tables over time to study the real topology of the surrounding packet network.\nNext: a “real-edges” topology graph showing true peer-to-peer adjacency, built from the peer-route snapshots now being collected."
+    "text": "Current status & goals\n\nLive and in production. The node, its API and the direwolf/TNC stack all run as managed services that survive reboots and self-recover from crashes.\nSelf-healing bulletins. A recurring crash caused by malformed (bare-CR) bulletins relayed in from peers is now handled by an automatic mail sanitiser, so the node repairs itself instead of going down.\nNetwork analysis. Logging routes and node tables over time to study the real topology of the surrounding packet network.\nNext: a “real-edges” topology graph showing true peer-to-peer adjacency, built from the peer-route snapshots now being collected."
   },
   {
     "objectID": "projects/gb7cam.html#key-links",
     "href": "projects/gb7cam.html#key-links",
     "title": "GB7CAM Packet Node",
     "section": "Key links",
-    "text": "Key links\n\nGB7CAM website — the dedicated operator-facing site\nNode status\nNetwork graph\nActivity trends\nBulletins archive\nWhatsPac gateway (password-gated)"
+    "text": "Key links\n\nGB7CAM website, the dedicated operator-facing site\nNode status\nNetwork graph\nActivity trends\nBulletins archive\nWhatsPac gateway (password-gated)"
   },
   {
     "objectID": "projects/gb7cam.html#related-posts",
@@ -438,28 +438,28 @@
     "href": "projects/dsp-visualisations.html#what-it-is",
     "title": "DSP Visualisations",
     "section": "What it is",
-    "text": "What it is\nA running effort to make the digital signal processing behind SDR visible — IQ constellations, spectra, and the way real signals behave — through small tools and explanatory writing. It includes a simple IQ-visualisation plugin for SDRconnect for people who want a quick feel for IQ without the GNU Radio learning curve, alongside step-by-step setup notes."
+    "text": "What it is\nA running effort to make the digital signal processing behind SDR visible: IQ constellations, spectra, and the way real signals actually behave, through small tools and explanatory writing. It includes a simple IQ visualisation plugin for SDRconnect, for people who want a quick feel for IQ without the GNU Radio learning curve, alongside step-by-step setup notes."
   },
   {
     "objectID": "projects/dsp-visualisations.html#why-i-built-it",
     "href": "projects/dsp-visualisations.html#why-i-built-it",
     "title": "DSP Visualisations",
     "section": "Why I built it",
-    "text": "Why I built it\nI care as much about why things work as how, and IQ/DSP concepts click far faster when you can see them move. These pieces are aimed at demystifying the theory rather than just listing procedures."
+    "text": "Why I built it\nI care as much about why things work as how, and IQ and DSP concepts click far faster when you can see them move. These pieces are aimed at demystifying the theory rather than just listing procedures."
   },
   {
     "objectID": "projects/dsp-visualisations.html#current-status-goals",
     "href": "projects/dsp-visualisations.html#current-status-goals",
     "title": "DSP Visualisations",
     "section": "Current status & goals",
-    "text": "Current status & goals\n\nSetup guide for IQ visualisation with an SDRplay (GNU Radio / Radioconda), plus a lightweight SDRconnect plugin as a quick-start path.\nExplorations of FM and repeater IQ.\nThe material became a full talk, Making the invisible visible, given to CDARC in May 2026 and invited to the RSGB Convention in October 2026, and a RadCom article, Seeing signals: I and Q from first principles (September 2026).\nA purpose-built Raspberry Pi device plots live IQ and demodulates the same signal to audio for demonstrations."
+    "text": "Current status & goals\n\nSetup guide for IQ visualisation with an SDRplay, using GNU Radio and Radioconda, plus a lightweight SDRconnect plugin as a quick-start path.\nExplorations of FM and repeater IQ.\nThe material became a full talk, Making the invisible visible, given to CDARC in May 2026 and invited to the RSGB Convention in October 2026, and a RadCom article, Seeing signals: I and Q from first principles, in September\n\n\n\nA purpose-built Raspberry Pi device plots live IQ and demodulates the same signal to audio for demonstrations."
   },
   {
     "objectID": "projects/dsp-visualisations.html#key-links",
     "href": "projects/dsp-visualisations.html#key-links",
     "title": "DSP Visualisations",
     "section": "Key links",
-    "text": "Key links\nMy code\n\nsdrconnect-iq-visualiser — the SDRconnect IQ visualisation plugin\nsdrplay-gnuradio-examples — GNU Radio flow graphs for SDRplay devices\n\nElsewhere on this site\n\nSetup for IQ visualisation and digital signal processing\nTalks & Publications — the IQ talk and article\nRaspberry Pi SDR — the demonstration device\n\nTools used\n\nSDRplay — the RSP receivers\nGNU Radio — the DSP environment\nRadioconda — the easy path to a working GNU Radio install"
+    "text": "Key links\nMy code\n\nsdrconnect-iq-visualiser, the SDRconnect IQ visualisation plugin\nsdrplay-gnuradio-examples, GNU Radio flow graphs for SDRplay devices\n\nElsewhere on this site\n\nSetup for IQ visualisation and digital signal processing\nTalks & Publications, covering the IQ talk and article\nRaspberry Pi SDR, the demonstration device\n\nTools used\n\nSDRplay, the RSP receivers\nGNU Radio, the DSP environment\nRadioconda, the easy path to a working GNU Radio install"
   },
   {
     "objectID": "projects/dsp-visualisations.html#related-posts",
@@ -473,14 +473,14 @@
     "href": "projects/mmdvm-hotspot.html#what-it-is",
     "title": "MMDVM Digital Voice Hotspot",
     "section": "What it is",
-    "text": "What it is\nA personal digital voice hotspot: a Raspberry Pi 5 with a duplex MMDVM hat, running WPSD. It puts a low-power digital voice access point on my desk, so a handheld can reach the digital voice networks without needing to be in range of a repeater.\nBeing duplex, it transmits and receives simultaneously on separate frequencies — so it behaves like a miniature repeater rather than requiring the turn-taking a simplex hotspot imposes. It gives me access to both DMR and YSF (System Fusion) networks, and works with the FT5D handheld and the FTM-200DE in the shack.\nIt appears in my radios’ memory files as the G0LFT HOTSPOT channel — 438.725 MHz receive, 434.725 MHz transmit, in Fusion (DN) mode with the wide IF filter, which C4FM needs to decode reliably."
+    "text": "What it is\nA personal digital voice hotspot: a Raspberry Pi 5 with a duplex MMDVM hat, running WPSD. It puts a low-power digital voice access point on my desk, so a handheld can reach the digital voice networks without needing to be in range of a repeater.\nBeing duplex, it transmits and receives simultaneously on separate frequencies, so it behaves like a miniature repeater rather than imposing the turn-taking a simplex hotspot requires. It gives me access to both the DMR and YSF (System Fusion) networks, and works with the FT5D handheld and the FTM-200DE in the shack.\nIt appears in my radios’ memory files as the G0LFT HOTSPOT channel: 438.725 MHz receive, 434.725 MHz transmit, in Fusion (DN) mode with the wide IF filter, which C4FM needs to decode reliably."
   },
   {
     "objectID": "projects/mmdvm-hotspot.html#why-i-built-it",
     "href": "projects/mmdvm-hotspot.html#why-i-built-it",
     "title": "MMDVM Digital Voice Hotspot",
     "section": "Why I built it",
-    "text": "Why I built it\nCambridge has repeater coverage, but a hotspot removes the dependency entirely: it works from indoors, at very low power, and lets me move between the digital voice networks without retuning anything. It’s also the most convenient way to experiment with the digital modes — reflectors and talkgroups are a configuration change rather than a drive to somewhere with coverage.\nIt’s the piece of infrastructure that made the digital side of the hobby practical for me day to day, which is why the wide-IF discovery it prompted ended up baked into my memory-channel builder."
+    "text": "Why I built it\nCambridge has repeater coverage, but a hotspot removes the dependency entirely. It works from indoors, at very low power, and lets me move between the digital voice networks without retuning anything. It’s also the most convenient way to experiment with the digital modes, since reflectors and talkgroups become a configuration change rather than a drive to somewhere with coverage.\nIt’s the piece of infrastructure that made the digital side of the hobby practical for me day to day, which is why the wide-IF discovery it prompted ended up baked into my memory-channel builder."
   },
   {
     "objectID": "projects/mmdvm-hotspot.html#current-status-goals",
@@ -494,14 +494,14 @@
     "href": "projects/mmdvm-hotspot.html#key-links",
     "title": "MMDVM Digital Voice Hotspot",
     "section": "Key links",
-    "text": "Key links\n\nWPSD — the hotspot software (a modern successor to Pi-Star)\nMMDVM — the multi-mode digital voice modem project"
+    "text": "Key links\n\nWPSD, the hotspot software and a modern successor to Pi-Star\nMMDVM, the multi-mode digital voice modem project"
   },
   {
     "objectID": "projects/mmdvm-hotspot.html#related",
     "href": "projects/mmdvm-hotspot.html#related",
     "title": "MMDVM Digital Voice Hotspot",
     "section": "Related",
-    "text": "Related\n\nRadio Memory Builder — the hotspot’s memory channel and the wide/narrow bandwidth rule it taught me\nMy Station"
+    "text": "Related\n\nRadio Memory Builder, which carries the hotspot’s memory channel and the wide/narrow bandwidth rule it taught me\nMy Station"
   },
   {
     "objectID": "notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html",
@@ -697,7 +697,7 @@
     "href": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#code-and-tools",
     "title": "Seeing an FM Repeater in IQ Space",
     "section": "Code and tools",
-    "text": "Code and tools\nThese plots come out of my wider DSP Visualisations work, which brings together the tooling for looking at IQ data like this:\n\nsdrplay-gnuradio-examples — GNU Radio flow graphs for capturing IQ from an SDRplay\nsdrconnect-iq-visualiser — a lightweight SDRconnect plugin, if you want IQ plots without the GNU Radio learning curve\nSetup for IQ visualisation and digital signal processing — how to get the whole toolchain running\n\nThe specific capture, plotting and animation scripts behind this post are still being tidied up for release."
+    "text": "Code and tools\nThese plots come out of my wider DSP Visualisations work, which brings together the tooling for looking at IQ data like this:\n\nsdrplay-gnuradio-examples, GNU Radio flow graphs for capturing IQ from an SDRplay\nsdrconnect-iq-visualiser, a lightweight SDRconnect plugin if you want IQ plots without the GNU Radio learning curve\nSetup for IQ visualisation and digital signal processing, which covers getting the whole toolchain running\n\nThe specific capture, plotting and animation scripts behind this post are still being tidied up for release."
   },
   {
     "objectID": "thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html#where-next",
@@ -718,14 +718,14 @@
     "href": "index.html#welcome",
     "title": "G0LFT",
     "section": "Welcome",
-    "text": "Welcome\nI’m Dr Ian Henry, a licensed UK radio amateur living just south of Cambridge, and a member of Cambridge and District Amateur Radio Club (CDARC) and the Radio Society of Great Britain (RSGB).\nIf you’ve found your way here from one of my RadCom articles or talks — welcome. They’re all listed on the Talks & Publications page, including Understanding FT8 through DNA-sequencing parallels and the blog post that accompanies it.\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
+    "text": "Welcome\nI’m Dr Ian Henry, a licensed UK radio amateur living just south of Cambridge, and a member of Cambridge and District Amateur Radio Club (CDARC) and the Radio Society of Great Britain (RSGB).\nIf you’ve found your way here from one of my RadCom articles or talks, welcome. They’re all listed on the Talks & Publications page, including Understanding FT8 through DNA-sequencing parallels and the blog post that goes with it.\nIf you’d like to get in touch, collaborate, or talk radio, you can find contact details in the footer."
   },
   {
     "objectID": "index.html#teaching-learning-and-amateur-radio",
     "href": "index.html#teaching-learning-and-amateur-radio",
     "title": "G0LFT",
     "section": "Teaching, learning, and amateur radio",
-    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, practical guides, and the things I’m building — all focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nProjects — packet radio infrastructure, machine learning for signal identification, and SDR builds\nBlog — posts exploring ideas and experiences\nThinking — theory-focused writing on learning and SDR\nGuides — practical guides for applying those ideas\nNotebook — working notes: speculative and self-correcting\nTalks & Publications — articles and conference sessions\n\nThere’s more about me and how I got here on the About page."
+    "text": "Teaching, learning, and amateur radio\nThis site brings together reflective writing, theory, practical guides, and the things I’m building, all focused on teaching, SDR, and modern amateur radio practice.\nYou’ll find:\n\nProjects: packet radio infrastructure, machine learning for signal identification, and SDR builds\nBlog: posts exploring ideas and experiences\nThinking: theory-focused writing on learning and SDR\nGuides: practical guides for applying those ideas\nNotebook: working notes, speculative and self-correcting\nTalks & Publications: articles and conference sessions\n\nThere’s more about me and how I got here on the About page."
   },
   {
     "objectID": "blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html",
@@ -781,6 +781,6 @@
     "href": "projects.html#projects",
     "title": "Projects",
     "section": "Projects",
-    "text": "Projects\nA home for the things I’m building around amateur radio — packet infrastructure, machine learning for signal identification, SDR experiments, and tools that make the underlying DSP visible.\nEach project has its own page describing what it is, why I built it, where it’s at now, and links to related writing. Some are live services, others are ongoing experiments and works in progress."
+    "text": "Projects\nA home for the things I’m building around amateur radio: packet infrastructure, machine learning for signal identification, SDR experiments, and tools that make the underlying DSP visible.\nEach project has its own page describing what it is, why I built it, where it’s at now, and links to related writing. Some are live services, others are ongoing experiments and works in progress."
   }
 ]

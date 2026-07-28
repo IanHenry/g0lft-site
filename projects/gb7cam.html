@@ -165,29 +165,29 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-it-is" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-is">What it is</h2>
-<p>GB7CAM is my packet radio infrastructure project: a licensed <a href="https://www.cantab.net/users/john.wiseman/Documents/">LinBPQ</a> node running on a Raspberry Pi, peering with other nodes across the UK packet network. Around the node I’ve built a set of web services — live status, a network topology graph, activity trends, and a searchable bulletin archive — plus a self-hosted <a href="http://whatspac.oarc.uk/">WhatsPac</a> chat gateway.</p>
+<p>GB7CAM is my packet radio infrastructure project: a licensed <a href="https://www.cantab.net/users/john.wiseman/Documents/">LinBPQ</a> node running on a Raspberry Pi, peering with other nodes across the UK packet network. Around the node I’ve built a set of web services covering live status, a network topology graph, activity trends and a searchable bulletin archive, plus a self-hosted <a href="http://whatspac.oarc.uk/">WhatsPac</a> chat gateway.</p>
 <p>It runs as a production service that other operators connect to and peer with, so it’s treated accordingly: monitored, backed up, and hardened against the failure modes I’ve run into along the way.</p>
 <blockquote class="blockquote">
-<p>GB7CAM has its own dedicated site aimed at operators who want to <em>use</em> the node — connection details, frequencies, status, and documentation. This page is about the project and how it was built; it doesn’t duplicate that information.</p>
+<p>GB7CAM has its own dedicated site aimed at operators who want to <em>use</em> the node, with connection details, frequencies, status and documentation. This page is about the project and how it was built; it doesn’t duplicate that information.</p>
 </blockquote>
 </section>
 <section id="why-i-built-it" class="level2">
 <h2 class="anchored" data-anchor-id="why-i-built-it">Why I built it</h2>
-<p>Cambridge was a bit of a “packet desert” — plenty of history, not much live activity. I wanted to put a reliable, always-on node back on the air for the area, and to learn the AX.25 / NET/ROM stack properly by running a real service rather than reading about it. It started with a £20 Raspberry Pi and a £10 handheld, which turned out to be enough to get a node on the air.</p>
+<p>Cambridge was a bit of a “packet desert”, with plenty of history but not much live activity. I wanted to put a reliable, always-on node back on the air for the area, and to learn the AX.25 and NET/ROM stack properly by running a real service rather than reading about it. It started with a £20 Raspberry Pi and a £10 handheld, which turned out to be enough to get a node on the air.</p>
 </section>
 <section id="current-status-goals" class="level2">
 <h2 class="anchored" data-anchor-id="current-status-goals">Current status &amp; goals</h2>
 <ul>
-<li><strong>Live and in production</strong> — the node, its API, and the direwolf/TNC stack all run as managed services that survive reboots and self-recover from crashes.</li>
-<li><strong>Self-healing bulletins</strong> — a recurring crash caused by malformed (bare-CR) bulletins relayed in from peers is now handled by an automatic mail sanitiser, so the node repairs itself instead of going down.</li>
-<li><strong>Network analysis</strong> — logging routes and node tables over time to study the real topology of the surrounding packet network.</li>
+<li><strong>Live and in production.</strong> The node, its API and the direwolf/TNC stack all run as managed services that survive reboots and self-recover from crashes.</li>
+<li><strong>Self-healing bulletins.</strong> A recurring crash caused by malformed (bare-CR) bulletins relayed in from peers is now handled by an automatic mail sanitiser, so the node repairs itself instead of going down.</li>
+<li><strong>Network analysis.</strong> Logging routes and node tables over time to study the real topology of the surrounding packet network.</li>
 <li><strong>Next:</strong> a “real-edges” topology graph showing true peer-to-peer adjacency, built from the peer-route snapshots now being collected.</li>
 </ul>
 </section>
 <section id="key-links" class="level2">
 <h2 class="anchored" data-anchor-id="key-links">Key links</h2>
 <ul>
-<li><a href="https://gb7cam.org.uk">GB7CAM website</a> — the dedicated operator-facing site</li>
+<li><a href="https://gb7cam.org.uk">GB7CAM website</a>, the dedicated operator-facing site</li>
 <li><a href="https://gb7cam.org.uk/status.html">Node status</a></li>
 <li><a href="https://gb7cam.org.uk/graph.html">Network graph</a></li>
 <li><a href="https://gb7cam.org.uk/trends.html">Activity trends</a></li>

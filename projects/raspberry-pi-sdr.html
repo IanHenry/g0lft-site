@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A self-contained, off-the-shelf device that shows IQ data live on a touchscreen — and lets you listen to what you’re looking at.">
+<meta name="description" content="A self-contained, off-the-shelf device that shows IQ data live on a touchscreen and lets you listen to what you’re looking at.">
 
 <title>Raspberry Pi SDR</title>
 <style>
@@ -171,18 +171,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="what-it-is" class="level2">
 <h2 class="anchored" data-anchor-id="what-it-is">What it is</h2>
-<p>A small, self-contained device that receives radio signals and plots their IQ data live on a touchscreen — and demodulates the same signal to audio so you can <em>hear</em> what you’re looking at. It’s built entirely from off-the-shelf parts and open-source software:</p>
+<p>A small, self-contained device that receives radio signals and plots their IQ data live on a touchscreen, then demodulates the same signal to audio so you can <em>hear</em> what you’re looking at. It’s built entirely from off-the-shelf parts and open-source software:</p>
 <ul>
 <li><strong>Raspberry Pi 5</strong> mounted behind a <strong>touchscreen</strong> (on a touchscreen stand)</li>
 <li><strong>RTL-SDR v5</strong> USB dongle as the receiver</li>
-<li><strong>USB soundcard / speaker</strong> for the demodulated audio</li>
+<li><strong>USB soundcard and speaker</strong> for the demodulated audio</li>
 </ul>
-<p>The signal processing is a <a href="https://www.gnuradio.org/">GNU Radio</a> flow graph: it takes IQ samples from the USB dongle, selects the region of interest from the captured bandwidth, plots the IQ, demodulates to audio, and sends that audio to the speaker.</p>
+<p>The signal processing is a <a href="https://www.gnuradio.org/">GNU Radio</a> flow graph. It takes IQ samples from the USB dongle, selects the region of interest from the captured bandwidth, plots the IQ, demodulates to audio, and sends that audio to the speaker.</p>
 </section>
 <section id="why-i-built-it" class="level2">
 <h2 class="anchored" data-anchor-id="why-i-built-it">Why I built it</h2>
-<p>IQ is the foundation of every modern software-defined radio, but it’s usually buried inside the software and never seen. I wanted a physical object I could put on a table in front of people — tune it to a real signal and let them watch the constellation move while hearing the audio at the same time. Seeing an AM carrier trace a line, an FM signal ride a circle, and FT8 hop between eight tones does far more than a slide ever will.</p>
-<p>It’s a demonstration tool for the IQ talk more than an instrument, which is why it’s deliberately built from cheap, easily-sourced components that anyone could copy.</p>
+<p>IQ is the foundation of every modern software-defined radio, but it’s usually buried inside the software and never seen. I wanted a physical object I could put on a table in front of people, tune to a real signal, and let them watch the constellation move while hearing the audio at the same time. Seeing an AM carrier trace a line, an FM signal ride a circle, and FT8 hop between eight tones does far more than a slide ever will.</p>
+<p>It’s a demonstration tool for the IQ talk more than an instrument, which is why it’s deliberately built from cheap, easily sourced components that anyone could copy.</p>
 </section>
 <section id="current-status-goals" class="level2">
 <h2 class="anchored" data-anchor-id="current-status-goals">Current status &amp; goals</h2>
@@ -196,19 +196,19 @@ ul.task-list li input[type="checkbox"] {
 <section id="key-links" class="level2">
 <h2 class="anchored" data-anchor-id="key-links">Key links</h2>
 <ul>
-<li><a href="https://github.com/IanHenry/sdrplay-gnuradio-examples">sdrplay-gnuradio-examples</a> — my GNU Radio flow graphs</li>
-<li><a href="../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html">Setup guide for IQ visualisation</a> — how to get started with this yourself</li>
-<li><a href="https://www.gnuradio.org/about/">GNU Radio</a> — the DSP environment</li>
-<li><a href="https://github.com/radioconda/radioconda-installer">Radioconda</a> — pre-packaged GNU Radio with SDR driver support</li>
-<li><a href="https://www.rtl-sdr.com/">RTL-SDR</a> — the receiver dongle</li>
+<li><a href="https://github.com/IanHenry/sdrplay-gnuradio-examples">sdrplay-gnuradio-examples</a>, my GNU Radio flow graphs</li>
+<li><a href="../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html">Setup guide for IQ visualisation</a>, which covers getting started with this yourself</li>
+<li><a href="https://www.gnuradio.org/about/">GNU Radio</a>, the DSP environment</li>
+<li><a href="https://github.com/radioconda/radioconda-installer">Radioconda</a>, pre-packaged GNU Radio with SDR driver support</li>
+<li><a href="https://www.rtl-sdr.com/">RTL-SDR</a>, the receiver dongle</li>
 </ul>
-<p>The flow graph for this specific device is still being tidied for release — in the meantime it’s available on request, <a href="../contact.html">get in touch</a>.</p>
+<p>The flow graph for this specific device is still being tidied for release. In the meantime it’s available on request, so do <a href="../contact.html">get in touch</a>.</p>
 </section>
 <section id="related" class="level2">
 <h2 class="anchored" data-anchor-id="related">Related</h2>
 <ul>
-<li><a href="../talks.html">Talks &amp; Publications</a> — <em>Making the invisible visible: understanding your SDR through IQ visualisation</em></li>
-<li><a href="../projects/dsp-visualisations.html">DSP Visualisations</a> — the wider project this device belongs to</li>
+<li><a href="../talks.html">Talks &amp; Publications</a>, covering <em>Making the invisible visible: understanding your SDR through IQ visualisation</em></li>
+<li><a href="../projects/dsp-visualisations.html">DSP Visualisations</a>, the wider project this device belongs to</li>
 </ul>
 
 
