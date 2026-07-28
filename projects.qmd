@@ -12,10 +12,10 @@ listing:
 
 ## Projects
 
-A home for the things I'm building around amateur radio — packet
-infrastructure, machine learning for signal identification, SDR
-experiments, and tools that make the underlying DSP visible.
+A home for the things I'm building around amateur radio: packet infrastructure,
+machine learning for signal identification, SDR experiments, and tools that make
+the underlying DSP visible.
 
-Each project has its own page describing what it is, why I built it, where
-it's at now, and links to related writing. Some are live services, others
-are ongoing experiments and works in progress.
+Each project has its own page describing what it is, why I built it, where it's
+at now, and links to related writing. Some are live services, others are ongoing
+experiments and works in progress.

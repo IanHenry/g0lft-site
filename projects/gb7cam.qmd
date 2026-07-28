@@ -8,10 +8,10 @@ categories: [Packet Radio, AX.25, LinBPQ, Infrastructure]
 ## What it is
 
 GB7CAM is my packet radio infrastructure project: a licensed
-[LinBPQ](https://www.cantab.net/users/john.wiseman/Documents/) node running on
-a Raspberry Pi, peering with other nodes across the UK packet network. Around
-the node I've built a set of web services — live status, a network topology
-graph, activity trends, and a searchable bulletin archive — plus a self-hosted
+[LinBPQ](https://www.cantab.net/users/john.wiseman/Documents/) node running on a
+Raspberry Pi, peering with other nodes across the UK packet network. Around the
+node I've built a set of web services covering live status, a network topology
+graph, activity trends and a searchable bulletin archive, plus a self-hosted
 [WhatsPac](http://whatspac.oarc.uk/) chat gateway.
 
 It runs as a production service that other operators connect to and peer with,
@@ -19,33 +19,33 @@ so it's treated accordingly: monitored, backed up, and hardened against the
 failure modes I've run into along the way.
 
 > GB7CAM has its own dedicated site aimed at operators who want to *use* the
-> node — connection details, frequencies, status, and documentation. This page
-> is about the project and how it was built; it doesn't duplicate that
+> node, with connection details, frequencies, status and documentation. This
+> page is about the project and how it was built; it doesn't duplicate that
 > information.
 
 ## Why I built it
 
-Cambridge was a bit of a "packet desert" — plenty of history, not much live
-activity. I wanted to put a reliable, always-on node back on the air for the
-area, and to learn the AX.25 / NET/ROM stack properly by running a real service
-rather than reading about it. It started with a £20 Raspberry Pi and a £10
-handheld, which turned out to be enough to get a node on the air.
+Cambridge was a bit of a "packet desert", with plenty of history but not much
+live activity. I wanted to put a reliable, always-on node back on the air for
+the area, and to learn the AX.25 and NET/ROM stack properly by running a real
+service rather than reading about it. It started with a £20 Raspberry Pi and a
+£10 handheld, which turned out to be enough to get a node on the air.
 
 ## Current status & goals
 
-- **Live and in production** — the node, its API, and the direwolf/TNC stack all
+- **Live and in production.** The node, its API and the direwolf/TNC stack all
   run as managed services that survive reboots and self-recover from crashes.
-- **Self-healing bulletins** — a recurring crash caused by malformed (bare-CR)
+- **Self-healing bulletins.** A recurring crash caused by malformed (bare-CR)
   bulletins relayed in from peers is now handled by an automatic mail sanitiser,
   so the node repairs itself instead of going down.
-- **Network analysis** — logging routes and node tables over time to study the
+- **Network analysis.** Logging routes and node tables over time to study the
   real topology of the surrounding packet network.
 - **Next:** a "real-edges" topology graph showing true peer-to-peer adjacency,
   built from the peer-route snapshots now being collected.
 
 ## Key links
 
-- [GB7CAM website](https://gb7cam.org.uk) — the dedicated operator-facing site
+- [GB7CAM website](https://gb7cam.org.uk), the dedicated operator-facing site
 - [Node status](https://gb7cam.org.uk/status.html)
 - [Network graph](https://gb7cam.org.uk/graph.html)
 - [Activity trends](https://gb7cam.org.uk/trends.html)

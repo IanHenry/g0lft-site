@@ -1,6 +1,6 @@
 ---
 title: "Raspberry Pi SDR"
-description: "A self-contained, off-the-shelf device that shows IQ data live on a touchscreen — and lets you listen to what you're looking at."
+description: "A self-contained, off-the-shelf device that shows IQ data live on a touchscreen and lets you listen to what you're looking at."
 image: /images/pi-sdr-build.jpg
 categories: [SDR, Raspberry Pi, IQ, GNU Radio, DSP]
 ---
@@ -11,15 +11,15 @@ an RTL-SDR dongle and a USB speaker.](../images/pi-sdr-build.jpg)
 ## What it is
 
 A small, self-contained device that receives radio signals and plots their IQ
-data live on a touchscreen — and demodulates the same signal to audio so you can
+data live on a touchscreen, then demodulates the same signal to audio so you can
 *hear* what you're looking at. It's built entirely from off-the-shelf parts and
 open-source software:
 
 - **Raspberry Pi 5** mounted behind a **touchscreen** (on a touchscreen stand)
 - **RTL-SDR v5** USB dongle as the receiver
-- **USB soundcard / speaker** for the demodulated audio
+- **USB soundcard and speaker** for the demodulated audio
 
-The signal processing is a [GNU Radio](https://www.gnuradio.org/) flow graph: it
+The signal processing is a [GNU Radio](https://www.gnuradio.org/) flow graph. It
 takes IQ samples from the USB dongle, selects the region of interest from the
 captured bandwidth, plots the IQ, demodulates to audio, and sends that audio to
 the speaker.
@@ -28,13 +28,13 @@ the speaker.
 
 IQ is the foundation of every modern software-defined radio, but it's usually
 buried inside the software and never seen. I wanted a physical object I could
-put on a table in front of people — tune it to a real signal and let them watch
-the constellation move while hearing the audio at the same time. Seeing an AM
+put on a table in front of people, tune to a real signal, and let them watch the
+constellation move while hearing the audio at the same time. Seeing an AM
 carrier trace a line, an FM signal ride a circle, and FT8 hop between eight
 tones does far more than a slide ever will.
 
 It's a demonstration tool for the IQ talk more than an instrument, which is why
-it's deliberately built from cheap, easily-sourced components that anyone could
+it's deliberately built from cheap, easily sourced components that anyone could
 copy.
 
 ## Current status & goals
@@ -50,21 +50,21 @@ copy.
 
 ## Key links
 
-- [sdrplay-gnuradio-examples](https://github.com/IanHenry/sdrplay-gnuradio-examples)
-  — my GNU Radio flow graphs
-- [Setup guide for IQ visualisation](../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd) — how to get started with
-  this yourself
-- [GNU Radio](https://www.gnuradio.org/about/) — the DSP environment
-- [Radioconda](https://github.com/radioconda/radioconda-installer) — pre-packaged
+- [sdrplay-gnuradio-examples](https://github.com/IanHenry/sdrplay-gnuradio-examples),
+  my GNU Radio flow graphs
+- [Setup guide for IQ visualisation](../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd),
+  which covers getting started with this yourself
+- [GNU Radio](https://www.gnuradio.org/about/), the DSP environment
+- [Radioconda](https://github.com/radioconda/radioconda-installer), pre-packaged
   GNU Radio with SDR driver support
-- [RTL-SDR](https://www.rtl-sdr.com/) — the receiver dongle
+- [RTL-SDR](https://www.rtl-sdr.com/), the receiver dongle
 
-The flow graph for this specific device is still being tidied for release — in
-the meantime it's available on request, [get in touch](../contact.qmd).
+The flow graph for this specific device is still being tidied for release. In
+the meantime it's available on request, so do [get in touch](../contact.qmd).
 
 ## Related
 
-- [Talks & Publications](../talks.qmd) — *Making the invisible visible:
+- [Talks & Publications](../talks.qmd), covering *Making the invisible visible:
   understanding your SDR through IQ visualisation*
-- [DSP Visualisations](../projects/dsp-visualisations.qmd) — the wider project
-  this device belongs to
+- [DSP Visualisations](dsp-visualisations.qmd), the wider project this device
+  belongs to

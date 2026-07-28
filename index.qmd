@@ -10,10 +10,10 @@ and a member of [Cambridge and District Amateur Radio Club (CDARC)](https://www.
 and the [Radio Society of Great Britain (RSGB)](https://rsgb.org/).
 
 If you've found your way here from one of my
-[RadCom articles or talks](talks.qmd) — welcome. They're all listed on the
+[RadCom articles or talks](talks.qmd), welcome. They're all listed on the
 [Talks & Publications](talks.qmd) page, including
 *Understanding FT8 through DNA-sequencing parallels* and the
-[blog post](blog-posts/2026-04-25-ft8_dna_radcom.qmd) that accompanies it.
+[blog post](blog-posts/2026-04-25-ft8_dna_radcom.qmd) that goes with it.
 
 If you'd like to get in touch, collaborate, or talk radio, you can find contact
 details in the footer.
@@ -21,17 +21,17 @@ details in the footer.
 ## Teaching, learning, and amateur radio
 
 This site brings together reflective writing, theory, practical guides, and the
-things I'm building — all focused on teaching, SDR, and modern amateur radio
+things I'm building, all focused on teaching, SDR, and modern amateur radio
 practice.
 
 You'll find:
 
-- [**Projects**](projects.qmd) — packet radio infrastructure, machine learning
+- [**Projects**](projects.qmd): packet radio infrastructure, machine learning
   for signal identification, and SDR builds
-- [**Blog**](blog.qmd) — posts exploring ideas and experiences
-- [**Thinking**](thinking.qmd) — theory-focused writing on learning and SDR
-- [**Guides**](guides.qmd) — practical guides for applying those ideas
-- [**Notebook**](notebook.qmd) — working notes: speculative and self-correcting
-- [**Talks & Publications**](talks.qmd) — articles and conference sessions
+- [**Blog**](blog.qmd): posts exploring ideas and experiences
+- [**Thinking**](thinking.qmd): theory-focused writing on learning and SDR
+- [**Guides**](guides.qmd): practical guides for applying those ideas
+- [**Notebook**](notebook.qmd): working notes, speculative and self-correcting
+- [**Talks & Publications**](talks.qmd): articles and conference sessions
 
 There's more about me and how I got here on the [About](about.qmd) page.

@@ -14,7 +14,7 @@ My current setup includes:
 - Homebrew and commercial SDR receivers
 - Raspberry Pi–based packet and digital voice infrastructure
 
-Several of these have grown into projects in their own right — the
+Several of these have grown into projects in their own right: the
 [GB7CAM packet node](projects/gb7cam.qmd), my
 [MMDVM digital voice hotspot](projects/mmdvm-hotspot.qmd), a
 [Raspberry Pi IQ visualiser](projects/raspberry-pi-sdr.qmd), and the
