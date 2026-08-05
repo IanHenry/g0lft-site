@@ -7,6 +7,8 @@ aliases:
   - /iq-setup.html
 ---
 
+# Setup for IQ visualisation and digital signal processing
+
 ## Introduction
 
 This guide explains how to set up your computer to use an SDRplay device to visualise IQ data. While this ideally requires advanced software like GNU Radio, I have also built a simple plugin for SDRconnect for those wanting a quick feel of what is possible without a steep learning curve.
@@ -14,6 +16,17 @@ This guide explains how to set up your computer to use an SDRplay device to visu
 To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a bridge for GNU Radio to communicate with it. Using **Radioconda** is the highly recommended "easy path" because it pre-packages GNU Radio with the necessary SoapySDR support.
 
 **Choose your path:**
+
+- **No hardware at all:** The [**Signal Explorer**](/apps/signal-explorer/) runs
+  in your browser, with nothing to install. It generates the same modulation
+  types this guide captures off the air, and shows the waveform, constellation,
+  spectrum and waterfall together, with sliders for noise, tuning error and
+  fading. Every panel of Figures 4, 5 and 6 in
+  *Seeing signals: I and Q from first principles*, in the September 2026 issue
+  of RadCom, is there under its own number, and each has its own link. You can also turn the sound on and
+  hear both the audio going in and what comes back out of the receiver, which
+  makes the effect of noise, mistuning and overmodulation audible rather than
+  just visible.
 
 - **The Full Setup:** Follow the step-by-step guidelines below for GNU Radio.
 

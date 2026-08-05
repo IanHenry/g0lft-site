@@ -13,6 +13,30 @@ small tools and explanatory writing. It includes a simple IQ visualisation
 plugin for SDRconnect, for people who want a quick feel for IQ without the GNU
 Radio learning curve, alongside step-by-step setup notes.
 
+### Signal Explorer
+
+The newest piece, and the one to try first: a
+[**radio simulator that runs in a browser**](/apps/signal-explorer/). Pick a
+mode and it generates the signal from the theory up, showing the audio going
+in, I and Q against time, the constellation, the spectrum and a waterfall, all
+from the same samples so every view is the same instant. Sliders for tuning
+error, noise, gain and fading, and you can turn the sound on to hear both the
+audio going in and what comes back out of the receiver.
+
+It covers the analogue modes (AM, FM, SSB in both sidebands, double sideband)
+and the digital ones (CW, RTTY, FT8, BPSK through 8PSK, 16-QAM and 64-QAM).
+Each mode carries the sample rate, tuning and filtering of the flowgraph that
+made the matching capture, and says on the page where each number came from.
+Where a parameter is a standard value rather than a measured one, it says that
+too.
+
+Nothing in it was fitted to make a picture look right. The modulators are
+checked against closed-form results instead: FM sideband amplitudes against the
+Bessel functions, with the carrier vanishing at the zeros of J₀ exactly as it
+does on a bench; AM sidebands at half the modulation index; single sideband
+suppression; and a round trip in which the audio put in comes back out of a
+detector as the same waveform.
+
 ## Why I built it
 
 I care as much about *why* things work as *how*, and IQ and DSP concepts click

@@ -1,0 +1,154 @@
+/* Signal Explorer.
+ *
+ * Plain CSS, no framework and no build step. The plots are canvas and size
+ * themselves from their box, so the layout's only real job is to give each one
+ * a sensible box at every width and then get out of the way.
+ */
+
+:root {
+  --ink: #1a1f24;
+  --ink-soft: #5a6672;
+  --rule: #ccd4da;
+  --grid: #e8edf1;
+  --paper: #ffffff;
+  --accent: #1c5d7a;
+  --wash: #f4f7f9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 1.25rem 4rem;
+  font: 15px/1.55 "Segoe UI", -apple-system, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+header { max-width: 62rem; margin: 0 auto; padding: 2rem 0 1rem; }
+h1 { font-size: 1.7rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+.sub { margin: 0 0 .4rem; color: var(--ink-soft); max-width: 46rem; }
+.sub.small { font-size: .84rem; }
+.sub code { background: var(--wash); padding: .05rem .3rem; border-radius: 3px; }
+
+/* Mode groups. The heading carries the family; the panel chip on each button
+   is subordinate, so a reader hunting for 5D still finds it at a glance while
+   everyone else reads mode names. */
+nav#presets { display: block; }
+nav#presets .grp { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center;
+                   margin: 0 0 .5rem; }
+nav#presets .grp > h3 { font-size: .72rem; text-transform: uppercase;
+                        letter-spacing: .07em; color: var(--ink-soft);
+                        margin: 0 .5rem 0 0; font-weight: 600; min-width: 6.5rem; }
+
+main { max-width: 78rem; margin: 0 auto; }
+
+h2 { font-size: .82rem; text-transform: uppercase; letter-spacing: .07em;
+     color: var(--ink-soft); margin: 0 0 .7rem; font-weight: 600; }
+
+/* ---- Mode chooser ------------------------------------------------------ */
+nav#presets {
+  padding: 1rem 0 .6rem;
+  border-bottom: 1px solid var(--grid);
+}
+nav#presets button {
+  font: inherit; font-size: .84rem;
+  padding: .34rem .7rem;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--paper); color: var(--ink);
+  cursor: pointer;
+}
+nav#presets button:hover { background: var(--wash); }
+nav#presets button[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent); color: #fff;
+}
+nav#presets button .p { font-weight: 600; margin-right: .4rem; opacity: .55;
+                        font-size: .72rem; letter-spacing: .02em; }
+nav#presets button[aria-pressed="true"] .p { opacity: .8; }
+select#c-source { font: inherit; font-size: .85rem; padding: .25rem; width: 100%; }
+button#c-audio { font: inherit; font-size: .88rem; padding: .4rem .8rem;
+                 border: 1px solid var(--accent); border-radius: 4px;
+                 background: var(--accent); color: #fff; cursor: pointer; }
+button#c-audio[aria-pressed="true"] { background: var(--paper); color: var(--accent); }
+
+#blurb { padding: .9rem 0 1.1rem; max-width: 52rem; }
+#blurb-text { margin: 0 0 .4rem; font-size: 1.02rem; }
+#blurb-origin { margin: 0; font-size: .8rem; color: var(--ink-soft); }
+
+/* ---- Plot grid --------------------------------------------------------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .8rem;
+}
+.panel {
+  margin: 0;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--paper);
+  display: flex; flex-direction: column;
+}
+.panel figcaption {
+  font-size: .74rem; font-weight: 600;
+  padding: .4rem .55rem;
+  border-bottom: 1px solid var(--grid);
+  background: var(--wash);
+}
+.panel .hint { font-weight: 400; color: var(--ink-soft); }
+.panel canvas { display: block; width: 100%; flex: 1 1 auto; }
+
+.panel.wide { grid-column: span 2; }
+.panel.tall { grid-column: span 2; grid-row: span 2; }
+.panel.wide canvas { height: 190px; }
+.panel.tall canvas { height: 460px; }
+.panel canvas { height: 190px; }
+
+/* ---- Controls ---------------------------------------------------------- */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin: 1.6rem 0 0;
+  padding: 1.2rem 0 0;
+  border-top: 1px solid var(--grid);
+}
+.ctl { display: block; margin: 0 0 .75rem; font-size: .85rem; }
+.ctl > span { display: block; margin-bottom: .18rem; color: var(--ink-soft); }
+.ctl b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.ctl input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl.radio label { display: block; font-size: .85rem; color: var(--ink); margin: .1rem 0; }
+.ctl[hidden] { display: none; }
+
+.note { font-size: .76rem; color: var(--ink-soft); margin: -.35rem 0 1rem; }
+
+button#c-clear, button#c-wav-clear {
+  font: inherit; font-size: .8rem; padding: .3rem .65rem;
+  border: 1px solid var(--rule); border-radius: 4px;
+  background: var(--paper); cursor: pointer;
+}
+button#c-clear:hover, button#c-wav-clear:hover { background: var(--wash); }
+
+/* ---- Readout ----------------------------------------------------------- */
+.readout { margin: 2rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--grid); }
+#stats { border-collapse: collapse; font-size: .85rem; }
+#stats td { padding: .18rem 1.4rem .18rem 0; }
+#stats td:first-child { color: var(--ink-soft); }
+#stats td:nth-child(2) { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+.colophon { margin: 2rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--grid);
+            max-width: 46rem; }
+.colophon p { font-size: .84rem; color: var(--ink-soft); }
+
+/* ---- Narrower screens -------------------------------------------------- */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .panel.tall { grid-column: span 2; grid-row: auto; }
+  .panel.tall canvas { height: 380px; }
+  .controls { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  .panel.wide, .panel.tall { grid-column: span 1; }
+  .controls { grid-template-columns: 1fr; }
+}
