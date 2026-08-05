@@ -162,10 +162,10 @@
       </label>
 
       <label class="ctl" id="row-depth">
-        <span>Modulation depth <b id="v-depth"></b></span>
+        <span>Modulation index <b id="v-depth"></b></span>
         <input type="range" id="c-depth" min="0" max="1.6" step="0.01">
       </label>
-      <p class="note" id="depth-note">Above 1 the envelope goes negative, the point passes straight through the origin and the carrier is overmodulated. Worth doing once.</p>
+      <p class="note" id="depth-note">The index is the audio swing as a percentage of the carrier. Past 100 per cent the envelope goes negative, the point passes straight through the origin, and the carrier is overmodulated. Worth doing once, and worth listening to.</p>
 
       <label class="ctl">
         <span>Source</span>
@@ -205,7 +205,7 @@
 
 <script src="shared/dsp.js?v=d8b0c151"></script>
 <script src="shared/fft.js?v=071a6e26"></script>
-<script src="shared/sources.js?v=7474fb7e"></script>
+<script src="shared/sources.js?v=87c6ade4"></script>
 <script src="shared/modulators.js?v=11ed2e9b"></script>
 <script src="shared/digital.js?v=9e5e843d"></script>
 <script src="shared/demod.js?v=6cfbf64d"></script>
@@ -213,7 +213,7 @@
 <script src="shared/engine.js?v=6a181436"></script>
 <script src="shared/palette.js?v=1f85a60d"></script>
 <script src="shared/plots.js?v=a72e6c14"></script>
-<script src="shared/presets.js?v=2e0e4970"></script>
-<script src="js/app.js?v=ce6bb25f"></script>
+<script src="shared/presets.js?v=3699f420"></script>
+<script src="js/app.js?v=cde1cc00"></script>
 </body>
 </html>

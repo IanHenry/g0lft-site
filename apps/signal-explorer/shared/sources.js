@@ -198,11 +198,13 @@
      * 0.075, so unity rms would want a scale of about 13. That is the wrong
      * target. Speech has a high peak to mean ratio and the plot wants the loud
      * passages to fill the frame while the quiet ones stay small, so the scale
-     * is set from the peaks instead. At 6 the loudest windows reach about 0.87
-     * rms and the quietest about 0.011, which keeps vowels inside the display
-     * and pauses down in the noise. test/modes.js pins both ends. */
-    this.a = env * re * 6;
-    this.aq = env * im * 6;
+     * is set from the peaks instead, and the constraint is that a modulating
+     * signal must stay inside plus and minus one. At 6 it peaked at 1.66, which
+     * silently overmodulated every AM preset built on it: the envelope went
+     * negative and the point crossed the origin. 3.5 keeps the peak at unity.
+     * test/modes.js pins the loud and quiet ends. */
+    this.a = env * re * 3.5;
+    this.aq = env * im * 3.5;
     this.syll += this.rate / fs;
   };
   Speech.prototype.label = 'Voice-like, not speech';

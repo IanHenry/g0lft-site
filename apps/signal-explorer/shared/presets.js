@@ -47,28 +47,40 @@
     P({
       id: '5a', panel: '5A', name: 'FM broadcast', group: 'Analogue',
       blurb: 'Constant amplitude, changing frequency, so the radius never moves and everything is in how fast the point travels. A clean tight ring.',
-      fs: 200000, speed: 0.02, scale: 1.8, view: 'density', persist: 4096, style: 'line', bins: 120,
+      fs: 200000, speed: 0.02, scale: 2.3, view: 'density', persist: 4096, style: 'line', bins: 120,
       origin: 'From the capture flowgraph broadcast_fm.py: 1MHz sampling, tuned 100.700MHz, decimated by 5 to a 200kHz recording, 192kHz filter. Deviation 75kHz is the standard for band II, not in the flowgraph.',
       source: function () { return new Sources.Speech(20260901); },
       mod: function () { return Mod.FM({ deviation: 75000 }); },
-      channel: { noise: 0.04, gain: 0.8 }
+      /* 219Hz is measured from fm_broadcast.iq, whose angle histogram is
+       * uniform to within six per cent. Without an offset the phase is the
+       * integral of zero-mean audio, which wanders about its starting angle
+       * rather than sweeping, and the ring develops bright patches. */
+      channel: { noise: 0.04, gain: 0.8, freqOffset: 219 }
     }),
     P({
       id: '5b', panel: '5B', name: 'FM repeater', group: 'Analogue',
       blurb: 'Noise at the origin, snapping into a rotating circle when somebody keys up, wobbling while they talk, collapsing back to a dot. You can watch the repeater breathe.',
-      fs: 100000, speed: 0.02, scale: 1.8, view: 'density', persist: 4096, style: 'line', bins: 120,
+      fs: 100000, speed: 0.02, scale: 2.3, view: 'density', persist: 4096, style: 'line', bins: 120,
       origin: 'From the capture flowgraph repeater_fm.py: 1MHz sampling, tuned 145.750MHz, decimated by 10 to a 100kHz recording, 40kHz filter, max_dev=5e3.',
       source: function () { return new Sources.Speech(20260902); },
       mod: function () { return Mod.Keyed(Mod.FM({ deviation: 5000 }), { onTime: 4, offTime: 2, edge: 0.03 }); },
-      channel: { noise: 0.05, gain: 0.8 }
+      /* 118Hz, measured from fm_repeatertime.iq over 15.9 seconds. Its angle
+       * histogram is uniform to within four per cent: a real repeater capture
+       * fills the ring evenly, and it does so because the receiver is never
+       * exactly on frequency. */
+      channel: { noise: 0.05, gain: 0.8, freqOffset: 118 }
     }),
     P({
       id: '5c', panel: '5C', name: 'AM broadcast', group: 'Analogue',
       blurb: 'Frequency constant, amplitude varying. The point sits on the I axis and breathes in and out with the programme, never altering phase.',
-      fs: 250000, speed: 0.02, scale: 1.6, view: 'density', persist: 4096, style: 'line', bins: 150,
+      fs: 250000, speed: 0.02, scale: 2.2, view: 'density', persist: 4096, style: 'line', bins: 150,
       origin: 'From the capture flowgraph broadcast_am.py: 250kHz sampling, tuned 909kHz, no decimation, 15kHz filter. 909kHz is BBC Radio 5 Live, as named in the article.',
       source: function () { return new Sources.Speech(20260903); },
-      mod: function () { return Mod.AM({ depth: 0.7, carrier: 0.55 }); },
+      /* The index is depth over carrier, so these are 80 per cent. An earlier
+       * version paired depth 0.7 with carrier 0.55, which is 127 per cent:
+       * overmodulated before the audio was even considered, and the point
+       * crossed the origin on peaks. A broadcast station does not do that. */
+      mod: function () { return Mod.AM({ depth: 0.6, carrier: 0.75 }); },
       channel: { noise: 0.015, gain: 1 }
     }),
     P({
@@ -77,7 +89,7 @@
       fs: 250000, speed: 0.02, scale: 1.6, view: 'density', persist: 4096, style: 'dots', bins: 45,
       origin: 'From the capture flowgraph airband_am.py: 250kHz sampling, tuned 120.625MHz, no decimation, 10kHz filter. The 1800Hz offset is measured from the capture itself, not assumed.',
       source: function () { return new Sources.Speech(20260905); },
-      mod: function () { return Mod.AM({ depth: 0.7, carrier: 0.55 }); },
+      mod: function () { return Mod.AM({ depth: 0.6, carrier: 0.75 }); },
       /* The offset is measured rather than modelled. The recording rotates
        * 2322 turns in 1.29 seconds, which is 1800Hz, and its angle histogram is
        * uniform to within one per cent across twelve sectors: the phasor sweeps
@@ -119,7 +131,7 @@
       origin: 'The article builds this by adding the two sidebands rather than by multiplying a carrier, and so does the code.',
       source: function () { return new Sources.Tone(1000); },
       mod: function () { return Mod.DSB(); },
-      channel: { noise: 0.008, gain: 1.6 }
+      channel: { noise: 0.008, gain: 1 }
     }),
     P({
       id: '5h', panel: '5H', name: 'USB, two tones', group: 'Analogue',
@@ -215,7 +227,7 @@
     P({
       id: '6g', panel: '6G', name: '16-QAM', group: 'Digital',
       blurb: 'Amplitude and phase together, so the points form a grid rather than a ring. Four bits per symbol. This is where the trade-off becomes visible rather than asserted: more data, and the points crowded closer.',
-      fs: 2000000, speed: 0.02, scale: 2.6, view: 'density', persist: 800, style: 'line', bins: 225,
+      fs: 2000000, speed: 0.02, scale: 3.3, view: 'density', persist: 800, style: 'line', bins: 225,
       origin: 'Loopback generator: (I + jQ)/3 with I and Q each drawn from [-3,-1,1,3], so the outer points sit at unit distance along each axis.',
       source: function () { return new Sources.Silence(); },
       mod: function () { return Dig.QAM({ order: 16, sps: 10, seed: 24 }); },
@@ -224,7 +236,7 @@
     P({
       id: '6h', panel: '6H', name: '64-QAM', group: 'Digital',
       blurb: 'An eight by eight grid, six bits per symbol. The clusters are visibly crowded now, and it takes a much better signal to tell them apart. This is the mode your router drops out of first as you walk down the garden.',
-      fs: 2000000, speed: 0.02, scale: 2.6, view: 'density', persist: 1200, style: 'line', bins: 225,
+      fs: 2000000, speed: 0.02, scale: 3.3, view: 'density', persist: 1200, style: 'line', bins: 225,
       origin: 'As 16-QAM, over [-7..7] divided by 7.',
       source: function () { return new Sources.Silence(); },
       mod: function () { return Dig.QAM({ order: 64, sps: 10, seed: 25 }); },
