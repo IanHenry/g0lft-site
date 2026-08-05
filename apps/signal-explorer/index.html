@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal Explorer: seeing I and Q move</title>
+<link rel="stylesheet" href="css/style.css?v=f5c319cd">
+</head>
+<body>
+
+<header>
+  <h1>Signal Explorer</h1>
+  <p class="sub">A radio simulator you can hear. Pick a mode, push it around with the controls, and watch every view change together. Turn the sound on to hear the audio going in and what comes back out of the receiver.</p>
+  <p class="sub small">Arrived from <em>Seeing signals: I and Q from first principles</em>? Every panel of Figures 4, 5 and 6 is here, marked with its number. Each one has its own link, so <code>#5d</code> opens the airband panel directly.</p>
+</header>
+
+<main>
+
+  <nav id="presets" aria-label="Modes"></nav>
+
+  <section id="blurb">
+    <p id="blurb-text"></p>
+    <p id="blurb-origin"></p>
+  </section>
+
+  <div class="grid">
+
+    <figure class="panel wide">
+      <figcaption><span id="audio-caption">The audio going in</span> <span class="hint" id="audio-hint">everything below is what the modulator does with this</span></figcaption>
+      <canvas id="audio"></canvas>
+    </figure>
+
+    <figure class="panel wide">
+      <figcaption>I and Q against time <span class="hint">the two waves the rotation is a side effect of</span></figcaption>
+      <canvas id="wave"></canvas>
+    </figure>
+
+    <figure class="panel tall">
+      <figcaption>Constellation <span class="hint" id="view-hint"></span></figcaption>
+      <canvas id="iq"></canvas>
+    </figure>
+
+    <figure class="panel">
+      <figcaption>Phasor <span class="hint">amplitude is distance, phase is angle, frequency is how fast it turns</span></figcaption>
+      <canvas id="phasor"></canvas>
+    </figure>
+
+    <figure class="panel">
+      <figcaption>Spectrum <span class="hint">two sided, so a signal above the tuned frequency sits right of centre and one below sits left</span></figcaption>
+      <canvas id="spectrum"></canvas>
+    </figure>
+
+    <figure class="panel">
+      <figcaption>Waterfall <span class="hint">the same spectrum, remembered</span></figcaption>
+      <canvas id="waterfall"></canvas>
+    </figure>
+
+  </div>
+
+  <section class="controls">
+
+    <div class="ctl-group">
+      <h2>The view</h2>
+
+      <label class="ctl">
+        <span>Speed <b id="v-speed"></b></span>
+        <input type="range" id="c-speed" min="-3.3" max="0" step="0.01">
+      </label>
+      <p class="note" id="speed-note"></p>
+
+      <label class="ctl">
+        <span>Zoom <b id="v-scale"></b></span>
+        <input type="range" id="c-scale" min="0.3" max="4" step="0.05">
+      </label>
+
+      <div class="ctl radio">
+        <span>Constellation</span>
+        <label><input type="radio" name="view" value="trace"> Trace, coloured by time</label>
+        <label><input type="radio" name="view" value="density"> Density, log scaled</label>
+      </div>
+      <p class="note">Trace colours the last few thousand samples from purple through blue and green to yellow, so you can see which way the point is going. Density piles every sample into a grid and colours by how many landed in each square, which is how the printed figures were made. Real signals move far too fast to watch, and that is why.</p>
+
+      <label class="ctl">
+        <span>Trail <b id="v-persist"></b> samples</span>
+        <input type="range" id="c-persist" min="128" max="16384" step="64">
+      </label>
+      <p class="note">Each mode starts with a trail about one revolution long, which is what makes the colour run once round the shape. Lengthen it a long way and every colour is painted over by the newest one, so the trail turns a single flat green and the direction of rotation disappears.</p>
+
+      <label class="ctl">
+        <span>Density grain <b id="v-bins"></b> cells across</span>
+        <input type="range" id="c-bins" min="16" max="300" step="1">
+      </label>
+      <p class="note">How coarse the density map is. This is not just cosmetic: the printed figures vary by a factor of seven in it, and a coarse grid turns a smooth gradient into what look like distinct contour rings. Several of the printed panels are banded for exactly that reason.</p>
+
+      <button id="c-clear" type="button">Clear the density</button>
+    </div>
+
+    <div class="ctl-group">
+      <h2>Sound</h2>
+
+      <button id="c-audio" type="button">Turn the sound on</button>
+      <p class="note" id="audio-note">Your browser will not start audio without a click, which is why this is a button rather than a switch.</p>
+
+      <div class="ctl radio" id="row-listen">
+        <span>Listen to</span>
+        <label><input type="radio" name="listen" value="before" checked> The audio going in</label>
+        <label><input type="radio" name="listen" value="after"> What comes out of the receiver</label>
+      </div>
+      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made.</p>
+
+      <label class="ctl">
+        <span>Volume <b id="v-vol"></b></span>
+        <input type="range" id="c-vol" min="0" max="1" step="0.01" value="0.4">
+      </label>
+
+      <p class="note" id="speed-audio-note"></p>
+    </div>
+
+    <div class="ctl-group">
+      <h2>The channel</h2>
+
+      <label class="ctl">
+        <span>Tuning error <b id="v-freq"></b></span>
+        <input type="range" id="c-freq" min="-200" max="200" step="0.5">
+      </label>
+      <p class="note">The rotation rate <em>is</em> the tuning error, exactly. The readout below reports the rotation of the signal itself, so it will agree with this slider whatever the speed control is set to.</p>
+
+      <label class="ctl">
+        <span>Noise <b id="v-noise"></b></span>
+        <input type="range" id="c-noise" min="0" max="0.5" step="0.002">
+      </label>
+
+      <label class="ctl">
+        <span>Gain <b id="v-gain"></b></span>
+        <input type="range" id="c-gain" min="0.05" max="3" step="0.01">
+      </label>
+      <p class="note">Noise is the receiver's own, so it is added after the gain. Turning the gain up lifts the signal out of the cloud; it does not shrink the cloud.</p>
+
+      <label class="ctl">
+        <span>Fading <b id="v-fade"></b></span>
+        <input type="range" id="c-fade" min="0" max="1" step="0.01">
+      </label>
+      <p class="note">A sum of sinusoids approximation to a multipath path, not a measured channel. It is here because the airband panel is the same modulation as the broadcast one and looks nothing like it.</p>
+    </div>
+
+    <div class="ctl-group">
+      <h2>The signal</h2>
+
+      <label class="ctl" id="row-tone">
+        <span>Tone <b id="v-tone"></b></span>
+        <input type="range" id="c-tone" min="100" max="3000" step="10">
+      </label>
+
+      <label class="ctl" id="row-tone2">
+        <span>Second tone <b id="v-tone2"></b></span>
+        <input type="range" id="c-tone2" min="100" max="3000" step="10">
+      </label>
+
+      <label class="ctl" id="row-dev">
+        <span>Deviation <b id="v-dev"></b></span>
+        <input type="range" id="c-dev" min="500" max="80000" step="500">
+      </label>
+
+      <label class="ctl" id="row-depth">
+        <span>Modulation depth <b id="v-depth"></b></span>
+        <input type="range" id="c-depth" min="0" max="1.6" step="0.01">
+      </label>
+      <p class="note" id="depth-note">Above 1 the envelope goes negative, the point passes straight through the origin and the carrier is overmodulated. Worth doing once.</p>
+
+      <label class="ctl">
+        <span>Source</span>
+        <select id="c-source">
+          <option value="preset">Whatever the mode uses</option>
+          <option value="tone">Single tone</option>
+          <option value="twotone">Two tones</option>
+          <option value="chirp">Swept tone</option>
+          <option value="speech">Voice</option>
+          <option value="music">Music</option>
+        </select>
+      </label>
+
+      <div class="ctl">
+        <span>Or your own file</span>
+        <input type="file" id="c-wav" accept="audio/*">
+        <button id="c-wav-clear" type="button" hidden>Back to the preset</button>
+      </div>
+      <p class="note">Loaded in the browser and never sent anywhere. Speech on SSB is the one to try: watch the cloud breathe.</p>
+    </div>
+
+  </section>
+
+  <section class="readout">
+    <h2>Measured, this instant</h2>
+    <table id="stats"><tbody></tbody></table>
+    <p class="note">Taken from the same samples the plots are drawing, not from the settings. If a number here disagrees with a slider, the number is right.</p>
+  </section>
+
+  <section class="colophon">
+    <h2>Where the numbers come from</h2>
+    <p>Each mode carries the sample rate, tuning and filtering of the GNU Radio flowgraph that produced the matching capture in the article, so the shapes here are generated under the same conditions the printed ones were recorded under. Parameters the flowgraphs do not record, such as the sideband of an SSB capture or the tone frequencies behind the two tone rosette, are marked as standard values rather than quietly invented. The origin line under each mode says which is which.</p>
+    <p>One thing here is not a reproduction. The published figures are densities accumulated over 100000 samples, roughly four tenths of a second, because a constellation at its real speed is a blur. The speed control exists so the same signal can be slowed to something a person can follow. Slowing it changes how much signal passes per frame and changes nothing about the signal, so every frequency, deviation and measurement stays exactly as stated.</p>
+  </section>
+
+</main>
+
+<script src="shared/dsp.js?v=d8b0c151"></script>
+<script src="shared/fft.js?v=071a6e26"></script>
+<script src="shared/sources.js?v=7474fb7e"></script>
+<script src="shared/modulators.js?v=11ed2e9b"></script>
+<script src="shared/digital.js?v=9e5e843d"></script>
+<script src="shared/demod.js?v=6cfbf64d"></script>
+<script src="shared/audio.js?v=c1a1666c"></script>
+<script src="shared/engine.js?v=6a181436"></script>
+<script src="shared/palette.js?v=1f85a60d"></script>
+<script src="shared/plots.js?v=a72e6c14"></script>
+<script src="shared/presets.js?v=2e0e4970"></script>
+<script src="js/app.js?v=ce6bb25f"></script>
+</body>
+</html>

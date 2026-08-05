@@ -165,12 +165,15 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="setup-for-iq-visualisation-and-digital-signal-processing" class="level1">
+<h1>Setup for IQ visualisation and digital signal processing</h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>This guide explains how to set up your computer to use an SDRplay device to visualise IQ data. While this ideally requires advanced software like GNU Radio, I have also built a simple plugin for SDRconnect for those wanting a quick feel of what is possible without a steep learning curve.</p>
 <p>To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a bridge for GNU Radio to communicate with it. Using <strong>Radioconda</strong> is the highly recommended “easy path” because it pre-packages GNU Radio with the necessary SoapySDR support.</p>
 <p><strong>Choose your path:</strong></p>
 <ul>
+<li><p><strong>No hardware at all:</strong> The <a href="../../apps/signal-explorer/"><strong>Signal Explorer</strong></a> runs in your browser, with nothing to install. It generates the same modulation types this guide captures off the air, and shows the waveform, constellation, spectrum and waterfall together, with sliders for noise, tuning error and fading. Every panel of Figures 4, 5 and 6 in <em>Seeing signals: I and Q from first principles</em>, in the September 2026 issue of RadCom, is there under its own number, and each has its own link. You can also turn the sound on and hear both the audio going in and what comes back out of the receiver, which makes the effect of noise, mistuning and overmodulation audible rather than just visible.</p></li>
 <li><p><strong>The Full Setup:</strong> Follow the step-by-step guidelines below for GNU Radio.</p></li>
 <li><p><strong>The Quick Start:</strong> If you want a simpler way to view IQ constellation plots, skip straight to the <a href="#simple-iq-visualisation-plugin-for-sdrconnect"><strong>Simple IQ Visualisation Plugin for SDRconnect</strong></a> section.</p></li>
 </ul>
@@ -298,6 +301,7 @@ Found device 16
 <p>I built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!</p>
 
 
+</section>
 </section>
 </section>
 
