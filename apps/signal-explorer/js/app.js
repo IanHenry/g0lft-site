@@ -218,7 +218,13 @@
     }
     if (m && m.deviation !== undefined) $('v-dev').textContent = fmt(m.deviation);
     if (m && m.depth !== undefined) {
-      $('v-depth').textContent = m.depth.toFixed(2) + (m.depth > 1 ? ', overmodulated' : '');
+      /* The modulation index is the swing over the carrier, not the swing on
+       * its own, so overmodulation begins wherever depth passes carrier rather
+       * than at a fixed 1.0. Showing the raw depth said 0.60 next to a carrier
+       * of 0.75 and left the reader to do the division. */
+      var idx = m.depth / (m.carrier || 1);
+      $('v-depth').textContent = Math.round(idx * 100) + '%' +
+        (idx > 1 ? ', overmodulated' : '');
     }
   }
 
