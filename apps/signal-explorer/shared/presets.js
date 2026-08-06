@@ -15,12 +15,13 @@
   'use strict';
 
   var SS = root.SS || {};
-  var DSP = SS.DSP, Sources = SS.Sources, Mod = SS.Mod, Dig = SS.Dig;
+  var DSP = SS.DSP, Sources = SS.Sources, Mod = SS.Mod, Dig = SS.Dig, FT8 = SS.FT8;
   if (typeof require !== 'undefined') {
     if (!DSP) DSP = require('./dsp.js');
     if (!Sources) Sources = require('./sources.js');
     if (!Mod) Mod = require('./modulators.js');
     if (!Dig) Dig = require('./digital.js');
+    if (!FT8) FT8 = require('./ft8.js');
   }
 
   function P(o) { return o; }
@@ -185,17 +186,22 @@
       channel: { noise: 0.02, gain: 1 }
     }),
     P({
-      id: '6c', panel: '6C', name: 'FT8', group: 'Digital',
-      blurb: 'Eight tones instead of two, so each symbol carries three bits. The tones are 6.25Hz apart and the symbol rate is 6.25 baud, which is what makes FT8 narrow and slow enough to work below the noise.',
-      fs: 62500, speed: 0.02, scale: 2.4, view: 'density', persist: 6000, style: 'line', bins: 187,
-      origin: 'Standard FT8: 8-FSK, 6.25 baud, 6.25Hz tone spacing, here offset 1000Hz from the tuned frequency so the rotation is visible. The printed panel is many signals overlapping across a 3kHz passband, which this single signal is not.',
+      id: '6c', panel: '6C', name: 'FT8, a whole passband', group: 'Digital',
+      blurb: 'Not one signal but everything inside a 3kHz filter at once. A dozen stations, different frequencies, different strengths, all transmitting together. Their sum is the dense swirl of overlapping loops, and no single signal can make it.',
+      fs: 12000, speed: 0.25, scale: 2.6, view: 'density', persist: 8192, style: 'dots', bins: 150,
+      origin: 'Standard FT8: 79 symbols of 8-FSK at 6.25 baud with 6.25Hz spacing, Costas synchronisation at the start, middle and end, and Gaussian frequency shaping at BT 2.0. The modulator is the one from the FT8 Message Explorer, checked by round-tripping through the WSJT-X jt9 decoder.',
       source: function () { return new Sources.Silence(); },
-      mod: function () {
-        var tones = [], k;
-        for (k = 0; k < 8; k++) tones.push(1000 + k * 6.25);
-        return Dig.FSK({ tones: tones, baud: 6.25, seed: 5 });
-      },
+      mod: function () { return FT8.Band({ count: 14, lo: 300, hi: 2700, seed: 91 }); },
       channel: { noise: 0.02, gain: 1 }
+    }),
+    P({
+      id: '6c1', panel: '', name: 'FT8, one signal', group: 'Digital',
+      blurb: 'The same mode with a single station in the passband, so the structure is visible: eight tones, sliding rather than stepping between them, in a frame that starts and stops.',
+      fs: 12000, speed: 0.25, scale: 2.6, view: 'trace', persist: 3000, style: 'line', bins: 150,
+      origin: 'Standard FT8, one signal at 1000Hz. The tone slides because FT8 shapes its frequency with a Gaussian pulse; a mode that stepped between tones would splatter either side and lose the narrow bandwidth that is its whole point.',
+      source: function () { return new Sources.Silence(); },
+      mod: function () { return FT8.Modulator({ offset: 1000, seed: 5 }); },
+      channel: { noise: 0.01, gain: 1 }
     }),
     P({
       id: '6d', panel: '6D', name: 'BPSK', group: 'Digital',
