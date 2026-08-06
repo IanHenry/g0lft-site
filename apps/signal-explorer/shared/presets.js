@@ -15,13 +15,14 @@
   'use strict';
 
   var SS = root.SS || {};
-  var DSP = SS.DSP, Sources = SS.Sources, Mod = SS.Mod, Dig = SS.Dig, FT8 = SS.FT8;
+  var DSP = SS.DSP, Sources = SS.Sources, Mod = SS.Mod, Dig = SS.Dig, FT8 = SS.FT8, PSK = SS.PSK;
   if (typeof require !== 'undefined') {
     if (!DSP) DSP = require('./dsp.js');
     if (!Sources) Sources = require('./sources.js');
     if (!Mod) Mod = require('./modulators.js');
     if (!Dig) Dig = require('./digital.js');
     if (!FT8) FT8 = require('./ft8.js');
+    if (!PSK) PSK = require('./psk31.js');
   }
 
   function P(o) { return o; }
@@ -202,6 +203,15 @@
       source: function () { return new Sources.Silence(); },
       mod: function () { return FT8.Modulator({ offset: 1000, seed: 5 }); },
       channel: { noise: 0.01, gain: 1 }
+    }),
+    P({
+      id: '6psk31', panel: '', name: 'PSK31, carrying text', group: 'Digital',
+      blurb: 'Differential BPSK at 31.25 baud, sending real characters. The data is not in the phase but in whether the phase changed, so a receiver never needs to know the absolute phase. Shaping takes the trace through the origin on every reversal, which is why it is a line rather than two dots.',
+      fs: 8000, speed: 0.3, scale: 2.6, view: 'trace', persist: 1200, style: 'line', bins: 150,
+      origin: 'Standard PSK31: G3PLX varicode, differential BPSK, 31.25 baud, raised cosine shaping over two symbol periods. The varicode was written to the published specification rather than taken from any implementation, and 95 per cent of the power sits inside 31Hz.',
+      source: function () { return new Sources.Silence(); },
+      mod: function () { return PSK.Modulator({ text: 'CQ CQ de G0LFT G0LFT k  ' }); },
+      channel: { noise: 0.03, gain: 1 }
     }),
     P({
       id: '6d', panel: '6D', name: 'BPSK', group: 'Digital',
