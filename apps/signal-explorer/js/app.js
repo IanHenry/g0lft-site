@@ -321,7 +321,9 @@
           btn.textContent = 'Sound is on';
           $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz.';
         }).catch(function (e) {
-          $('audio-note').textContent = 'Sound would not start: ' + e.message;
+          btn.textContent = 'Sound is not available';
+          $('audio-note').textContent = 'Sound would not start: ' + e.message +
+            '. Everything else on the page works without it.';
         });
       } else if (btn.getAttribute('aria-pressed') === 'true') {
         out.stop();

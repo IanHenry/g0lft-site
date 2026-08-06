@@ -168,14 +168,21 @@
     var vowel = (idx === 0 || idx === 2 || idx === 4);
     var pause = (idx === 7);
     var env, bright;
+    /* Every syllable begins and ends at silence, so the envelope is continuous
+     * across the boundary. It used to step between 0.25, 0.10 and 0.02 as the
+     * syllable type changed, and a step in amplitude is a click: audible on
+     * every mode built on this source, several times a second. Real speech
+     * closes to nothing between syllables anyway, so the fix is also the more
+     * faithful shape. */
+    var shape = Math.sin(Math.PI * phaseOfSyll);
     if (pause) {
-      env = 0.02;
+      env = 0.02 * shape;
       bright = 0.5;
     } else if (vowel) {
-      env = 0.25 + 0.75 * Math.sin(Math.PI * phaseOfSyll);
+      env = 1.0 * shape;
       bright = 0.25;                       /* energy low in the band */
     } else {
-      env = 0.10 + 0.18 * Math.sin(Math.PI * phaseOfSyll);
+      env = 0.28 * shape;
       bright = 0.85;                       /* consonants sit high and quiet */
     }
     this.level = env;
@@ -244,7 +251,12 @@
       this.phase.fill(0);
     }
     var f0 = this.notes[this.n];
-    var env = Math.exp(-3.2 * this.t / period) * (1 - Math.exp(-400 * this.t));
+    /* Decay, attack, and a short taper into the note boundary. Without the
+     * taper the note is still at four per cent when the next one resets the
+     * phases, and that step clicks once per note. */
+    var tail = Math.min(1, (period - this.t) / 0.015);
+    var env = Math.exp(-3.2 * this.t / period) *
+              (1 - Math.exp(-400 * this.t)) * Math.max(0, tail);
     var re = 0, im = 0, k, a, norm = 0;
     for (k = 1; k <= this.harmonics; k++) {
       a = 1 / k;

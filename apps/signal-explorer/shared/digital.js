@@ -47,7 +47,14 @@
   }
   Symbols.prototype.reset = function () {
     this.k = 0;                             /* samples since the current symbol */
-    this.cur = this.next();
+    /* Deliberately does not draw a symbol. Resetting is not transmitting, and
+     * a reset that consumes from the symbol stream makes the stream depend on
+     * how many times the object happened to be reset: the constructor calls
+     * this, and so does setModulator, so two symbols were being pulled and
+     * discarded before the first sample. Nothing showed until a receiver tried
+     * to compare what came back against what went in, and then everything was
+     * one symbol out and every error rate came back at chance. */
+    this.cur = null;
     /* History for the shaping filter, newest last. */
     var n = 2 * this.span + 2, j;
     this.hist = [];
@@ -56,7 +63,10 @@
     this.phase = 0;
   };
   Symbols.prototype.step = function () {
-    if (this.k >= this.sps) {
+    if (this.cur === null) {
+      this.cur = this.next();
+      this.k = 0;
+    } else if (this.k >= this.sps) {
       this.k = 0;
       this.hist.shift();
       this.hist.push(this.cur);
@@ -104,10 +114,30 @@
    * Each symbol carries log2(M) bits: one for BPSK, two for QPSK, three for
    * 8PSK, and that is the whole trade the article is about.
    */
+  Dig.constellation = function (kind, order) {
+    var pts = [], k, side, levels, norm;
+    if (kind === 'psk') {
+      for (k = 0; k < order; k++) {
+        pts.push([Math.cos(2 * Math.PI * k / order), Math.sin(2 * Math.PI * k / order)]);
+      }
+    } else {
+      side = Math.round(Math.sqrt(order));
+      levels = [];
+      for (k = 0; k < side; k++) levels.push(2 * k - (side - 1));
+      norm = side - 1;
+      for (k = 0; k < order; k++) {
+        pts.push([levels[k % side] / norm, levels[Math.floor(k / side)] / norm]);
+      }
+    }
+    return pts;
+  };
+
   Dig.PSK = function (opts) {
     opts = opts || {};
     var order = opts.order || 4;
-    var pick = picker(opts.seed, order);
+    /* A caller may supply the symbol stream. Without that, a bit error rate
+     * measurement has nothing to compare the receiver's output against. */
+    var pick = opts.next || picker(opts.seed, order);
     var syms = [], k;
     for (k = 0; k < order; k++) {
       syms.push([Math.cos(2 * Math.PI * k / order), Math.sin(2 * Math.PI * k / order)]);
@@ -150,7 +180,7 @@
     var levels = [], k;
     for (k = 0; k < side; k++) levels.push(2 * k - (side - 1));
     var norm = side - 1;
-    var pick = picker(opts.seed, order);
+    var pick = opts.next || picker(opts.seed, order);
     var s = new Symbols({
       sps: opts.sps || 10,
       shaping: opts.shaping,
@@ -189,7 +219,7 @@
     opts = opts || {};
     var tones = opts.tones || [1000, 1500];
     var baud = opts.baud || 45.45;
-    var pick = picker(opts.seed, tones.length);
+    var pick = opts.next || picker(opts.seed, tones.length);
     var order = tones.length;
     return {
       label: order + '-FSK',
@@ -227,7 +257,11 @@
     var m = Dig.FSK({
       tones: [mark, mark + shift],
       baud: opts.baud === undefined ? 45.45 : opts.baud,
-      seed: opts.seed
+      seed: opts.seed,
+      /* Forward the caller's symbol stream. Without this an error rate
+       * measurement silently compares the receiver against an empty array and
+       * reports no errors, which is not a pass. */
+      next: opts.next
     });
     m.label = 'RTTY';
     m.mark = mark;

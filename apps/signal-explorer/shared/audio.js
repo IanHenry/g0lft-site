@@ -33,9 +33,10 @@
     '    this.w = 0; this.r = 0;',
     '    this.last = 0;',
     '    this.starved = 0;',
+    '    this.fade = 0;',
     '    this.port.onmessage = e => {',
     '      const d = e.data;',
-    '      if (d.reset) { this.w = 0; this.r = 0; this.last = 0; return; }',
+    '      if (d.reset) { this.w = 0; this.r = 0; this.last = 0; this.fade = 0; return; }',
     '      const s = d.samples;',
     '      for (let k = 0; k < s.length; k++) {',
     '        this.buf[this.w] = s[k];',
@@ -45,7 +46,13 @@
     '         to be worth catching up, so jump it forward rather than playing',
     '         half a second of stale audio. */',
     '      const avail = (this.w - this.r) & this.mask;',
-    '      if (avail > (this.buf.length >> 1)) this.r = (this.w - 2048) & this.mask;',
+    '      /* If the reader has fallen a long way behind, skipping it forward',
+    '         is a discontinuity and clicks. Ask the output stage to fade',
+    '         across the jump instead. */',
+    '      if (avail > (this.buf.length >> 1)) {',
+    '        this.r = (this.w - 4096) & this.mask;',
+    '        this.fade = 128;',
+    '      }',
     '    };',
     '  }',
     '  process(inputs, outputs) {',
@@ -54,7 +61,8 @@
     '    for (let k = 0; k < out.length; k++) {',
     '      if (this.r !== this.w) { this.last = this.buf[this.r]; this.r = (this.r + 1) & this.mask; }',
     '      else this.starved++;',
-    '      out[k] = this.last;',
+    '      if (this.fade > 0) { out[k] = this.last * (1 - this.fade / 128); this.fade--; }',
+    '      else out[k] = this.last;',
     '    }',
     '    return true;',
     '  }',
@@ -70,6 +78,8 @@
     this.volume = 0.4;
     /* Scratch for the resampler, allocated once. */
     this.out = new Float32Array(8192);
+    this.lastPush = 0;
+    this.backlog = 0;
   }
 
   /* Must be called from a click. Browsers will not start audio otherwise, and
@@ -80,15 +90,39 @@
     var Ctx = root.AudioContext || root.webkitAudioContext;
     if (!Ctx) return Promise.reject(new Error('no Web Audio in this browser'));
     this.ctx = new Ctx();
+    if (!this.ctx.audioWorklet) {
+      /* Some mobile browsers, and any browser over plain http rather than
+       * https, have no AudioWorklet. Say so plainly instead of failing
+       * silently, because a silent failure on a phone is indistinguishable
+       * from a volume problem and the reader will blame their handset. */
+      return Promise.reject(new Error(
+        root.isSecureContext === false
+          ? 'audio needs a secure connection, and this page was loaded over http'
+          : 'this browser has no AudioWorklet'));
+    }
+
+    /* iOS in particular starts the context suspended and will only resume it
+     * inside the gesture that asked for sound, so resume first and load the
+     * worklet after. Doing it the other way round works everywhere else and
+     * leaves an iPhone silent with no error at all. */
+    var resumed = this.ctx.state === 'suspended'
+      ? this.ctx.resume() : Promise.resolve();
     var url = URL.createObjectURL(new Blob([WORKLET], { type: 'application/javascript' }));
-    return this.ctx.audioWorklet.addModule(url).then(function () {
+    return resumed.then(function () {
+      return self.ctx.audioWorklet.addModule(url);
+    }).then(function () {
       URL.revokeObjectURL(url);
       self.node = new AudioWorkletNode(self.ctx, 'ring-player', { outputChannelCount: [1] });
       self.gain = self.ctx.createGain();
       self.gain.gain.value = self.volume;
       self.node.connect(self.gain).connect(self.ctx.destination);
       self.ready = true;
-      return self.ctx.resume().then(function () { return true; });
+      return self.ctx.resume().then(function () {
+        if (self.ctx.state !== 'running') {
+          throw new Error('the browser kept audio suspended, state is ' + self.ctx.state);
+        }
+        return true;
+      });
     });
   };
 
@@ -125,7 +159,38 @@
    */
   AudioOut.prototype.push = function (audio, n, fs) {
     if (!this.ready || n < 2) return;
-    var want = Math.round(this.sampleRate() / 60);
+
+    /* How many samples the card has consumed since the last push, measured
+     * rather than assumed.
+     *
+     * This used to be sampleRate/60, on the assumption that animation frames
+     * arrive sixty times a second. They do not. A 120Hz phone display fires
+     * twice as often, so twice as much audio went in as came out, the ring
+     * overran within a second, and the recovery that jumps the reader forward
+     * produced an audible click every time. That is the clicking on repeat: it
+     * was never the audio, it was the frame rate.
+     *
+     * Measuring the interval makes it self correcting on any display, and on a
+     * browser that throttles frames in a background tab as well. */
+    var now = (root.performance && root.performance.now)
+      ? root.performance.now() : Date.now();
+    var dt = this.lastPush ? (now - this.lastPush) / 1000 : 1 / 60;
+    this.lastPush = now;
+    /* Ignore an implausible gap: a tab that was hidden for a minute should not
+     * try to catch up with a minute of audio. */
+    if (dt > 0.25 || dt <= 0) dt = 1 / 60;
+
+    var want = Math.round(this.sampleRate() * dt);
+
+    /* Nudge towards a small steady backlog rather than tracking exactly, so
+     * ordinary jitter in the frame timing never empties the ring. */
+    var backlog = this.backlog || 0;
+    var target = this.sampleRate() * 0.04;
+    if (backlog > target * 2) want = Math.round(want * 0.9);
+    else if (backlog < target * 0.5) want = Math.round(want * 1.1);
+    this.backlog = backlog + want - this.sampleRate() * dt;
+
+    if (want < 1) return;
     if (want > this.out.length) want = this.out.length;
     var out = this.out, k, pos, i0, frac;
     var stepIn = (n - 1) / want;
@@ -142,6 +207,8 @@
 
   AudioOut.prototype.flush = function () {
     if (this.ready) this.node.port.postMessage({ reset: true });
+    this.lastPush = 0;
+    this.backlog = 0;
   };
 
   root.SS = root.SS || {};

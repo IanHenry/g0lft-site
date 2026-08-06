@@ -29,6 +29,9 @@ header { max-width: 62rem; margin: 0 auto; padding: 2rem 0 1rem; }
 h1 { font-size: 1.7rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
 .sub { margin: 0 0 .4rem; color: var(--ink-soft); max-width: 46rem; }
 .sub.small { font-size: .84rem; }
+.home { font-size: .8rem; margin: 0 0 .6rem; }
+.home a { color: var(--ink-soft); text-decoration: none; }
+.home a:hover { color: var(--accent); text-decoration: underline; }
 .sub code { background: var(--wash); padding: .05rem .3rem; border-radius: 3px; }
 
 /* Mode groups. The heading carries the family; the panel chip on each button
@@ -151,4 +154,37 @@ button#c-clear:hover, button#c-wav-clear:hover { background: var(--wash); }
   .grid { grid-template-columns: 1fr; }
   .panel.wide, .panel.tall { grid-column: span 1; }
   .controls { grid-template-columns: 1fr; }
+
+  /* On a phone the mode list took 472px before the first plot, so a reader
+     arriving from the magazine scrolled past twenty buttons to see anything.
+     The plots are the reason they came. Scroll the list sideways instead: the
+     groups stay visible, nothing is hidden, and the constellation is on screen
+     immediately. */
+  nav#presets .grp {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: .2rem;
+  }
+  nav#presets .grp > h3 {
+    position: sticky; left: 0;
+    background: var(--paper);
+    padding-right: .4rem;
+    min-width: auto;
+    z-index: 1;
+  }
+  nav#presets button { flex: 0 0 auto; }
+
+  /* The constellation is what a reader came for, so it goes first. On a
+     desktop the reading order audio, waves, constellation is the right story;
+     on a phone that story costs a thousand pixels of scrolling before anything
+     moves. */
+  .grid { display: flex; flex-direction: column; }
+  .panel.tall { order: -1; }
+
+  header { padding: 1.2rem 0 .5rem; }
+  h1 { font-size: 1.4rem; }
+  .panel.tall canvas { height: 320px; }
+  .panel canvas, .panel.wide canvas { height: 150px; }
 }

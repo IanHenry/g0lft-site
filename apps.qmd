@@ -1,0 +1,31 @@
+---
+title: "Apps"
+description: "Interactive tools that run in your browser, with nothing to install."
+---
+
+# Apps
+
+Browser tools that run entirely on your own machine. Nothing is uploaded,
+nothing is installed, and none of them need a radio attached.
+
+## [Signal Explorer](/apps/signal-explorer/)
+
+A radio simulator you can watch and hear. Pick a mode and it builds the signal
+from the theory up, showing the audio going in, I and Q against time, the
+constellation, the spectrum and a waterfall, all drawn from the same samples so
+every view is the same instant.
+
+Sliders for tuning error, noise, gain and fading. Turn the sound on and you can
+hear both the audio going in and what comes back out of the receiver, which
+makes the effect of noise, mistuning and overmodulation audible rather than
+only visible.
+
+It covers the analogue modes (AM, FM, SSB in both sidebands, double sideband
+suppressed carrier) and the digital ones (CW, RTTY, FT8, BPSK through 8PSK,
+16-QAM and 64-QAM). Every panel of Figures 4, 5 and 6 in
+*Seeing signals: I and Q from first principles*, in the September 2026 issue of
+RadCom, is there under its own number, and each has its own link.
+
+Each mode shows where its numbers came from: the sample rate, tuning and
+filtering of the flowgraph that made the matching capture, or, where a value is
+a published standard rather than a measured one, it says so.
