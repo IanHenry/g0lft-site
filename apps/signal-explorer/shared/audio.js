@@ -66,8 +66,11 @@
     '       this out for itself: estimating from a wall clock assumes the card',
     '       consumes at exactly its nominal rate, and a ring that is nearly',
     '       empty on average starves inside almost every render quantum, which',
-    '       is heard as a rasp rather than as a gap. */',
-    '    if ((this.tick++ & 7) === 0) {',
+    '       is heard as a rasp rather than as a gap. Every sixty fourth block,',
+    '       about twelve times a second, which is far more often than a control',
+    '       loop that nudges by a few per cent needs and rare enough that the',
+    '       audio thread is not spending its budget posting messages. */',
+    '    if ((this.tick++ & 63) === 0) {',
     '      this.port.postMessage({ fill: (this.w - this.r) & this.mask,',
     '                              starved: this.starved });',
     '    }',
@@ -213,8 +216,17 @@
      * fill figure comes from the worklet, so it is measured rather than
      * inferred from how often frames happen to arrive. */
     var target = rate * AudioOut.TARGET;
-    if (this.fill > target * 2.5) want = Math.round(want * 0.98);
-    else if (this.fill < target * 0.6) want = Math.round(want * 1.02);
+    /* Proportional, and capped at five per cent either way. A fixed two per
+     * cent nudge cannot win against a four per cent error, and the backlog
+     * then grows without bound until the ring laps and the reader is jumped
+     * forward with a fade. Measured here at 350ms and climbing. */
+    var err = (this.fill - target) / target;
+    if (err > 0.5 || err < -0.4) {
+      var adj = 1 - err * 0.02;
+      if (adj > 1.05) adj = 1.05;
+      if (adj < 0.95) adj = 0.95;
+      want = Math.round(want * adj);
+    }
 
     if (want < 1) return;
     if (want > this.out.length) want = this.out.length;
