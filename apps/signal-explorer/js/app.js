@@ -26,6 +26,36 @@
   var listenTo = 'before';
   var demodBuf = new Float32Array(Engine.HISTORY);
 
+  /* A second generator, for the loudspeaker only, running at real time.
+   *
+   * The plots are usually slowed to a fraction of a per cent, which is the only
+   * way to watch a constellation, and at those speeds the display generator
+   * makes about six samples per frame where the card wants eight hundred. There
+   * is no honest audio to be made from six samples. So the sound comes from its
+   * own engine at speed 1, configured identically and sharing the channel
+   * object so every slider affects both.
+   *
+   * The plots still all agree with each other, which is what the one-buffer
+   * rule was protecting. The loudspeaker is a different clock, and the page
+   * says so. */
+  var audioEngine = new Engine({ fs: 250000, seed: 4242 });
+  audioEngine.speed = 1;
+  var audioDetector = null;
+  var audioBuf = new Float32Array(Engine.HISTORY);
+  var audioClock = 0;
+  var audible = true;
+
+  /* Is there anything to listen to?
+   *
+   * The rule is the capture's own sample rate. Panels 6D to 6H were recorded
+   * at 2MHz with ten samples to a symbol, which is two hundred thousand
+   * symbols a second: the signal occupies a couple of hundred kilohertz and
+   * every part of it is above hearing. Slowing it to fit the audio band would
+   * not be that signal any more, and a made up sound presented next to a real
+   * constellation is worse than no sound. So those modes are seen and not
+   * heard, and the page says so. */
+  var AUDIBLE_FS = 384000;
+
   var iq = new Plots.Constellation($('iq'));
   var audio = new Plots.Trace($('audio'), { colour: SS.Palette.ui.ink, range: 1.1 });
   var wave = new Plots.Waveform($('wave'));
@@ -109,6 +139,17 @@
 
     applySource();
     detector = Demod.forModulator(engine.modulator);
+
+    /* The same mode again for the loudspeaker, at real time. Its own source and
+     * modulator instances, because both are stateful, but the same channel
+     * object so noise, tuning and fading move together. */
+    Presets.apply(audioEngine, preset);
+    audioEngine.speed = 1;
+    if (userWav) audioEngine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
+    else applySourceTo(audioEngine);
+    audioEngine.channel = engine.channel;
+    primeDetector();
+    setAudible(audioEngine.fs <= AUDIBLE_FS);
     out.flush();
     syncControlsFromState();
     showRelevantControls();
@@ -119,6 +160,31 @@
     Array.prototype.forEach.call(
       document.querySelectorAll('input[name="' + name + '"]'),
       function (r) { r.checked = (r.value === value); });
+  }
+
+  /* Apply a change to both generators. The sliders used to reach only the
+   * display engine, so turning the tone knob moved the picture and not the
+   * sound. Anything that alters the signal has to go through here. */
+  function bothSources(fn) { fn(engine.source); if (audioEngine.source) fn(audioEngine.source); }
+  function bothMods(fn) {
+    fn(innerMod());
+    var m = audioEngine.modulator;
+    if (m) fn(m.inner ? m.inner : m);
+  }
+
+  /* Build the receiver for the loudspeaker's engine and run a frame through it
+   * that nobody hears.
+   *
+   * A detector starts cold: filters are empty and any DC blocker has no
+   * estimate yet, so the first block out of it is a settling transient rather
+   * than the signal. On the 5B repeater capture it peaks near ten, which is a
+   * bang out of the speaker at the instant you switch to listening after the
+   * receiver. Discarding one frame costs a sixtieth of a second of audio and
+   * removes it entirely. */
+  function primeDetector() {
+    audioDetector = Demod.forModulator(audioEngine.modulator);
+    if (!audioDetector) return;
+    Demod.run(audioDetector, audioEngine.step(Math.round(audioEngine.fs / 60)), audioBuf);
   }
 
   function modOf() { return engine.modulator; }
@@ -184,10 +250,34 @@
     }
   }
 
+  function setAudible(yes) {
+    audible = yes;
+    $('c-audio').disabled = !yes;
+    $('c-vol').disabled = !yes;
+    var rs = document.getElementsByName('listen'), k;
+    for (k = 0; k < rs.length; k++) rs[k].disabled = !yes;
+    if (!yes) {
+      out.flush();
+      $('audio-note').textContent =
+        'Nothing to hear. This capture was recorded at ' + fmt(audioEngine.fs) +
+        ' and carries two hundred thousand symbols a second, so the whole '
+        + 'signal sits far above hearing. The modes with audio in them are the '
+        + 'analogue ones and the on air digital modes further up.';
+    } else if (!out.ready) {
+      $('audio-note').textContent =
+        'Your browser will not start audio without a click, which is why this '
+        + 'is a button rather than a switch.';
+    } else {
+      $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz.';
+    }
+  }
+
   function fmt(hz) {
     if (typeof hz !== 'number' || !isFinite(hz)) return '?';
-    if (Math.abs(hz) >= 1000) return (hz / 1000).toFixed(hz % 1000 === 0 ? 0 : 1) + 'kHz';
-    return hz.toFixed(Math.abs(hz) < 10 ? 1 : 0) + 'Hz';
+    var a = Math.abs(hz);
+    if (a >= 1e6) return (hz / 1e6).toFixed(hz % 1e6 === 0 ? 0 : 2) + 'MHz';
+    if (a >= 1000) return (hz / 1000).toFixed(hz % 1000 === 0 ? 0 : 1) + 'kHz';
+    return hz.toFixed(a < 10 ? 1 : 0) + 'Hz';
   }
 
   function updateLabels() {
@@ -196,15 +286,14 @@
     $('speed-note').textContent =
       'Generating ' + fmt(sps).replace('Hz', '') + ' samples a second of a signal recorded at ' +
       fmt(engine.fs) + '. At full speed this mode goes past far too quickly to follow, which is why the printed figures are densities.';
+    $('speed-audio-note').textContent = engine.speed > 0.6
+      ? 'The sound plays at real time, which is what the plots are showing too.'
+      : 'The sound always plays at real time, whatever the plots are doing. There is no useful audio to be made from a signal slowed a hundredfold, so the loudspeaker keeps its own clock.';
     $('v-scale').textContent = '±' + (iq.scale / 2).toFixed(2);
     $('v-persist').textContent = iq.persist;
     $('v-bins').textContent = iq.bins;
     $('v-vol').textContent = Math.round(parseFloat($('c-vol').value) * 100) + '%';
-    $('speed-audio-note').textContent = engine.speed > 0.6
-      ? 'At full speed the sound is correct.'
-      : 'Slowed to ' + (engine.speed * 100).toFixed(1) + ' per cent, so the sound '
-        + 'drops in pitch and coarsens. That is the same fact the constellation '
-        + 'is showing, heard rather than seen.';
+
     $('v-freq').textContent = fmt(engine.channel.freqOffset || 0);
     $('v-noise').textContent = (engine.channel.noise || 0).toFixed(3);
     $('v-gain').textContent = (engine.channel.gain).toFixed(2);
@@ -280,26 +369,30 @@
     });
 
     $('c-tone').addEventListener('input', function () {
-      var s = engine.source, v = parseFloat(this.value);
-      if (s.freq !== undefined) s.freq = v;
-      else if (s.f1 !== undefined) s.f1 = v;
+      var v = parseFloat(this.value);
+      bothSources(function (s) {
+        if (!s) return;
+        if (s.freq !== undefined) s.freq = v;
+        else if (s.f1 !== undefined) s.f1 = v;
+      });
       iq.clearDensity();
       updateLabels();
     });
     $('c-tone2').addEventListener('input', function () {
-      if (engine.source.f2 !== undefined) engine.source.f2 = parseFloat(this.value);
+      var v = parseFloat(this.value);
+      bothSources(function (s) { if (s && s.f2 !== undefined) s.f2 = v; });
       iq.clearDensity();
       updateLabels();
     });
     $('c-dev').addEventListener('input', function () {
-      var m = innerMod();
-      if (m && m.deviation !== undefined) m.deviation = parseFloat(this.value);
+      var v = parseFloat(this.value);
+      bothMods(function (m) { if (m && m.deviation !== undefined) m.deviation = v; });
       iq.clearDensity();
       updateLabels();
     });
     $('c-depth').addEventListener('input', function () {
-      var m = innerMod();
-      if (m && m.depth !== undefined) m.depth = parseFloat(this.value);
+      var v = parseFloat(this.value);
+      bothMods(function (m) { if (m && m.depth !== undefined) m.depth = v; });
       iq.clearDensity();
       updateLabels();
     });
@@ -336,8 +429,23 @@
       }
     });
 
-    document.querySelectorAll('input[name="listen"]').forEach(function (r) {
-      r.addEventListener('change', function () { listenTo = this.value; out.flush(); });
+    /* A hidden tab gets no animation frames, so nothing refills the ring and
+     * the worklet holds its last sample forever: a DC offset that costs
+     * nothing to hear but bangs on the way back. Stop the clock instead. */
+    document.addEventListener('visibilitychange', function () {
+      if (!out.ready) return;
+      if (document.hidden) { out.stop(); }
+      else { out.flush(); audioClock = 0; out.resume(); }
+    });
+
+    var listenRadios = document.getElementsByName('listen');
+    Array.prototype.forEach.call(listenRadios, function (r) {
+      r.addEventListener('change', function () {
+        listenTo = this.value;
+        if (listenTo === 'after') primeDetector();
+        out.flush();
+        audioClock = 0;
+      });
     });
 
     $('c-vol').addEventListener('input', function () {
@@ -358,13 +466,18 @@
    * reader can hear the same channel carrying different material. */
   function applySource() {
     if (userWav) { applyWavSource(); return; }
+    applySourceTo(engine);
+    if (audioEngine.modulator) applySourceTo(audioEngine);
+  }
+
+  function applySourceTo(target) {
     var s = null;
     if (sourceChoice === 'tone') s = new Sources.Tone(1000);
     else if (sourceChoice === 'twotone') s = new Sources.TwoTone(700, 1900);
     else if (sourceChoice === 'chirp') s = new Sources.Chirp(600, 2600, 2);
     else if (sourceChoice === 'speech') s = new Sources.Speech(20260907);
     else if (sourceChoice === 'music') s = new Sources.Music();
-    if (s) engine.setSource(s);
+    if (s) target.setSource(s);
   }
 
   /* ---- Audio from a file ------------------------------------------------
@@ -459,12 +572,27 @@
     waterfall.draw(bufI, bufQ, sn, engine.fs);
 
     /* One more reader of the block that was already generated. */
-    if (out.ready) {
-      if (listenTo === 'after' && detector) {
-        Demod.run(detector, block, demodBuf);
-        out.push(demodBuf, block.n, engine.fs);
+    if (out.ready && audible) {
+      /* Real time, from the loudspeaker's own engine, so there is always
+       * enough signal to make continuous audio however slowly the plots run.
+       *
+       * How much to generate is measured, not assumed. Engine.blockSize()
+       * divides by a nominal sixty frames a second, and a 120Hz phone or a
+       * throttled tab would then be handed half or twice the signal a real
+       * second contains, which is a pitch error rather than a timing one. */
+      var t = performance.now();
+      var adt = audioClock ? (t - audioClock) / 1000 : 1 / 60;
+      audioClock = t;
+      if (!(adt > 0) || adt > 0.05) adt = 1 / 60;
+      var an = Math.round(audioEngine.fs * adt);
+      if (an > 8192) an = 8192;
+      if (an < 8) an = 8;
+      var ab = audioEngine.step(an);
+      if (listenTo === 'after' && audioDetector) {
+        Demod.run(audioDetector, ab, audioBuf);
+        out.push(audioBuf, ab.n, audioEngine.fs);
       } else {
-        out.push(block.audio, block.n, engine.fs);
+        out.push(ab.audio, ab.n, audioEngine.fs);
       }
     }
 

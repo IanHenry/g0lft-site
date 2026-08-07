@@ -13,10 +13,18 @@
  * watching its phasor visibly halve its rotation has been told the same fact
  * twice, and the distortion is the point rather than a failure.
  *
- * So each frame of generated audio is resampled to fill one frame of the card,
- * however few samples it contained. At full speed that is nearly one to one and
- * the audio is correct; slowed, the same waveform is stretched, so the pitch
- * falls with the rotation and stays continuous.
+ * The loudspeaker has its own generator, and that is deliberate.
+ *
+ * The plots can be slowed to a fraction of a per cent of real time, which is
+ * the only way to watch a constellation. At those speeds the display generator
+ * produces six samples per animation frame where the sound card wants eight
+ * hundred, and there is no honest way to make audio out of six samples:
+ * stretching them gives frame-rate mush, and holding them gives clicks. Both
+ * were tried.
+ *
+ * So the sound is generated separately, at real time, from the same
+ * configuration. The loudspeaker and the plots show the same signal, at
+ * different speeds, and saying that plainly is better than either artefact.
  *
  * An AudioWorklet built from a Blob, so there is no separate file to fetch and
  * no build step, which is the constraint the whole project runs under.
@@ -140,67 +148,59 @@
     return this.ctx ? this.ctx.sampleRate : 48000;
   };
 
-  /* Take one frame of audio at the engine's rate and hand over one frame's
-   * worth at the card's rate, by resampling rather than decimating.
+  /* Take a block of audio at the generator's rate and hand over the same
+   * stretch of time at the card's rate.
    *
-   * This is the fix for the clicking. Decimating only works while the engine is
-   * producing at least as many samples as the card consumes. Slowed to a
-   * fraction of a per cent it produces six samples a frame against the eight
-   * hundred the card wants, the ring empties instantly, and the zero order hold
-   * that was supposed to give a graceful pitch drop instead gives a burst of
-   * audio sixty times a second, which is a click train at the frame rate. That
-   * is not slowed audio, it is the animation being made audible.
+   * The output length comes from the input length, not from a wall clock:
+   * `n` samples at `fs` are n/fs seconds of signal, and they must come out as
+   * n/fs seconds of sound or the pitch is wrong. Timing the frames instead
+   * and asking for that many samples was the earlier mistake, and it shifts
+   * the pitch by whatever ratio the real frame rate differs from the assumed
+   * one. Keeping the caller responsible for generating a real time's worth is
+   * the only part that needs a clock, and it is done there.
    *
-   * Resampling to fill the frame gives what was actually wanted: the same
-   * waveform stretched, so a tone slowed to a hundredth comes out a hundredth
-   * of the pitch, continuously. Linear interpolation, so it is gritty when
-   * stretched a long way, and the grit is the honest artefact of listening to
-   * something played far too slowly.
+   * Each output sample is the MEAN of the input interval it covers, not a
+   * point taken from it. The generator runs far faster than the card, up to
+   * 250kHz against 48kHz, and picking points would fold everything above
+   * 24kHz straight down into the audible band. Averaging is a crude
+   * anti-alias filter and an honest one.
    */
   AudioOut.prototype.push = function (audio, n, fs) {
     if (!this.ready || n < 2) return;
 
-    /* How many samples the card has consumed since the last push, measured
-     * rather than assumed.
-     *
-     * This used to be sampleRate/60, on the assumption that animation frames
-     * arrive sixty times a second. They do not. A 120Hz phone display fires
-     * twice as often, so twice as much audio went in as came out, the ring
-     * overran within a second, and the recovery that jumps the reader forward
-     * produced an audible click every time. That is the clicking on repeat: it
-     * was never the audio, it was the frame rate.
-     *
-     * Measuring the interval makes it self correcting on any display, and on a
-     * browser that throttles frames in a background tab as well. */
+    var rate = this.sampleRate();
+    var want = Math.round(n * rate / fs);
+
+    /* Aim at a small steady backlog so ordinary jitter never empties the ring
+     * and a slow generator never fills it. This is the only feedback in the
+     * path, and it moves the rate by a fraction of a per cent at a time, which
+     * is inaudible. */
+    var target = rate * 0.04;
+    if (this.backlog > target * 2) want = Math.round(want * 0.98);
+    else if (this.backlog < target * 0.5) want = Math.round(want * 1.02);
+
     var now = (root.performance && root.performance.now)
       ? root.performance.now() : Date.now();
-    var dt = this.lastPush ? (now - this.lastPush) / 1000 : 1 / 60;
+    if (this.lastPush) {
+      var dt = (now - this.lastPush) / 1000;
+      if (dt > 0 && dt < 0.5) this.backlog += want - rate * dt;
+      if (this.backlog < 0) this.backlog = 0;
+    }
     this.lastPush = now;
-    /* Ignore an implausible gap: a tab that was hidden for a minute should not
-     * try to catch up with a minute of audio. */
-    if (dt > 0.25 || dt <= 0) dt = 1 / 60;
-
-    var want = Math.round(this.sampleRate() * dt);
-
-    /* Nudge towards a small steady backlog rather than tracking exactly, so
-     * ordinary jitter in the frame timing never empties the ring. */
-    var backlog = this.backlog || 0;
-    var target = this.sampleRate() * 0.04;
-    if (backlog > target * 2) want = Math.round(want * 0.9);
-    else if (backlog < target * 0.5) want = Math.round(want * 1.1);
-    this.backlog = backlog + want - this.sampleRate() * dt;
 
     if (want < 1) return;
     if (want > this.out.length) want = this.out.length;
-    var out = this.out, k, pos, i0, frac;
-    var stepIn = (n - 1) / want;
+
+    var out = this.out, k, from, to, j, acc, cnt;
+    var step = n / want;
     for (k = 0; k < want; k++) {
-      pos = k * stepIn;
-      i0 = pos | 0;
-      frac = pos - i0;
-      out[k] = i0 + 1 < n
-        ? audio[i0] * (1 - frac) + audio[i0 + 1] * frac
-        : audio[n - 1];
+      from = Math.floor(k * step);
+      to = Math.floor((k + 1) * step);
+      if (to <= from) to = from + 1;
+      if (to > n) to = n;
+      acc = 0; cnt = 0;
+      for (j = from; j < to; j++) { acc += audio[j]; cnt++; }
+      out[k] = cnt ? acc / cnt : 0;
     }
     this.node.port.postMessage({ samples: out.slice(0, want) });
   };
