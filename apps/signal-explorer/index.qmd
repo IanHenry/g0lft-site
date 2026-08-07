@@ -207,10 +207,10 @@ include-in-header:
 <script src="/apps/signal-explorer/shared/ft8.js?v=4cd1c713"></script>
 <script src="/apps/signal-explorer/shared/psk31.js?v=cd9f160c"></script>
 <script src="/apps/signal-explorer/shared/demod.js?v=6cfbf64d"></script>
-<script src="/apps/signal-explorer/shared/audio.js?v=bbb07977"></script>
+<script src="/apps/signal-explorer/shared/audio.js?v=b5c65c40"></script>
 <script src="/apps/signal-explorer/shared/engine.js?v=6a181436"></script>
 <script src="/apps/signal-explorer/shared/palette.js?v=1f85a60d"></script>
 <script src="/apps/signal-explorer/shared/plots.js?v=a72e6c14"></script>
 <script src="/apps/signal-explorer/shared/presets.js?v=64aa90fe"></script>
-<script src="/apps/signal-explorer/js/app.js?v=be77dc23"></script>
+<script src="/apps/signal-explorer/js/app.js?v=6671a7aa"></script>
 ```

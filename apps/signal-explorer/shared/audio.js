@@ -42,6 +42,7 @@
     '    this.last = 0;',
     '    this.starved = 0;',
     '    this.fade = 0;',
+    '    this.tick = 0;',
     '    this.port.onmessage = e => {',
     '      const d = e.data;',
     '      if (d.reset) { this.w = 0; this.r = 0; this.last = 0; this.fade = 0; return; }',
@@ -66,6 +67,15 @@
     '  process(inputs, outputs) {',
     '    const out = outputs[0][0];',
     '    if (!out) return true;',
+    '    /* Tell the writer how much is actually in the ring. It cannot work',
+    '       this out for itself: estimating from a wall clock assumes the card',
+    '       consumes at exactly its nominal rate, and a ring that is nearly',
+    '       empty on average starves inside almost every render quantum, which',
+    '       is heard as a rasp rather than as a gap. */',
+    '    if ((this.tick++ & 7) === 0) {',
+    '      this.port.postMessage({ fill: (this.w - this.r) & this.mask,',
+    '                              starved: this.starved });',
+    '    }',
     '    for (let k = 0; k < out.length; k++) {',
     '      if (this.r !== this.w) { this.last = this.buf[this.r]; this.r = (this.r + 1) & this.mask; }',
     '      else this.starved++;',
@@ -86,9 +96,20 @@
     this.volume = 0.4;
     /* Scratch for the resampler, allocated once. */
     this.out = new Float32Array(8192);
-    this.lastPush = 0;
-    this.backlog = 0;
+    this.fill = 0;         /* samples in the ring, reported by the worklet */
+    this.starved = 0;
   }
+
+  /* How much sound should be sitting ahead of the reader.
+   *
+   * An animation frame is about 16ms and they do not arrive evenly: a frame
+   * that takes 40ms is unremarkable on a phone. Without a cushion the ring is
+   * empty by construction, the reader catches the writer inside almost every
+   * 128 sample block, and what comes out is a rasp. Eighty milliseconds is
+   * enough to ride out several late frames and short enough that nothing feels
+   * out of step with the picture. */
+  AudioOut.LEAD = 0.08;
+  AudioOut.TARGET = 0.05;
 
   /* Must be called from a click. Browsers will not start audio otherwise, and
    * that is a deliberate protection rather than an obstacle to route around. */
@@ -121,6 +142,10 @@
     }).then(function () {
       URL.revokeObjectURL(url);
       self.node = new AudioWorkletNode(self.ctx, 'ring-player', { outputChannelCount: [1] });
+      self.node.port.onmessage = function (e) {
+        self.fill = e.data.fill;
+        self.starved = e.data.starved;
+      };
       self.gain = self.ctx.createGain();
       self.gain.gain.value = self.volume;
       self.node.connect(self.gain).connect(self.ctx.destination);
@@ -171,22 +196,15 @@
     var rate = this.sampleRate();
     var want = Math.round(n * rate / fs);
 
-    /* Aim at a small steady backlog so ordinary jitter never empties the ring
-     * and a slow generator never fills it. This is the only feedback in the
-     * path, and it moves the rate by a fraction of a per cent at a time, which
-     * is inaudible. */
-    var target = rate * 0.04;
-    if (this.backlog > target * 2) want = Math.round(want * 0.98);
-    else if (this.backlog < target * 0.5) want = Math.round(want * 1.02);
-
-    var now = (root.performance && root.performance.now)
-      ? root.performance.now() : Date.now();
-    if (this.lastPush) {
-      var dt = (now - this.lastPush) / 1000;
-      if (dt > 0 && dt < 0.5) this.backlog += want - rate * dt;
-      if (this.backlog < 0) this.backlog = 0;
-    }
-    this.lastPush = now;
+    /* Nudge towards the target cushion. The generator's clock and the card's
+     * clock are different crystals and will drift apart; this is the only
+     * feedback in the path and it moves the rate by two per cent at a time,
+     * which is inaudible and takes a second or so to correct a wander. The
+     * fill figure comes from the worklet, so it is measured rather than
+     * inferred from how often frames happen to arrive. */
+    var target = rate * AudioOut.TARGET;
+    if (this.fill > target * 2.5) want = Math.round(want * 0.98);
+    else if (this.fill < target * 0.6) want = Math.round(want * 1.02);
 
     if (want < 1) return;
     if (want > this.out.length) want = this.out.length;
@@ -207,8 +225,7 @@
 
   AudioOut.prototype.flush = function () {
     if (this.ready) this.node.port.postMessage({ reset: true });
-    this.lastPush = 0;
-    this.backlog = 0;
+    this.fill = 0;
   };
 
   root.SS = root.SS || {};
