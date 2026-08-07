@@ -43,6 +43,7 @@
   var audioDetector = null;
   var audioBuf = new Float32Array(Engine.HISTORY);
   var audioClock = 0;
+  var audioLead = true;
   var audible = true;
 
   /* Is there anything to listen to?
@@ -150,7 +151,7 @@
     audioEngine.channel = engine.channel;
     primeDetector();
     setAudible(audioEngine.fs <= AUDIBLE_FS);
-    out.flush();
+    resetAudio();
     syncControlsFromState();
     showRelevantControls();
   }
@@ -181,6 +182,36 @@
    * bang out of the speaker at the instant you switch to listening after the
    * receiver. Discarding one frame costs a sixtieth of a second of audio and
    * removes it entirely. */
+  /* Generate `secs` of real time and hand it to the loudspeaker. Split into
+   * blocks the engine and the scratch buffer can hold, because the lead-in
+   * asks for eighty milliseconds at once and at 250kHz that is twenty thousand
+   * samples. */
+  /* Empty the ring and arrange for the next frame to refill it with a lead-in
+   * rather than a frame's worth. Anything that makes the old contents wrong,
+   * a change of mode or of what is being listened to, has to come through
+   * here or the reader spends the next second catching up. */
+  function resetAudio() {
+    out.flush();
+    audioClock = 0;
+    audioLead = true;
+  }
+
+  function pumpAudio(secs) {
+    var want = Math.round(audioEngine.fs * secs), chunk, ab;
+    while (want > 0) {
+      chunk = Math.min(want, 8192);
+      if (chunk < 8) break;
+      want -= chunk;
+      ab = audioEngine.step(chunk);
+      if (listenTo === 'after' && audioDetector) {
+        Demod.run(audioDetector, ab, audioBuf);
+        out.push(audioBuf, ab.n, audioEngine.fs);
+      } else {
+        out.push(ab.audio, ab.n, audioEngine.fs);
+      }
+    }
+  }
+
   function primeDetector() {
     audioDetector = Demod.forModulator(audioEngine.modulator);
     if (!audioDetector) return;
@@ -246,7 +277,7 @@
     if (!carries && listenTo === 'before') {
       listenTo = 'after';
       setRadio('listen', 'after');
-      out.flush();
+      resetAudio();
     }
   }
 
@@ -257,7 +288,7 @@
     var rs = document.getElementsByName('listen'), k;
     for (k = 0; k < rs.length; k++) rs[k].disabled = !yes;
     if (!yes) {
-      out.flush();
+      resetAudio();
       $('audio-note').textContent =
         'Nothing to hear. This capture was recorded at ' + fmt(audioEngine.fs) +
         ' and carries two hundred thousand symbols a second, so the whole '
@@ -401,7 +432,7 @@
       sourceChoice = this.value;
       applySource();
       iq.clearDensity();
-      out.flush();
+      resetAudio();
       showRelevantControls();
       syncControlsFromState();
     });
@@ -435,7 +466,7 @@
     document.addEventListener('visibilitychange', function () {
       if (!out.ready) return;
       if (document.hidden) { out.stop(); }
-      else { out.flush(); audioClock = 0; out.resume(); }
+      else { resetAudio(); out.resume(); }
     });
 
     var listenRadios = document.getElementsByName('listen');
@@ -443,7 +474,7 @@
       r.addEventListener('change', function () {
         listenTo = this.value;
         if (listenTo === 'after') primeDetector();
-        out.flush();
+        resetAudio();
         audioClock = 0;
       });
     });
@@ -584,16 +615,11 @@
       var adt = audioClock ? (t - audioClock) / 1000 : 1 / 60;
       audioClock = t;
       if (!(adt > 0) || adt > 0.05) adt = 1 / 60;
-      var an = Math.round(audioEngine.fs * adt);
-      if (an > 8192) an = 8192;
-      if (an < 8) an = 8;
-      var ab = audioEngine.step(an);
-      if (listenTo === 'after' && audioDetector) {
-        Demod.run(audioDetector, ab, audioBuf);
-        out.push(audioBuf, ab.n, audioEngine.fs);
-      } else {
-        out.push(ab.audio, ab.n, audioEngine.fs);
-      }
+      /* Starting from nothing, the ring is empty by construction and the
+       * reader catches the writer inside almost every block it renders. Get
+       * ahead once, with real signal rather than silence, and stay ahead. */
+      if (audioLead) { adt += SS.AudioOut.LEAD; audioLead = false; }
+      pumpAudio(adt);
     }
 
     updateStats(block);
