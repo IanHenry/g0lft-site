@@ -103,13 +103,16 @@ include-in-header:
         <label><input type="radio" name="listen" value="before" checked> The audio going in</label>
         <label><input type="radio" name="listen" value="after"> What comes out of the receiver</label>
       </div>
-      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made. The speed control slows the sound along with the plots, down to a quarter speed, so a tone drops in pitch as the phasor slows. That is the same fact heard rather than seen. Below a quarter speed the sound holds, because a tone slowed five hundred times is not something a loudspeaker can give you.</p>
+      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made. The sound runs at real time whatever the plots are doing, unless you ask it not to with the box below.</p>
 
       <label class="ctl">
         <span>Volume <b id="v-vol"></b></span>
         <input type="range" id="c-vol" min="0" max="1" step="0.01" value="0.4">
       </label>
 
+      <div class="ctl radio">
+        <label><input type="checkbox" id="c-follow"> Slow the sound with the plots</label>
+      </div>
       <p class="note" id="speed-audio-note"></p>
     </div>
 
@@ -212,5 +215,5 @@ include-in-header:
 <script src="/apps/signal-explorer/shared/palette.js?v=1f85a60d"></script>
 <script src="/apps/signal-explorer/shared/plots.js?v=a72e6c14"></script>
 <script src="/apps/signal-explorer/shared/presets.js?v=64aa90fe"></script>
-<script src="/apps/signal-explorer/js/app.js?v=0fe329e9"></script>
+<script src="/apps/signal-explorer/js/app.js?v=39a8cf8c"></script>
 ```
