@@ -197,17 +197,21 @@
   }
 
   function pumpAudio(secs) {
-    var want = Math.round(audioEngine.fs * secs), chunk, ab;
+    /* At speed 1 this is a real time's worth. Slowed, it is proportionally
+     * less signal, and audio.js stretches it over the same stretch of sound,
+     * which is what drops the pitch. Two samples is the floor: below that
+     * there is nothing to interpolate between. */
+    var want = Math.round(audioEngine.fs * secs * engine.speed), chunk, ab;
+    if (want < 2) want = 2;
     while (want > 0) {
       chunk = Math.min(want, 8192);
-      if (chunk < 8) break;
       want -= chunk;
       ab = audioEngine.step(chunk);
       if (listenTo === 'after' && audioDetector) {
         Demod.run(audioDetector, ab, audioBuf);
-        out.push(audioBuf, ab.n, audioEngine.fs);
+        out.push(audioBuf, ab.n, audioEngine.fs, engine.speed);
       } else {
-        out.push(ab.audio, ab.n, audioEngine.fs);
+        out.push(ab.audio, ab.n, audioEngine.fs, engine.speed);
       }
     }
   }
@@ -317,9 +321,19 @@
     $('speed-note').textContent =
       'Generating ' + fmt(sps).replace('Hz', '') + ' samples a second of a signal recorded at ' +
       fmt(engine.fs) + '. At full speed this mode goes past far too quickly to follow, which is why the printed figures are densities.';
+    /* Say what the speed control is doing to the sound, in the terms the
+     * reader can check by listening. A tone slowed by the same factor as the
+     * plots is the honest behaviour, and the pitch it lands on is the number
+     * worth quoting. */
+    var demo = 1000 * engine.speed;
     $('speed-audio-note').textContent = engine.speed > 0.6
-      ? 'The sound plays at real time, which is what the plots are showing too.'
-      : 'The sound always plays at real time, whatever the plots are doing. There is no useful audio to be made from a signal slowed a hundredfold, so the loudspeaker keeps its own clock.';
+      ? 'At this speed the sound is real time, and a 1kHz tone is a 1kHz tone.'
+      : 'The sound slows with the plots, so a 1kHz tone comes out at '
+        + fmt(demo) + '. That is not a fault, it is what a tone slowed '
+        + (1 / engine.speed).toFixed(engine.speed < 0.02 ? 0 : 1)
+        + ' times sounds like'
+        + (demo < 40 ? ', and below about 40Hz a loudspeaker has nothing left '
+                     + 'to give you. Bring the speed up to hear the mode.' : '.');
     $('v-scale').textContent = '±' + (iq.scale / 2).toFixed(2);
     $('v-persist').textContent = iq.persist;
     $('v-bins').textContent = iq.bins;
@@ -538,13 +552,22 @@
       });
   }
 
+  /* Both generators, always. A Buffer source holds a read position, so the two
+   * need one each rather than a shared object, but a loaded file that reaches
+   * only the display engine is heard as the preset's own audio while the plots
+   * show the file. That is a worse failure than silence, because everything
+   * looks right. */
   function applyWavSource() {
     engine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
+    if (audioEngine.modulator) {
+      audioEngine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
+    }
   }
 
   function applyWav() {
     if (!userWav) return;
-    engine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
+    applyWavSource();
+    resetAudio();
     $('blurb-origin').textContent = 'Playing ' + userWav.name + ' through ' +
       (engine.modulator ? engine.modulator.label : 'the current mode') +
       '. Only the audio is replaced. The capture parameters are unchanged.';
