@@ -4,27 +4,22 @@
  * what the engine already produced and plays it. The audio and the pictures
  * are the same moment for the same reason they always were.
  *
- * The speed problem, and why the answer is not to solve it
- * -------------------------------------------------------
- * Signal time is not wall clock time when the display is slowed. Something has
- * to give, and there are only two honest options: force real time whenever the
- * sound is on, or let the sound slow down with everything else and go down in
- * pitch. The second is better. A reader who hears a tone drop an octave while
- * watching its phasor visibly halve its rotation has been told the same fact
- * twice, and the distortion is the point rather than a failure.
+ * Speed, and what the loudspeaker does about it
+ * ---------------------------------------------
+ * Signal time is not wall clock time when the display is slowed, and the sound
+ * follows the speed control rather than ignoring it. Slowed to a fiftieth, a
+ * 1kHz tone comes out at 20Hz, because that is what a 1kHz tone slowed fifty
+ * times is. A reader who hears the pitch fall as the phasor visibly slows has
+ * been told the same fact twice, and the distortion is the point rather than a
+ * failure. Far enough down there is nothing a loudspeaker can reproduce, and
+ * that is worth hearing too.
  *
- * The loudspeaker has its own generator, and that is deliberate.
- *
- * The plots can be slowed to a fraction of a per cent of real time, which is
- * the only way to watch a constellation. At those speeds the display generator
- * produces six samples per animation frame where the sound card wants eight
- * hundred, and there is no honest way to make audio out of six samples:
- * stretching them gives frame-rate mush, and holding them gives clicks. Both
- * were tried.
- *
- * So the sound is generated separately, at real time, from the same
- * configuration. The loudspeaker and the plots show the same signal, at
- * different speeds, and saying that plainly is better than either artefact.
+ * The generator is still its own, separate from the one driving the plots, and
+ * that is deliberate. It runs the same preset over the same channel, but its
+ * block size is chosen from the measured frame interval rather than from a
+ * nominal sixty frames a second, because a block sized for the wrong frame
+ * rate is a pitch error. The plots all agree with each other, which is what
+ * the one buffer rule was protecting; the loudspeaker keeps its own count.
  *
  * An AudioWorklet built from a Blob, so there is no separate file to fetch and
  * no build step, which is the constraint the whole project runs under.
@@ -98,6 +93,9 @@
     this.out = new Float32Array(8192);
     this.fill = 0;         /* samples in the ring, reported by the worklet */
     this.starved = 0;
+    /* Resampler state, so one block joins the next instead of restarting. */
+    this.prev = 0;
+    this.phase = 0;
   }
 
   /* How much sound should be sitting ahead of the reader.
@@ -173,33 +171,45 @@
     return this.ctx ? this.ctx.sampleRate : 48000;
   };
 
-  /* Take a block of audio at the generator's rate and hand over the same
-   * stretch of time at the card's rate.
+  /* Take a block of audio and hand over the same stretch of time at the card's
+   * rate, slowed by `speed`.
    *
-   * The output length comes from the input length, not from a wall clock:
-   * `n` samples at `fs` are n/fs seconds of signal, and they must come out as
-   * n/fs seconds of sound or the pitch is wrong. Timing the frames instead
-   * and asking for that many samples was the earlier mistake, and it shifts
-   * the pitch by whatever ratio the real frame rate differs from the assumed
-   * one. Keeping the caller responsible for generating a real time's worth is
-   * the only part that needs a clock, and it is done there.
+   * The output length comes from the input length and the speed, never from a
+   * wall clock: `n` samples at `fs` played at speed s last n/(fs*s) seconds.
+   * Timing the frames instead and asking for that many samples shifts the
+   * pitch by whatever ratio the real frame rate differs from the assumed one,
+   * which on a 120Hz phone is an octave. That was the first bug here.
    *
-   * Each output sample is the MEAN of the input interval it covers, not a
-   * point taken from it. The generator runs far faster than the card, up to
-   * 250kHz against 48kHz, and picking points would fold everything above
-   * 24kHz straight down into the audible band. Averaging is a crude
-   * anti-alias filter and an honest one.
+   * Slowing is a real slowing, not a trick: at a hundredth of speed a 1kHz
+   * tone comes out at 10Hz, because that is what a 1kHz tone slowed a hundred
+   * times is. The plots are showing the same thing. Below a few per cent there
+   * is nothing left a loudspeaker can reproduce, and hearing it fall away is
+   * the point rather than a fault.
+   *
+   * Two directions, and they need different arithmetic:
+   *
+   *   stretching (the usual case once slowed) interpolates between input
+   *   samples, carrying the fractional position and the last sample across the
+   *   block boundary so the waveform is continuous. Holding each input sample
+   *   instead gives a staircase, and a staircase regenerated every animation
+   *   frame is the frame-rate rasp this started with.
+   *
+   *   squeezing (at or near full speed, where a 250kHz generator feeds a 48kHz
+   *   card) averages the interval each output sample covers. Picking a point
+   *   would fold content near the card rate straight into the middle of
+   *   hearing, and averaging has its null exactly there.
    */
-  AudioOut.prototype.push = function (audio, n, fs) {
-    if (!this.ready || n < 2) return;
+  AudioOut.prototype.push = function (audio, n, fs, speed) {
+    if (!this.ready || n < 1) return;
+    if (!(speed > 0)) speed = 1;
 
     var rate = this.sampleRate();
-    var want = Math.round(n * rate / fs);
+    var want = Math.round(n * rate / (fs * speed));
 
     /* Nudge towards the target cushion. The generator's clock and the card's
      * clock are different crystals and will drift apart; this is the only
      * feedback in the path and it moves the rate by two per cent at a time,
-     * which is inaudible and takes a second or so to correct a wander. The
+     * which is inaudible and takes about a second to correct a wander. The
      * fill figure comes from the worklet, so it is measured rather than
      * inferred from how often frames happen to arrive. */
     var target = rate * AudioOut.TARGET;
@@ -209,16 +219,41 @@
     if (want < 1) return;
     if (want > this.out.length) want = this.out.length;
 
-    var out = this.out, k, from, to, j, acc, cnt;
+    var out = this.out, k, j, acc, cnt, from, to, p, i, f, a, b;
     var step = n / want;
-    for (k = 0; k < want; k++) {
-      from = Math.floor(k * step);
-      to = Math.floor((k + 1) * step);
-      if (to <= from) to = from + 1;
-      if (to > n) to = n;
-      acc = 0; cnt = 0;
-      for (j = from; j < to; j++) { acc += audio[j]; cnt++; }
-      out[k] = cnt ? acc / cnt : 0;
+
+    if (step < 1) {
+      /* Interpolate over [prev, audio[0] ... audio[n-1]], so position 0 is the
+       * last sample of the PREVIOUS block. Starting at audio[0] instead skips
+       * the interval between the blocks, and the waveform steps by a whole
+       * input sample once per animation frame. Slowed a hundredfold that is a
+       * step the signal itself would take a hundred output samples to make:
+       * sixty clicks a second, which is what this sounded like. */
+      for (k = 0; k < want; k++) {
+        p = this.phase + k * step;
+        i = Math.floor(p);
+        f = p - i;
+        a = i <= 0 ? this.prev : (i <= n ? audio[i - 1] : audio[n - 1]);
+        b = (i + 1) <= 0 ? this.prev
+                         : ((i + 1) <= n ? audio[i] : audio[n - 1]);
+        out[k] = a + (b - a) * f;
+      }
+      /* Whatever is left of the last input sample starts the next block. */
+      this.phase = this.phase + want * step - n;
+      if (this.phase < 0) this.phase = 0;
+      this.prev = audio[n - 1];
+    } else {
+      for (k = 0; k < want; k++) {
+        from = Math.floor(k * step);
+        to = Math.floor((k + 1) * step);
+        if (to <= from) to = from + 1;
+        if (to > n) to = n;
+        acc = 0; cnt = 0;
+        for (j = from; j < to; j++) { acc += audio[j]; cnt++; }
+        out[k] = cnt ? acc / cnt : 0;
+      }
+      this.phase = 0;
+      this.prev = audio[n - 1];
     }
     this.node.port.postMessage({ samples: out.slice(0, want) });
   };
@@ -226,6 +261,8 @@
   AudioOut.prototype.flush = function () {
     if (this.ready) this.node.port.postMessage({ reset: true });
     this.fill = 0;
+    this.prev = 0;
+    this.phase = 0;
   };
 
   root.SS = root.SS || {};
