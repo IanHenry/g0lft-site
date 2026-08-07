@@ -268,7 +268,9 @@
    * disagreement between what is seen and what is heard is worse than either
    * behaviour on its own. */
   var AUDIO_FLOOR = 0.25;
+  var followSpeed = false;
   function audioSpeed() {
+    if (!followSpeed) return 1;
     return engine.speed > AUDIO_FLOOR ? engine.speed : AUDIO_FLOOR;
   }
 
@@ -286,10 +288,14 @@
    * is also the cheapest case to do it in: a quarter speed block is a quarter
    * of the work. */
   function pumpAudio(secs, block) {
-    var slow = engine.speed < AUDIO_FLOOR;
-    if (slow !== audioSlow) { audioSlow = slow; resetAudio(); return; }
+    var sp = audioSpeed();
+    /* The block just drawn is only usable as sound when the sound is meant to
+     * run at exactly the speed the plots are running at. Otherwise the second
+     * generator has to do it, at whatever rate the sound wants. */
+    var own = Math.abs(sp - engine.speed) > 1e-9;
+    if (own !== audioSlow) { audioSlow = own; resetAudio(); return; }
 
-    if (!slow) {
+    if (!own) {
       if (listenTo === 'after' && detector) {
         Demod.run(detector, block, demodBuf);
         out.push(demodBuf, block.n, engine.fs, engine.speed);
@@ -299,7 +305,7 @@
       return;
     }
 
-    var want = Math.round(audioEngine.fs * secs * AUDIO_FLOOR), chunk, ab;
+    var want = Math.round(audioEngine.fs * secs * sp), chunk, ab;
     if (want < 2) want = 2;
     while (want > 0) {
       chunk = Math.min(want, 8192);
@@ -307,9 +313,9 @@
       ab = audioEngine.step(chunk);
       if (listenTo === 'after' && audioDetector) {
         Demod.run(audioDetector, ab, audioBuf);
-        out.push(audioBuf, ab.n, audioEngine.fs, AUDIO_FLOOR);
+        out.push(audioBuf, ab.n, audioEngine.fs, sp);
       } else {
-        out.push(ab.audio, ab.n, audioEngine.fs, AUDIO_FLOOR);
+        out.push(ab.audio, ab.n, audioEngine.fs, sp);
       }
     }
   }
@@ -419,20 +425,22 @@
     $('speed-note').textContent =
       'Generating ' + fmt(sps).replace('Hz', '') + ' samples a second of a signal recorded at ' +
       fmt(engine.fs) + '. At full speed this mode goes past far too quickly to follow, which is why the printed figures are densities.';
-    /* Say what the speed control is doing to the sound, in terms a reader can
-     * check by listening: the pitch a 1kHz tone lands on. */
+    /* Say what the sound is doing, in terms a reader can check by listening:
+     * the pitch a 1kHz tone lands on. */
     var sp = audioSpeed();
-    $('speed-audio-note').textContent = engine.speed > 0.9
-      ? 'Real time. A 1kHz tone is a 1kHz tone.'
+    $('speed-audio-note').textContent = !followSpeed
+      ? 'The sound runs at real time whatever the plots are doing, so a 1kHz '
+        + 'tone is a 1kHz tone. The plots are slowed so a constellation can be '
+        + 'watched; a signal slowed that far is not something a loudspeaker can '
+        + 'reproduce. Tick the box to hear it try.'
       : (engine.speed > AUDIO_FLOOR
-          ? 'The sound slows with the plots, so a 1kHz tone comes out at '
+          ? 'The sound is slowed with the plots, so a 1kHz tone comes out at '
             + fmt(1000 * sp) + '. That is not a fault, it is what a tone '
             + 'slowed ' + (1 / sp).toFixed(1) + ' times sounds like.'
-          : 'The plots are slowed further than the sound can follow, so the '
+          : 'The plots are slowed further than the sound will follow, so the '
             + 'sound is held at a quarter speed and a 1kHz tone comes out at '
-            + fmt(1000 * sp) + '. Slowed as far as the plots are, a 1kHz tone '
-            + 'would be ' + fmt(1000 * engine.speed) + ', which no loudspeaker '
-            + 'will give you and no ear would hear.');
+            + fmt(1000 * sp) + '. Slowed as far as the plots are it would be '
+            + fmt(1000 * engine.speed) + ', which no ear would hear.');
     $('v-scale').textContent = '±' + (iq.scale / 2).toFixed(2);
     $('v-persist').textContent = iq.persist;
     $('v-bins').textContent = iq.bins;
@@ -595,6 +603,12 @@
         if (listenTo === 'after') primeDetector();
         resetAudio();
       });
+    });
+
+    $('c-follow').addEventListener('change', function () {
+      followSpeed = this.checked;
+      resetAudio();
+      updateLabels();
     });
 
     $('c-vol').addEventListener('input', function () {
