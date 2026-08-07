@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Signal Explorer: seeing I and Q move</title>
-<link rel="stylesheet" href="css/style.css?v=d12f465e">
-</head>
-<body>
+---
+title: "Signal Explorer"
+pagetitle: "Signal Explorer: seeing I and Q move"
+description: "A radio simulator you can hear."
+page-layout: full
+include-in-header:
+  text: |
+    <link rel="stylesheet" href="/apps/signal-explorer/css/style.css?v=cd7a8d01">
+---
 
-<header>
-  <p class="home"><a href="/">g0lft.org</a> &rsaquo; <a href="/apps.html">Apps</a> &rsaquo; Signal Explorer</p>
-  <h1>Signal Explorer</h1>
-  <p class="sub">A radio simulator you can hear. Pick a mode, push it around with the controls, and watch every view change together. Turn the sound on to hear the audio going in and what comes back out of the receiver.</p>
-  <p class="sub small">Arrived from <em>Seeing signals: I and Q from first principles</em>? Every panel of Figures 4, 5 and 6 is here, marked with its number. Each one has its own link, so <code>#5d</code> opens the airband panel directly.</p>
-</header>
-
+```{=html}
+<p class="app-lead">A radio simulator you can hear. Pick a mode, push it around with the controls, and watch every view change together. Turn the sound on to hear the audio going in and what comes back out of the receiver.</p>
+<p class="app-lead">Arrived from <em>Seeing signals: I and Q from first principles</em>? Every panel of Figures 4, 5 and 6 is here, marked with its number. Each one has its own link, so <code>#5d</code> opens the airband panel directly.</p>
+<div id="sx">
 <main>
-
-  <nav id="presets" aria-label="Modes"></nav>
+<nav id="presets" aria-label="Modes"></nav>
 
   <section id="blurb">
     <p id="blurb-text"></p>
@@ -107,7 +103,7 @@
         <label><input type="radio" name="listen" value="before" checked> The audio going in</label>
         <label><input type="radio" name="listen" value="after"> What comes out of the receiver</label>
       </div>
-      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made.</p>
+      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made. The sound always plays at real time, whatever speed the plots are set to.</p>
 
       <label class="ctl">
         <span>Volume <b id="v-vol"></b></span>
@@ -201,22 +197,20 @@
     <p>Each mode carries the sample rate, tuning and filtering of the GNU Radio flowgraph that produced the matching capture in the article, so the shapes here are generated under the same conditions the printed ones were recorded under. Parameters the flowgraphs do not record, such as the sideband of an SSB capture or the tone frequencies behind the two tone rosette, are marked as standard values rather than quietly invented. The origin line under each mode says which is which.</p>
     <p>One thing here is not a reproduction. The published figures are densities accumulated over 100000 samples, roughly four tenths of a second, because a constellation at its real speed is a blur. The speed control exists so the same signal can be slowed to something a person can follow. Slowing it changes how much signal passes per frame and changes nothing about the signal, so every frequency, deviation and measurement stays exactly as stated.</p>
   </section>
-
 </main>
-
-<script src="shared/dsp.js?v=d8b0c151"></script>
-<script src="shared/fft.js?v=071a6e26"></script>
-<script src="shared/sources.js?v=4803d2ba"></script>
-<script src="shared/modulators.js?v=11ed2e9b"></script>
-<script src="shared/digital.js?v=737a75ce"></script>
-<script src="shared/ft8.js?v=4cd1c713"></script>
-<script src="shared/psk31.js?v=cd9f160c"></script>
-<script src="shared/demod.js?v=6cfbf64d"></script>
-<script src="shared/audio.js?v=8919bd78"></script>
-<script src="shared/engine.js?v=6a181436"></script>
-<script src="shared/palette.js?v=1f85a60d"></script>
-<script src="shared/plots.js?v=a72e6c14"></script>
-<script src="shared/presets.js?v=64aa90fe"></script>
-<script src="js/app.js?v=b56bb6a9"></script>
-</body>
-</html>
+</div>
+<script src="/apps/signal-explorer/shared/dsp.js?v=d8b0c151"></script>
+<script src="/apps/signal-explorer/shared/fft.js?v=071a6e26"></script>
+<script src="/apps/signal-explorer/shared/sources.js?v=4803d2ba"></script>
+<script src="/apps/signal-explorer/shared/modulators.js?v=11ed2e9b"></script>
+<script src="/apps/signal-explorer/shared/digital.js?v=737a75ce"></script>
+<script src="/apps/signal-explorer/shared/ft8.js?v=4cd1c713"></script>
+<script src="/apps/signal-explorer/shared/psk31.js?v=cd9f160c"></script>
+<script src="/apps/signal-explorer/shared/demod.js?v=6cfbf64d"></script>
+<script src="/apps/signal-explorer/shared/audio.js?v=bbb07977"></script>
+<script src="/apps/signal-explorer/shared/engine.js?v=6a181436"></script>
+<script src="/apps/signal-explorer/shared/palette.js?v=1f85a60d"></script>
+<script src="/apps/signal-explorer/shared/plots.js?v=a72e6c14"></script>
+<script src="/apps/signal-explorer/shared/presets.js?v=64aa90fe"></script>
+<script src="/apps/signal-explorer/js/app.js?v=be77dc23"></script>
+```

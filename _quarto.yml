@@ -3,7 +3,13 @@ project:
   output-dir: _site
   resources:
     - images
-    - apps
+    # The app's assets are copied verbatim; its page is a .qmd alongside them,
+    # rendered like every other page so it gets the real navbar and footer.
+    # Listing the asset directories rather than apps/ keeps the .qmd source
+    # from being copied into the built site next to its own output.
+    - apps/signal-explorer/css
+    - apps/signal-explorer/js
+    - apps/signal-explorer/shared
 
 website:
   title: ""
