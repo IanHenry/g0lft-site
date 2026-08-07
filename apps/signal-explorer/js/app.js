@@ -20,30 +20,27 @@
   var detector = null;         /* the receiver, for listening after transmission */
   var sourceChoice = 'preset';
 
-  /* The loudspeaker is one more reader of the same block. It is fed from the
-   * frame loop like every plot, never from a second generator. */
+  /* The loudspeaker is one more reader of the same block, whenever it can be.
+   * See pumpAudio for the one case where it cannot. */
   var out = new SS.AudioOut();
   var listenTo = 'before';
   var demodBuf = new Float32Array(Engine.HISTORY);
 
-  /* A second generator, for the loudspeaker only, running at real time.
+  /* A second generator, for the loudspeaker, used only when the plots are
+   * slowed past the point where their own block is any use as sound.
    *
-   * The plots are usually slowed to a fraction of a per cent, which is the only
-   * way to watch a constellation, and at those speeds the display generator
-   * makes about six samples per frame where the card wants eight hundred. There
-   * is no honest audio to be made from six samples. So the sound comes from its
-   * own engine at speed 1, configured identically and sharing the channel
-   * object so every slider affects both.
-   *
-   * The plots still all agree with each other, which is what the one-buffer
-   * rule was protecting. The loudspeaker is a different clock, and the page
-   * says so. */
+   * At a seventh of a per cent the display generator makes six samples in the
+   * time the card wants eight hundred, and there is no honest audio to be made
+   * of six samples. Above the floor it makes exactly the right number and this
+   * engine stays idle, which matters: running both at full speed was three
+   * times the work and put broadcast FM over the frame budget. */
   var audioEngine = new Engine({ fs: 250000, seed: 4242 });
   audioEngine.speed = 1;
   var audioDetector = null;
   var audioBuf = new Float32Array(Engine.HISTORY);
-  var audioClock = 0;
+  var frameClock = 0;
   var audioLead = true;
+  var audioSlow = null;
   var audible = true;
 
   /* Is there anything to listen to?
@@ -217,7 +214,10 @@
   /* Apply a change to both generators. The sliders used to reach only the
    * display engine, so turning the tone knob moved the picture and not the
    * sound. Anything that alters the signal has to go through here. */
-  function bothSources(fn) { fn(engine.source); if (audioEngine.source) fn(audioEngine.source); }
+  function bothSources(fn) {
+    fn(engine.source);
+    if (audioEngine.source) fn(audioEngine.source);
+  }
   /* Wrap a channel control so the loudspeaker's copy follows the plots'. */
   function channelChange(fn) {
     return function () {
@@ -250,7 +250,6 @@
    * here or the reader spends the next second catching up. */
   function resetAudio() {
     out.flush();
-    audioClock = 0;
     audioLead = true;
   }
 
@@ -273,13 +272,34 @@
     return engine.speed > AUDIO_FLOOR ? engine.speed : AUDIO_FLOOR;
   }
 
-  function pumpAudio(secs) {
-    /* At speed 1 this is a real time's worth. Slowed, it is proportionally
-     * less signal, and audio.js stretches it over the same stretch of sound,
-     * which is what drops the pitch. Two samples is the floor: below that
-     * there is nothing to interpolate between. */
-    var sp = audioSpeed();
-    var want = Math.round(audioEngine.fs * secs * sp), chunk, ab;
+  /* Feed the loudspeaker, from whichever generator can do it for nothing.
+   *
+   * Above the floor the plots are already advancing fast enough to BE the
+   * sound: the block just drawn holds the right number of samples and wants
+   * playing at exactly the speed the slider is set to. Using it costs nothing,
+   * which is the whole point, because building the signal twice at full speed
+   * was three times the work and put broadcast FM over the frame budget.
+   *
+   * Below the floor the block is six samples and there is nothing to be made
+   * of it, so the second generator runs, at the floor speed, and the plots and
+   * the loudspeaker part company. That is the only case that needs it, and it
+   * is also the cheapest case to do it in: a quarter speed block is a quarter
+   * of the work. */
+  function pumpAudio(secs, block) {
+    var slow = engine.speed < AUDIO_FLOOR;
+    if (slow !== audioSlow) { audioSlow = slow; resetAudio(); return; }
+
+    if (!slow) {
+      if (listenTo === 'after' && detector) {
+        Demod.run(detector, block, demodBuf);
+        out.push(demodBuf, block.n, engine.fs, engine.speed);
+      } else {
+        out.push(block.audio, block.n, engine.fs, engine.speed);
+      }
+      return;
+    }
+
+    var want = Math.round(audioEngine.fs * secs * AUDIO_FLOOR), chunk, ab;
     if (want < 2) want = 2;
     while (want > 0) {
       chunk = Math.min(want, 8192);
@@ -287,9 +307,9 @@
       ab = audioEngine.step(chunk);
       if (listenTo === 'after' && audioDetector) {
         Demod.run(audioDetector, ab, audioBuf);
-        out.push(audioBuf, ab.n, audioEngine.fs, sp);
+        out.push(audioBuf, ab.n, audioEngine.fs, AUDIO_FLOOR);
       } else {
-        out.push(ab.audio, ab.n, audioEngine.fs, sp);
+        out.push(ab.audio, ab.n, audioEngine.fs, AUDIO_FLOOR);
       }
     }
   }
@@ -574,7 +594,6 @@
         listenTo = this.value;
         if (listenTo === 'after') primeDetector();
         resetAudio();
-        audioClock = 0;
       });
     });
 
@@ -714,7 +733,20 @@
   }
 
   function frame() {
-    var block = engine.step();
+    /* Measured, not assumed. Engine.blockSize() divides by a nominal sixty
+     * frames a second; on a 120Hz screen or in a throttled tab that hands the
+     * plots half or twice the signal a real second contains. It was always
+     * wrong, and it stopped being invisible when the same block started
+     * feeding the loudspeaker, where it is a pitch error. */
+    var now = performance.now();
+    var dt = frameClock ? (now - frameClock) / 1000 : 1 / 60;
+    frameClock = now;
+    if (!(dt > 0) || dt > 0.05) dt = 1 / 60;
+
+    var want = Math.round(engine.fs * engine.speed * dt);
+    if (want < 4) want = 4;
+    if (want > 8192) want = 8192;
+    var block = engine.step(want);
 
     /* One read of the history, shared by everything that needs it. */
     var trail = Math.min(iq.persist, engine.hist.filled);
@@ -748,14 +780,12 @@
        * throttled tab would then be handed half or twice the signal a real
        * second contains, which is a pitch error rather than a timing one. */
       var t = performance.now();
-      var adt = audioClock ? (t - audioClock) / 1000 : 1 / 60;
-      audioClock = t;
-      if (!(adt > 0) || adt > 0.05) adt = 1 / 60;
       /* Starting from nothing, the ring is empty by construction and the
        * reader catches the writer inside almost every block it renders. Get
        * ahead once, with real signal rather than silence, and stay ahead. */
+      var adt = dt;
       if (audioLead) { adt += SS.AudioOut.LEAD; audioLead = false; }
-      pumpAudio(adt);
+      pumpAudio(adt, block);
       audioStatus(t);
     }
 
