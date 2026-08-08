@@ -188,6 +188,10 @@
       label: 'FT8, a 3kHz passband',
       signals: sigs,
       carriesAudio: false,
+      /* Already where a receiver would put it: the signals sit at their real
+       * audio offsets in the passband, so the real part of this is what a
+       * loudspeaker plays. No beat note wanted. */
+      audioBand: true,
       a: 0,
       reset: function () { for (var j = 0; j < sigs.length; j++) sigs[j].reset(); },
       step: function (src, fs) {
@@ -210,6 +214,10 @@
       label: 'FT8',
       signal: s,
       carriesAudio: false,
+      /* Already where a receiver would put it: the signals sit at their real
+       * audio offsets in the passband, so the real part of this is what a
+       * loudspeaker plays. No beat note wanted. */
+      audioBand: true,
       a: 0,
       reset: function () { s.reset(); },
       step: function (src, fs) { s.step(fs); this.i = s.i; this.q = s.q; }
