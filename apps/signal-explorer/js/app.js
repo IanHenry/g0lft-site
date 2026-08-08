@@ -20,88 +20,42 @@
   var detector = null;         /* the receiver, for listening after transmission */
   var sourceChoice = 'preset';
 
-  /* The loudspeaker is one more reader of the same block, whenever it can be.
-   * See pumpAudio for the one case where it cannot. */
+  /* The loudspeaker is one more reader of the same block. Not a second
+   * generator: the same samples the plots are drawing, played.
+   *
+   * That rule was broken once, and putting it back is the reason this file is
+   * shorter than it was. A separate generator running at real time while the
+   * plots crawled meant two clocks, and two clocks mean the swept tone you can
+   * see is not the swept tone you can hear. No amount of interface could make
+   * that honest.
+   *
+   * What it costs is that you cannot have both at once, and that is not a
+   * limitation of the program. A constellation has to be slowed a hundredfold
+   * to be watched, and a signal slowed a hundredfold has no sound in it: a
+   * 1kHz tone becomes 10Hz. Watch it or hear it, and the page says so where
+   * the button is.
+   */
   var out = new SS.AudioOut();
   var listenTo = 'before';
   var demodBuf = new Float32Array(Engine.HISTORY);
-
-  /* A second generator, for the loudspeaker, used only when the plots are
-   * slowed past the point where their own block is any use as sound.
-   *
-   * At a seventh of a per cent the display generator makes six samples in the
-   * time the card wants eight hundred, and there is no honest audio to be made
-   * of six samples. Above the floor it makes exactly the right number and this
-   * engine stays idle, which matters: running both at full speed was three
-   * times the work and put broadcast FM over the frame budget. */
-  var audioEngine = new Engine({ fs: 250000, seed: 4242 });
-  audioEngine.speed = 1;
-  var audioDetector = null;
-  var audioBuf = new Float32Array(Engine.HISTORY);
-  var frameClock = 0;
   var audioLead = true;
-  var audioSlow = null;
-  var audible = true;
+  var frameClock = 0;      /* the measured animation interval, for block sizing */
 
-  /* Is there anything to listen to?
+  /* The slowest the plots may run and still make a sound worth hearing.
    *
-   * The rule is the capture's own sample rate. Panels 6D to 6H were recorded
-   * at 2MHz with ten samples to a symbol, which is two hundred thousand
-   * symbols a second: the signal occupies a couple of hundred kilohertz and
-   * every part of it is above hearing. Slowing it to fit the audio band would
-   * not be that signal any more, and a made up sound presented next to a real
-   * constellation is worse than no sound. So those modes are seen and not
-   * heard, and the page says so. */
+   * Playing a block generated at speed s stretches it by 1/s, so every
+   * frequency in it is multiplied by s. At a quarter speed a 1kHz tone lands
+   * on 250Hz, which is low but plainly a tone; at a tenth it is 100Hz and
+   * turning to mush; below that there is nothing a loudspeaker can do with it.
+   * A quarter is where the sound stops being informative, so that is where it
+   * is switched off rather than left playing something misleading. */
+  var AUDIO_MIN_SPEED = 0.25;
+
+  /* Some captures have nothing audible in them at any speed. 6D to 6H were
+   * recorded at 2MHz carrying two hundred thousand symbols a second: even
+   * slowed to a quarter that is 50 kilobaud, an octave-and-a-half of nothing
+   * above hearing. Seen and not heard, and the page says why. */
   var AUDIBLE_FS = 384000;
-
-  /* What sample rate the loudspeaker's generator needs.
-   *
-   * The captures run at 250kHz, and at 100kHz and 2MHz, because that is what
-   * the flowgraphs that produced the printed figures recorded at. The plots
-   * have to keep those rates: the whole point is that the shapes are generated
-   * under the conditions the printed ones were measured under.
-   *
-   * The loudspeaker does not. It needs a rate that holds the signal, and no
-   * more. Running it at 250kHz means a quarter of a million source and
-   * modulator steps every second in JavaScript, on top of the display
-   * generator and six canvases, and a phone cannot do it: the ring empties,
-   * the card plays the last sample it had, and it comes out as a rasp or as
-   * nothing. Measured at a third of the frame budget on a desktop, which
-   * leaves no margin at all for a handset.
-   *
-   * So: enough for the modulation and a comfortable margin, floored at 48kHz
-   * and never above what the capture itself used. Wideband FM still needs most
-   * of it, because 75kHz of deviation genuinely occupies 190kHz. Everything
-   * else drops to 48kHz and costs a fifth as much.
-   *
-   * Modes that build their own symbols keep the preset's rate untouched. Their
-   * symbol timing is derived from it, so changing it would change the mode. */
-  function audioFsFor(preset, eng) {
-    var m = eng.modulator, inner = m && m.inner ? m.inner : m;
-    if (!m || m.carriesAudio === false) return eng.fs;
-    /* Carson: twice the deviation plus twice the highest audio frequency, and
-     * a quarter again so the signal is not sitting on the edge of the band. */
-    var need = 2 * ((inner && inner.deviation ? inner.deviation : 0) + 20000);
-    need = Math.round(need * 1.25);
-    if (need < 48000) need = 48000;
-    return Math.min(eng.fs, need);
-  }
-
-  /* The channel the loudspeaker hears, kept in step with the one the plots
-   * show. Everything is copied across except the noise, which is scaled.
-   *
-   * Noise is white and specified per sample, so its power spreads over the
-   * whole sample rate. Copy the same figure to a generator running at a fifth
-   * of the rate and it becomes five times as dense in the audio band: the
-   * picture would show a light dusting and the ear would hear a gale. Scaling
-   * by the square root of the rate ratio keeps the density, and therefore the
-   * signal to noise ratio a listener hears, the same as the one being looked
-   * at. */
-  function syncChannel() {
-    var src = engine.channel, dst = audioEngine.channel, k;
-    for (k in src) dst[k] = src[k];
-    dst.noise = src.noise * Math.sqrt(audioEngine.fs / engine.fs);
-  }
 
   var iq = new Plots.Constellation($('iq'));
   var audio = new Plots.Trace($('audio'), { colour: SS.Palette.ui.ink, range: 1.1 });
@@ -190,15 +144,7 @@
     /* The same mode again for the loudspeaker, at real time. Its own source and
      * modulator instances, because both are stateful, but the same channel
      * object so noise, tuning and fading move together. */
-    Presets.apply(audioEngine, preset);
-    audioEngine.speed = 1;
-    audioEngine.setFs(audioFsFor(preset, audioEngine));
-    if (userWav) audioEngine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
-    else applySourceTo(audioEngine);
-    audioEngine.channel = Object.create(null);
-    syncChannel();
-    primeDetector();
-    setAudible(audioEngine.fs <= AUDIBLE_FS);
+    updateAudioAvailability();
     resetAudio();
     syncControlsFromState();
     showRelevantControls();
@@ -214,116 +160,66 @@
   /* Apply a change to both generators. The sliders used to reach only the
    * display engine, so turning the tone knob moved the picture and not the
    * sound. Anything that alters the signal has to go through here. */
-  function bothSources(fn) {
-    fn(engine.source);
-    if (audioEngine.source) fn(audioEngine.source);
-  }
-  /* Wrap a channel control so the loudspeaker's copy follows the plots'. */
-  function channelChange(fn) {
-    return function () {
-      fn.call(this);
-      if (audioEngine.channel) syncChannel();
-    };
-  }
-  function bothMods(fn) {
-    fn(innerMod());
-    var m = audioEngine.modulator;
-    if (m) fn(m.inner ? m.inner : m);
-  }
+  function withSource(fn) { if (engine.source) fn(engine.source); }
+  function withMod(fn) { var m = innerMod(); if (m) fn(m); }
 
-  /* Build the receiver for the loudspeaker's engine and run a frame through it
-   * that nobody hears.
-   *
-   * A detector starts cold: filters are empty and any DC blocker has no
-   * estimate yet, so the first block out of it is a settling transient rather
-   * than the signal. On the 5B repeater capture it peaks near ten, which is a
-   * bang out of the speaker at the instant you switch to listening after the
-   * receiver. Discarding one frame costs a sixtieth of a second of audio and
-   * removes it entirely. */
-  /* Generate `secs` of real time and hand it to the loudspeaker. Split into
-   * blocks the engine and the scratch buffer can hold, because the lead-in
-   * asks for eighty milliseconds at once and at 250kHz that is twenty thousand
-   * samples. */
   /* Empty the ring and arrange for the next frame to refill it with a lead-in
    * rather than a frame's worth. Anything that makes the old contents wrong,
-   * a change of mode or of what is being listened to, has to come through
-   * here or the reader spends the next second catching up. */
+   * a change of mode, of speed, or of what is being listened to, has to come
+   * through here or the reader spends the next second catching up. */
   function resetAudio() {
     out.flush();
     audioLead = true;
   }
 
-  /* How slowly the sound may run.
+  /* Build the receiver and run a frame through it that nobody hears.
    *
-   * The speed control goes down to about a seventh of a per cent, because that
-   * is what it takes to watch a constellation crawl. Following it all the way
-   * down with the sound is arithmetically honest and practically useless: a
-   * 1kHz tone at that setting is 1.5Hz, and since most modes open at a
-   * fraction of a per cent, turning the sound on would give silence. That is
-   * not a slowed signal a reader can learn anything from, it is no signal.
-   *
-   * So the sound tracks the slider down to a quarter speed, two octaves down,
-   * where a tone is still plainly a tone and plainly slowed, and holds there.
-   * The page says when it has stopped tracking, which matters: an unexplained
-   * disagreement between what is seen and what is heard is worse than either
-   * behaviour on its own. */
-  var AUDIO_FLOOR = 0.25;
-  var followSpeed = false;
-  function audioSpeed() {
-    if (!followSpeed) return 1;
-    return engine.speed > AUDIO_FLOOR ? engine.speed : AUDIO_FLOOR;
+   * A detector starts cold: filters are empty and any DC blocker has no
+   * estimate yet, so the first block out of it is a settling transient rather
+   * than the signal. On the 5B repeater capture it peaks near ten, which is a
+   * bang out of the loudspeaker the instant you switch to listening after the
+   * receiver. Discarding one frame removes it entirely. */
+  function primeDetector() {
+    detector = Demod.forModulator(engine.modulator);
+    if (!detector) return;
+    Demod.run(detector, engine.step(Math.round(engine.fs / 60)), demodBuf);
   }
 
-  /* Feed the loudspeaker, from whichever generator can do it for nothing.
+  /* Feed the loudspeaker from the block the plots were just drawn from.
    *
-   * Above the floor the plots are already advancing fast enough to BE the
-   * sound: the block just drawn holds the right number of samples and wants
-   * playing at exactly the speed the slider is set to. Using it costs nothing,
-   * which is the whole point, because building the signal twice at full speed
-   * was three times the work and put broadcast FM over the frame budget.
+   * `block.n` samples of signal generated at `engine.speed`, which audio.js
+   * turns into the same stretch of sound at the card's rate. Nothing here
+   * generates a sample. That is the whole design, and the reason the sound and
+   * the picture can no longer disagree about anything. */
+  /* Get a cushion of sound into the ring before the card starts reading it.
    *
-   * Below the floor the block is six samples and there is nothing to be made
-   * of it, so the second generator runs, at the floor speed, and the plots and
-   * the loudspeaker part company. That is the only case that needs it, and it
-   * is also the cheapest case to do it in: a quarter speed block is a quarter
-   * of the work. */
-  function pumpAudio(secs, block) {
-    var sp = audioSpeed();
-    /* The block just drawn is only usable as sound when the sound is meant to
-     * run at exactly the speed the plots are running at. Otherwise the second
-     * generator has to do it, at whatever rate the sound wants. */
-    var own = Math.abs(sp - engine.speed) > 1e-9;
-    if (own !== audioSlow) { audioSlow = own; resetAudio(); return; }
-
-    if (!own) {
-      if (listenTo === 'after' && detector) {
-        Demod.run(detector, block, demodBuf);
-        out.push(demodBuf, block.n, engine.fs, engine.speed);
-      } else {
-        out.push(block.audio, block.n, engine.fs, engine.speed);
-      }
-      return;
-    }
-
-    var want = Math.round(audioEngine.fs * secs * sp), chunk, ab;
-    if (want < 2) want = 2;
+   * Frames do not arrive evenly, and a ring holding only what the last frame
+   * put in it runs dry inside almost every block the card renders, which is
+   * heard as a rasp rather than as a gap. Eighty milliseconds rides out
+   * several late frames.
+   *
+   * With one generator the only way to make that cushion is to run the signal
+   * on a little further, which advances the plots by the same eighty
+   * milliseconds of sound. At a quarter speed that is twenty milliseconds of
+   * signal, once, at the moment the sound is switched on. Nobody will see it,
+   * and the alternative is a second generator and two clocks again. */
+  function leadIn() {
+    var want = Math.round(engine.fs * engine.speed * SS.AudioOut.LEAD), chunk;
     while (want > 0) {
       chunk = Math.min(want, 8192);
       want -= chunk;
-      ab = audioEngine.step(chunk);
-      if (listenTo === 'after' && audioDetector) {
-        Demod.run(audioDetector, ab, audioBuf);
-        out.push(audioBuf, ab.n, audioEngine.fs, sp);
-      } else {
-        out.push(ab.audio, ab.n, audioEngine.fs, sp);
-      }
+      if (chunk < 2) break;
+      pumpAudio(engine.step(chunk));
     }
   }
 
-  function primeDetector() {
-    audioDetector = Demod.forModulator(audioEngine.modulator);
-    if (!audioDetector) return;
-    Demod.run(audioDetector, audioEngine.step(Math.round(audioEngine.fs / 60)), audioBuf);
+  function pumpAudio(block) {
+    if (listenTo === 'after' && detector) {
+      Demod.run(detector, block, demodBuf);
+      out.push(demodBuf, block.n, engine.fs, engine.speed);
+    } else {
+      out.push(block.audio, block.n, engine.fs, engine.speed);
+    }
   }
 
   function modOf() { return engine.modulator; }
@@ -389,26 +285,62 @@
     }
   }
 
-  function setAudible(yes) {
-    audible = yes;
-    $('c-audio').disabled = !yes;
-    $('c-vol').disabled = !yes;
+  /* Whether there is anything to hear, and if not, why not in one sentence.
+   *
+   * Two separate reasons, and a reader deserves to be told which applies.
+   * Either the mode carries nothing in the audio band at any speed, or the
+   * plots have been slowed past the point where the sound means anything. The
+   * second is fixable by moving one slider, so say so. */
+  function audioState() {
+    if (engine.fs > AUDIBLE_FS) return 'never';
+    if (engine.speed < AUDIO_MIN_SPEED) return 'tooslow';
+    return 'ok';
+  }
+
+  function updateAudioAvailability() {
+    var st = audioState(), ok = st === 'ok';
+    $('c-vol').disabled = !ok;
     var rs = document.getElementsByName('listen'), k;
-    for (k = 0; k < rs.length; k++) rs[k].disabled = !yes;
-    if (!yes) {
-      resetAudio();
+    for (k = 0; k < rs.length; k++) {
+      /* A mode that builds its own symbols has no audio going in, so there is
+       * nothing to listen to before transmission whatever the speed. */
+      rs[k].disabled = !ok || (rs[k].value === 'before' && !carriesAudio());
+    }
+    $('c-audio').disabled = st === 'never';
+
+    if (st === 'never') {
+      if (out.ready) { out.stop(); out.ready = false; }
       $('audio-note').textContent =
-        'Nothing to hear. This capture was recorded at ' + fmt(audioEngine.fs) +
-        ' and carries two hundred thousand symbols a second, so the whole '
-        + 'signal sits far above hearing. The modes with audio in them are the '
-        + 'analogue ones and the on air digital modes further up.';
-    } else if (!out.ready) {
+        'Nothing to hear. This capture was recorded at ' + fmt(engine.fs) +
+        ' and carries two hundred thousand symbols a second, so all of it sits '
+        + 'far above hearing however much it is slowed. The modes with sound in '
+        + 'them are the analogue ones and the on air digital modes above.';
+    } else if (st === 'tooslow') {
+      $('audio-note').textContent = out.ready
+        ? 'Sound paused. The plots are at ' + pct(engine.speed) + ' of real '
+          + 'time, and at that speed a 1kHz tone would come out at '
+          + fmt(1000 * engine.speed) + ', which is not something you can hear. '
+          + 'Bring the speed back to a quarter or more and it resumes.'
+        : 'Sound needs the plots at a quarter of real time or faster. Pressing '
+          + 'the button will take them there.';
+    } else if (out.ready) {
+      $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz.';
+    } else {
       $('audio-note').textContent =
         'Your browser will not start audio without a click, which is why this '
-        + 'is a button rather than a switch.';
-    } else {
-      $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz.';
+        + 'is a button rather than a switch. The plots will speed up to a '
+        + 'quarter of real time, because that is the slowest a signal can be '
+        + 'played and still be heard.';
     }
+  }
+
+  function carriesAudio() {
+    var m = engine.modulator;
+    return !(m && m.carriesAudio === false);
+  }
+
+  function pct(x) {
+    return (x * 100).toFixed(x < 0.01 ? 2 : x < 1 ? 1 : 0) + '%';
   }
 
   function fmt(hz) {
@@ -425,22 +357,20 @@
     $('speed-note').textContent =
       'Generating ' + fmt(sps).replace('Hz', '') + ' samples a second of a signal recorded at ' +
       fmt(engine.fs) + '. At full speed this mode goes past far too quickly to follow, which is why the printed figures are densities.';
-    /* Say what the sound is doing, in terms a reader can check by listening:
-     * the pitch a 1kHz tone lands on. */
-    var sp = audioSpeed();
-    $('speed-audio-note').textContent = !followSpeed
-      ? 'The sound runs at real time whatever the plots are doing, so a 1kHz '
-        + 'tone is a 1kHz tone. The plots are slowed so a constellation can be '
-        + 'watched; a signal slowed that far is not something a loudspeaker can '
-        + 'reproduce. Tick the box to hear it try.'
-      : (engine.speed > AUDIO_FLOOR
-          ? 'The sound is slowed with the plots, so a 1kHz tone comes out at '
-            + fmt(1000 * sp) + '. That is not a fault, it is what a tone '
-            + 'slowed ' + (1 / sp).toFixed(1) + ' times sounds like.'
-          : 'The plots are slowed further than the sound will follow, so the '
-            + 'sound is held at a quarter speed and a 1kHz tone comes out at '
-            + fmt(1000 * sp) + '. Slowed as far as the plots are it would be '
-            + fmt(1000 * engine.speed) + ', which no ear would hear.');
+    /* The one thing about this tool a reader has to understand, said where
+     * they will meet it. Slowing the plots is not a display option, it changes
+     * how much signal passes in a frame, and the sound is that same signal
+     * played. Slow it far enough and there is no sound left in it. */
+    var hz = 1000 * engine.speed;
+    $('speed-audio-note').textContent = engine.speed >= AUDIO_MIN_SPEED
+      ? 'The sound is these same samples played, so it is slowed with them: a '
+        + '1kHz tone comes out at ' + fmt(hz) + '. Nothing is generated twice, '
+        + 'which is why what you hear and what you see cannot disagree.'
+      : 'No sound at this speed. A 1kHz tone would come out at ' + fmt(hz) +
+        ', which is not something a loudspeaker or an ear can do anything '
+        + 'with. A constellation has to be slowed to be watched and a signal '
+        + 'has to run to be heard, and that is a fact about signals rather '
+        + 'than a shortcoming here. Bring the speed to a quarter or more.';
     $('v-scale').textContent = '±' + (iq.scale / 2).toFixed(2);
     $('v-persist').textContent = iq.persist;
     $('v-bins').textContent = iq.bins;
@@ -471,7 +401,13 @@
 
   function wire() {
     $('c-speed').addEventListener('input', function () {
+      var was = audioState();
       engine.speed = speedFromSlider(this.value);
+      /* Crossing into or out of the audible range empties the ring: what is
+       * in it was generated at the old speed and would be played at the new
+       * one, which is a step in pitch. */
+      if (audioState() !== was) { resetAudio(); updateAudioAvailability(); }
+      iq.clearDensity();
       updateLabels();
     });
     $('c-scale').addEventListener('input', function () {
@@ -499,22 +435,22 @@
       });
     });
 
-    $('c-freq').addEventListener('input', channelChange(function () {
+    $('c-freq').addEventListener('input', (function () {
       engine.channel.freqOffset = parseFloat(this.value);
       iq.clearDensity();
       updateLabels();
     }));
-    $('c-noise').addEventListener('input', channelChange(function () {
+    $('c-noise').addEventListener('input', (function () {
       engine.channel.noise = parseFloat(this.value);
       iq.clearDensity();
       updateLabels();
     }));
-    $('c-gain').addEventListener('input', channelChange(function () {
+    $('c-gain').addEventListener('input', (function () {
       engine.channel.gain = parseFloat(this.value);
       iq.clearDensity();
       updateLabels();
     }));
-    $('c-fade').addEventListener('input', channelChange(function () {
+    $('c-fade').addEventListener('input', (function () {
       engine.channel.fadeDepth = parseFloat(this.value);
       iq.clearDensity();
       updateLabels();
@@ -522,7 +458,7 @@
 
     $('c-tone').addEventListener('input', function () {
       var v = parseFloat(this.value);
-      bothSources(function (s) {
+      withSource(function (s) {
         if (!s) return;
         if (s.freq !== undefined) s.freq = v;
         else if (s.f1 !== undefined) s.f1 = v;
@@ -532,19 +468,19 @@
     });
     $('c-tone2').addEventListener('input', function () {
       var v = parseFloat(this.value);
-      bothSources(function (s) { if (s && s.f2 !== undefined) s.f2 = v; });
+      withSource(function (s) { if (s && s.f2 !== undefined) s.f2 = v; });
       iq.clearDensity();
       updateLabels();
     });
     $('c-dev').addEventListener('input', function () {
       var v = parseFloat(this.value);
-      bothMods(function (m) { if (m && m.deviation !== undefined) m.deviation = v; });
+      withMod(function (m) { if (m && m.deviation !== undefined) m.deviation = v; });
       iq.clearDensity();
       updateLabels();
     });
     $('c-depth').addEventListener('input', function () {
       var v = parseFloat(this.value);
-      bothMods(function (m) { if (m && m.depth !== undefined) m.depth = v; });
+      withMod(function (m) { if (m && m.depth !== undefined) m.depth = v; });
       iq.clearDensity();
       updateLabels();
     });
@@ -560,11 +496,21 @@
 
     $('c-audio').addEventListener('click', function () {
       var btn = this;
+      /* The sound is the same samples the plots are made of, so it cannot
+       * play while they are crawling. Rather than grey the button out and
+       * leave the reader to work out which slider to move, take them there. */
+      if (engine.speed < AUDIO_MIN_SPEED) {
+        engine.speed = AUDIO_MIN_SPEED;
+        $('c-speed').value = sliderFromSpeed(engine.speed);
+        iq.clearDensity();
+        updateLabels();
+        resetAudio();
+      }
       if (!out.ready) {
         out.start().then(function () {
           btn.setAttribute('aria-pressed', 'true');
           btn.textContent = 'Sound is on';
-          $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz.';
+          updateAudioAvailability();
         }).catch(function (e) {
           btn.textContent = 'Sound is not available';
           $('audio-note').textContent = 'Sound would not start: ' + e.message +
@@ -572,12 +518,15 @@
         });
       } else if (btn.getAttribute('aria-pressed') === 'true') {
         out.stop();
+        $('audio-note').textContent = 'Sound off.';
         btn.setAttribute('aria-pressed', 'false');
         btn.textContent = 'Turn the sound on';
       } else {
+        resetAudio();
         out.resume();
         btn.setAttribute('aria-pressed', 'true');
         btn.textContent = 'Sound is on';
+        updateAudioAvailability();
       }
     });
 
@@ -602,13 +551,8 @@
         listenTo = this.value;
         if (listenTo === 'after') primeDetector();
         resetAudio();
+        updateAudioAvailability();
       });
-    });
-
-    $('c-follow').addEventListener('change', function () {
-      followSpeed = this.checked;
-      resetAudio();
-      updateLabels();
     });
 
     $('c-vol').addEventListener('input', function () {
@@ -630,7 +574,7 @@
   function applySource() {
     if (userWav) { applyWavSource(); return; }
     applySourceTo(engine);
-    if (audioEngine.modulator) applySourceTo(audioEngine);
+
   }
 
   function applySourceTo(target) {
@@ -677,9 +621,7 @@
    * looks right. */
   function applyWavSource() {
     engine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
-    if (audioEngine.modulator) {
-      audioEngine.setSource(new SS.Sources.Buffer(userWav.data, userWav.rate));
-    }
+
   }
 
   function applyWav() {
@@ -727,6 +669,7 @@
   var statusAt = 0, starvedAt = 0;
   function audioStatus(now) {
     if (!out.ready || now - statusAt < 1000) return;
+    if (audioState() !== 'ok') return;   /* the note is explaining why, leave it */
     statusAt = now;
     var lost = out.starved - starvedAt;
     starvedAt = out.starved;
@@ -737,9 +680,9 @@
     } else if (lost > out.sampleRate() * 0.02) {
       $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz, but ' +
         'this machine is not keeping up: ' + (lost / out.sampleRate() * 1000).toFixed(0) +
-        'ms of the last second had nothing ready to play. Slowing the plots will ' +
-        'not help, the sound has its own generator. Try a mode with a lower ' +
-        'sample rate, or another browser.';
+        'ms of the last second had nothing ready to play. A mode with a lower ' +
+        'sample rate will cost less, and so will slowing the plots, though ' +
+        'not below a quarter speed or the sound stops altogether.';
     } else {
       $('audio-note').textContent = 'Playing at ' + out.sampleRate() + 'Hz, ' +
         Math.round(out.fill / out.sampleRate() * 1000) + 'ms buffered.';
@@ -785,7 +728,7 @@
     waterfall.draw(bufI, bufQ, sn, engine.fs);
 
     /* One more reader of the block that was already generated. */
-    if (out.ready && audible) {
+    if (out.ready && audioState() === 'ok') {
       /* Real time, from the loudspeaker's own engine, so there is always
        * enough signal to make continuous audio however slowly the plots run.
        *
@@ -797,9 +740,8 @@
       /* Starting from nothing, the ring is empty by construction and the
        * reader catches the writer inside almost every block it renders. Get
        * ahead once, with real signal rather than silence, and stay ahead. */
-      var adt = dt;
-      if (audioLead) { adt += SS.AudioOut.LEAD; audioLead = false; }
-      pumpAudio(adt, block);
+      if (audioLead) { audioLead = false; leadIn(); }
+      pumpAudio(block);
       audioStatus(t);
     }
 
