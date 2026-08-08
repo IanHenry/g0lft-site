@@ -171,7 +171,10 @@
     P({
       id: '6a', panel: '6A', name: 'CW', group: 'Digital',
       blurb: 'On-off keying, the oldest digital mode and the simplest. Key down puts the point at a fixed amplitude, key up drops it into the noise at the origin. Tuned slightly off, the key-down point traces a short arc during each dit and dah instead of sitting still.',
-      fs: 62500, speed: 0.06, scale: 2.4, view: 'density', persist: 3000, style: 'line', bins: 187,
+      /* A quarter speed rather than a sixteenth. The constellation is a point
+       * switching on and off, which needs no slowing to follow, and a quarter
+       * is where the sound starts working, so the mode opens ready to hear. */
+      fs: 62500, speed: 0.25, scale: 2.4, view: 'density', persist: 3000, style: 'line', bins: 187,
       origin: 'From the capture flowgraph cw.py: 250kHz sampling, tuned 14.090MHz, decimated by 4 to 62.5kHz, 500Hz filter. Speed and text are standard choices; the receive flowgraph never knew them. Edges are shaped over 5ms, which is why the loop is rounded rather than a jump.',
       source: function () { return new Sources.Silence(); },
       mod: function () { return Dig.CW({ wpm: 20, text: 'CQ CQ DE G0LFT K' }); },
@@ -207,7 +210,10 @@
     P({
       id: '6psk31', panel: '', name: 'PSK31, carrying text', group: 'Digital',
       blurb: 'Differential BPSK at 31.25 baud, sending real characters. The data is not in the phase but in whether the phase changed, so a receiver never needs to know the absolute phase. Shaping takes the trace through the origin on every reversal, which is why it is a line rather than two dots.',
-      fs: 8000, speed: 0.3, scale: 2.6, view: 'trace', persist: 1200, style: 'line', bins: 150,
+      /* Real time. At 31 baud the line through the origin is perfectly
+       * watchable, so this is one of the few modes where the picture and the
+       * sound are both right at once and nothing has to be moved to hear it. */
+      fs: 8000, speed: 1, scale: 2.6, view: 'trace', persist: 1200, style: 'line', bins: 150,
       origin: 'Standard PSK31: G3PLX varicode, differential BPSK, 31.25 baud, raised cosine shaping over two symbol periods. The varicode was written to the published specification rather than taken from any implementation, and 95 per cent of the power sits inside 31Hz.',
       source: function () { return new Sources.Silence(); },
       mod: function () { return PSK.Modulator({ text: 'CQ CQ de G0LFT G0LFT k  ' }); },
