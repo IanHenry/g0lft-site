@@ -64,6 +64,7 @@ include-in-header:
         <input type="range" id="c-speed" min="-3.3" max="0" step="0.01">
       </label>
       <p class="note" id="speed-note"></p>
+      <p class="note">Slowing is not a display setting. It changes how much signal passes in a frame and nothing else, so every frequency, deviation and symbol rate stays exactly as stated and a measurement taken at any speed is still valid. It is also why the sound switches off below a quarter speed: the loudspeaker is playing these same samples, and there is no sound left in a signal slowed five hundred times.</p>
 
       <label class="ctl">
         <span>Zoom <b id="v-scale"></b></span>
@@ -103,16 +104,13 @@ include-in-header:
         <label><input type="radio" name="listen" value="before" checked> The audio going in</label>
         <label><input type="radio" name="listen" value="after"> What comes out of the receiver</label>
       </div>
-      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made. The sound runs at real time whatever the plots are doing, unless you ask it not to with the box below.</p>
+      <p class="note">The second is the whole signal chain: modulated, put through the channel, and detected. Turn the noise up, mistune it, or push AM past 100 per cent, and the difference between the two is the difference the channel made. Both are the same samples: what the plots draw is what the loudspeaker plays, so the two can never disagree.</p>
 
       <label class="ctl">
         <span>Volume <b id="v-vol"></b></span>
         <input type="range" id="c-vol" min="0" max="1" step="0.01" value="0.4">
       </label>
 
-      <div class="ctl radio">
-        <label><input type="checkbox" id="c-follow"> Slow the sound with the plots</label>
-      </div>
       <p class="note" id="speed-audio-note"></p>
     </div>
 
@@ -210,10 +208,10 @@ include-in-header:
 <script src="/apps/signal-explorer/shared/ft8.js?v=4cd1c713"></script>
 <script src="/apps/signal-explorer/shared/psk31.js?v=cd9f160c"></script>
 <script src="/apps/signal-explorer/shared/demod.js?v=6cfbf64d"></script>
-<script src="/apps/signal-explorer/shared/audio.js?v=75526eaf"></script>
+<script src="/apps/signal-explorer/shared/audio.js?v=52205249"></script>
 <script src="/apps/signal-explorer/shared/engine.js?v=6a181436"></script>
 <script src="/apps/signal-explorer/shared/palette.js?v=1f85a60d"></script>
 <script src="/apps/signal-explorer/shared/plots.js?v=a72e6c14"></script>
 <script src="/apps/signal-explorer/shared/presets.js?v=64aa90fe"></script>
-<script src="/apps/signal-explorer/js/app.js?v=39a8cf8c"></script>
+<script src="/apps/signal-explorer/js/app.js?v=2914a8f0"></script>
 ```

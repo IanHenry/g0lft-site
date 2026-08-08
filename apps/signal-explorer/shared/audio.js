@@ -4,22 +4,16 @@
  * what the engine already produced and plays it. The audio and the pictures
  * are the same moment for the same reason they always were.
  *
- * Speed, and what the loudspeaker does about it
- * ---------------------------------------------
- * Signal time is not wall clock time when the display is slowed, and the sound
- * follows the speed control rather than ignoring it. Slowed to a fiftieth, a
- * 1kHz tone comes out at 20Hz, because that is what a 1kHz tone slowed fifty
- * times is. A reader who hears the pitch fall as the phasor visibly slows has
- * been told the same fact twice, and the distortion is the point rather than a
- * failure. Far enough down there is nothing a loudspeaker can reproduce, and
- * that is worth hearing too.
+ * Speed
+ * -----
+ * The samples handed over were generated at some fraction of real time, and
+ * they are played as they are: at a quarter speed a 1kHz tone comes out at
+ * 250Hz, because that is what a 1kHz tone slowed four times is. The picture
+ * and the sound are the same samples and cannot disagree about anything.
  *
- * The generator is still its own, separate from the one driving the plots, and
- * that is deliberate. It runs the same preset over the same channel, but its
- * block size is chosen from the measured frame interval rather than from a
- * nominal sixty frames a second, because a block sized for the wrong frame
- * rate is a pitch error. The plots all agree with each other, which is what
- * the one buffer rule was protecting; the loudspeaker keeps its own count.
+ * There is a floor to that, and it is the caller's business rather than this
+ * file's. Far enough down there is no sound left in a signal at all, and the
+ * app switches the loudspeaker off and says so rather than playing a rumble.
  *
  * An AudioWorklet built from a Blob, so there is no separate file to fetch and
  * no build step, which is the constraint the whole project runs under.
