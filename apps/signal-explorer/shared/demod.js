@@ -129,6 +129,13 @@
     if (m.deviation !== undefined) return Demod.FM({ deviation: m.deviation });
     if (m.depth !== undefined) return Demod.AM();
     if (m.label === 'CW' || m.order !== undefined) return Demod.CW();
+    /* A mode that builds its own symbols and sits at baseband has nothing an
+     * ear can use: PSK31's detected output is the bit waveform, 31Hz wide and
+     * centred on nothing. What a listener actually hears is the signal beating
+     * against the receiver's own oscillator, so give it one. Modes that put
+     * themselves at an audio offset already, FT8 among them, are left alone:
+     * their real part IS what comes out of a loudspeaker. */
+    if (mod.carriesAudio === false && !m.audioBand) return Demod.CW();
     return Demod.SSB();
   };
 
