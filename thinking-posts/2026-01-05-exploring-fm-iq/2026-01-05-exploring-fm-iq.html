@@ -501,6 +501,25 @@ Figure&nbsp;7: Animated IQ plot with audio overlay
 <section id="next-time" class="level2">
 <h2 class="anchored" data-anchor-id="next-time">Next Time…</h2>
 <p>In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.</p>
+<style>
+  /* The Cusdis iframe defaults to 150px, and its resize message does not always
+     arrive, which leaves the form scrolling inside a small box. min-height sets
+     a comfortable floor while still letting Cusdis grow it if resize does fire,
+     since an inline height from the SDK beats this rule. */
+  #cusdis_thread iframe {
+    width: 100%;
+    min-height: 480px;
+    border: 0;
+  }
+  #comments-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  #comments-section > p {
+    margin-bottom: 1rem;
+  }
+</style>
 <section id="comments-section" hidden="">
 <h2 class="anchored">Comments</h2>
 <p>You don't need an account, just a name. Comments are read before they appear,
