@@ -288,7 +288,7 @@ Found device 16
 </section>
 </section>
 <section id="using-the-simple-iq-visualisation-plugin" class="level3">
-<h3 class="anchored" data-anchor-id="using-the-simple-iq-visualisation-plugin">Using the Simple IQ Visualisation Plugin</h3>
+<h3 class="anchored">Using the Simple IQ Visualisation Plugin</h3>
 <p>This tool is designed for visualising strong signals like Broadcast FM/AM, Repeaters, and Airband. It uses an IQ sample window centered on the waterfall. While audio filters are applied in SDRconnect, they do not affect this raw IQ stream. The script automatically periodically re-centers the VFO so the IQ you see matches your tuned frequency.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -303,6 +303,36 @@ Found device 16
 </ul>
 <p>You can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script “jumps” the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.</p>
 <p>I built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!</p>
+<section id="comments-section" hidden="">
+<h2 class="anchored" data-anchor-id="using-the-simple-iq-visualisation-plugin">Comments</h2>
+<p>You don't need an account, just a name. Comments are read before they appear,
+so there may be a short delay before yours shows up.</p>
+<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="dea1e098-1427-480b-8085-9974093665c4"></div>
+</section>
+<script>
+(function () {
+  var el = document.getElementById('cusdis_thread');
+  if (!el) return;
+  // Stay invisible until a real Cusdis app id has been filled in, so the
+  // section never appears half-working on the live site.
+  var appId = el.getAttribute('data-app-id');
+  if (!appId || appId.indexOf('REPLACE_WITH') === 0) return;
+
+  // A stable id per page, so comments stay attached to the right page.
+  var path = window.location.pathname.replace(/index\.html$/, '');
+  if (path.length > 1) path = path.replace(/\/$/, '');
+  el.setAttribute('data-page-id', path);
+  el.setAttribute('data-page-url', window.location.origin + path);
+  el.setAttribute('data-page-title', document.title);
+
+  document.getElementById('comments-section').removeAttribute('hidden');
+
+  var s = document.createElement('script');
+  s.src = 'https://cusdis.com/js/cusdis.es.js';
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
 
 
 </section>

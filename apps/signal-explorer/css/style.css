@@ -135,3 +135,25 @@
   #sx .panel.tall canvas { height: 320px; }
   #sx .panel canvas, #sx .panel.wide canvas { height: 150px; }
 }
+
+/* Beta badge and notice */
+.beta-badge {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  padding: 0.15em 0.55em;
+  font-size: 0.45em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #d97706;
+  border-radius: 999px;
+}
+.app-beta {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid #d97706;
+  background: rgba(217, 119, 6, 0.08);
+  border-radius: 4px;
+}

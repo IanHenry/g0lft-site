@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Ian Henry, G0LFT">
+<meta name="dcterms.date" content="2026-08-08">
+<meta name="description" content="Last time the map was a star, and I said the clustering was missing only because I could not see how my peers connect to one another. So I spent a fortnight asking each of them for its own routing table. The clustering came back. It is real. And it turned out not to be mine.">
 
-<title>Notebook</title>
+<title>The Edges I Could Not See</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,26 +32,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./images/favicon.ico" rel="icon">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e8af6e89599387d949cfa00551ed8178.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e8af6e89599387d949cfa00551ed8178.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,35 +77,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-image','listing-date','listing-title','listing-description','listing-reading-time','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -116,45 +88,16 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- intentionally empty — GA is handled by _cookie_consent.html -->
 
-<link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
-<link rel="manifest" href="./images/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
 <meta name="theme-color" content="#1ecbe1">
 
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="_theme/_base.css">
-<link rel="stylesheet" href="_theme/_colors.css">
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -170,39 +113,39 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./projects.html"> 
+    <a class="nav-link" href="../../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./apps.html"> 
+    <a class="nav-link" href="../../apps.html"> 
 <span class="menu-text">Apps</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./thinking.html"> 
+    <a class="nav-link" href="../../thinking.html"> 
 <span class="menu-text">Thinking</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./guides.html"> 
+    <a class="nav-link" href="../../guides.html"> 
 <span class="menu-text">Guides</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./notebook.html" aria-current="page"> 
+    <a class="nav-link" href="../../notebook.html"> 
 <span class="menu-text">Notebook</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./talks.html"> 
+    <a class="nav-link" href="../../talks.html"> 
 <span class="menu-text">Talks &amp; Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -216,103 +159,78 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q29tcHV0YXRpb25hbCUyMEJpb2xvZ3k=">Computational Biology <span class="quarto-category-count">(2)</span></div><div class="category" data-category="R0I3Q0FN">GB7CAM <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TmV0d29ya3M=">Networks <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Tm90ZWJvb2s=">Notebook <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UGFja2V0JTIwUmFkaW8=">Packet Radio <span class="quarto-category-count">(2)</span></div></div></div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">Notebook</h1></header>
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">The Edges I Could Not See</h1></header>
 
 <header id="title-block-header">
 
+<p class="author">Ian Henry, G0LFT</p>
 
+<p class="date">2026-08-08</p>
 </header>
 
 
-<p><img src="images/main_logo.png" class="centered-image"></p>
-<section id="notebook" class="level2">
-<h2 class="anchored" data-anchor-id="notebook">Notebook</h2>
-<p>Working notes rather than finished pieces. Speculative, half-formed, and often self-correcting. Corrections are welcome.</p>
-
+<section id="the-edges-i-could-not-see" class="level1">
+<h1>The Edges I Could Not See</h1>
+<section id="the-promise-i-made-last-time" class="level2">
+<h2 class="anchored" data-anchor-id="the-promise-i-made-last-time">The promise I made last time</h2>
+<p><a href="../../notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html">Last time</a> I drew a map of the nodes <a href="https://gb7cam.org.uk">GB7CAM</a> can reach and then talked myself out of most of what I thought I saw in it. The feature that had stopped me, the dense local clustering that made me think of protein networks in the first place, turned out to be missing rather than present. My data could only ever draw a star. LinBPQ tells me that a node is reachable through a given peer; it does not tell me whether any two of those nodes touch each other. I had built a spoke model out of routing tables without knowing that was the choice I was making, and a spoke model cannot show clustering even where clustering exists.</p>
+<p>I ended that post with a list of things to build, and the first item was the one that mattered. Get the real edges. Ask each peer for its own routing table, not merely the destinations it hands me, and the star should collapse into something nearer the truth. Only then would I find out whether the missing clustering was real, or whether the network genuinely was as sparse as my instrument made it look.</p>
+<p>I have spent the two weeks since doing exactly that. The clustering came back. It is real. And it is not mine.</p>
+</section>
+<section id="asking-every-peer-what-it-sees" class="level2">
+<h2 class="anchored" data-anchor-id="asking-every-peer-what-it-sees">Asking every peer what it sees</h2>
+<p>The change is small and it is the whole thing. Every six hours my node now connects to each configured peer in turn and reads that peer’s own ROUTES table, its list of direct neighbours, and stores it. Where the old map recorded “I can reach this node through that peer”, the new one records “this peer says it is directly linked to that one”. The first is a claim about my horizon. The second is a claim about an edge, and edges are the thing a network is actually made of.</p>
+<p>Two weeks of six-hourly snapshots later I have around three hundred and forty distinct real links between a bit over two hundred stations.</p>
+<p>It is worth being exact about what those two hundred are, because it is easy to conflate two counts that mean very different things. Between them the peers can <em>reach</em> around fourteen hundred distinct nodes, the sum of everything in all their NODES tables. But reaching is not touching. GB7BDH, to take one, can reach eighty-nine nodes and is directly linked to eleven of them; the other seventy eight it gets to through those eleven, or through nodes further out that I never poll. The real-edges map draws only the direct links, the eleven and not the eighty-nine, because a direct link is the only thing I can verify as an edge. The fourteen hundred is the horizon. The two hundred is the topology. The gap between them is every station that is reachable but not adjacent, which is most of them, and it is the spoke-versus-edge distinction from the last post standing one level up: a horizon count grows with every hop, an edge count does not.</p>
+<p>The <a href="https://gb7cam.org.uk/graph.html">graph</a> is live and redrawn around this data, and it defaults to the connected backbone rather than every single-link leaf, because the honest full set is now large enough to need the trim.</p>
+<iframe src="https://gb7cam.org.uk/graph.html" style="width:100%; height:70vh; border:1px solid #ddd;" loading="lazy">
+</iframe>
+</section>
+<section id="the-network-grew-while-i-watched" class="level2">
+<h2 class="anchored" data-anchor-id="the-network-grew-while-i-watched">The network grew while I watched</h2>
+<p>I had asked, last time, whether adding peers would change the shape, and I got to find out sooner than expected because the node itself grew while I was measuring it. On the 24th of July there were three live peers. It sat at four for ten days. Then, over the first week of August, it went to six, to seven, and then in a single day to twelve.</p>
+<p>They were not local. The first of the newcomers was KB1TAE, a node in Maine that had asked to forward mail with me. Behind it came a rush: N3HYM, N5MDT and W6RAY across the United States, VE3CGR and VE3KPG in Canada, VK2RZ in Australia, PY2BIL in Brazil. A village outside Cambridge, over the space of about seventy two hours, acquired direct links to four continents. Every one of those links is AXUDP, a tunnel across the ordinary internet wearing AX.25 as a costume. Not one of them travelled a single metre by radio.</p>
+</section>
+<section id="the-clustering-came-back-and-it-was-not-mine" class="level2">
+<h2 class="anchored" data-anchor-id="the-clustering-came-back-and-it-was-not-mine">The clustering came back, and it was not mine</h2>
+<p>Here is the thing I built all of this to find out. With real edges instead of spokes, are there closed triangles? Does the map cluster the way a protein network clusters, or was that always a trick of the light?</p>
+<p>It clusters. There are fifteen direct peer-to-peer links now, genuine edges between stations that both name each other, and a knot of tightly wired nodes sits at the centre of the picture. If I stripped the labels off and showed it to a colleague, they might well guess it was proteomics.</p>
+<p>But look at which stations closed the triangles. KB1TAE links directly to N3HYM, to N5MDT, to W6RAY, to VK2RZ. VE3CGR links to five others. The overseas nodes are densely meshed among themselves; they did not arrive as isolated points, they arrived as a cluster that was already wired together somewhere I cannot see, and plugging into one corner of it drew the whole thing onto my screen.</p>
+<p>And my own peers, the three UK links I actually care about, GB7BDH, GB7BED-5 and GB7NPR? Not one direct edge among them. Zero. Last time I had a hunch, and I wrote it down so I could be checked against it: “with only three peers they largely are not [meshed], and adding more would start to close the triangles”. I was exactly half right, in the least useful way possible. Adding more peers did close the triangles. It closed them on the wrong side of the Atlantic. My local peers are still a star radiating into the backbone, precisely as sparse as they were in July. The clustering I went looking for is real, and it belongs to a network I did not know I had joined.</p>
+</section>
+<section id="the-backbone-i-was-proud-of-is-gone" class="level2">
+<h2 class="anchored" data-anchor-id="the-backbone-i-was-proud-of-is-gone">The backbone I was proud of is gone</h2>
+<p>The most satisfying single moment in the last post was watching G8PZT, the node at Kidderminster, arrive through all three of my peers at once, three independent paths to the same place, redundancy made visible. I called it the node you do not lose easily.</p>
+<p>It now appears on two edges. GB7CIP, the other backbone name I had gone looking for, appears on none at all. Neither has moved an inch in the real world. What moved is the centre of gravity of my map. Ranked by number of links, the hubs are now VE3CGR with eighty, N3HYM with seventy two, N5MDT with sixty two. GB7CAM, which is to say me, sits at twelve, roughly level with GB7BDH. The picture is no longer a diagram of the backbone around Cambridge with me somewhere near the middle of it. It is a diagram of a mostly north-American mesh, with a faint English node hanging off one edge.</p>
+</section>
+<section id="rf-and-the-internet-which-i-still-cannot-cleanly-separate" class="level2">
+<h2 class="anchored" data-anchor-id="rf-and-the-internet-which-i-still-cannot-cleanly-separate">RF and the internet, which I still cannot cleanly separate</h2>
+<p>I built one more thing into the capture, because last time I suspected that RF and AXUDP were two different networks wearing the same name and I wanted evidence. Each edge now carries a flag for whether it is a radio hop or a tunnel.</p>
+<p>I have to report this one as a partial failure, in the spirit of the last post’s null result. Of the edges where the flag actually got set, radio is a clear minority, something like forty-six RF hops against ninety internet ones. But the honest number is the third one, the one I did not want: more than two thousand edges carry no flag at all, because a peer’s routing output does not always say which port a neighbour sits on. So the clean split I promised is not something I can give you yet.</p>
+<p>What I can give you is a weaker version of the same claim, and it is stark enough to stand on its own. Every one of the fifteen closed triangles, the entire cluster that now dominates the picture, is internet. Not a single closed triangle in my whole map is on radio. Whatever shape the real RF network has around here, it is not in this graph. I have drawn a beautiful, densely connected network and almost none of it is radio.</p>
+</section>
+<section id="does-the-analogy-survive-the-better-data" class="level2">
+<h2 class="anchored" data-anchor-id="does-the-analogy-survive-the-better-data">Does the analogy survive the better data?</h2>
+<p>So, with the artefact removed, does the packet network look like a protein network? More than the star ever did, yes. There is a dense core, a handful of high-degree hubs, a long periphery of leaves, real closed triangles. On the surface the resemblance I reached for in the title finally has some support.</p>
+<p>And it is still the wrong resemblance, for a reason that is more interesting than the first one. Last time the clustering was an artefact of my instrument. This time it is an artefact of my peering. The edges are real, the cluster is real, but it is real the way a photograph of a stranger’s family is real. I did not build that structure and I do not sit inside it. A protein interaction network is the local wiring of a single cell, everything in it physically present and physically touching. What I have drawn is the local wiring of somebody else’s continent, reached down a wire, none of it touching anything near me. The graph theory is the same. The thing the graph is a theory of could hardly be more different.</p>
+</section>
+<section id="what-this-was-a-map-of" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-was-a-map-of">What this was a map of</h2>
+<p>The last post taught me that my map was a reading off a drifting instrument, and that most of the drift was me. This one taught me something narrower and worse: that the instrument was pointed at the wrong network the whole time. “My network” has quietly become an internet overlay that happens to speak AX.25, and the thing I actually set out to see, the local radio network around a quiet node in a packet desert, is exactly as invisible in the real-edges map as it was in the spoke. Getting the true edges did not reveal my network. It revealed how little of what I can see was ever mine.</p>
+<p>There is a version of this worth saying plainly to anyone else running a node and admiring their own reachable set. A long node list and a busy graph are, to a first approximation, a measure of how many internet tunnels you have open. They are not a measure of your radio footprint, and on my evidence they are barely correlated with it. The station count that would actually tell me something is the one I still cannot measure: how many people within radio range have their receiver on.</p>
+</section>
+<section id="open-question" class="level2">
+<h2 class="anchored" data-anchor-id="open-question">Open question</h2>
+<p>I set out, again, to map my own network, and I have instead produced a rather good map of a north-American AXUDP mesh that I am attached to by a thread. I do not know whether that mesh is a real community with a shape worth studying, or an accident of a few unusually well-connected tunnels that would look like nothing if I could see everyone’s edges rather than the handful mine happen to reveal. It has the same sampling problem I have been complaining about for two posts now, one layer up.</p>
+<p>And the question underneath both posts is still open, and it is not a graph question. If you work on networks of any kind, I would still like to hear where you think this breaks. But the person I most want to hear from is the one running a quiet radio-only node that nobody has peered with, sitting invisibly inside the one network I keep failing to draw.</p>
 
 
 </section>
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Tm90ZWJvb2slMkNQYWNrZXQlMjBSYWRpbyUyQ05ldHdvcmtzJTJDQ29tcHV0YXRpb25hbCUyMEJpb2xvZ3klMkNHQjdDQU0=" data-listing-date-sort="1786147200000" data-listing-file-modified-sort="1786292844877" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1835">
-<div class="thumbnail"><a href="./notebook-posts/2026-08-08-the-edges-i-could-not-see/2026-08-08-the-edges-i-could-not-see.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebook-posts/2026-08-08-the-edges-i-could-not-see/2026-08-08-the-edges-i-could-not-see.html" class="no-external">The Edges I Could Not See</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Tm90ZWJvb2s='); return false;">Notebook</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UGFja2V0JTIwUmFkaW8='); return false;">Packet Radio</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TmV0d29ya3M='); return false;">Networks</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q29tcHV0YXRpb25hbCUyMEJpb2xvZ3k='); return false;">Computational Biology</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('R0I3Q0FN'); return false;">GB7CAM</div>
-
-</div>
-<div class="delink listing-description"><a href="./notebook-posts/2026-08-08-the-edges-i-could-not-see/2026-08-08-the-edges-i-could-not-see.html" class="no-external">
-<p>Last time the map was a star, and I said the clustering was missing only because I could not see how my peers connect to one another. So I spent a fortnight asking each of them for its own routing table. The clustering came back. It is real. And it turned out not to be mine.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./notebook-posts/2026-08-08-the-edges-i-could-not-see/2026-08-08-the-edges-i-could-not-see.html" class="no-external">
-<div class="listing-date">
-Aug 8, 2026
-</div>
-<div class="listing-reading-time">10 min</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Tm90ZWJvb2slMkNQYWNrZXQlMjBSYWRpbyUyQ05ldHdvcmtzJTJDQ29tcHV0YXRpb25hbCUyMEJpb2xvZ3klMkNHQjdDQU0=" data-listing-date-sort="1784851200000" data-listing-file-modified-sort="1786292844876" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2259">
-<div class="thumbnail"><a href="./notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html" class="no-external">
-
-<img loading="lazy" src="./notebook-posts/2026-07-24-packet-networks-and-protein-networks/images/gb7cam-graph-spoke-white.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html" class="no-external">Packet Networks and Protein Networks</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Tm90ZWJvb2s='); return false;">Notebook</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UGFja2V0JTIwUmFkaW8='); return false;">Packet Radio</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TmV0d29ya3M='); return false;">Networks</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Q29tcHV0YXRpb25hbCUyMEJpb2xvZ3k='); return false;">Computational Biology</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('R0I3Q0FN'); return false;">GB7CAM</div>
-
-</div>
-<div class="delink listing-description"><a href="./notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html" class="no-external">
-<p>I built a map of the nodes GB7CAM can reach because the table it came from was long and told me nothing. The map told me more, then it told me it would not hold still, and most of what moved turned out to be me</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html" class="no-external">
-<div class="listing-date">
-Jul 24, 2026
-</div>
-<div class="listing-reading-time">12 min</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <!-- Cookie / Privacy Banner -->
 <div id="cookie-banner" style="position: fixed; bottom: 0; left:0; width:100%; background:#222; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; z-index:9999;">
   <div style="flex:1; min-width:250px;">
@@ -364,18 +282,18 @@ Jul 24, 2026
 <div class="site-footer">
  <div class="footer-content">
    © 2026 Dr Ian Henry, G0LFT. All rights reserved.<br>
-   <a href="./privacy.html">Privacy Policy</a> |
-   <a href="./credits.html">Image Credits</a> |
-   <a href="./about.html">About</a> |
-   <a href="./station.html">Station</a> |
-   <a href="./contact.html">Contact</a> |
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
    <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
    <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
   </div>
 </div>
 <!-- Desktop-only navbar logo -->
 <a href="https://g0lft.org" class="navbar-desktop-logo-link">
-  <img src="./images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
 </a>
 
 <script>
