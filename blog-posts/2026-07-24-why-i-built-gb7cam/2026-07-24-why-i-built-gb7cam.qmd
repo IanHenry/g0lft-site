@@ -75,3 +75,5 @@ Two packet nodes 400 metres apart is a slightly comic outcome when the county ha
 There is more to do. I want to take the node onto HF, going back to Direwolf as a software TNC, this time driving an FT-710 rather than a £10 handheld, which would give GB7CAM paths that do not depend on line of sight to Milton Keynes. And having spent those evenings on the LinBPQ configuration file myself, I am happy to share a cleaned-up version of mine, with the passwords and peer details stripped out, if it would save anybody else the same evenings. Just ask.
 
 I would like more peers, and I am not fussy about how. RF or AXUDP, near or far. If you run a node, my [contact page](https://gb7cam.org.uk/contact.html) has the details; send me your MAP line and I will get you added. And if you are sitting in your own local desert wondering whether it is worth the effort: the licence took a morning, the hardware cost less than a night out, and the people who told me it would not work here are the same people who helped me do it.
+
+{{< include ../../_includes/_comments.md >}}

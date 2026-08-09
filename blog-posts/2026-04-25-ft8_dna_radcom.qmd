@@ -51,3 +51,5 @@ But I don't want to rush it. I'd rather write it when I have the mental space to
 For now, I'm curious what you think. Leave a comment, send me an email (ian@g0lft.org), or catch me on 20m FT8 most evenings.
 
 What questions should I be asking?
+
+{{< include ../_includes/_comments.md >}}

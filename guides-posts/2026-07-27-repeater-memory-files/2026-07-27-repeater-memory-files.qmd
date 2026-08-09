@@ -210,3 +210,5 @@ and simplex channels go in a `special_channels.csv`.
 
 - [Radio Memory Builder](../../projects/radio-memory-builder.qmd), the project page
 - [UK repeater list (RSGB ETCC)](https://ukrepeater.net/repeaterlist.html)
+
+{{< include ../../_includes/_comments.md >}}

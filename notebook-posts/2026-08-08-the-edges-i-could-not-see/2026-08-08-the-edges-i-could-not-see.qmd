@@ -199,3 +199,5 @@ question. If you work on networks of any kind, I would still like to hear where
 you think this breaks. But the person I most want to hear from is the one running
 a quiet radio-only node that nobody has peered with, sitting invisibly inside the
 one network I keep failing to draw.
+
+{{< include ../../_includes/_comments.md >}}

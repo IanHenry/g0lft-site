@@ -244,3 +244,5 @@ not very much. If you work on networks of any kind, biological, social or radio,
 I would like to hear where you think this breaks. And if you run a node,
 especially a quiet local one that nobody has peered with, I am now interested in
 you for reasons that are entirely self-serving.
+
+{{< include ../../_includes/_comments.md >}}

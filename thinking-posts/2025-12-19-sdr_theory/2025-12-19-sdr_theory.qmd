@@ -19,3 +19,4 @@ Software-defined radios (SDRs) are not just tools for communication—they are p
 
 Treating SDRs as learning spaces allows students to connect theory to practice quickly and safely.
 
+{{< include ../../_includes/_comments.md >}}
