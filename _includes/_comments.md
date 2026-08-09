@@ -1,4 +1,23 @@
 ```{=html}
+<style>
+  /* The Cusdis iframe defaults to 150px, and its resize message does not always
+     arrive, which leaves the form scrolling inside a small box. min-height sets
+     a comfortable floor while still letting Cusdis grow it if resize does fire,
+     since an inline height from the SDK beats this rule. */
+  #cusdis_thread iframe {
+    width: 100%;
+    min-height: 480px;
+    border: 0;
+  }
+  #comments-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  #comments-section > p {
+    margin-bottom: 1rem;
+  }
+</style>
 <section id="comments-section" hidden>
 <h2>Comments</h2>
 <p>You don't need an account, just a name. Comments are read before they appear,
