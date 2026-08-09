@@ -277,4 +277,4 @@ being tidied up for release.*
 ## Next Time...
 In the next post, we’ll look at an FM repeater signal and see how the same underlying geometry appears in a more dynamic, real-world setting , with silence, speech, and key-up transients all visible in IQ space.
 
-
+{{< include ../../_includes/_comments.md >}}

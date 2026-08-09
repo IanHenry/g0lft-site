@@ -16,7 +16,8 @@ Radio learning curve, alongside step-by-step setup notes.
 ### Signal Explorer
 
 The newest piece, and the one to try first: a
-[**radio simulator that runs in a browser**](/apps/signal-explorer/). Pick a
+[**radio simulator that runs in a browser**](/apps/signal-explorer/), currently in
+beta. Pick a
 mode and it generates the signal from the theory up, showing the audio going
 in, I and Q against time, the constellation, the spectrum and a waterfall, all
 from the same samples so every view is the same instant. Sliders for tuning

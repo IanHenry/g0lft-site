@@ -1,0 +1,201 @@
+---
+title: "The Edges I Could Not See"
+description: "Last time the map was a star, and I said the clustering was missing only because I could not see how my peers connect to one another. So I spent a fortnight asking each of them for its own routing table. The clustering came back. It is real. And it turned out not to be mine."
+author: "Ian Henry, G0LFT"
+date: "2026-08-08"
+categories:
+  - Notebook
+  - Packet Radio
+  - Networks
+  - Computational Biology
+  - GB7CAM
+---
+
+# The Edges I Could Not See
+
+## The promise I made last time
+
+[Last time](../2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.qmd)
+I drew a map of the nodes [GB7CAM](https://gb7cam.org.uk) can reach and then
+talked myself out of most of what I thought I saw in it. The feature that had
+stopped me, the dense local clustering that made me think of protein networks in
+the first place, turned out to be missing rather than present. My data could
+only ever draw a star. LinBPQ tells me that a node is reachable through a given
+peer; it does not tell me whether any two of those nodes touch each other. I had
+built a spoke model out of routing tables without knowing that was the choice I
+was making, and a spoke model cannot show clustering even where clustering
+exists.
+
+I ended that post with a list of things to build, and the first item was the one
+that mattered. Get the real edges. Ask each peer for its own routing table, not
+merely the destinations it hands me, and the star should collapse into something
+nearer the truth. Only then would I find out whether the missing clustering was
+real, or whether the network genuinely was as sparse as my instrument made it
+look.
+
+I have spent the two weeks since doing exactly that. The clustering came back. It
+is real. And it is not mine.
+
+## Asking every peer what it sees
+
+The change is small and it is the whole thing. Every six hours my node now
+connects to each configured peer in turn and reads that peer's own ROUTES table,
+its list of direct neighbours, and stores it. Where the old map recorded "I can
+reach this node through that peer", the new one records "this peer says it is
+directly linked to that one". The first is a claim about my horizon. The second
+is a claim about an edge, and edges are the thing a network is actually made of.
+
+Two weeks of six-hourly snapshots later I have around three hundred and forty
+distinct real links between a bit over two hundred stations.
+
+It is worth being exact about what those two hundred are, because it is easy to
+conflate two counts that mean very different things. Between them the peers can
+*reach* around fourteen hundred distinct nodes, the sum of everything in all
+their NODES tables. But reaching is not touching. GB7BDH, to take one, can reach
+eighty-nine nodes and is directly linked to eleven of them; the other seventy
+eight it gets to through those eleven, or through nodes further out that I never
+poll. The real-edges map draws only the direct links, the eleven and not the
+eighty-nine, because a direct link is the only thing I can verify as an edge. The
+fourteen hundred is the horizon. The two hundred is the topology. The gap between
+them is every station that is reachable but not adjacent, which is most of them,
+and it is the spoke-versus-edge distinction from the last post standing one level
+up: a horizon count grows with every hop, an edge count does not.
+
+The [graph](https://gb7cam.org.uk/graph.html) is live and redrawn around this
+data, and it defaults to the connected backbone rather than every single-link
+leaf, because the honest full set is now large enough to need the trim.
+
+<iframe src="https://gb7cam.org.uk/graph.html" style="width:100%; height:70vh; border:1px solid #ddd;" loading="lazy"></iframe>
+
+## The network grew while I watched
+
+I had asked, last time, whether adding peers would change the shape, and I got to
+find out sooner than expected because the node itself grew while I was measuring
+it. On the 24th of July there were three live peers. It sat at four for ten days.
+Then, over the first week of August, it went to six, to seven, and then in a
+single day to twelve.
+
+They were not local. The first of the newcomers was KB1TAE, a node in Maine that
+had asked to forward mail with me. Behind it came a rush: N3HYM, N5MDT and W6RAY
+across the United States, VE3CGR and VE3KPG in Canada, VK2RZ in Australia,
+PY2BIL in Brazil. A village outside Cambridge, over the space of about seventy
+two hours, acquired direct links to four continents. Every one of those links is
+AXUDP, a tunnel across the ordinary internet wearing AX.25 as a costume. Not one
+of them travelled a single metre by radio.
+
+## The clustering came back, and it was not mine
+
+Here is the thing I built all of this to find out. With real edges instead of
+spokes, are there closed triangles? Does the map cluster the way a protein
+network clusters, or was that always a trick of the light?
+
+It clusters. There are fifteen direct peer-to-peer links now, genuine edges
+between stations that both name each other, and a knot of tightly wired nodes
+sits at the centre of the picture. If I stripped the labels off and showed it to
+a colleague, they might well guess it was proteomics.
+
+But look at which stations closed the triangles. KB1TAE links directly to N3HYM,
+to N5MDT, to W6RAY, to VK2RZ. VE3CGR links to five others. The overseas nodes are
+densely meshed among themselves; they did not arrive as isolated points, they
+arrived as a cluster that was already wired together somewhere I cannot see, and
+plugging into one corner of it drew the whole thing onto my screen.
+
+And my own peers, the three UK links I actually care about, GB7BDH, GB7BED-5 and
+GB7NPR? Not one direct edge among them. Zero. Last time I had a hunch, and I
+wrote it down so I could be checked against it: "with only three peers they
+largely are not [meshed], and adding more would start to close the triangles". I
+was exactly half right, in the least useful way possible. Adding more peers did
+close the triangles. It closed them on the wrong side of the Atlantic. My local
+peers are still a star radiating into the backbone, precisely as sparse as they
+were in July. The clustering I went looking for is real, and it belongs to a
+network I did not know I had joined.
+
+## The backbone I was proud of is gone
+
+The most satisfying single moment in the last post was watching G8PZT, the node
+at Kidderminster, arrive through all three of my peers at once, three
+independent paths to the same place, redundancy made visible. I called it the
+node you do not lose easily.
+
+It now appears on two edges. GB7CIP, the other backbone name I had gone looking
+for, appears on none at all. Neither has moved an inch in the real world. What
+moved is the centre of gravity of my map. Ranked by number of links, the hubs are
+now VE3CGR with eighty, N3HYM with seventy two, N5MDT with sixty two. GB7CAM,
+which is to say me, sits at twelve, roughly level with GB7BDH. The picture is no
+longer a diagram of the backbone around Cambridge with me somewhere near the
+middle of it. It is a diagram of a mostly north-American mesh, with a faint
+English node hanging off one edge.
+
+## RF and the internet, which I still cannot cleanly separate
+
+I built one more thing into the capture, because last time I suspected that RF
+and AXUDP were two different networks wearing the same name and I wanted evidence.
+Each edge now carries a flag for whether it is a radio hop or a tunnel.
+
+I have to report this one as a partial failure, in the spirit of the last post's
+null result. Of the edges where the flag actually got set, radio is a clear
+minority, something like forty-six RF hops against ninety internet ones. But the
+honest number is the third one, the one I did not want: more than two thousand
+edges carry no flag at all, because a peer's routing output does not always say
+which port a neighbour sits on. So the clean split I promised is not something I
+can give you yet.
+
+What I can give you is a weaker version of the same claim, and it is stark enough
+to stand on its own. Every one of the fifteen closed triangles, the entire
+cluster that now dominates the picture, is internet. Not a single closed triangle
+in my whole map is on radio. Whatever shape the real RF network has around here,
+it is not in this graph. I have drawn a beautiful, densely connected network and
+almost none of it is radio.
+
+## Does the analogy survive the better data?
+
+So, with the artefact removed, does the packet network look like a protein
+network? More than the star ever did, yes. There is a dense core, a handful of
+high-degree hubs, a long periphery of leaves, real closed triangles. On the
+surface the resemblance I reached for in the title finally has some support.
+
+And it is still the wrong resemblance, for a reason that is more interesting than
+the first one. Last time the clustering was an artefact of my instrument. This
+time it is an artefact of my peering. The edges are real, the cluster is real,
+but it is real the way a photograph of a stranger's family is real. I did not
+build that structure and I do not sit inside it. A protein interaction network is
+the local wiring of a single cell, everything in it physically present and
+physically touching. What I have drawn is the local wiring of somebody else's
+continent, reached down a wire, none of it touching anything near me. The graph
+theory is the same. The thing the graph is a theory of could hardly be more
+different.
+
+## What this was a map of
+
+The last post taught me that my map was a reading off a drifting instrument, and
+that most of the drift was me. This one taught me something narrower and worse:
+that the instrument was pointed at the wrong network the whole time. "My network"
+has quietly become an internet overlay that happens to speak AX.25, and the thing
+I actually set out to see, the local radio network around a quiet node in a
+packet desert, is exactly as invisible in the real-edges map as it was in the
+spoke. Getting the true edges did not reveal my network. It revealed how little
+of what I can see was ever mine.
+
+There is a version of this worth saying plainly to anyone else running a node and
+admiring their own reachable set. A long node list and a busy graph are, to a
+first approximation, a measure of how many internet tunnels you have open. They
+are not a measure of your radio footprint, and on my evidence they are barely
+correlated with it. The station count that would actually tell me something is
+the one I still cannot measure: how many people within radio range have their
+receiver on.
+
+## Open question
+
+I set out, again, to map my own network, and I have instead produced a rather
+good map of a north-American AXUDP mesh that I am attached to by a thread. I do
+not know whether that mesh is a real community with a shape worth studying, or an
+accident of a few unusually well-connected tunnels that would look like nothing
+if I could see everyone's edges rather than the handful mine happen to reveal. It
+has the same sampling problem I have been complaining about for two posts now,
+one layer up.
+
+And the question underneath both posts is still open, and it is not a graph
+question. If you work on networks of any kind, I would still like to hear where
+you think this breaks. But the person I most want to hear from is the one running
+a quiet radio-only node that nobody has peered with, sitting invisibly inside the
+one network I keep failing to draw.

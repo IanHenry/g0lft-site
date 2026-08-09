@@ -253,3 +253,5 @@ being tidied up for release.*
 ## Where next
 
 So far, all the signals we’ve looked at have used frequency modulation and contained a clear carrier. In the next post, we’ll switch modulation entirely and look at airband AM, where the carrier remains but the information moves from rotation rate to amplitude, producing a very different picture in IQ space.
+
+{{< include ../../_includes/_comments.md >}}
