@@ -172,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="a-year-of-listening" class="level2">
 <h2 class="anchored" data-anchor-id="a-year-of-listening">2025 - A Year of Listening:</h2>
 <section id="finding-structure-curiosity-and-understanding-through-amateur-radio" class="level3">
-<h3 class="anchored" data-anchor-id="finding-structure-curiosity-and-understanding-through-amateur-radio">Finding Structure, Curiosity and Understanding Through Amateur Radio</h3>
+<h3 class="anchored">Finding Structure, Curiosity and Understanding Through Amateur Radio</h3>
 <p>At the beginning of this year, I was completely unaware of amateur radio. I was recovering from illness and work was already proving more challenging than usual. I needed something mentally stimulating but not demanding, something absorbing, technical and quietly constructive.</p>
 <p>In April, I stumbled upon amateur radio almost by chance. Initially, it wasn’t about licences or operating privileges; it was simply fascinating. Signals emerged from noise, antennas behaved in unexpected ways and the concept of meaningful communication with minimal power captivated me.</p>
 <p>My curiosity quickly turned into momentum. I sat the Foundation exam in May and shortly afterwards the Intermediate. Looking back, this pace reflects more on circumstance than ability. Radio provided a concrete focus during a time when many other aspects of my life felt fragmented.</p>
@@ -186,6 +186,55 @@ ul.task-list li input[type="checkbox"] {
 <p>Next year, I want to spend less time acquiring equipment and more time understanding it. If this space becomes anything, I hope it becomes a place where difficult radio concepts are explained visually patiently and honestly – where behaviour is shown, not just described, and where understanding can grow over time.</p>
 <p>Amateur radio didn’t solve a difficult year but it gave it structure – and that proved more valuable than I anticipated.</p>
 <p><em>If you’re curious, have questions or want to share your own experiences, feel free to get in touch. I’d love to hear from fellow enthusiasts.</em></p>
+<style>
+  /* The Cusdis iframe defaults to 150px, and its resize message does not always
+     arrive, which leaves the form scrolling inside a small box. min-height sets
+     a comfortable floor while still letting Cusdis grow it if resize does fire,
+     since an inline height from the SDK beats this rule. */
+  #cusdis_thread iframe {
+    width: 100%;
+    min-height: 480px;
+    border: 0;
+  }
+  #comments-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  #comments-section > p {
+    margin-bottom: 1rem;
+  }
+</style>
+<section id="comments-section" hidden="">
+<h2 class="anchored" data-anchor-id="finding-structure-curiosity-and-understanding-through-amateur-radio">Comments</h2>
+<p>You don't need an account, just a name. Comments are read before they appear,
+so there may be a short delay before yours shows up.</p>
+<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="dea1e098-1427-480b-8085-9974093665c4"></div>
+</section>
+<script>
+(function () {
+  var el = document.getElementById('cusdis_thread');
+  if (!el) return;
+  // Stay invisible until a real Cusdis app id has been filled in, so the
+  // section never appears half-working on the live site.
+  var appId = el.getAttribute('data-app-id');
+  if (!appId || appId.indexOf('REPLACE_WITH') === 0) return;
+
+  // A stable id per page, so comments stay attached to the right page.
+  var path = window.location.pathname.replace(/index\.html$/, '');
+  if (path.length > 1) path = path.replace(/\/$/, '');
+  el.setAttribute('data-page-id', path);
+  el.setAttribute('data-page-url', window.location.origin + path);
+  el.setAttribute('data-page-title', document.title);
+
+  document.getElementById('comments-section').removeAttribute('hidden');
+
+  var s = document.createElement('script');
+  s.src = 'https://cusdis.com/js/cusdis.es.js';
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
 
 
 </section>

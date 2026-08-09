@@ -215,6 +215,55 @@ ul.task-list li input[type="checkbox"] {
 <p>Two packet nodes 400 metres apart is a slightly comic outcome when the county had none at all. But it is the part I keep coming back to. The desert was real, and it was also self-fulfilling: nobody built a node because there was nothing to connect to, and there was nothing to connect to because nobody built a node. Breaking that needed one person to go first, on £30 of second-hand equipment, during a week off work.</p>
 <p>There is more to do. I want to take the node onto HF, going back to Direwolf as a software TNC, this time driving an FT-710 rather than a £10 handheld, which would give GB7CAM paths that do not depend on line of sight to Milton Keynes. And having spent those evenings on the LinBPQ configuration file myself, I am happy to share a cleaned-up version of mine, with the passwords and peer details stripped out, if it would save anybody else the same evenings. Just ask.</p>
 <p>I would like more peers, and I am not fussy about how. RF or AXUDP, near or far. If you run a node, my <a href="https://gb7cam.org.uk/contact.html">contact page</a> has the details; send me your MAP line and I will get you added. And if you are sitting in your own local desert wondering whether it is worth the effort: the licence took a morning, the hardware cost less than a night out, and the people who told me it would not work here are the same people who helped me do it.</p>
+<style>
+  /* The Cusdis iframe defaults to 150px, and its resize message does not always
+     arrive, which leaves the form scrolling inside a small box. min-height sets
+     a comfortable floor while still letting Cusdis grow it if resize does fire,
+     since an inline height from the SDK beats this rule. */
+  #cusdis_thread iframe {
+    width: 100%;
+    min-height: 480px;
+    border: 0;
+  }
+  #comments-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  #comments-section > p {
+    margin-bottom: 1rem;
+  }
+</style>
+<section id="comments-section" hidden="">
+<h2 class="anchored">Comments</h2>
+<p>You don't need an account, just a name. Comments are read before they appear,
+so there may be a short delay before yours shows up.</p>
+<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="dea1e098-1427-480b-8085-9974093665c4"></div>
+</section>
+<script>
+(function () {
+  var el = document.getElementById('cusdis_thread');
+  if (!el) return;
+  // Stay invisible until a real Cusdis app id has been filled in, so the
+  // section never appears half-working on the live site.
+  var appId = el.getAttribute('data-app-id');
+  if (!appId || appId.indexOf('REPLACE_WITH') === 0) return;
+
+  // A stable id per page, so comments stay attached to the right page.
+  var path = window.location.pathname.replace(/index\.html$/, '');
+  if (path.length > 1) path = path.replace(/\/$/, '');
+  el.setAttribute('data-page-id', path);
+  el.setAttribute('data-page-url', window.location.origin + path);
+  el.setAttribute('data-page-title', document.title);
+
+  document.getElementById('comments-section').removeAttribute('hidden');
+
+  var s = document.createElement('script');
+  s.src = 'https://cusdis.com/js/cusdis.es.js';
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
 
 
 </section>
