@@ -57,7 +57,7 @@ plt.show()
 </details>
 
 
-![IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgshire broadcast signal](images/constellation.png){
+![IQ constellation diagram showing raw iq from a short capture of BBC Radio Cambridgeshire broadcast signal](images/constellation.png){
   #fig-constellation
   fig-align="left"
   width=50%

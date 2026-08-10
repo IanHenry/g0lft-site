@@ -13,7 +13,7 @@ Software-defined radios (SDRs) are not just tools for communication—they are p
 
 - Immediate feedback: you can see signals in real time.  
 - Experimentation: easily test modulation, filters, and antennas.  
-- Visualization: spectrum displays make abstract concepts tangible.  
+- Visualisation: spectrum displays make abstract concepts tangible.  
 
 ### Conclusion
 

@@ -10,7 +10,7 @@ We use Google Analytics 4 (GA4) to collect anonymous site usage data.
 This may involve cookies to track sessions, page views, and returning visitors.
 
 - **Cookies used:** `_ga`, `_gid`
-- **Purpose:** Analyze site traffic and improve user experience  
+- **Purpose:** Analyse site traffic and improve user experience  
 - **IP anonymization:** Enabled  
 - **Third-party access:** Data is processed by Google under their privacy policy: [https://policies.google.com/privacy](https://policies.google.com/privacy)
 
@@ -28,7 +28,7 @@ you.
 - **Moderation:** comments are not published until I have read them, and I may
   decline to publish anything off-topic, abusive or promotional
 - **Third-party access:** comment data is stored by Cusdis under their privacy
-  policy: [https://cusdis.com/privacy](https://cusdis.com/privacy)
+  policy: [https://cusdis.com/privacy-policy](https://cusdis.com/privacy-policy)
 
 You do not need an account to comment, and you do not have to give an email
 address. If you would like a comment of yours removed, please
