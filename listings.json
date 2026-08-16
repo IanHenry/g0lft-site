@@ -1,17 +1,36 @@
 [
   {
-    "listing": "/notebook.html",
+    "listing": "/guides.html",
     "items": [
-      "/notebook-posts/2026-08-08-the-edges-i-could-not-see/2026-08-08-the-edges-i-could-not-see.html",
-      "/notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html"
+      "/guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html",
+      "/guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html"
     ]
   },
   {
     "listing": "/thinking.html",
     "items": [
+      "/thinking-posts/2026-08-16-combining-ask-fsk-psk/2026-08-16-combining-ask-fsk-psk.html",
       "/thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.html",
       "/thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.html",
       "/thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/ai-signal-classifier.html",
+      "/projects/mmdvm-hotspot.html",
+      "/projects/dsp-visualisations.html",
+      "/projects/raspberry-pi-sdr.html",
+      "/projects/gb7cam.html",
+      "/projects/radio-memory-builder.html"
+    ]
+  },
+  {
+    "listing": "/notebook.html",
+    "items": [
+      "/notebook-posts/2026-08-08-the-edges-i-could-not-see/2026-08-08-the-edges-i-could-not-see.html",
+      "/notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.html"
     ]
   },
   {
@@ -20,24 +39,6 @@
       "/blog-posts/2026-07-24-why-i-built-gb7cam/2026-07-24-why-i-built-gb7cam.html",
       "/blog-posts/2026-04-25-ft8_dna_radcom.html",
       "/blog-posts/2025-12-26-a_year_of_listening.html"
-    ]
-  },
-  {
-    "listing": "/guides.html",
-    "items": [
-      "/guides-posts/2026-07-27-repeater-memory-files/2026-07-27-repeater-memory-files.html",
-      "/guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.html"
-    ]
-  },
-  {
-    "listing": "/projects.html",
-    "items": [
-      "/projects/raspberry-pi-sdr.html",
-      "/projects/gb7cam.html",
-      "/projects/radio-memory-builder.html",
-      "/projects/dsp-visualisations.html",
-      "/projects/ai-signal-classifier.html",
-      "/projects/mmdvm-hotspot.html"
     ]
   }
 ]

@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e8af6e89599387d949cfa00551ed8178.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-5af1b6580d2d273b02271d51ec1ed122.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 <p>To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the hardware driver) and a bridge for GNU Radio to communicate with it. Using <strong>Radioconda</strong> is the highly recommended “easy path” because it pre-packages GNU Radio with the necessary SoapySDR support.</p>
 <p><strong>Choose your path:</strong></p>
 <ul>
-<li><p><strong>No hardware at all:</strong> The <a href="../../apps/signal-explorer/"><strong>Signal Explorer</strong></a> runs in your browser, with nothing to install. It generates the same modulation types this guide captures off the air, and shows the waveform, constellation, spectrum and waterfall together, with sliders for noise, tuning error and fading. Every panel of Figures 4, 5 and 6 in <em>Seeing signals: I and Q from first principles</em>, in the September 2026 issue of RadCom, is there under its own number, and each has its own link. You can also turn the sound on and hear both the audio going in and what comes back out of the receiver, which makes the effect of noise, mistuning and overmodulation audible rather than just visible.</p></li>
+<li><p><strong>No hardware at all:</strong> The <a href="../../apps/signal-explorer/index.html"><strong>Signal Explorer</strong></a> runs in your browser, with nothing to install. It generates the same modulation types this guide captures off the air, and shows the waveform, constellation, spectrum and waterfall together, with sliders for noise, tuning error and fading. Every panel of Figures 4, 5 and 6 in <em>Seeing signals: I and Q from first principles</em>, in the September 2026 issue of RadCom, is there under its own number, and each has its own link. You can also turn the sound on and hear both the audio going in and what comes back out of the receiver, which makes the effect of noise, mistuning and overmodulation audible rather than just visible.</p></li>
 <li><p><strong>The Full Setup:</strong> Follow the step-by-step guidelines below for GNU Radio.</p></li>
 <li><p><strong>The Quick Start:</strong> If you want a simpler way to view IQ constellation plots, skip straight to the <a href="#simple-iq-visualisation-plugin-for-sdrconnect"><strong>Simple IQ Visualisation Plugin for SDRconnect</strong></a> section.</p></li>
 </ul>
@@ -288,7 +288,7 @@ Found device 16
 </section>
 </section>
 <section id="using-the-simple-iq-visualisation-plugin" class="level3">
-<h3 class="anchored">Using the Simple IQ Visualisation Plugin</h3>
+<h3 class="anchored" data-anchor-id="using-the-simple-iq-visualisation-plugin">Using the Simple IQ Visualisation Plugin</h3>
 <p>This tool is designed for visualising strong signals like Broadcast FM/AM, Repeaters, and Airband. It uses an IQ sample window centered on the waterfall. While audio filters are applied in SDRconnect, they do not affect this raw IQ stream. The script automatically periodically re-centers the VFO so the IQ you see matches your tuned frequency.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -303,6 +303,13 @@ Found device 16
 </ul>
 <p>You can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script “jumps” the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.</p>
 <p>I built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!</p>
+</section>
+</section>
+<section id="reader-questions" class="level2">
+<h2 class="anchored" data-anchor-id="reader-questions">Reader questions</h2>
+<ul>
+<li><a href="../../thinking-posts/2026-08-16-combining-ask-fsk-psk/2026-08-16-combining-ask-fsk-psk.html">Can you combine ASK, FSK and PSK?</a>, answering a question about the September RadCom article</li>
+</ul>
 <style>
   /* The Cusdis iframe defaults to 150px, and its resize message does not always
      arrive, which leaves the form scrolling inside a small box. min-height sets
@@ -323,7 +330,7 @@ Found device 16
   }
 </style>
 <section id="comments-section" hidden="">
-<h2 class="anchored" data-anchor-id="using-the-simple-iq-visualisation-plugin">Comments</h2>
+<h2 class="anchored">Comments</h2>
 <p>You don't need an account, just a name. Comments are read before they appear,
 so there may be a short delay before yours shows up.</p>
 <div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="dea1e098-1427-480b-8085-9974093665c4"></div>
@@ -354,7 +361,6 @@ so there may be a short delay before yours shows up.</p>
 </script>
 
 
-</section>
 </section>
 </section>
 
