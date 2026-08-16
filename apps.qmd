@@ -8,7 +8,7 @@ description: "Interactive tools that run in your browser, with nothing to instal
 Browser tools that run entirely on your own machine. Nothing is uploaded,
 nothing is installed, and none of them need a radio attached.
 
-## [Signal Explorer](/apps/signal-explorer/)
+## [Signal Explorer](apps/signal-explorer/index.qmd)
 
 A radio simulator you can watch and hear. Pick a mode and it builds the signal
 from the theory up, showing the audio going in, I and Q against time, the

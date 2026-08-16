@@ -16,7 +16,7 @@ Radio learning curve, alongside step-by-step setup notes.
 ### Signal Explorer
 
 The newest piece, and the one to try first: a
-[**radio simulator that runs in a browser**](/apps/signal-explorer/), currently in
+[**radio simulator that runs in a browser**](../apps/signal-explorer/index.qmd), currently in
 beta. Pick a
 mode and it generates the signal from the theory up, showing the audio going
 in, I and Q against time, the constellation, the spectrum and a waterfall, all
@@ -80,6 +80,7 @@ the theory rather than just listing procedures.
 
 ## Related posts
 
+- [Can you combine ASK, FSK and PSK?](../thinking-posts/2026-08-16-combining-ask-fsk-psk/2026-08-16-combining-ask-fsk-psk.qmd)
 - [Setup for IQ visualisation and digital signal processing](../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd)
 - [Exploring FM IQ](../thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.qmd)
 - [Exploring repeater IQ](../thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.qmd)

@@ -17,7 +17,7 @@ To use an SDRplay RSP device with GNU Radio, you need both the SDRplay API (the 
 
 **Choose your path:**
 
-- **No hardware at all:** The [**Signal Explorer**](/apps/signal-explorer/) runs
+- **No hardware at all:** The [**Signal Explorer**](../../apps/signal-explorer/index.qmd) runs
   in your browser, with nothing to install. It generates the same modulation
   types this guide captures off the air, and shows the waveform, constellation,
   spectrum and waterfall together, with sliders for noise, tuning error and
@@ -138,5 +138,10 @@ The visualiser has two main controls:
 You can still adjust settings directly in SDRconnect and see the changes reflected in the plot. Note that because the IQ data is centered on the window rather than the VFO line, the script "jumps" the window occasionally to keep your signal centered. This is a workaround for SDRconnect’s current tuning implementation but works well for most use cases.
 
 I built this simple tool to give newcomers an easy starting point—enjoy exploring the signals!
+
+## Reader questions
+
+- [Can you combine ASK, FSK and PSK?](../../thinking-posts/2026-08-16-combining-ask-fsk-psk/2026-08-16-combining-ask-fsk-psk.qmd),
+  answering a question about the September RadCom article
 
 {{< include ../../_includes/_comments.md >}}

@@ -1,0 +1,150 @@
+---
+title: "Can you combine ASK, FSK and PSK?"
+description: "A reader question about the September RadCom article, and why the answer is more interesting than yes or no."
+author: "Ian Henry, G0LFT"
+date: "2026-08-16"
+categories:
+  - IQ
+  - Modulation
+  - Digital Modes
+  - Publications
+format:
+  html:
+    toc: true
+---
+
+# Can you combine ASK, FSK and PSK?
+
+A reader wrote in about [*Seeing signals: I and Q from first principles*](../../talks.qmd) in the
+September RadCom with a question I did not see coming. The article works
+through ASK, then FSK, then PSK, and then describes QAM as amplitude and phase
+together. So, he asked, is there an all-three version, ASK plus FSK plus PSK,
+and would it carry any advantage?
+
+The answer turns out to say something about what a constellation plot is
+actually showing you.
+
+::: {.callout-tip}
+## Watch the shapes while you read
+Every mode named below is in the [Signal Explorer](../../apps/signal-explorer/index.qmd):
+CW for ASK, RTTY and FT8 for FSK, BPSK through 8PSK for PSK, and 16-QAM and
+64-QAM for amplitude and phase together. Turning the noise up on the three PSK
+panels, then on the two QAM ones, shows the trade-off discussed here rather
+than asking you to take it on trust.
+:::
+
+## There is no third axis
+
+Start with what a single symbol has to work with. A sample of IQ data is two
+numbers, I and Q, which is the same as saying amplitude and phase. That is the
+whole of it. QAM already uses both, so on that count there is nothing left to
+add.
+
+Frequency feels as though it ought to be a third thing, but it is not
+independent of the other two. Frequency is how fast the phase is changing, and
+the article gives it in exactly those terms: f = dθ/dt. So frequency is a
+property of how a run of samples moves around the plot, not of where any single
+point sits. FSK is not a third dimension alongside amplitude and phase. It is a
+rule about how the phase is allowed to evolve.
+
+That is why the answer cannot simply be yes. There is no free axis to hang a
+third modulation on.
+
+## Two things it could mean instead
+
+Which leaves two readings of the question, and both describe real systems.
+
+The first is to treat frequency as a separate resource rather than a third
+dimension. Run a constellation on each of many tones at once. That is OFDM,
+and if you use WiFi or listen to DAB you have used it today. It appears on HF
+in PACTOR-III. The tones do not all have to carry the same thing: DAB and
+PACTOR-III put a phase-shift constellation on each one [1][2], while WiFi and
+DVB-T use QAM [3], which is the version that really does combine all three ideas at
+once.
+The advantage is not subtle. Each tone is narrow enough to see a simpler
+version of the channel, so multipath becomes something you correct tone by tone
+instead of fighting across the whole passband, and you can put a dense
+constellation on the tones that are behaving and a sparse one on the tones that
+are not.
+
+The second is to encode bits in the choice of which tone you transmit on, as
+well as in that tone's amplitude and phase, all within one symbol. This also
+exists, under the name FQAM, and it is a real scheme rather than a curiosity.
+Some of the bits pick the tone and the rest pick a QAM point on it [4].
+
+The advantage claimed for it is a narrow one. Because only one tone of the set
+is transmitting at any moment, the interference it creates for neighbouring
+cells does not look like Gaussian noise, and non-Gaussian interference is
+easier for a receiver to work around. That is a problem worth solving in a
+crowded cellular network. It is not a problem any of us have.
+
+## Why the second one does not turn up on HF
+
+Here is the part worth the detour.
+
+The great virtue of FSK is that the receiver never has to recover phase. It
+only has to work out which frequency carried the energy. That is why FSK
+survives conditions that defeat PSK, and it is part of why so many of the
+weak-signal modes are frequency modes.
+
+Add PSK on top and you throw that away. Now the receiver has to track phase
+properly across every hop, and phase coherence is exactly what fading and
+Doppler destroy. You would pay the extra bandwidth that FSK costs and lose the
+robustness that made the bandwidth worth paying for. On the trade-off arrow at
+the end of the article, it falls into a gap rather than onto a useful point.
+
+## The categories are ours, not the signal's
+
+One last thing, which only struck me when I went back to the article to answer
+the question.
+
+ASK, FSK and PSK are a convenient way to teach modulation, but they are not a
+real partition of the possibilities. Minimum shift keying can be described
+equally correctly as continuous-phase FSK or as offset QPSK [5]. Same waveform,
+two names, depending on which description you pick up first. It is the precise
+point where the frequency account and the phase account of a signal turn out to
+be the same account, and it is sitting in [WSJT-X](https://wsjtx.github.io/wsjtx/index.html)
+as MSK144.
+
+So the honest answer is that you cannot add a third thing, because there were
+never three separate things to begin with. There is one phasor, moving. ASK,
+FSK and PSK are three rules about how it is allowed to move, and the shapes in
+the article are what those rules look like when you plot them.
+
+My thanks to the reader who asked. Questions like that are the best part of
+writing for a magazine.
+
+## Related
+
+- [Signal Explorer](../../apps/signal-explorer/index.qmd), where every mode above
+  can be watched and heard
+- [Talks & Publications](../../talks.qmd), for the article this question came from
+- [Setup for IQ visualisation and digital signal processing](../../guides-posts/2026-05-10-visualising-iq-setup/2026-05-10-visualising-iq-setup.qmd),
+  if you would rather capture these signals off air yourself
+- [Seeing Broadcast FM in IQ Space](../../thinking-posts/2026-01-05-exploring-fm-iq/2026-01-05-exploring-fm-iq.qmd)
+  and [Seeing an FM Repeater in IQ Space](../../thinking-posts/2026-01-06-exploring-repeater-iq/2026-01-06-exploring-repeater-iq.qmd),
+  the same geometry in real captures
+
+## References
+
+[1] *Radio broadcasting systems; Digital Audio Broadcasting (DAB) to mobile,
+portable and fixed receivers*, ETSI EN 300 401, which specifies the
+differential QPSK applied to each OFDM subcarrier
+
+[2] Wavecom, *Advanced Protocols: PACTOR*,
+[http://www.wavecom.ch/content/pdf/advanced_protocol_pactor.pdf](http://www.wavecom.ch/content/pdf/advanced_protocol_pactor.pdf)
+
+[3] *Digital Video Broadcasting (DVB); Framing structure, channel coding and
+modulation for digital terrestrial television*, ETSI EN 300 744 V1.6.2
+(2015-10), clause 4.3.5, which specifies the QPSK, 16-QAM and 64-QAM
+constellations carried on each data carrier
+
+[4] S Hong, M Sagong, C Lim, S Cho, K Cheun and K Yang, 'Frequency and
+quadrature-amplitude modulation for downlink cellular OFDMA networks', *IEEE
+Journal on Selected Areas in Communications*, vol 32 no 6, June 2014, pp
+1256-1267
+
+[5] S Pasupathy, 'Minimum shift keying: a spectrally efficient modulation',
+*IEEE Communications Magazine*, vol 17 no 4, July 1979, pp 14-22
+
+{{< include ../../_includes/_comments.md >}}

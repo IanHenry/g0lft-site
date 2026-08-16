@@ -36,7 +36,7 @@ high-noise environments.
 
 ### Seeing signals: I and Q from first principles
 
-**RadCom**, Radio Society of Great Britain, September 2026 *(scheduled)*
+**RadCom**, Radio Society of Great Britain, September 2026
 
 IQ data sits at the heart of every modern software-defined radio, yet it's
 usually presented as an equation rather than something you can picture. This
@@ -45,6 +45,10 @@ why a single measurement of a wave is ambiguous, how a pair of quadrature
 measurements resolves that ambiguity completely, and what the resulting IQ plot
 actually shows you for real signals, from a bare carrier and CW, through AM, FM
 and SSB, to the digital modes.
+
+A reader question about the article, on whether ASK, FSK and PSK can be
+combined, is answered in
+[Can you combine ASK, FSK and PSK?](thinking-posts/2026-08-16-combining-ask-fsk-psk/2026-08-16-combining-ask-fsk-psk.qmd).
 
 Resources referenced in the article:
 
