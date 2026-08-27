@@ -12,6 +12,7 @@ project:
     - apps/signal-explorer/shared
 
 website:
+  draft-mode: gone
   title: ""
   site-url: "https://g0lft.org"
   favicon: images/favicon.ico

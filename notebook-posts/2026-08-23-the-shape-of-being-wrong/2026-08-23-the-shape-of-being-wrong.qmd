@@ -2,6 +2,7 @@
 title: "The Shape of Being Wrong"
 description: "I set out to find where a radio transmitter physically is, using nothing but public receivers and the speed of light. I found one to fifteen kilometres. Then I got six answers that were confidently, plausibly wrong, and every one of them told me why in the direction it was wrong in"
 author: "Ian Henry, G0LFT"
+draft: true
 date: "2026-08-23"
 categories:
   - Notebook

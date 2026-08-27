@@ -68,9 +68,14 @@ Resources referenced in the article:
 **RSGB Convention 2026**, Saturday 10 October 2026, 10.30 to 11.15
 Kents Hill Conference Centre, Milton Keynes
 
-An invited convention session developing the themes of the May 2026 RadCom
-article: why FT8 and modern DNA sequencing solve the same weak-signal problem in
-the same ways, and what that tells us about digital mode design.
+FT8 routinely decodes stations at around −20 dB SNR on bands that sound
+completely dead. DNA sequencing faces the same problem in a different domain:
+reading billions of tiny, noise-swamped molecular signals at better than 99.9%
+accuracy. Both fields arrived independently at the same engineering answers,
+namely structured messages, precise timing, strong error correction, and quality
+metrics. This session uses those parallels to explain how FT8 achieves its
+weak-signal performance. No biology or advanced mathematics required. Based on
+the May 2026 RadCom article of the same title.
 
 - [RSGB Convention programme and speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-programme-and-speakers/)
 
@@ -79,14 +84,16 @@ the same ways, and what that tells us about digital mode design.
 **RSGB Convention 2026**, Sunday 11 October 2026, 10.45 to 11.30
 Kents Hill Conference Centre, Milton Keynes
 
-An invited convention session introducing IQ visually and with minimal
-mathematics. It covers why IQ matters for modern radios, how to read an IQ plot,
-and what analogue voice (AM, FM, SSB) and the digital data modes (CW, RTTY, FT8,
-PSK, QAM) each look like in the IQ plane. It finishes with a live demonstration
-using a purpose-built Raspberry Pi IQ visualiser.
+IQ data sits at the heart of every modern SDR, yet it's usually presented as an
+equation rather than something you can picture. This session builds I and Q up
+visually and with minimal mathematics: why a single measurement of a wave is
+ambiguous, how quadrature resolves it, and what real signals look like on an IQ
+plot. Examples run from a bare carrier through CW, AM, FM and SSB to digital
+modes like RTTY, FT8, PSK and QAM.
 
 - [RSGB Convention programme and speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-programme-and-speakers/)
-- [Raspberry Pi SDR](projects/raspberry-pi-sdr.qmd), the demonstration device
+- [Signal Explorer](apps/signal-explorer/index.qmd), which carries the same
+  material
 
 ### Making the invisible visible: understanding SDR through IQ visualisation
 
