@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ian Henry, G0LFT">
+<meta name="dcterms.date" content="2026-08-23">
+<meta name="description" content="I set out to find where a radio transmitter physically is, using nothing but public receivers and the speed of light. I found one to fifteen kilometres. Then I got six answers that were confidently, plausibly wrong, and every one of them told me why in the direction it was wrong in">
+
+<title>The Shape of Being Wrong</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5af1b6580d2d273b02271d51ec1ed122.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "G0LFT",
+  "url": "https://g0lft.org"
+}
+</script>
+
+<!-- intentionally empty — GA is handled by _cookie_consent.html -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
+<meta name="theme-color" content="#1ecbe1">
+
+
+
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../apps.html"> 
+<span class="menu-text">Apps</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../thinking.html"> 
+<span class="menu-text">Thinking</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../guides.html"> 
+<span class="menu-text">Guides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../notebook.html"> 
+<span class="menu-text">Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks.html"> 
+<span class="menu-text">Talks &amp; Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">The Shape of Being Wrong</h1></header>
+
+<header id="title-block-header">
+
+<p class="author">Ian Henry, G0LFT</p>
+
+<p class="date">2026-08-23</p>
+</header>
+
+
+<section id="the-shape-of-being-wrong" class="level1">
+<h1>The Shape of Being Wrong</h1>
+<section id="it-started-with-the-buzzer" class="level2">
+<h2 class="anchored" data-anchor-id="it-started-with-the-buzzer">It started with the Buzzer</h2>
+<p>Like a lot of people, I came to this through UVB-76. A buzzing tone on 4625 kHz that has been going since the eighties, occasionally interrupted by a voice reading words and numbers, transmitted from somewhere in Russia by somebody who has never explained themselves. It is the gateway drug of shortwave listening and I am not embarrassed about it.</p>
+<p>What I actually wanted to know was where it is. Not what the messages mean, because if they are one-time pads then nobody is reading them and no amount of compute changes that. Just the physical location of the transmitter. That turns out to be a question you can attack from a laptop, and the attacking of it is what this post is about.</p>
+<p>The technique is time difference of arrival. It is the same arithmetic that LORAN and Decca used for marine navigation, run backwards. Those systems put transmitters in known places and let the ship solve for itself. Here the receivers are in known places and you solve for the transmitter.</p>
+<p>I got one answer right, to fifteen kilometres. Then I got six answers wrong, by between sixty and a thousand kilometres. The wrong answers are the interesting part, and not for the reason I expected.</p>
+</section>
+<section id="what-a-time-difference-actually-buys-you" class="level2">
+<h2 class="anchored" data-anchor-id="what-a-time-difference-actually-buys-you">What a time difference actually buys you</h2>
+<p>Radio travels about three hundred metres every microsecond. If two receivers hear the same transmission and one hears it five hundred microseconds earlier, that receiver is a hundred and fifty kilometres closer to the source. You have learned nothing about how far away it is, only about the difference.</p>
+<p>That difference is the whole subtlety. The set of points whose distance from two fixed places differs by a constant amount is a hyperbola. So one pair of receivers narrows the transmitter down to a curve rather than a point. Add a second pair, the curves cross, and now you have somewhere to stand. Three receivers is the minimum, more gives you an over-determined answer with an error you can actually estimate.</p>
+<p>Measuring the difference is done by cross-correlation. You take the raw samples from both receivers and slide one against the other until they line up best, and the amount you had to slide is the time difference. This is the elegant bit: it needs no understanding of the modulation at all. It works on a buzz, on a data burst, on anything with structure in it.</p>
+<p>Which leads to the thing that governs how good your answer will be. Timing resolution comes from bandwidth, not from signal strength. A wide signal gives a sharp correlation peak. A bare unmodulated carrier gives an almost flat one and tells you very little. This matters later.</p>
+<p>The whole edifice rests on both receivers timestamping their samples against a common clock. One microsecond of clock error is three hundred metres of position error, so you need agreement to better than a microsecond between machines a thousand kilometres apart. Ordinary receivers cannot do this, because their clocks free-run. KiwiSDRs have GPS receivers disciplining the sample clock and stamping the data as it goes, which is the entire reason a public network of them can do this at all.</p>
+<p>I had met a weaker version of this problem before. Getting FT8 to decode well needs the capture aligned to the fifteen second slot inside about a second, and the yield collapses without it. This is the same lesson at roughly a thousand times the precision.</p>
+</section>
+<section id="a-transmitter-in-lower-saxony" class="level2">
+<h2 class="anchored" data-anchor-id="a-transmitter-in-lower-saxony">A transmitter in Lower Saxony</h2>
+<p>For a first attempt you want a target whose answer you already know, so I picked DHO38. It is a German Navy station on 23.4 kHz at Rhauderfehn in Lower Saxony, it transmits continuously, it is minimum-shift keyed so it has real bandwidth, and its position is on Wikipedia. Very Low Frequency also propagates by ground wave, which means the signal travels along the surface in something close to a straight line, which is what the geometry assumes.</p>
+<p>Four receivers, one in each quadrant: Norway, Berlin, Dortmund, and Crowthorne in Berkshire. Thirty seconds of samples from each, correlated on a server somewhere, and back came a position.</p>
+<p><strong>The fix landed 15.4 kilometres from the real site.</strong> Four public receivers spread across fifteen hundred kilometres, half an hour of effort, and a number I could check. I was very pleased with myself, and that feeling lasted about until the next attempt.</p>
+</section>
+<section id="the-receiver-that-dropped-out" class="level2">
+<h2 class="anchored" data-anchor-id="the-receiver-that-dropped-out">The receiver that dropped out</h2>
+<p>The first run of that job had only managed three receivers. Berlin had failed its status check and quietly excluded itself, and I submitted before I noticed. That run put the transmitter 106 kilometres away.</p>
+<p>Here is the part worth keeping. The error was not scattered. It was 101 kilometres east to west and only 31 kilometres north to south. Berlin was the eastern receiver. With nothing to the east, the hyperbolas all crossed at a shallow angle along that axis and the answer smeared out along it, while the north-south axis, which still had Norway and Dortmund nearly opposite each other, stayed four times tighter.</p>
+<p>The error had a direction, and the direction pointed at what was missing. I put Berlin back and the east-west error fell by a factor of eight. That is dilution of precision, which I knew about as a phrase from GPS and had never actually watched happen.</p>
+<p>I did not realise at the time that I had just been handed the diagnostic tool for the rest of the day.</p>
+</section>
+<section id="the-buzzer-and-the-half-of-the-sky-that-is-not-there" class="level2">
+<h2 class="anchored" data-anchor-id="the-buzzer-and-the-half-of-the-sky-that-is-not-there">The Buzzer, and the half of the sky that is not there</h2>
+<p>So, back to the thing that started it.</p>
+<p>The Buzzer was audible on six receivers across Europe, which I confirmed before spending anything. I also confirmed the receiving chain by checking RWM, the Moscow time signal on 4996 kHz, which came booming in at 48 dB from Poland. The path into Russia worked and the measurement worked.</p>
+<p>Five receivers went into the job. The answer came back in the Baltic Sea, off the coast of Latvia. It is a high-power land transmitter, so a fix in open water falsifies itself without any need to know which of the candidate sites is correct. Every publicly suggested location was between 693 and 1001 kilometres away, and all of them to the east.</p>
+<p>Two things were wrong and both were structural.</p>
+<p><strong>Every receiver was on one side.</strong> The five sat in a 130 degree arc from Poland round to Finland. There are no public receivers of this kind in Russia, Belarus or the Baltic states, so the entire eastern half of the circle was empty. Not through carelessness on my part, and not fixable by trying harder. With observations from one side only, the distance along that axis is barely constrained and the answer settles nearer the observers, which is exactly what it did.</p>
+<p><strong>The signal was not travelling in a straight line.</strong> At 4625 kHz in the evening, every path was going up to the ionosphere and back down, over distances of one to two and a half thousand kilometres. The real path is longer than the straight line by an amount that varies with the height of the ionosphere and the number of hops. Ground wave at 23 kHz behaves itself. Short wave does not.</p>
+<p>The two compound. Bad geometry means small timing errors become large position errors, and the ionosphere generously supplies the timing errors.</p>
+<p>I had read that people locate the Buzzer this way. My run does not reproduce it, and I would now treat such claims as either much coarser than a location, or made with receiver availability I cannot recreate.</p>
+</section>
+<section id="three-bugs-which-were-all-the-same-bug" class="level2">
+<h2 class="anchored" data-anchor-id="three-bugs-which-were-all-the-same-bug">Three bugs, which were all the same bug</h2>
+<p>At this point I should say something about my own tooling, because the most useful thing I learned all day was about me rather than about radio.</p>
+<p>I had written a small program to answer one question: is this signal actually on air, on this receiver, right now. It connects to a receiver, pulls a few seconds, and reports how far the signal sits above the noise. It found three different ways to lie to me.</p>
+<p><strong>It searched too narrow a window.</strong> I had sized the search in frequency bins, which felt like the natural unit. Bin spacing depends on the sample rate, so at twenty kilohertz with a large transform my window was under four hertz wide. Any station whose energy sits off its nominal frequency was invisible, and the program reported “not detected” for receivers that were hearing it perfectly well. I widened the window to a thousand hertz and several stations went from absent to strong.</p>
+<p><strong>It measured the wrong thing.</strong> Having widened the window I started reporting where inside it the strongest bin was, as an offset. That produced offsets of one to three hundred hertz and I briefly got excited about a map of stations sitting off their published frequencies. Ten minutes of checking killed it. I measured the same stations on five independent receivers, and the strongest-bin offsets disagreed with each other by up to nine hundred hertz. The same station gave +249, +533, +347, -305 and +603 from five different places. That is noise wearing a lab coat. The power-weighted centre of the energy, which is the statistic I should have used, agreed to within seven hertz on every station. The published frequencies were right all along.</p>
+<p><strong>It rewarded me for widening the window.</strong> This one is the good one. If you take the largest of N noise samples, it sits above the median by roughly ten times the log of the log of N, which is about eight decibels over forty bins and eleven and a half over eleven thousand. My detection threshold was twelve decibels above the median. So when I widened the search window, I raised the noise floor of my own statistic to just below my threshold, and every distant receiver started passing on pure noise. My fix for the first bug created the third one.</p>
+<p>Three bugs, one shape. Each was a reasonable-looking choice that produced confident numbers, and each was caught only by measuring something whose answer I already knew.</p>
+<p>I spend my working days around sequencing data, where the whole discipline is built on controls, because an instrument that is quietly broken produces results that look exactly like results. I know this. I still wrote all three.</p>
+<p>There is a sharper version of the lesson. I validated the program against DHO38, which was sensible. DHO38 also happens to transmit within five hertz of its nominal frequency, so it was the one station in my list that could not have exposed the first two bugs. A known positive has to be representative as well as correct, or it certifies your instrument for the one case you tested.</p>
+</section>
+<section id="a-beacon-i-could-not-stand-around" class="level2">
+<h2 class="anchored" data-anchor-id="a-beacon-i-could-not-stand-around">A beacon I could not stand around</h2>
+<p>Chastened, I went looking for easier targets and landed on differential GPS beacons. These sit between 283 and 325 kilohertz, they are ground wave, they are minimum-shift keyed so they have bandwidth, and their positions are published in a database that is maintained and current. Gilze Rijen in the southern Netherlands looked ideal.</p>
+<p>Six receivers at bearings of 63, 102, 121, 196, 261 and 309 degrees. A textbook ring. I said so at the time.</p>
+<p><strong>The answer was 402 kilometres out.</strong> And once again the error had a shape: 1.2 kilometres in longitude and 402 kilometres in latitude. The longitude figure is the best number I produced all day, on a two hundred watt beacon.</p>
+<p>The receivers were at latitudes of 51.03, 51.11, 51.37, 51.50, 52.63 and 53.97. Five of the six within a degree and a half of each other, in an east to west band. Spreading receivers by bearing is not the same as spreading them in space when the distances differ. A receiver due east at two hundred kilometres and one due west at three hundred and fifty sit at almost the same latitude and pin the latitude down hardly at all.</p>
+<p>It is the same failure as the Buzzer, rotated ninety degrees, and it got past me while I was congratulating myself on the geometry.</p>
+<p>There was a second tell I nearly missed. The answer came back at exactly 48.00 degrees north, which was the southern edge of the search area. A solution sitting precisely on the boundary of the region you allowed it means the optimiser wanted to keep going and ran out of map. It is worth checking for, because it looks like an answer.</p>
+</section>
+<section id="the-receiver-that-was-listening-to-sweden" class="level2">
+<h2 class="anchored" data-anchor-id="the-receiver-that-was-listening-to-sweden">The receiver that was listening to Sweden</h2>
+<p>The fix seemed obvious. Add a receiver far to the north and break the latitude clustering. Vejby in Denmark, at 56 degrees north, was the only candidate far enough away to help.</p>
+<p><strong>That made it worse. 822 kilometres, railed against the grid edge again.</strong></p>
+<p>Gilze Rijen transmits on 302.0 kHz. So does Hjortens Udde, in Sweden. Vejby is 286 kilometres from the Swedish station and 686 from the Dutch one. It was correlating happily on an entirely different transmitter, and I had dropped its timing into a solution about a beacon in the Netherlands.</p>
+<p>I had checked that every receiver could hear 302.0 kilohertz. It had not occurred to me to check that they were all hearing the same thing on it. Differential GPS frequencies are reused geographically, in the same way mobile phone cells reuse channels, and I had walked straight into it.</p>
+<p>The constraint this exposes is harder than the mistake. For Gilze Rijen, every usable receiver has to be nearer to it than to Sweden, which caps how far north you can go. South of it is out of ground-wave range for two hundred watts. What is left is a band about three degrees wide with the target near its southern edge, and no amount of care in choosing receivers fixes that.</p>
+<p>Which generalises into the most useful thing I took from the whole exercise. <strong>Transmit power sets the geometry you are allowed to have.</strong> A high-power station is audible for thousands of kilometres, so you can put receivers all around it. A two hundred watt beacon is audible for a few hundred, so your receivers are necessarily huddled together, and huddled receivers cannot give a good answer however carefully you choose them. Low-power beacons are simply the wrong target class for this, and I would have saved myself two hours by reasoning that out in advance.</p>
+</section>
+<section id="anthorn-and-an-error-with-no-direction" class="level2">
+<h2 class="anchored" data-anchor-id="anthorn-and-an-error-with-no-direction">Anthorn, and an error with no direction</h2>
+<p>So back to a proper transmitter. Anthorn, on the Solway Firth in Cumbria, is a Royal Navy Very Low Frequency station and is close enough that I could drive there. Its position is published and its frequency is unique, so no station elsewhere is going to muddy the correlation.</p>
+<p>Two things nearly went wrong before it started. My station list had Anthorn on 19.6 kHz, and a survey on that frequency gave me between seven and thirteen decibels across eight receivers, which I very nearly accepted as a weak signal. Looking at the whole band from Edinburgh instead showed that everything was sitting at seven to thirteen decibels, because that was the noise, and the one thing standing above it was 22.1 kHz. Anthorn was on the other frequency all along. Then, setting up the job, I reused a receiver index I had cached earlier in the day and selected a station in Seattle, because the host list had re-indexed itself between sessions. Resolve things by where they are, not by what number they were last time.</p>
+<p>This time I chose the receivers by latitude and longitude explicitly rather than by bearing. Three north of Anthorn and three south. Three east and three west. Norway, Sweden, western Scotland, Worcestershire, Ireland and the Netherlands.</p>
+<p><strong>The fix came back 60.8 kilometres out, and the error was 34.7 kilometres north to south against 49.7 east to west.</strong></p>
+<p>That balance is the whole result. Sixty kilometres is four times worse than DHO38, but it is worse in every direction at once, which means nothing was missing. Geometry had stopped being the limiting factor. What was left was signal: Anthorn read seven to sixteen decibels at these receivers where DHO38 read twenty-six to forty-two, roughly twenty decibels weaker, and timing precision degrades with signal to noise about as you would expect.</p>
+<p>For the first time since the first attempt, the error had no direction to point in. I had used the shape of one failure to fix the next one, and it worked.</p>
+<p>One oddity I cannot fully explain. Anthorn is stronger in Norway at eleven hundred kilometres, at sixteen decibels, than it is in Wales at three hundred and fifty, at seven. Some of that will be the dedicated Very Low Frequency receiving sites in Scandinavia having far better antennas and quieter surroundings than a general-purpose receiver in the Welsh valleys. Some of it may be the station’s own radiation pattern. I do not know which dominates.</p>
+</section>
+<section id="what-i-am-building-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-am-building-next">What I am building next</h2>
+<ul>
+<li>Fix the tool properly and keep it. It now measures the centre of the energy rather than the loudest bin, sizes its window in hertz, and discounts the free decibels that a wide window hands you. All three were found by measuring things I already knew the answer to, and that habit is the actual deliverable.</li>
+<li>Work out how much of the Anthorn residual is signal to noise and how much is the ionosphere starting to intrude even at 22 kilohertz. Repeating the same job at local midday and at midnight should separate those.</li>
+<li>Try a genuinely strong target with receivers on every side and see how far down the error goes. Fifteen kilometres was with four receivers and no particular care taken. I suspect there is better available.</li>
+<li>Build the receiver selection into a script rather than choosing by eye, with the latitude and longitude spread and the co-channel check as hard filters. I made both mistakes by hand and both are trivially checkable in code.</li>
+</ul>
+</section>
+<section id="open-question" class="level2">
+<h2 class="anchored" data-anchor-id="open-question">Open question</h2>
+<p>I set out to find the Buzzer. I did not find the Buzzer, and I am now fairly confident that nobody is finding it this way from western Europe, because the receivers required do not exist and the ionosphere would spoil it if they did.</p>
+<p>What I found instead was that I could locate a transmitter I had never thought about to fifteen kilometres, and that six subsequent failures were all diagnosable before I knew anything about their causes, purely from which direction they were wrong in. Collapsed east to west meant nothing to the east. Collapsed north to south meant receivers in a band. Pinned to the edge of the map meant the answer was outside it. In every case the size of the error told me I had failed and the shape of it told me why.</p>
+<p>That is the post I did not sit down to write. I expected to learn about radio propagation and I mostly learned about instruments, including three of my own that were quietly wrong in ways that produced entirely plausible numbers.</p>
+<p>The thing I still cannot settle is where the floor is. Sixty kilometres was signal-limited and fifteen was not obviously limited by anything I identified, which means I do not know what this technique is actually capable of with care. If you have pushed it further, or if you run a receiver somewhere with nothing to its east, I would like to hear from you. Particularly the second one.</p>
+<style>
+  /* The Cusdis iframe defaults to 150px, and its resize message does not always
+     arrive, which leaves the form scrolling inside a small box. min-height sets
+     a comfortable floor while still letting Cusdis grow it if resize does fire,
+     since an inline height from the SDK beats this rule. */
+  #cusdis_thread iframe {
+    width: 100%;
+    min-height: 480px;
+    border: 0;
+  }
+  #comments-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  #comments-section > p {
+    margin-bottom: 1rem;
+  }
+</style>
+<section id="comments-section" hidden="">
+<h2 class="anchored">Comments</h2>
+<p>You don't need an account, just a name. Comments are read before they appear,
+so there may be a short delay before yours shows up.</p>
+<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="dea1e098-1427-480b-8085-9974093665c4"></div>
+</section>
+<script>
+(function () {
+  var el = document.getElementById('cusdis_thread');
+  if (!el) return;
+  // Stay invisible until a real Cusdis app id has been filled in, so the
+  // section never appears half-working on the live site.
+  var appId = el.getAttribute('data-app-id');
+  if (!appId || appId.indexOf('REPLACE_WITH') === 0) return;
+
+  // A stable id per page, so comments stay attached to the right page.
+  var path = window.location.pathname.replace(/index\.html$/, '');
+  if (path.length > 1) path = path.replace(/\/$/, '');
+  el.setAttribute('data-page-id', path);
+  el.setAttribute('data-page-url', window.location.origin + path);
+  el.setAttribute('data-page-title', document.title);
+
+  document.getElementById('comments-section').removeAttribute('hidden');
+
+  var s = document.createElement('script');
+  s.src = 'https://cusdis.com/js/cusdis.es.js';
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Cookie / Privacy Banner -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; left:0; width:100%; background:#222; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; z-index:9999;">
+  <div style="flex:1; min-width:250px;">
+    We use Google Analytics to collect anonymous data on site usage. 
+    <a href="https://g0lft.org/privacy.html" style="color:#1ecbe1; text-decoration:underline;">Learn more</a>.
+  </div>
+  <button id="accept-cookies" style="background:#1ecbe1; color:#000; border:none; padding:0.5rem 1rem; cursor:pointer; margin-left:1rem;">Accept</button>
+</div>
+
+<script>
+(function() {
+  const GA_MEASUREMENT_ID = "G-VLN605GS0J"; // Change per domain if needed
+
+  // Load GA4 *only* after consent
+  function loadGA() {
+    if (window.GA_LOADED) return;
+    window.GA_LOADED = true;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    s.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+    };
+    document.head.appendChild(s);
+  }
+
+  const banner = document.getElementById('cookie-banner');
+  const hasConsent = document.cookie.split('; ').find(row => row.startsWith('cookies_accepted='));
+
+  if (hasConsent && hasConsent.split('=')[1] === 'true') {
+    banner.style.display = 'none';
+    loadGA(); // already accepted previously
+  } else {
+    banner.style.display = 'flex';
+    document.getElementById('accept-cookies').addEventListener('click', () => {
+      document.cookie = "cookies_accepted=true; path=/; max-age=" + (60*60*24*365);
+      banner.style.display = 'none';
+      loadGA();
+    });
+  }
+})();
+</script>
+
+<div class="site-footer">
+ <div class="footer-content">
+   © 2026 Dr Ian Henry, G0LFT. All rights reserved.<br>
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
+   <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
+   <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
+  </div>
+</div>
+<!-- Desktop-only navbar logo -->
+<a href="https://g0lft.org" class="navbar-desktop-logo-link">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+</a>
+
+<script>
+  // Move the logo into the desktop navbar on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.querySelector('.navbar');
+    const logo = document.querySelector('.navbar-desktop-logo-link');
+    if (navbar && logo) {
+      navbar.insertBefore(logo, navbar.firstChild);
+	  //navbar.insertBefore(logo, navbar.lastChild);
+    }
+  });
+</script>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/g0lft\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
