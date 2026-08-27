@@ -29,3 +29,18 @@ RadCom, is there under its own number, and each has its own link.
 Each mode shows where its numbers came from: the sample rate, tuning and
 filtering of the flowgraph that made the matching capture, or, where a value is
 a published standard rather than a measured one, it says so.
+
+## [Bench Test](https://bench.g0lft.org)
+
+Interactive pages for the technical part of the amateur radio syllabus, at
+[bench.g0lft.org](https://bench.g0lft.org). Each page turns the circuits from a
+syllabus group into working instruments.
+
+There are controls for the component values. Move one and the page solves the
+circuit again from a nodal analysis: the readings update, the waveforms redraw,
+the working underneath substitutes the new values, and the charge moving round
+the schematic changes speed to match the current in each branch.
+
+The pages work offline once loaded, and are meant to sit alongside a course and
+the books rather than replace them. Tuned circuits and semiconductors are up so
+far, with further syllabus groups to come.

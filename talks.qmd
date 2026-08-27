@@ -65,17 +65,19 @@ Resources referenced in the article:
 
 ### Understanding FT8 through DNA-sequencing parallels
 
-**RSGB Convention 2026**, Saturday 10 October 2026
+**RSGB Convention 2026**, Saturday 10 October 2026, 10.30 to 11.15
+Kents Hill Conference Centre, Milton Keynes
 
 An invited convention session developing the themes of the May 2026 RadCom
 article: why FT8 and modern DNA sequencing solve the same weak-signal problem in
 the same ways, and what that tells us about digital mode design.
 
-- [RSGB Convention speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-speakers/)
+- [RSGB Convention programme and speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-programme-and-speakers/)
 
 ### Making the invisible visible: understanding your SDR through IQ visualisation
 
-**RSGB Convention 2026**, Saturday 10 October 2026
+**RSGB Convention 2026**, Sunday 11 October 2026, 10.45 to 11.30
+Kents Hill Conference Centre, Milton Keynes
 
 An invited convention session introducing IQ visually and with minimal
 mathematics. It covers why IQ matters for modern radios, how to read an IQ plot,
@@ -83,7 +85,7 @@ and what analogue voice (AM, FM, SSB) and the digital data modes (CW, RTTY, FT8,
 PSK, QAM) each look like in the IQ plane. It finishes with a live demonstration
 using a purpose-built Raspberry Pi IQ visualiser.
 
-- [RSGB Convention speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-speakers/)
+- [RSGB Convention programme and speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-programme-and-speakers/)
 - [Raspberry Pi SDR](projects/raspberry-pi-sdr.qmd), the demonstration device
 
 ### Making the invisible visible: understanding SDR through IQ visualisation
@@ -98,3 +100,29 @@ look like on an IQ plot, with a live Raspberry Pi and RTL-SDR showing real
 signals off air.
 
 - [Raspberry Pi SDR](projects/raspberry-pi-sdr.qmd), the demonstration device
+
+## Tools
+
+Two interactive tools that go alongside the writing and the talks. Both are
+free, run entirely in your browser, and are written and maintained by me.
+
+### Signal Explorer
+
+A radio simulator you can watch and hear. It covers the analogue and digital
+modes, and carries every panel of Figures 4, 5 and 6 from *Seeing signals: I and
+Q from first principles* under its own number. Currently in beta.
+
+- [Signal Explorer](apps/signal-explorer/index.qmd)
+
+### Bench Test
+
+Interactive pages for the technical part of the amateur radio syllabus. Each
+page turns the circuits from a syllabus group into working instruments: move a
+component value and the browser solves the circuit again, so the readings, the
+waveforms and the working underneath all update together. The pages are free,
+run entirely in the browser, and work offline once loaded. They are meant to sit
+alongside a course and the books rather than replace them.
+
+A work in progress, with further syllabus groups still to come.
+
+- [Bench Test](https://bench.g0lft.org), at bench.g0lft.org
