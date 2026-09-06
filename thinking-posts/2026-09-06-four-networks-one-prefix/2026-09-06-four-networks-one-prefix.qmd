@@ -1,0 +1,526 @@
+---
+title: "Four networks, one prefix"
+description: "Amateur radio has twelve million IP addresses, shared by several separate networks that look alike and cannot reach each other. Why getting started is confusing, and what the pieces actually are."
+author: "Ian Henry, G0LFT"
+date: "2026-09-06"
+image: ./images/block-split.png
+categories:
+  - Packet Radio
+  - Networking
+  - AMPRNet
+  - HAMNET
+  - AREDN
+format:
+  html:
+    toc: true
+---
+
+# Four networks, one prefix
+
+Amateur radio has about twelve million IP addresses of its own, held on the
+hobby's behalf by a foundation called ARDC. They are shared by several separate
+networks which look alike, sit in the same address block, and cannot reach each
+other directly. A single node can hold an address in four of them at
+once, and which one a distant station sees depends entirely on the path its
+traffic took.
+
+That is the fact which makes 44 space confusing to enter. The documentation for
+each network is good. What is missing is the map showing how they relate,
+because each one reasonably assumes you arrived through its own front door.
+
+This is that map: what the pieces are, how they differ, and the places where the
+differences bite. The figures come from GB7CAM, a packet node in a village
+outside Cambridge, measured in September 2026.
+
+::: {.callout-note}
+## If the slash numbers are new to you
+
+Everything below is written in CIDR notation, so it is worth thirty seconds up
+front. `44.0.0.0/8` describes a block of addresses. The number after the slash
+says how many of the 32 bits are fixed, and the rest are free to vary. **The
+smaller the number, the bigger the block.**
+
+```
+/8    8 bits fixed     44.x.x.x       16,777,216 addresses
+/16  16 bits fixed     44.63.x.x          65,536
+/24  24 bits fixed     44.63.0.x             256
+/29  29 bits fixed                             8
+```
+
+So `44.0.0.0/9` is exactly half of `44.0.0.0/8`, and `44.128.0.0/10` is a
+quarter of it. That is the whole of the notation.
+:::
+
+## What this actually gets you
+
+Worth saying before the mechanics, because the mechanics are only worth learning
+if the destination is interesting.
+
+44 space is a working network with things on it. Surveying every web service
+listed for HAMNET from GB7CAM returns **2,027 of them**, of which 806 answer
+with a plain HTTP 200 and most of the rest redirect or ask for a login, so they
+are live too. Wikis, cameras, weather stations, repeater controllers, mail and
+chat servers, DX clusters, and a good deal of experimentation. Packet nodes
+exchange mail and keep routing tables across continents. None of it touches the
+public internet unless you want it to.
+
+The four networks this article is about are:
+
+1. **The IPIP mesh**, the original AMPRNet, still running
+2. **44Net Connect**, ARDC's modern VPN route in
+3. **HAMNET**, a routed backbone, mostly European
+4. **AREDN**, a self-forming mesh which is a different animal again
+
+The first three will give you a 44 address. The fourth mostly will not, and is
+in here because it is constantly confused with the others.
+
+## The names, first
+
+A good share of the confusion is vocabulary. These terms get used loosely, often
+as though they were synonyms, and they are not.
+
+| Name | What it actually is |
+|---|---|
+| **ARDC** | [Amateur Radio Digital Communications](https://www.ardc.net/). The non-profit which administers the address block. It took over the registration of 44/8 from an individual contact in 2011 [1]. |
+| **AMPRNet** | AMateur Packet Radio Network, the historical name for the network on 44.0.0.0/8, also called Network 44 [1]. In current use it usually means the IPIP tunnel mesh specifically. |
+| **[44Net](https://www.ardc.net/44net/)** | ARDC's present name for the address space and what runs on it. |
+| **ampr.org** | The DNS domain for 44 space, managed through the [44Net portal](https://portal.ampr.org/). |
+| **AmprGW** | The gateway passing traffic between the wider internet and tunnelled hosts [14]. |
+| **[44Net Connect](https://www.ardc.net/introducing-44net-connect-a-simpler-way-to-access-44net/)** | ARDC's WireGuard service, for getting an address without running a gateway [6]. |
+| **[HAMNET](https://hamnetdb.net/)** | High-speed Amateur-radio Multimedia NETwork. A separate European project which uses part of 44 space [1]. |
+| **[AREDN](https://www.arednmesh.org/)** | Amateur Radio Emergency Data Network. A separate mesh project, mostly not on 44 space at all [8]. |
+
+The distinction that clears most of the fog is this. **ARDC is an organisation.
+AMPRNet, HAMNET and AREDN are networks**, run by different people, in different
+places, with different aims. ARDC administers the addresses. It does not run
+HAMNET or AREDN.
+
+One name collision to know about, because it will confuse a search: in South
+Africa, HAMNET is the emergency communications arm of the South African Radio
+League, an entirely different organisation which happens to share the name [17].
+
+::: {.callout-note}
+## A few networking words, if they are new
+
+**Tunnel.** Wrapping your traffic inside somebody else's connection so it can
+cross a network that would not otherwise carry it. All three routes into 44
+space are tunnels of one kind or another.
+
+**Encapsulation.** The wrapping itself. A packet inside a packet.
+
+**NAT**, network address translation. What a home router does so that several
+devices share one public address. It rewrites addresses and **ports** on the way
+through, which is why it needs there to be ports at all.
+
+**Port forward.** Telling that router "traffic arriving on this port belongs to
+that machine inside". It is how a home-hosted service becomes reachable, and it
+only works for protocols which have ports.
+
+**CGNAT**, carrier-grade NAT. The same thing again, done by your ISP, so you do
+not get a public address of your own at all.
+
+**BGP.** The protocol the real internet uses to tell other networks which
+addresses you are responsible for. Running it means you are a network rather
+than a customer.
+:::
+
+## One block, cut into three
+
+In 1981 Hank Magnuski, KA6M, telephoned Jon Postel and asked for a block of IP
+addresses for licensed amateurs. He was given 44.0.0.0/8, sixteen million
+addresses [1][2]. That was a plausible thing to hand a hobby in 1981.
+
+It is now administered by ARDC, Amateur Radio Digital Communications. In 2019
+ARDC sold a quarter of the block, 44.192.0.0/10, to Amazon, roughly four million
+addresses, registered to Amazon Technologies on 18 July 2019 [1][3]. The
+proceeds endowed the grant programme that now funds amateur digital projects, so
+that sale is the reason there is money in the hobby for this kind of work.
+
+About twelve million addresses remain [3], and they are in two pieces:
+
+| Range | Size | What lives there |
+|---|---|---|
+| `44.0.0.0/9` | 8.4 million | The IPIP mesh and 44Net Connect |
+| `44.128.0.0/10` | 4.2 million | Regional allocations, including HAMNET's |
+| `44.192.0.0/10` | 4.2 million | Sold in 2019 |
+
+That boundary is worth remembering, because it turns up in configuration
+everywhere. A firewall or routing rule on a 44Net host will say `44.0.0.0/9`
+rather than the whole block, and it looks arbitrary until you know that the two
+halves behave nothing like each other. Send traffic for one half down the path
+meant for the other and it disappears.
+
+## Three ways to be given an address
+
+Getting a 44 address is not one process. There are three, they arrived in that
+order, and a station can be on all three at once with a different address on
+each. GB7CAM is.
+
+The choice is made explicit at the moment you request an allocation, because the
+portal hands out a [different block depending on what you intend to do with
+it](https://wiki.ampr.org/wiki/Requesting_a_block) [16]:
+
+```
+44.63.0.0/16    joining the IPIP tunnel mesh
+44.61.0.0/16    standalone use
+44.31.0.0/16    a BGP announced assignment
+```
+
+So the block an address sits in tells you which network it belongs to. GB7CAM's
+mesh address is in `44.63`, exactly as that table predicts. The BGP option
+attracts more scrutiny than the others, because an announced subnet has to be a
+`/24` or larger and is harder for the administrators to oversee [16].
+
+Those three are what you get when you **request an allocation**, and the choice
+records how you intend to route it. "Standalone" is the neither case: an
+allocation you are not joining to the mesh and not announcing by BGP.
+
+**44Net Connect is a separate path and does not involve requesting a block at
+all.** You create a tunnel and an address comes with it. On GB7CAM that address
+is in `44.27`, which is none of the three above, so the block table does not
+describe it. The wiki does not document how Connect picks addresses, but what
+arrives here is two of them: a `/24` address which is the tunnel endpoint, and a
+`/29` routed subnet which is what actually gets used as the source when talking
+to other stations. That matches what Connect offers on paper, a usable 44Net
+address plus an optional routed subnet [7].
+
+### The IPIP mesh
+
+The original AMPRNet, and still running. Your packet to another amateur is
+wrapped inside a second IP header and posted to their ordinary broadband
+address, where their gateway unwraps it. IANA calls that protocol 4, ["IPv4
+encapsulation"](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml), defined in [RFC 2003](https://www.rfc-editor.org/rfc/rfc2003) [4][5]. Everyone participating runs their own gateway, and the
+routing table is distributed as a file called [`encap.txt`](https://wiki.ampr.org/wiki/Encap.txt), fed by a protocol
+called RIP44.
+
+The scale surprised me. GB7CAM currently holds 931 routes into the mesh across
+688 distinct gateway addresses, each one an endpoint somebody is running and
+maintaining.
+
+There is a requirement hiding in that design. Because other gateways post
+packets to *your* public address, you need one that stays put, and the
+Quickstart says so plainly: an internet connection "that gives you a stable IP
+address for the rest of the network to talk to you" [15]. If your ISP puts you
+behind CGNAT, or moves your address around, the mesh is largely closed to you.
+That single constraint is most of the reason the next option exists.
+
+### 44Net Connect
+
+ARDC now runs a VPN. You verify your callsign through the [44Net portal](https://portal.ampr.org/), request
+a tunnel, and paste the configuration into a WireGuard client [6][7]. After that
+44Net is simply reachable. There is no gateway of your own to run and no
+encapsulation to think about, and it works from behind carrier-grade NAT, which
+the mesh does not.
+
+If you want an address that works and you are not sure which of these you need,
+this is the one. Everything else on this page is optional and can be added
+later.
+
+### HAMNET
+
+HAMNET is a different animal. It is a genuinely routed network, largely built on
+microwave links across Germany, Austria and neighbouring countries, running real
+BGP. You are allocated a subnet, you peer with a neighbouring router, you
+announce your allocation and receive theirs.
+
+Worth being honest about how this node reaches it, because "microwave backbone"
+and what happens here are not the same. GB7CAM has no microwave link to
+Germany. It peers with a HAMNET router over an L2TP tunnel across the ordinary
+internet, and BGP then runs inside that tunnel. The backbone is real radio in
+the places where it has been built. Joining it from outside those places means
+tunnelling in, exactly as with the other two.
+
+What arrives is about 2,500 routes, against the single route GB7CAM announces
+back. That ratio is the whole character of the thing. It carries services rather
+than just packet links, and browsing it feels like a small parallel internet.
+
+## AREDN, which is a different shape again
+
+AREDN is the one most often lumped in with the others, and it is worth
+separating because it works differently at almost every level.
+
+It is a mesh built on repurposed consumer WiFi hardware running firmware that
+operates in the amateur portions of those bands. Nodes find their neighbours and
+work out routing among themselves with no configuration from you. Links are RF
+where there is line of sight, and tunnels over the internet where there is not.
+Above that sits a [supernode](http://docs.arednmesh.org/en/latest/arednHow-toGuides/supernodes.html) tier, whose job is to join separate mesh islands
+while shielding each local network from the others' routing traffic. Supernodes
+link over WireGuard [8].
+
+Addressing is where it differs most, and it is worth being precise because there
+is a lot of hearsay about it.
+
+**An AREDN node's mesh address is derived from its own MAC address** [11]. It has
+no relationship to any 44 address, and there is no mapping between the two. That
+is the entire point. The address comes from the hardware, which is what allows a
+node to join a mesh with no allocation, no registry and no paperwork.
+
+You can watch it happen. On the AREDN node here, the last three octets of each
+interface's MAC become the last three octets of its address, though the exact
+rule varies by interface type and by how large a LAN you asked the node for:
+
+```
+MAC  ..:7a:d8:bb   ->   10.122.216.187
+MAC  ..:7a:d8:bc   ->   10.122.216.188
+
+     7a = 122    d8 = 216    bb = 187    bc = 188
+```
+
+There is nowhere in that for a 44 address to enter. Tunnel interfaces use a
+different range again, `172.31.x.x` [11].
+
+It is also worth saying what this node actually is, because AREDN is easy to
+assume means radio. Its mesh RF is switched off. It reaches the mesh through a
+single WireGuard tunnel to another amateur's gateway. Here, AREDN over the
+internet is not a fallback for missing line of sight. It is the entire
+connection.
+
+What arrives through that link is instructive. Two routes, and only two:
+`10.0.0.0/8` for the whole mesh, and `44.32.112.0/20`. The AREDN gateway
+summarises the entire mesh into one line rather than listing its members. Set
+that against 931 routes from the IPIP mesh and about 2,500 from HAMNET and you
+have three quite different philosophies of how much a network should tell you
+about itself.
+
+There is a 44Net option for the LAN side of a node, and it comes with warnings.
+Addresses handed out that way are advertised but not reliably reachable from
+neighbouring nodes, and it is not recommended for a mesh anyone is depending on
+[9][10]. What does work is a gateway between the mesh and AMPRNet for services.
+
+Using 44 addresses as AREDN **tunnel endpoints** is a separate idea, and it has
+been raised on the AREDN forums without ever being settled [12]. There is no
+policy either way and no established practice. If you have heard it mentioned,
+that is why it sounded vague.
+
+That is what shows up here. The AREDN interface on GB7CAM offers a route to the
+whole of `10.0.0.0/8` and also a route into a `/20` of 44 space, so it is
+quietly a further path to some 44 addresses without being a way to get one of
+your own.
+
+Which is the general lesson. These networks overlap, so check what an interface
+is actually offering rather than what its label suggests.
+
+## Do you get a name as well as a number?
+
+Yes, and on one of these networks the name is not optional.
+
+Once your callsign is verified in the 44Net portal you can [claim a
+subdomain](https://wiki.ampr.org/wiki/DNS/Portal/Subdomains) under `ampr.org`, normally your callsign. If it matches a callsign you have
+verified it is approved automatically, and you then add records to it yourself
+through the portal [13][14].
+
+The part worth knowing is that on the IPIP mesh **DNS is plumbing rather than
+decoration**. Traffic from the wider internet reaches tunnelled AMPRNet hosts
+through a gateway called AmprGW, and the permission list it works from is built
+out of `ampr.org` A records. A tunnelled host with no A record does not get that
+traffic forwarded to it [14]. Registering a gateway in the first place also
+requires adding an A record for each local host, as a setup step before you
+configure the router at all [15].
+
+That applies to traffic arriving from the internet at large. Two gateways
+already in the mesh can talk to each other regardless. Even so, a missing DNS
+entry is not cosmetic, and it is worth checking early rather than treating it as
+tidying up afterwards.
+
+There is a naming trap in this worth pointing out, because GB7CAM fell into it.
+The subdomain is `gb7cam.ampr.org`, and the host record inside that subdomain is
+also called `gb7cam`, so the node's actual name is `gb7cam.gb7cam.ampr.org`. The
+bare `gb7cam.ampr.org` has no A record at all and resolves to nothing, which
+looks exactly like a broken delegation. If you want the short form to work, add
+a record at the apex of your own subdomain.
+
+## Two ways to put AX.25 inside IP
+
+Packet radio speaks AX.25. To carry it between nodes over the internet you wrap
+it in IP, and there are two conventions. They look nearly identical written down
+and share nothing on the wire.
+
+**AXUDP** puts the AX.25 frame inside a UDP datagram. UDP has ports, and AXUDP
+has no port of its own registered with IANA, so every sysop picks a number. The
+peers on GB7CAM between them use four: 93, 10093, 10095 and 10193. There is no
+way to deduce which a station wants. You have to ask.
+
+The convention is borrowed rather than assigned. UDP port 93 is registered to
+`dcp`, the Device Control Protocol, and has nothing to do with amateur radio
+[18]. Nothing breaks, because nobody is running Device Control Protocol on a
+packet node, but it is a reminder that these are local habits rather than
+standards.
+
+**AXIP** puts the frame straight into IP as protocol 93. IANA registers that
+number as ["AX.25 Frames"](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml), credited to Brian Kantor [4]. An IP protocol number
+has no port at all. Ports are a thing that exists inside UDP and TCP, one layer
+further up.
+
+So "AXIP on 93" and "AXUDP on port 93" are different in a way the words hide
+almost perfectly.
+
+```{=html}
+<figure style="margin:1.5rem 0;">
+<svg viewBox="0 0 700 200" role="img" style="max-width:100%;height:auto;"
+     aria-label="Two packet layouts compared. AXUDP has an IP header, then a UDP header carrying ports, then the AX.25 frame. AXIP has an IP header marked protocol 93 followed directly by the AX.25 frame, with no UDP header and therefore no port.">
+  <text x="4" y="14" font-size="11" fill="currentColor" opacity="0.65" font-family="monospace">AXUDP</text>
+  <rect x="4" y="24" width="150" height="44" rx="3" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.45"/>
+  <text x="79" y="43" text-anchor="middle" font-size="12" fill="currentColor">IP header</text>
+  <text x="79" y="59" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.6" font-family="monospace">protocol 17</text>
+  <rect x="160" y="24" width="176" height="44" rx="3" fill="currentColor" fill-opacity="0.13" stroke="currentColor" stroke-opacity="0.7"/>
+  <text x="248" y="43" text-anchor="middle" font-size="12" fill="currentColor">UDP header</text>
+  <text x="248" y="59" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.6" font-family="monospace">src port, dst port</text>
+  <rect x="342" y="24" width="200" height="44" rx="3" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.45"/>
+  <text x="442" y="50" text-anchor="middle" font-size="12" fill="currentColor">AX.25 frame</text>
+  <text x="550" y="50" font-size="11" fill="currentColor" opacity="0.75">the port lives here</text>
+
+  <text x="4" y="110" font-size="11" fill="currentColor" opacity="0.65" font-family="monospace">AXIP</text>
+  <rect x="4" y="120" width="150" height="44" rx="3" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.45"/>
+  <text x="79" y="139" text-anchor="middle" font-size="12" fill="currentColor">IP header</text>
+  <text x="79" y="155" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.6" font-family="monospace">protocol 93</text>
+  <rect x="160" y="120" width="176" height="44" rx="3" fill="none" stroke="currentColor" stroke-opacity="0.4" stroke-dasharray="5 4"/>
+  <text x="248" y="146" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.7">no UDP layer, no port</text>
+  <rect x="342" y="120" width="200" height="44" rx="3" fill="currentColor" fill-opacity="0.05" stroke="currentColor" stroke-opacity="0.45"/>
+  <text x="442" y="146" text-anchor="middle" font-size="12" fill="currentColor">AX.25 frame</text>
+  <text x="550" y="146" font-size="11" fill="currentColor" opacity="0.75">93 is the protocol</text>
+</svg>
+<figcaption style="font-size:0.85rem;opacity:0.75;margin-top:0.5rem;">
+One layer's difference, and nothing in common on the wire.
+</figcaption>
+</figure>
+```
+
+The trap is easy to walk into. A station running `ax25ipd` under uro-node speaks
+AXIP. Given his address and "port 93", the obvious reading is AXUDP on UDP port
+93. Configure it that way and both ends look correct, both log nothing useful,
+and the link never carries a single frame. On GB7CAM one link sat in that state
+for months, because a link which has never worked is indistinguishable from a
+link whose far end is quiet.
+
+There is a second half worth knowing if you run a firewall. `ufw` can allow UDP
+port 93 in one line. It has no way to express IP protocol 93 at all, so those
+frames arrive and are discarded with no log entry anywhere. Allowing a bare IP
+protocol has to be written by hand.
+
+## Where the layering bites
+
+Put encapsulation together with ports and you get a failure mode that is very
+hard to see.
+
+Consider a peer behind a home router with a port forward for UDP 10093, which is
+the normal way to run a packet node. That forward works perfectly for AXUDP.
+Now send the same inner packet through the IPIP mesh. The outer header is now
+protocol 4, and it contains no ports anywhere, because IPv4 encapsulation has
+none. A router told to forward UDP 10093 has nothing to match on, so it discards
+the packet.
+
+Same inner frame, same destination, same forward in place. One arrives and one
+disappears, and neither end logs an error.
+
+A link on GB7CAM sat in exactly that state for six days. The far node was
+opening sessions correctly and this end was answering correctly, and every
+answer was discarded at his router because it left here encapsulated. His
+configuration was right throughout. The fix was at this end, sending his traffic
+as plain UDP instead.
+
+### Every wrapper costs you bytes
+
+The quieter consequence of layering is that each wrapper needs room for its own
+header, so the space left for your data shrinks. The paths off GB7CAM carry four
+different limits:
+
+```
+eth0, wlan0   1500    plain ethernet, nothing wrapped
+ppp0          1420    HAMNET, inside L2TP
+wg0           1380    44Net Connect, inside WireGuard
+tunl0         1360    the IPIP mesh, inside a second IP header
+```
+
+Get one of these wrong and the symptom is memorable: small packets work
+perfectly and large ones vanish. A link will pass keepalives and short frames
+all day, then fail the moment something sends a full-length one. **If a link
+works for everything except bulk transfers, suspect the MTU before anything
+else.**
+
+## If you are starting out
+
+**Use 44Net Connect.** One tunnel, an address that works, nothing to run.
+
+**When you arrange a link, ask two questions.** AXUDP or AXIP, and which port.
+Assuming either will cost you weeks, and both ends will look correctly
+configured the whole time.
+
+**When something breaks, suspect the addresses before the link.** If a station
+can reach you but you cannot answer, the usual cause is that your reply is
+leaving from a different one of your addresses than the one they contacted.
+Compare the two address pairs first. Of four link faults on GB7CAM this year,
+that check would have found three of them.
+
+None of this is hard once it is laid out. The barrier is that it is scattered,
+and each network's documentation reasonably assumes you arrived through that
+network's front door. Twelve million addresses is a great deal of room for a
+hobby to experiment in, and it is worth the effort of getting in.
+
+## Related
+
+- [GB7CAM](../../projects/gb7cam.qmd), the node all of these figures come from
+- [Packet networks and protein networks](../../notebook-posts/2026-07-24-packet-networks-and-protein-networks/2026-07-24-packet-networks-and-protein-networks.qmd), an earlier look at the shape of the peer network
+
+## References
+
+[1] *AMPRNet*, Wikipedia,
+[https://en.wikipedia.org/wiki/AMPRNet](https://en.wikipedia.org/wiki/AMPRNet)
+
+[2] ARDC, *44Net*,
+[https://www.ardc.net/44net/](https://www.ardc.net/44net/)
+
+[3] ARDC, *Frequently Asked Questions*,
+[https://www.ardc.net/about/faq/](https://www.ardc.net/about/faq/)
+
+[4] IANA, *Protocol Numbers*, entries 4 (IPv4, "IPv4 encapsulation") and 93
+(AX.25, "AX.25 Frames"),
+[https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml](https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
+
+[5] C Perkins, *IP Encapsulation within IP*, RFC 2003, October 1996,
+[https://www.rfc-editor.org/rfc/rfc2003](https://www.rfc-editor.org/rfc/rfc2003)
+
+[6] ARDC, *Introducing 44Net Connect: A Simpler Way to Access 44Net*,
+[https://www.ardc.net/introducing-44net-connect-a-simpler-way-to-access-44net/](https://www.ardc.net/introducing-44net-connect-a-simpler-way-to-access-44net/)
+
+[7] 44Net Wiki, *Start Using 44Net Connect*,
+[https://wiki.ampr.org/wiki/44Net_Connect](https://wiki.ampr.org/wiki/44Net_Connect)
+
+[8] AREDN, *Configuring a Supernode*,
+[http://docs.arednmesh.org/en/latest/arednHow-toGuides/supernodes.html](http://docs.arednmesh.org/en/latest/arednHow-toGuides/supernodes.html)
+
+[9] AREDN forums, *44net usage with mesh nodes*,
+[https://www.arednmesh.org/content/44net-usage-mesh-nodes](https://www.arednmesh.org/content/44net-usage-mesh-nodes)
+
+[10] AREDN forums, *44 Net addresses for Aredn*,
+[https://www.arednmesh.org/content/44-net-addresses-aredn](https://www.arednmesh.org/content/44-net-addresses-aredn)
+
+[11] AREDN forums, *AREDN Network IP address range*, on mesh addresses being
+derived from the interface MAC and tunnels using `172.31.x.x`,
+[https://www.arednmesh.org/content/aredn-network-ip-address-range](https://www.arednmesh.org/content/aredn-network-ip-address-range)
+
+[12] AREDN forums, *Use of AMPRnet (44.0/9) IP addresses for AREDN Tunnel
+Endpoints?*, a thread which reaches no conclusion,
+[https://www.arednmesh.org/content/use-amprnet-4409-ip-addresses-aredn-tunnel-endpoints](https://www.arednmesh.org/content/use-amprnet-4409-ip-addresses-aredn-tunnel-endpoints)
+
+[13] 44Net Wiki, *Claiming a Callsign Subdomain*,
+[https://wiki.ampr.org/wiki/DNS/Portal/Subdomains](https://wiki.ampr.org/wiki/DNS/Portal/Subdomains)
+
+[14] 44Net Wiki, *FAQ*, on the AmprGW permission list being built from AMPR.ORG
+DNS A records,
+[https://wiki.ampr.org/wiki/FAQ](https://wiki.ampr.org/wiki/FAQ)
+
+[15] 44Net Wiki, *Quickstart*,
+[https://wiki.ampr.org/wiki/Quickstart](https://wiki.ampr.org/wiki/Quickstart)
+
+[16] 44Net Wiki, *Requesting a block*,
+[https://wiki.ampr.org/wiki/Requesting_a_block](https://wiki.ampr.org/wiki/Requesting_a_block)
+
+[18] IANA, *Service Name and Transport Protocol Port Number Registry*, where
+UDP port 93 is registered to `dcp`,
+[https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
+
+[17] *South African Radio League*, Wikipedia, on HAMNET as its emergency
+communications arm, a separate use of the same name,
+[https://en.wikipedia.org/wiki/South_African_Radio_League](https://en.wikipedia.org/wiki/South_African_Radio_League)
+
+{{< include ../../_includes/_comments.md >}}
