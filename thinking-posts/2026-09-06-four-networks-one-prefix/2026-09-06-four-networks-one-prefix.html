@@ -349,7 +349,7 @@ ul.task-list li input[type="checkbox"] {
 44.31.0.0/16    a BGP announced assignment</code></pre>
 <p>So the block an address sits in tells you which network it belongs to. GB7CAM’s mesh address is in <code>44.63</code>, exactly as that table predicts. The BGP option attracts more scrutiny than the others, because an announced subnet has to be a <code>/24</code> or larger and is harder for the administrators to oversee [16].</p>
 <p>Those three are what you get when you <strong>request an allocation</strong>, and the choice records how you intend to route it. “Standalone” is the neither case: an allocation you are not joining to the mesh and not announcing by BGP.</p>
-<p><strong>44Net Connect is a separate path and does not involve requesting a block at all.</strong> You create a tunnel and an address comes with it. On GB7CAM that address is in <code>44.27</code>, which is none of the three above, so the block table does not describe it. The wiki does not document how Connect picks addresses, but what arrives here is two of them: a <code>/24</code> address which is the tunnel endpoint, and a <code>/29</code> routed subnet which is what actually gets used as the source when talking to other stations. That matches what Connect offers on paper, a usable 44Net address plus an optional routed subnet [7].</p>
+<p><strong>44Net Connect is a separate path and does not involve requesting a block at all.</strong> You create a tunnel and an address comes with it. On GB7CAM that address is in <code>44.27</code>, which is none of the three above, so the block table does not describe it. Neither the wiki nor the service’s own user guide spells out how Connect picks addresses [7][20], but what arrives here is two of them: a <code>/24</code> address which is the tunnel endpoint, and a <code>/29</code> routed subnet which is what actually gets used as the source when talking to other stations. A <code>/29</code> is the smallest allocation Connect offers, and small ones are approved instantly [19].</p>
 <section id="the-ipip-mesh" class="level3">
 <h3 class="anchored" data-anchor-id="the-ipip-mesh">The IPIP mesh</h3>
 <p>The original AMPRNet, and still running. Your packet to another amateur is wrapped inside a second IP header and posted to their ordinary broadband address, where their gateway unwraps it. IANA calls that protocol 4, <a href="https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">“IPv4 encapsulation”</a>, defined in <a href="https://www.rfc-editor.org/rfc/rfc2003">RFC 2003</a> [4][5]. Everyone participating runs their own gateway, and the routing table is distributed as a file called <a href="https://wiki.ampr.org/wiki/Encap.txt"><code>encap.txt</code></a>, fed by a protocol called RIP44.</p>
@@ -358,8 +358,26 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="net-connect" class="level3">
 <h3 class="anchored" data-anchor-id="net-connect">44Net Connect</h3>
-<p>ARDC now runs a VPN. You verify your callsign through the <a href="https://portal.ampr.org/">44Net portal</a>, request a tunnel, and paste the configuration into a WireGuard client [6][7]. After that 44Net is simply reachable. There is no gateway of your own to run and no encapsulation to think about, and it works from behind carrier-grade NAT, which the mesh does not.</p>
-<p>If you want an address that works and you are not sure which of these you need, this is the one. Everything else on this page is optional and can be added later.</p>
+<p>ARDC now runs a VPN, and it is new: <a href="https://connect.44net.cloud/">44Net Connect</a> launched on 13 December 2025 [19][22]. If you last looked at getting a 44 address a couple of years ago, this did not exist.</p>
+<p>You verify your licence, request a tunnel, and paste the configuration into a WireGuard client [6][20]. After that 44Net is simply reachable. There is no gateway of your own to run and no encapsulation to think about, and it works from behind CGNAT, which the mesh does not. Allocations run from a <code>/29</code> up to a <code>/25</code>, with small ones approved instantly, and the network type is either auto-assigned or bring-your-own [19][20]. It has since grown BGP and ASN management too, so the neat split where HAMNET is the BGP one no longer quite holds.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>It is a full tunnel by default, and that will surprise you
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is the one thing to know before you switch it on. The stock configuration carries <code>AllowedIPs = 0.0.0.0/0</code>, and the documentation is explicit: “The default 44Net Connect configuration is a full-tunnel VPN. This means the VPN tunnel is used as the default route and outbound IPv4 traffic is routed through the VPN” [21].</p>
+<p>So it does not simply add 44 space to your machine. <strong>It becomes the way out for everything</strong>, and your public address changes to your 44 address. Two consequences worth planning for.</p>
+<p>Your remote sessions can drop the moment you bring it up, because you have just changed the return path to the box. Enable it from the console or the LAN [21].</p>
+<p>And every service on that machine starts answering from a different address. On GB7CAM this quietly broke a packet link that had worked for months. A station had been told to reach us on our ISP address, still did, and our replies now left as the 44 address instead. Nothing was misconfigured at either end and nothing logged an error. It is the same address-mismatch fault described further down, arriving through the front door.</p>
+<p>If you want 44 space reachable without taking over your default route, that is a routing decision you have to make deliberately.</p>
+</div>
+</div>
+<p>If you want an address that works and you are not sure which of these you need, this is still the one to start with. Everything else on this page is optional and can be added later.</p>
 </section>
 <section id="hamnet" class="level3">
 <h3 class="anchored" data-anchor-id="hamnet">HAMNET</h3>
@@ -481,6 +499,10 @@ tunl0         1360    the IPIP mesh, inside a second IP header</code></pre>
 <p>[15] 44Net Wiki, <em>Quickstart</em>, <a href="https://wiki.ampr.org/wiki/Quickstart">https://wiki.ampr.org/wiki/Quickstart</a></p>
 <p>[16] 44Net Wiki, <em>Requesting a block</em>, <a href="https://wiki.ampr.org/wiki/Requesting_a_block">https://wiki.ampr.org/wiki/Requesting_a_block</a></p>
 <p>[18] IANA, <em>Service Name and Transport Protocol Port Number Registry</em>, where UDP port 93 is registered to <code>dcp</code>, <a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml</a></p>
+<p>[19] ARDC, <em>44Net Connect</em>, the service itself, <a href="https://connect.44net.cloud/">https://connect.44net.cloud/</a></p>
+<p>[20] ARDC, <em>44Net Connect User Guide</em>, <a href="https://connect.44net.cloud/help/">https://connect.44net.cloud/help/</a></p>
+<p>[21] AllStarLink, <em>44Net Connect for ASL</em>, on the full-tunnel default and the risk to remote sessions, <a href="https://allstarlink.github.io/adv-topics/44net-connect/">https://allstarlink.github.io/adv-topics/44net-connect/</a></p>
+<p>[22] <em>ARDC Launches 44Net Connect</em>, Ham Weekly, 13 December 2025, <a href="https://daily.hamweekly.com/2025/12/ardc-launches-44net-connect-easy-access-to-44net-ip-addresses/">https://daily.hamweekly.com/2025/12/ardc-launches-44net-connect-easy-access-to-44net-ip-addresses/</a></p>
 <p>[17] <em>South African Radio League</em>, Wikipedia, on HAMNET as its emergency communications arm, a separate use of the same name, <a href="https://en.wikipedia.org/wiki/South_African_Radio_League">https://en.wikipedia.org/wiki/South_African_Radio_League</a></p>
 <style>
   /* The Cusdis iframe defaults to 150px, and its resize message does not always
