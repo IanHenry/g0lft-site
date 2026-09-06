@@ -178,11 +178,11 @@ allocation you are not joining to the mesh and not announcing by BGP.
 **44Net Connect is a separate path and does not involve requesting a block at
 all.** You create a tunnel and an address comes with it. On GB7CAM that address
 is in `44.27`, which is none of the three above, so the block table does not
-describe it. The wiki does not document how Connect picks addresses, but what
-arrives here is two of them: a `/24` address which is the tunnel endpoint, and a
-`/29` routed subnet which is what actually gets used as the source when talking
-to other stations. That matches what Connect offers on paper, a usable 44Net
-address plus an optional routed subnet [7].
+describe it. Neither the wiki nor the service's own user guide spells out how Connect picks
+addresses [7][20], but what arrives here is two of them: a `/24` address which is
+the tunnel endpoint, and a `/29` routed subnet which is what actually gets used
+as the source when talking to other stations. A `/29` is the smallest allocation
+Connect offers, and small ones are approved instantly [19].
 
 ### The IPIP mesh
 
@@ -206,15 +206,48 @@ That single constraint is most of the reason the next option exists.
 
 ### 44Net Connect
 
-ARDC now runs a VPN. You verify your callsign through the [44Net portal](https://portal.ampr.org/), request
-a tunnel, and paste the configuration into a WireGuard client [6][7]. After that
-44Net is simply reachable. There is no gateway of your own to run and no
-encapsulation to think about, and it works from behind carrier-grade NAT, which
-the mesh does not.
+ARDC now runs a VPN, and it is new: [44Net Connect](https://connect.44net.cloud/)
+launched on 13 December 2025 [19][22]. If you last looked at getting a 44 address
+a couple of years ago, this did not exist.
+
+You verify your licence, request a tunnel, and paste the configuration into a
+WireGuard client [6][20]. After that 44Net is simply reachable. There is no
+gateway of your own to run and no encapsulation to think about, and it works from
+behind CGNAT, which the mesh does not. Allocations run from a `/29` up to a `/25`,
+with small ones approved instantly, and the network type is either auto-assigned
+or bring-your-own [19][20]. It has since grown BGP and ASN management too, so the
+neat split where HAMNET is the BGP one no longer quite holds.
+
+::: {.callout-warning}
+## It is a full tunnel by default, and that will surprise you
+
+This is the one thing to know before you switch it on. The stock configuration
+carries `AllowedIPs = 0.0.0.0/0`, and the documentation is explicit: "The default
+44Net Connect configuration is a full-tunnel VPN. This means the VPN tunnel is
+used as the default route and outbound IPv4 traffic is routed through the VPN"
+[21].
+
+So it does not simply add 44 space to your machine. **It becomes the way out for
+everything**, and your public address changes to your 44 address. Two consequences
+worth planning for.
+
+Your remote sessions can drop the moment you bring it up, because you have just
+changed the return path to the box. Enable it from the console or the LAN [21].
+
+And every service on that machine starts answering from a different address.
+On GB7CAM this quietly broke a packet link that had worked for months. A station
+had been told to reach us on our ISP address, still did, and our replies now left
+as the 44 address instead. Nothing was misconfigured at either end and nothing
+logged an error. It is the same address-mismatch fault described further down,
+arriving through the front door.
+
+If you want 44 space reachable without taking over your default route, that is a
+routing decision you have to make deliberately.
+:::
 
 If you want an address that works and you are not sure which of these you need,
-this is the one. Everything else on this page is optional and can be added
-later.
+this is still the one to start with. Everything else on this page is optional and
+can be added later.
 
 ### HAMNET
 
@@ -518,6 +551,19 @@ DNS A records,
 [18] IANA, *Service Name and Transport Protocol Port Number Registry*, where
 UDP port 93 is registered to `dcp`,
 [https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml)
+
+[19] ARDC, *44Net Connect*, the service itself,
+[https://connect.44net.cloud/](https://connect.44net.cloud/)
+
+[20] ARDC, *44Net Connect User Guide*,
+[https://connect.44net.cloud/help/](https://connect.44net.cloud/help/)
+
+[21] AllStarLink, *44Net Connect for ASL*, on the full-tunnel default and the
+risk to remote sessions,
+[https://allstarlink.github.io/adv-topics/44net-connect/](https://allstarlink.github.io/adv-topics/44net-connect/)
+
+[22] *ARDC Launches 44Net Connect*, Ham Weekly, 13 December 2025,
+[https://daily.hamweekly.com/2025/12/ardc-launches-44net-connect-easy-access-to-44net-ip-addresses/](https://daily.hamweekly.com/2025/12/ardc-launches-44net-connect-easy-access-to-44net-ip-addresses/)
 
 [17] *South African Radio League*, Wikipedia, on HAMNET as its emergency
 communications arm, a separate use of the same name,
