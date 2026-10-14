@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="790" viewBox="0 0 680 790" role="img" aria-labelledby="t d" font-family="Helvetica, Arial, sans-serif">
+<title id="t">From public receivers to the classifier</title>
+<desc id="d">Top half: recordings from KiwiSDRs are found and labelled by decoders with no machine learning. Bottom half: one example is cut per label, split by receiver, and a small CNN is trained on ten receivers and judged on three it never saw.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="680" height="790" fill="#ffffff"/>
+<rect x="40" y="40" width="600" height="390" rx="12" fill="none" stroke="#B4B2A9" stroke-width="0.8" stroke-dasharray="4 4"/>
+<text x="56" y="66" font-size="14" font-weight="600" fill="#2C2C2A">Making labelled recordings (no machine learning)</text>
+
+<g>
+<rect x="190" y="84" width="300" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="340" y="106" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Public KiwiSDRs</text>
+<text x="340" y="126" font-size="12" fill="#0F6E56" text-anchor="middle">10 receivers, 10 kHz windows of IQ</text>
+</g>
+<g stroke="#5F5E5A" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+<line x1="300" y1="140" x2="160" y2="162"/><line x1="340" y1="140" x2="340" y2="162"/><line x1="380" y1="140" x2="520" y2="162"/>
+</g>
+<g>
+<rect x="60" y="172" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="145" y="194" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Occupancy search</text>
+<text x="145" y="214" font-size="12" fill="#0F6E56" text-anchor="middle">CW, RTTY, PSK blocks</text>
+<rect x="255" y="172" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="340" y="194" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Whole window to jt9</text>
+<text x="340" y="214" font-size="12" fill="#0F6E56" text-anchor="middle">FT8 and FT4 dials</text>
+<rect x="450" y="172" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="535" y="194" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Max-hold spectrum</text>
+<text x="535" y="214" font-size="12" fill="#0F6E56" text-anchor="middle">SSB-shaped blocks</text>
+</g>
+<g stroke="#5F5E5A" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+<line x1="145" y1="228" x2="145" y2="250"/><line x1="340" y1="228" x2="340" y2="250"/><line x1="535" y1="228" x2="535" y2="250"/>
+</g>
+<g>
+<rect x="60" y="260" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="145" y="282" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Text decoders</text>
+<text x="145" y="302" font-size="12" fill="#0F6E56" text-anchor="middle">Baudot, Morse, PSK</text>
+<rect x="255" y="260" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="340" y="282" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">jt9 decodes</text>
+<text x="340" y="302" font-size="12" fill="#0F6E56" text-anchor="middle">CRC on every one</text>
+<rect x="450" y="260" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="535" y="282" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Whisper as a gate</text>
+<text x="535" y="302" font-size="12" fill="#0F6E56" text-anchor="middle">then I listen and vote</text>
+</g>
+<g stroke="#5F5E5A" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+<line x1="145" y1="316" x2="250" y2="350"/><line x1="340" y1="316" x2="340" y2="350"/><line x1="535" y1="316" x2="430" y2="350"/>
+</g>
+<g>
+<rect x="190" y="360" width="300" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.8"/>
+<text x="340" y="382" font-size="14" font-weight="600" fill="#085041" text-anchor="middle">Labelled recording</text>
+<text x="340" y="402" font-size="12" fill="#0F6E56" text-anchor="middle">IQ file + JSON label</text>
+<rect x="516" y="360" width="110" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.8"/>
+<text x="571" y="382" font-size="14" font-weight="600" fill="#444441" text-anchor="middle">RBN spots</text>
+<text x="571" y="402" font-size="12" fill="#5F5E5A" text-anchor="middle">confirm, never create</text>
+</g>
+<line x1="516" y1="388" x2="500" y2="388" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#arrow)"/>
+<line x1="340" y1="416" x2="340" y2="482" stroke="#5F5E5A" stroke-width="1.2" marker-end="url(#arrow)"/>
+
+<rect x="40" y="450" width="600" height="310" rx="12" fill="none" stroke="#B4B2A9" stroke-width="0.8" stroke-dasharray="4 4"/>
+<text x="56" y="476" font-size="14" font-weight="600" fill="#2C2C2A">The classifier (the only machine learning)</text>
+<g>
+<rect x="190" y="492" width="300" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+<text x="340" y="514" font-size="14" font-weight="600" fill="#3C3489" text-anchor="middle">One example per label</text>
+<text x="340" y="534" font-size="12" fill="#534AB7" text-anchor="middle">3 s, 4 kHz channel, centred</text>
+</g>
+<g stroke="#5F5E5A" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+<line x1="300" y1="548" x2="210" y2="572"/><line x1="380" y1="548" x2="470" y2="572"/>
+</g>
+<g>
+<rect x="100" y="582" width="200" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+<text x="200" y="604" font-size="14" font-weight="600" fill="#3C3489" text-anchor="middle">Train receivers (10)</text>
+<text x="200" y="624" font-size="12" fill="#534AB7" text-anchor="middle">50k spectrograms</text>
+<rect x="380" y="582" width="200" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+<text x="480" y="604" font-size="14" font-weight="600" fill="#3C3489" text-anchor="middle">Test receivers (3)</text>
+<text x="480" y="624" font-size="12" fill="#534AB7" text-anchor="middle">11k, never trained on</text>
+</g>
+<g stroke="#5F5E5A" stroke-width="1.2" fill="none" marker-end="url(#arrow)">
+<line x1="200" y1="638" x2="300" y2="664"/><line x1="480" y1="638" x2="380" y2="664"/>
+</g>
+<text x="226" y="666" font-size="12" fill="#5F5E5A" text-anchor="middle">trains</text>
+<text x="456" y="666" font-size="12" fill="#5F5E5A" text-anchor="middle">judges</text>
+<g>
+<rect x="190" y="676" width="300" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.8"/>
+<text x="340" y="698" font-size="14" font-weight="600" fill="#3C3489" text-anchor="middle">Small CNN, 300k parameters</text>
+<text x="340" y="718" font-size="12" fill="#534AB7" text-anchor="middle">6 classes, 97% on unseen receivers</text>
+</g>
+</svg>
