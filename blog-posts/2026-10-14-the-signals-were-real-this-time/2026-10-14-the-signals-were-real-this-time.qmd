@@ -29,6 +29,8 @@ The rule that mattered most is one I got wrong first. A label exists only where 
 
 Three weeks of this, with the laptop asleep for more of it than I'd like, gave me 4,241 recordings from 15 receivers, about 9 GB of IQ, and roughly 28,000 verified labels across FT8, FT4, RTTY and CW, plus a few dozen voted voice clips with a few hundred more waiting for my ears.
 
+![The whole pipeline. Everything above the line is detectors and decoders producing labelled recordings; the only machine learning is the classifier below it.](./images/pipeline.svg)
+
 ## Things I only found by looking
 
 Three faults sat in the pipeline for weeks. Not one of them showed up in a test. All three turned up when a person listened to a clip or looked at a picture.
