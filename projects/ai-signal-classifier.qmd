@@ -1,6 +1,6 @@
 ---
 title: "AI Signal Classifier"
-description: "A machine-learning system that identifies amateur-radio modes from RF, with the goal of automatic decoding."
+description: "A machine-learning system that identifies amateur-radio modes from IQ, trained on real off-air recordings from public receivers."
 image: /images/constellation.png
 categories: [Machine Learning, SDR, Digital Modes, DSP]
 ---
@@ -8,16 +8,17 @@ categories: [Machine Learning, SDR, Digital Modes, DSP]
 ## What it is
 
 A machine-learning system that classifies amateur-radio modes directly from RF
-(IQ) data and, increasingly, decodes them. The aim is a pipeline that can look
-at a stretch of spectrum, find the signals in it, identify each mode, and
-extract the message: **capture → detect → extract → decode → annotate**.
+(IQ) data. The long-term aim is a pipeline that can look at a stretch of
+spectrum, find the signals in it, identify each mode, and decode what it can:
+**capture → detect → identify → decode → annotate**.
 
-It combines two complementary views of a signal:
+The current version has two parts:
 
-- a **wideband spectrogram detector** that locates signals in time and
-  frequency across a span, and
-- a **narrowband IQ classifier** that identifies the exact mode of an
-  individual signal and validates it by decoding.
+- a **harvester** that records real off-air IQ from public KiwiSDRs and labels
+  it with the decoders themselves (jt9 for FT8 and FT4, Baudot, Morse and PSK
+  decoders for the keyed modes, Whisper and a human vote for voice), and
+- a **narrowband IQ classifier**, a small CNN trained on those recordings and
+  judged on receivers it never saw.
 
 ## Why I built it
 
@@ -29,31 +30,41 @@ FlexRadio.
 
 ## Current status & goals
 
-- **Validated mode generators.** Accurate generators for the core keyed modes
-  (RTTY, PSK31/63, Navtex, Morse), decode-validated to zero character error
-  rate, so the training data is faithful rather than a generic approximation.
-- **Narrowband classifier.** A length-agnostic CNN reaches about 99% on clean
-  1-second captures, and confirmed a key hypothesis: it distinguishes baud rates
-  such as RTTY45 from RTTY50, which shorter captures can't resolve.
-- **Wideband detector.** A spectrogram object-detector (YOLO) trained purely on
-  synthetic scenes *transfers to real off-air signals* and stays quiet on noise.
-- **Frequency-prior / band-plan layer.** Narrow, frequency-defined modes like
-  FT8 and FT4 are routed straight to a decoder from their known dial
-  frequencies rather than relying on the detector.
-- **Voice-to-text.** SSB and AM audio is demodulated and transcribed with
-  Whisper, which is a differentiator I haven't seen elsewhere.
-- **Goals:** add FT8/FT4 structural handling, harden real-world capture and
-  rejection of out-of-class signals, and close the loop into a live
-  identify-and-decode interface.
+- **The synthetic approach failed.** The first version, trained on validated
+  synthetic generators and measured on a synthetic benchmark, scored 99% and
+  fell over on the first real receiver. That result is withdrawn; the
+  [post](../blog-posts/2026-10-14-the-signals-were-real-this-time/2026-10-14-the-signals-were-real-this-time.qmd)
+  explains why.
+- **Real data instead.** Three weeks of harvesting from 15 public receivers
+  gave 4,241 recordings, about 9 GB of IQ, and roughly 28,000 decoder-verified
+  labels across FT8, FT4, RTTY and CW, plus voted voice clips. A label exists
+  only where a decoder actually read the signal; skimmer spots confirm labels
+  but never create them.
+- **First honest result.** Trained on ten receivers and tested on three it
+  never saw: balanced accuracy 0.97. FT8 and CW 0.99, RTTY 0.97, noise 1.00,
+  FT4 0.88. The learning curve is flat from a quarter of the data upwards, and
+  the model's features separate by mode rather than by receiver.
+- **Known limits.** Strong signals only (every label is at least 6 dB over the
+  floor), voice thin, FT4 confused with RTTY, no PSK31 or multi-tone modes yet,
+  three European KiwiSDRs as judges.
+- **Goals:** a confidence threshold with an "unsure" output, a weak-signal test
+  by mixing recorded noise into decoded signals, more voice votes, release of
+  the dataset as IQ and mode labels, and then the live identify-and-decode
+  interface.
 
 ## Key links
 
+- [WSJT-X](https://wsjtx.github.io/wsjtx/index.html), whose jt9 labels the FT8
+  and FT4 recordings
+- [KiwiSDR public receivers](http://rx.linkfanel.net/), the source of the
+  off-air recordings
+- [Reverse Beacon Network](https://www.reversebeacon.net/), used to confirm CW
+  and RTTY labels by callsign
 - [fldigi](https://sourceforge.net/projects/fldigi/), the reference decoder used
-  for validation
-- [WSJT-X](https://wsjtx.github.io/wsjtx/index.html), the FT8 and FT4 reference
-- [TorchSig](https://github.com/TorchDSP/torchsig), synthetic RF dataset tooling
+  to validate the keyed-mode decoders
 
 ## Related posts
 
+- [The Signals Were Real This Time](../blog-posts/2026-10-14-the-signals-were-real-this-time/2026-10-14-the-signals-were-real-this-time.qmd)
 - [Understanding FT8 through DNA-sequencing parallels](../blog-posts/2026-04-25-ft8_dna_radcom.qmd)
 - [SDR theory](../thinking-posts/2025-12-19-sdr_theory/2025-12-19-sdr_theory.qmd)
