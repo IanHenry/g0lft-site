@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ian Henry, G0LFT">
+<meta name="dcterms.date" content="2026-10-14">
+<meta name="description" content="My mode classifier scored 99% on synthetic HF signals and fell over on the first real receiver it met. So I spent three weeks recording real air instead, and got a number I actually believe.">
+
+<title>The Signals Were Real This Time</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-8dc96f8f5064c7c551e5af5f0142611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "G0LFT",
+  "url": "https://g0lft.org"
+}
+</script>
+
+<!-- intentionally empty — GA is handled by _cookie_consent.html -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+<link rel="manifest" href="../../images/site.webmanifest">
+<meta name="theme-color" content="#1ecbe1">
+
+
+
+<link rel="stylesheet" href="../../_theme/_base.css">
+<link rel="stylesheet" href="../../_theme/_colors.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../apps.html"> 
+<span class="menu-text">Apps</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../thinking.html"> 
+<span class="menu-text">Thinking</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../guides.html"> 
+<span class="menu-text">Guides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../notebook.html"> 
+<span class="menu-text">Notebook</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../talks.html"> 
+<span class="menu-text">Talks &amp; Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7">The Signals Were Real This Time</h1></header>
+
+<header id="title-block-header">
+
+<p class="author">Ian Henry, G0LFT</p>
+
+<p class="date">2026-10-14</p>
+</header>
+
+
+<section id="the-signals-were-real-this-time" class="level1">
+<h1>The Signals Were Real This Time</h1>
+<p>Back in June I had a classifier that could tell FT8 from RTTY from CW with 99% accuracy. I’d trained it on synthetic signals from generators I’d checked against the real decoders, and measured it against a published synthetic benchmark. I was quite pleased with it. Then I pointed it at a real receiver and it was useless.</p>
+<p>Real HF doesn’t look like a generator’s output. There’s fading, splatter from the station next door, a noise floor that’s different on every receiver and changes by the hour, operators tuned a hundred hertz off, and contest weekends where a 10 kHz window has a dozen stations in it at once. The model had never seen any of that, so it had no idea what to do with it. In hindsight the 99% was a fact about my generator, not about the air.</p>
+<p>This post is about what I did instead, and the first number I’m prepared to stand behind.</p>
+<section id="doing-it-the-other-way-round" class="level2">
+<h2 class="anchored" data-anchor-id="doing-it-the-other-way-round">Doing it the other way round</h2>
+<p>The idea was easy to say and took three weeks to do. Rather than generate signals and hope they look like the air, record the air and let the decoders say what’s in it.</p>
+<p>Public KiwiSDRs will stream 12 kHz of IQ to anyone who connects. A script keeps a connection to ten of them around Europe and steps through 10 kHz windows on every band, the FT8 and FT4 dials, the CW segments, the data segments, grabbing 20 to 30 seconds of IQ from each. Then each window goes to whatever can decode it. FT8 and FT4 go to WSJT-X’s jt9, and since every decode carries a CRC, those windows label themselves. For CW, RTTY and PSK I look for blocks of energy, give each block a narrow channel of its own so the decoder can’t drift onto a stronger neighbour, and run a decoder in it. Voice is messier. A max-hold spectrum picks out SSB-shaped blocks and Whisper acts purely as a gate: four distinct words and the clip is kept, after which I listen and vote on it myself. Whisper’s transcripts are mostly rubbish, I’m the labeller.</p>
+<p>The rule that mattered most is one I got wrong first. A label exists only where a decoder actually read the signal. The Reverse Beacon Network publishes what its skimmers heard, and it was very tempting to use those spots as labels as well. During CQ WW RTTY I let that happen and gained seventeen thousand labels in a day. When I checked, about a third of the RTTY ones had no RTTY at that frequency in my recording. Obvious in hindsight: a skimmer hearing a station says nothing about what my receiver picked up. Spots can now confirm a label I made, by matching the callsign I decoded, but they can’t create one.</p>
+<p>Three weeks of this, with the laptop asleep for more of it than I’d like, gave me 4,241 recordings from 15 receivers, about 9 GB of IQ, and roughly 28,000 verified labels across FT8, FT4, RTTY and CW, plus a few dozen voted voice clips with a few hundred more waiting for my ears.</p>
+</section>
+<section id="things-i-only-found-by-looking" class="level2">
+<h2 class="anchored" data-anchor-id="things-i-only-found-by-looking">Things I only found by looking</h2>
+<p>Three faults sat in the pipeline for weeks. Not one of them showed up in a test. All three turned up when a person listened to a clip or looked at a picture.</p>
+<p>The first was a click. When I finally played a voice clip through the speakers there was a tick in it every 43 milliseconds. It turned out the KiwiSDR’s IQ packets have a 20-byte header and my parser had been skipping 8 bytes since June, so every packet in every recording I’d ever made started with three junk samples. By luck the I and Q pairing survived, so the fix was exact and the old recordings could be repaired. Running jt9 again on the repaired recordings found five times as many FT8 decodes. An impulse every 43 ms turns out to be a very good way of blinding a weak-signal decoder.</p>
+<p>The second was my definition of empty. The model needed a noise class, so I took parts of recordings with nothing in them, meaning nothing more than 3 dB above the median of the spectrum. Then I printed a grid of random examples and three of the four “noise” windows had a strong signal in them. In a contest recording the median bin is a signal. The floor has to be a low percentile, and it has to be local, because the receiver’s passband falls away at the edges.</p>
+<p>The third was that passband. Signals near the edge of a window sit on a sloping floor and signals in the middle don’t, and all my noise windows came from the middle. A model would happily have learned that a sloping floor means signal. True of my recordings, false everywhere else. Every class is now cut from the flat part of the passband only.</p>
+<p>None of these would have shown up as a low accuracy. Every one of them would have produced a model that worked on my data and failed on yours.</p>
+</section>
+<section id="the-experiment" class="level2">
+<h2 class="anchored" data-anchor-id="the-experiment">The experiment</h2>
+<p>I kept the question narrow. Trained on some receivers, does the model recognise the modes on receivers it has never seen?</p>
+<p>For every label I cut a 3-second window of a 4 kHz channel centred on the signal, turned it into a 64 by 187 log spectrogram, subtracted the median and divided by the spread, so gain and noise floor can’t be used as features. That window is all the model sees. No bandwidth, no frequency, no metadata. Ten receivers went into training, about 50,000 windows. Three were kept back entirely for testing, about 11,000 windows, and two more for validation. The model itself is small, four convolutional blocks and a linear layer, about 300,000 parameters, and it trains in six minutes on a laptop GPU.</p>
+<p>On the three receivers it had never seen:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FT8</td>
+<td>0.99</td>
+</tr>
+<tr class="even">
+<td>CW</td>
+<td>0.99</td>
+</tr>
+<tr class="odd">
+<td>RTTY</td>
+<td>0.97</td>
+</tr>
+<tr class="even">
+<td>Noise</td>
+<td>1.00</td>
+</tr>
+<tr class="odd">
+<td>SSB</td>
+<td>1.00 (41 of 41)</td>
+</tr>
+<tr class="even">
+<td>FT4</td>
+<td>0.88</td>
+</tr>
+</tbody>
+</table>
+<p>That’s a balanced accuracy of 0.97. The mistakes make physical sense. FT4 gets confused with RTTY, both of them bursty and a few hundred hertz wide, and a handful of FT4 windows were called voice. The two digital test receivers, one in Ireland and one in Norway, agree with each other to within a point on every class except FT4.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/confusion_unseen_receivers.png" class="img-fluid figure-img"></p>
+<figcaption>Confusion matrix on the three receivers the model never saw.</figcaption>
+</figure>
+</div>
+<p>I also tried training on a quarter of the recordings, then half, then all of them: 0.975, 0.982 and 0.972. The curve is flat. For these modes at these signal strengths, 700 recordings were enough and the other 2,000 added nothing, which is useful to know before I spend another three weeks collecting.</p>
+<p>The errors also know they’re errors. The model’s confidence on the 261 mistakes has a median of 0.53, against 0.93 on the 10,857 it got right. A classifier that says “not sure” rather than guessing is the one I’d want in a live tool, and this one can be made to do that with a threshold.</p>
+</section>
+<section id="the-picture-i-actually-wanted" class="level2">
+<h2 class="anchored" data-anchor-id="the-picture-i-actually-wanted">The picture I actually wanted</h2>
+<p>The number I was most nervous about wasn’t the accuracy. It was whether the model had learned modes or learned receivers. Every voice clip in the set came from receivers that carried no other class at all, and a model can get surprisingly far just by recognising a noise floor it has seen before. Holding out whole receivers is the test for that, and the plot below is the same test drawn.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/umap_unseen_receivers.png" class="img-fluid figure-img"></p>
+<figcaption>The model’s internal features for 4,000 test windows, projected to two dimensions. Left: coloured by mode. Right: the same points coloured by receiver.</figcaption>
+</figure>
+</div>
+<p>On the left the modes form islands, with FT4 and RTTY joined by a bridge, which is exactly where the confusion matrix said the mistakes were. On the right the two receivers are mixed together inside every island. If it had learned receivers, each island would be two colours side by side. It hadn’t. That was the plot I was most relieved to see.</p>
+</section>
+<section id="what-this-doesnt-show" class="level2">
+<h2 class="anchored" data-anchor-id="what-this-doesnt-show">What this doesn’t show</h2>
+<p>Every label in the set is a strong signal, because the decoders that made the labels needed a clean copy, and the cutter insists the signal is at least 6 dB above the floor of its window. Below that, nothing has been tested. FT8 and CW still score 98% in the 6 to 9 dB bin; RTTY and FT4 drop to the low 80s. Weak signals are the next experiment, and the honest way to do it is to mix noise recorded from empty windows into signals that were decoded, so the label stays true as the SNR goes down.</p>
+<p>Voice is thin: 47 training examples and 41 test examples. The 41 of 41 is encouraging but not yet evidence of much. Modes I can’t decode, PSK31, Olivia, MFSK and the rest, aren’t in there, so the model has never been asked to say “none of the above”. And the judges were three European KiwiSDRs. My own radios, and anyone else’s, are untested.</p>
+<p>So 97% is a real number, measured the way I should have measured the first one, and it comes with a list of things it doesn’t cover. I’d rather have that than the 99% from June.</p>
+</section>
+<section id="what-id-tell-myself-in-june" class="level2">
+<h2 class="anchored" data-anchor-id="what-id-tell-myself-in-june">What I’d tell myself in June</h2>
+<p>Collect the real data first. The model was never the hard part; a small network that trains in six minutes did this. The three weeks went on finding and labelling signals, and on the three faults above, each of which I found only because I looked at the examples instead of the accuracy. If there’s one habit to take away it’s that one. Before you trust a number, print a grid of what the model is being fed, and listen to one of them.</p>
+<p>I’m planning to release the recordings and labels, as IQ and mode labels only, because as far as I can find there isn’t a labelled real-HF dataset in the open and everyone trying this is building their own from nothing. The code and a fuller write-up will follow. If you have a receiver that can produce IQ and fancy adding to it, get in touch.</p>
+<style>
+  /* The Cusdis iframe defaults to 150px, and its resize message does not always
+     arrive, which leaves the form scrolling inside a small box. min-height sets
+     a comfortable floor while still letting Cusdis grow it if resize does fire,
+     since an inline height from the SDK beats this rule. */
+  #cusdis_thread iframe {
+    width: 100%;
+    min-height: 480px;
+    border: 0;
+  }
+  #comments-section {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.3);
+  }
+  #comments-section > p {
+    margin-bottom: 1rem;
+  }
+</style>
+<section id="comments-section" hidden="">
+<h2 class="anchored">Comments</h2>
+<p>You don't need an account, just a name. Comments are read before they appear,
+so there may be a short delay before yours shows up.</p>
+<div id="cusdis_thread" data-host="https://cusdis.com" data-app-id="dea1e098-1427-480b-8085-9974093665c4"></div>
+</section>
+<script>
+(function () {
+  var el = document.getElementById('cusdis_thread');
+  if (!el) return;
+  // Stay invisible until a real Cusdis app id has been filled in, so the
+  // section never appears half-working on the live site.
+  var appId = el.getAttribute('data-app-id');
+  if (!appId || appId.indexOf('REPLACE_WITH') === 0) return;
+
+  // A stable id per page, so comments stay attached to the right page.
+  var path = window.location.pathname.replace(/index\.html$/, '');
+  if (path.length > 1) path = path.replace(/\/$/, '');
+  el.setAttribute('data-page-id', path);
+  el.setAttribute('data-page-url', window.location.origin + path);
+  el.setAttribute('data-page-title', document.title);
+
+  document.getElementById('comments-section').removeAttribute('hidden');
+
+  var s = document.createElement('script');
+  s.src = 'https://cusdis.com/js/cusdis.es.js';
+  s.defer = true;
+  document.body.appendChild(s);
+})();
+</script>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<!-- Cookie / Privacy Banner -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; left:0; width:100%; background:#222; color:#fff; padding:1rem; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; z-index:9999;">
+  <div style="flex:1; min-width:250px;">
+    We use Google Analytics to collect anonymous data on site usage. 
+    <a href="https://g0lft.org/privacy.html" style="color:#1ecbe1; text-decoration:underline;">Learn more</a>.
+  </div>
+  <button id="accept-cookies" style="background:#1ecbe1; color:#000; border:none; padding:0.5rem 1rem; cursor:pointer; margin-left:1rem;">Accept</button>
+</div>
+
+<script>
+(function() {
+  const GA_MEASUREMENT_ID = "G-VLN605GS0J"; // Change per domain if needed
+
+  // Load GA4 *only* after consent
+  function loadGA() {
+    if (window.GA_LOADED) return;
+    window.GA_LOADED = true;
+
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+    s.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+    };
+    document.head.appendChild(s);
+  }
+
+  const banner = document.getElementById('cookie-banner');
+  const hasConsent = document.cookie.split('; ').find(row => row.startsWith('cookies_accepted='));
+
+  if (hasConsent && hasConsent.split('=')[1] === 'true') {
+    banner.style.display = 'none';
+    loadGA(); // already accepted previously
+  } else {
+    banner.style.display = 'flex';
+    document.getElementById('accept-cookies').addEventListener('click', () => {
+      document.cookie = "cookies_accepted=true; path=/; max-age=" + (60*60*24*365);
+      banner.style.display = 'none';
+      loadGA();
+    });
+  }
+})();
+</script>
+
+<div class="site-footer">
+ <div class="footer-content">
+   © 2026 Dr Ian Henry, G0LFT. All rights reserved.<br>
+   <a href="../../privacy.html">Privacy Policy</a> |
+   <a href="../../credits.html">Image Credits</a> |
+   <a href="../../about.html">About</a> |
+   <a href="../../station.html">Station</a> |
+   <a href="../../contact.html">Contact</a> |
+   <a href="https://www.qrz.com/db/G0LFT">QRZ</a> |
+   <a href="https://www.youtube.com/@G0LFT-AmateurRadio">YouTube</a>
+  </div>
+</div>
+<!-- Desktop-only navbar logo -->
+<a href="https://g0lft.org" class="navbar-desktop-logo-link">
+  <img src="../../images/G0LFT_square_cropped.png" alt="Main Hub" class="navbar-desktop-logo">
+</a>
+
+<script>
+  // Move the logo into the desktop navbar on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    const navbar = document.querySelector('.navbar');
+    const logo = document.querySelector('.navbar-desktop-logo-link');
+    if (navbar && logo) {
+      navbar.insertBefore(logo, navbar.firstChild);
+	  //navbar.insertBefore(logo, navbar.lastChild);
+    }
+  });
+</script>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/g0lft\.org");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
