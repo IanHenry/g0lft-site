@@ -89,7 +89,10 @@ metrics. This session uses those parallels to explain how FT8 achieves its
 weak-signal performance. No biology or advanced mathematics required. Based on
 the May 2026 RadCom article of the same title.
 
-This session was livestreamed from the Convention.
+The session was livestreamed, and the recording is online: it starts at
+1:43:45 in the
+[Saturday livestream](https://www.youtube.com/watch?v=eiUs-aSVTBU&t=6225s)
+and runs to 2:26:30.
 
 - [RSGB Convention programme and speakers](https://rsgb.org/main/about-us/rsgb-convention/rsgb-2026-convention-programme-and-speakers/)
 
